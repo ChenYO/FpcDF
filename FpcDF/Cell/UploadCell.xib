@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="74" id="KGk-i7-Jjw" customClass="UploadCell" customModule="DF" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="362" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="362" height="73.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jqd-Cr-b7o">
+                        <rect key="frame" x="10" y="26.5" width="307" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_more_horiz_24px" translatesAutoresizingMaskIntoConstraints="NO" id="SS1-jI-4JY">
+                        <rect key="frame" x="327" y="24.5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="pLD-mQ-ooh"/>
+                            <constraint firstAttribute="height" constant="25" id="sk7-9r-M8x"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Jqd-Cr-b7o" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6Wo-Wr-x3R"/>
+                    <constraint firstItem="SS1-jI-4JY" firstAttribute="leading" secondItem="Jqd-Cr-b7o" secondAttribute="trailing" constant="10" id="B3S-5p-hs8"/>
+                    <constraint firstAttribute="trailing" secondItem="SS1-jI-4JY" secondAttribute="trailing" constant="10" id="LSy-HE-v6d"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Jqd-Cr-b7o" secondAttribute="bottom" constant="10" id="Z4I-Wl-yKb"/>
+                    <constraint firstItem="Jqd-Cr-b7o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ocm-4R-yht"/>
+                    <constraint firstItem="SS1-jI-4JY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pvL-vX-CHq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="title" destination="Jqd-Cr-b7o" id="45c-Nv-lHG"/>
+            </connections>
+            <point key="canvasLocation" x="162.31884057971016" y="131.91964285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_more_horiz_24px" width="16" height="4"/>
+    </resources>
+</document>

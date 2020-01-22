@@ -1,0 +1,11 @@
+framework module FpcDF {
+  umbrella header "FpcDF.h"
+
+  export *
+  module * { export * }
+}
+
+module FpcDF.Swift {
+    header "FpcDF-Swift.h"
+    requires objc
+}

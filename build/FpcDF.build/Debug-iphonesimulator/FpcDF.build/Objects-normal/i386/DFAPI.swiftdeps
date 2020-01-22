@@ -1,0 +1,184 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "DFAPI"
+provides-nominal:
+- "5FpcDF5DFAPIC"
+provides-member:
+- ["5FpcDF5DFAPIC", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "Alamofire"
+- !private "CastingPrecedence"
+- "DFAPI"
+- "DataResponse"
+- !private "DispatchQueue"
+- "FloatLiteralType"
+- "IntegerLiteralType"
+- "String"
+- "StringLiteralType"
+- !private "URLEncoding"
+- !private "print"
+depends-member:
+- !private ["s7CVarArgP", "fractionCompleted"]
+- !private ["s7CVarArgP", "global"]
+- !private ["s7CVarArgP", "subscript"]
+- !private ["Sl", "subscript"]
+- !private ["s28CustomDebugStringConvertibleP", "downloadProgress"]
+- !private ["s28CustomDebugStringConvertibleP", "fractionCompleted"]
+- !private ["s28CustomDebugStringConvertibleP", "global"]
+- !private ["s28CustomDebugStringConvertibleP", "responseJSON"]
+- !private ["s28CustomDebugStringConvertibleP", "result"]
+- !private ["s28CustomDebugStringConvertibleP", "subscript"]
+- !private ["s28CustomDebugStringConvertibleP", "validate"]
+- !private ["s28CustomDebugStringConvertibleP", "value"]
+- !private ["s17CustomReflectableP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "appendInterpolation"]
+- !private ["s23CustomStringConvertibleP", "appendLiteral"]
+- !private ["s23CustomStringConvertibleP", "downloadProgress"]
+- !private ["s23CustomStringConvertibleP", "fractionCompleted"]
+- !private ["s23CustomStringConvertibleP", "global"]
+- !private ["s23CustomStringConvertibleP", "responseJSON"]
+- !private ["s23CustomStringConvertibleP", "result"]
+- !private ["s23CustomStringConvertibleP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "validate"]
+- !private ["s23CustomStringConvertibleP", "value"]
+- !private ["5FpcDF5DFAPIC", "Alamofire"]
+- ["5FpcDF5DFAPIC", "DataResponse"]
+- !private ["5FpcDF5DFAPIC", "DispatchQueue"]
+- ["5FpcDF5DFAPIC", "String"]
+- !private ["5FpcDF5DFAPIC", "URLEncoding"]
+- ["5FpcDF5DFAPIC", "fileUploadUrl"]
+- ["5FpcDF5DFAPIC", "init"]
+- ["5FpcDF5DFAPIC", "post"]
+- !private ["5FpcDF5DFAPIC", "print"]
+- !private ["9Alamofire11DataRequestC", "downloadProgress"]
+- !private ["9Alamofire11DataRequestC", "responseJSON"]
+- !private ["9Alamofire11DataRequestC", "validate"]
+- !private ["9Alamofire12DataResponseV", "result"]
+- !private ["Se", "subscript"]
+- !private ["s26DefaultStringInterpolationV", "appendInterpolation"]
+- !private ["s26DefaultStringInterpolationV", "appendLiteral"]
+- !private ["9Alamofire11URLEncodingV11DestinationO", "httpBody"]
+- !private ["SD", "subscript"]
+- !private ["So18OS_dispatch_objectC", "global"]
+- !private ["So17OS_dispatch_queueC", "global"]
+- !private ["SE", "subscript"]
+- !private ["SQ", "fractionCompleted"]
+- !private ["SQ", "global"]
+- !private ["SQ", "httpBody"]
+- !private ["SQ", "post"]
+- !private ["SQ", "subscript"]
+- !private ["SQ", "utility"]
+- !private ["s30ExpressibleByDictionaryLiteralP", "subscript"]
+- !private ["9Alamofire10HTTPMethodO", "post"]
+- !private ["SH", "fractionCompleted"]
+- !private ["SH", "global"]
+- !private ["SH", "httpBody"]
+- !private ["SH", "post"]
+- !private ["SH", "subscript"]
+- !private ["SH", "utility"]
+- !private ["So8NSObjectC", "fractionCompleted"]
+- !private ["So8NSObjectC", "global"]
+- !private ["So8NSObjectP", "fractionCompleted"]
+- !private ["So8NSObjectP", "global"]
+- !private ["So9OS_objectC", "global"]
+- !private ["9Alamofire17ParameterEncodingP", "init"]
+- !private ["So10NSProgressC", "fractionCompleted"]
+- !private ["8Dispatch0A3QoSV0B6SClassO", "utility"]
+- !private ["SY", "post"]
+- !private ["9Alamofire7RequestC", "downloadProgress"]
+- !private ["9Alamofire7RequestC", "responseJSON"]
+- !private ["9Alamofire7RequestC", "validate"]
+- !private ["9Alamofire8ResponseP", "result"]
+- !private ["9Alamofire6ResultO", "value"]
+- !private ["ST", "subscript"]
+- !private ["s27StringInterpolationProtocolP", "appendInterpolation"]
+- !private ["s27StringInterpolationProtocolP", "appendLiteral"]
+- !private ["s16TextOutputStreamP", "appendInterpolation"]
+- !private ["s16TextOutputStreamP", "appendLiteral"]
+- !private ["9Alamofire11URLEncodingV", "init"]
+- !private ["9Alamofire7RequestC16ValidationResultO", "success"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
+- !private ["10Foundation36_JSONStringDictionaryDecodableMarkerP", "subscript"]
+- !private ["10Foundation36_JSONStringDictionaryEncodableMarkerP", "subscript"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "fractionCompleted"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "global"]
+- !private ["s21_ObjectiveCBridgeableP", "subscript"]
+depends-nominal:
+- !private "s7CVarArgP"
+- !private "Sl"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- "5FpcDF5DFAPIC"
+- !private "9Alamofire11DataRequestC"
+- !private "9Alamofire12DataResponseV"
+- !private "Se"
+- !private "s26DefaultStringInterpolationV"
+- !private "9Alamofire11URLEncodingV11DestinationO"
+- !private "SD"
+- !private "So18OS_dispatch_objectC"
+- !private "So17OS_dispatch_queueC"
+- !private "SE"
+- !private "SQ"
+- !private "s30ExpressibleByDictionaryLiteralP"
+- !private "9Alamofire10HTTPMethodO"
+- !private "SH"
+- !private "So8NSObjectC"
+- !private "So8NSObjectP"
+- !private "So9OS_objectC"
+- !private "9Alamofire17ParameterEncodingP"
+- !private "So10NSProgressC"
+- !private "8Dispatch0A3QoSV0B6SClassO"
+- !private "SY"
+- !private "9Alamofire7RequestC"
+- !private "9Alamofire8ResponseP"
+- !private "9Alamofire6ResultO"
+- !private "ST"
+- !private "s27StringInterpolationProtocolP"
+- !private "s16TextOutputStreamP"
+- !private "9Alamofire11URLEncodingV"
+- !private "9Alamofire7RequestC16ValidationResultO"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation36_JSONStringDictionaryDecodableMarkerP"
+- !private "10Foundation36_JSONStringDictionaryEncodableMarkerP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Modules/Alamofire.swiftmodule/i386.swiftmodule"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Modules/SKPhotoBrowser.swiftmodule/i386.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/SwiftOnoneSupport.swiftmodule"
+- "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/FpcDF.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Headers/Alamofire.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Headers/SKPhotoBrowser.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Headers/Alamofire-Swift.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Headers/SKPhotoBrowser-Swift.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/build/FpcDF.build/Debug-iphonesimulator/FpcDF.build/unextended-module.modulemap"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Modules/module.modulemap"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/SafariServices.framework/Headers/SafariServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "229614f311c17db9b889537ba0f3977b"

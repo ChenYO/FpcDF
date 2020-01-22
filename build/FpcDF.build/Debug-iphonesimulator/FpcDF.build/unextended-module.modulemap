@@ -1,0 +1,10 @@
+framework module FpcDF {
+  umbrella header "FpcDF.h"
+
+  export *
+  module * { export * }
+}
+
+module FpcDF.__Swift {
+    exclude header "FpcDF-Swift.h"
+}

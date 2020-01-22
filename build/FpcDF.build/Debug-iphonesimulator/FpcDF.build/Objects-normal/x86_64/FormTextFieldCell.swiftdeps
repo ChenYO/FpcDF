@@ -1,0 +1,432 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "FormTextFieldCell"
+provides-nominal:
+- "5FpcDF17FormTextFieldCellC"
+provides-member:
+- ["5FpcDF17FormTextFieldCellC", ""]
+provides-dynamic-lookup:
+- "awakeFromNib"
+- "deleteIcon"
+- "inputField"
+- "setSelected"
+- "title"
+- "topConstraint"
+depends-top-level:
+- "AssignmentPrecedence"
+- "Bool"
+- "FormTextFieldCell"
+- "NSLayoutConstraint"
+- "UIImageView"
+- "UILabel"
+- "UITableViewCell"
+- "UITextField"
+depends-member:
+- !private ["So17NSLayoutAttributeV", "height"]
+- !private ["So17NSLayoutAttributeV", "width"]
+- !private ["So15CALayerDelegateP", "NSLayoutConstraint"]
+- ["So15CALayerDelegateP", ""]
+- !private ["So15CALayerDelegateP", "addConstraint"]
+- !private ["So15CALayerDelegateP", "awakeFromNib"]
+- !private ["So15CALayerDelegateP", "constraint"]
+- !private ["So15CALayerDelegateP", "deleteIcon"]
+- !private ["So15CALayerDelegateP", "imageConstraint"]
+- !private ["So15CALayerDelegateP", "init"]
+- !private ["So15CALayerDelegateP", "setSelected"]
+- !private ["So15CALayerDelegateP", "title"]
+- !private ["s7CVarArgP", "NSLayoutConstraint"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "addConstraint"]
+- !private ["s7CVarArgP", "awakeFromNib"]
+- !private ["s7CVarArgP", "constraint"]
+- !private ["s7CVarArgP", "deleteIcon"]
+- !private ["s7CVarArgP", "imageConstraint"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "setSelected"]
+- !private ["s7CVarArgP", "title"]
+- !private ["s28CustomDebugStringConvertibleP", "NSLayoutConstraint"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "addConstraint"]
+- !private ["s28CustomDebugStringConvertibleP", "awakeFromNib"]
+- !private ["s28CustomDebugStringConvertibleP", "constraint"]
+- !private ["s28CustomDebugStringConvertibleP", "deleteIcon"]
+- !private ["s28CustomDebugStringConvertibleP", "imageConstraint"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "setSelected"]
+- !private ["s28CustomDebugStringConvertibleP", "title"]
+- !private ["s17CustomReflectableP", "addConstraint"]
+- !private ["s23CustomStringConvertibleP", "NSLayoutConstraint"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "addConstraint"]
+- !private ["s23CustomStringConvertibleP", "awakeFromNib"]
+- !private ["s23CustomStringConvertibleP", "constraint"]
+- !private ["s23CustomStringConvertibleP", "deleteIcon"]
+- !private ["s23CustomStringConvertibleP", "imageConstraint"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "setSelected"]
+- !private ["s23CustomStringConvertibleP", "title"]
+- !private ["Se", "addConstraint"]
+- !private ["SE", "addConstraint"]
+- !private ["SQ", "NSLayoutConstraint"]
+- ["SQ", ""]
+- !private ["SQ", "addConstraint"]
+- !private ["SQ", "awakeFromNib"]
+- !private ["SQ", "constraint"]
+- !private ["SQ", "deleteIcon"]
+- !private ["SQ", "equal"]
+- !private ["SQ", "height"]
+- !private ["SQ", "imageConstraint"]
+- !private ["SQ", "init"]
+- !private ["SQ", "setSelected"]
+- !private ["SQ", "title"]
+- !private ["SQ", "width"]
+- !private ["s23ExpressibleByNilLiteralP", "addConstraint"]
+- ["5FpcDF17FormTextFieldCellC", "Bool"]
+- ["5FpcDF17FormTextFieldCellC", "NSLayoutConstraint"]
+- ["5FpcDF17FormTextFieldCellC", "UIImageView"]
+- ["5FpcDF17FormTextFieldCellC", "UILabel"]
+- ["5FpcDF17FormTextFieldCellC", "UITextField"]
+- ["5FpcDF17FormTextFieldCellC", "awakeFromNib"]
+- ["5FpcDF17FormTextFieldCellC", "constraint"]
+- ["5FpcDF17FormTextFieldCellC", "deinit"]
+- ["5FpcDF17FormTextFieldCellC", "deleteIcon"]
+- ["5FpcDF17FormTextFieldCellC", "imageConstraint"]
+- ["5FpcDF17FormTextFieldCellC", "init"]
+- ["5FpcDF17FormTextFieldCellC", "inputField"]
+- ["5FpcDF17FormTextFieldCellC", "setSelected"]
+- ["5FpcDF17FormTextFieldCellC", "title"]
+- ["5FpcDF17FormTextFieldCellC", "topConstraint"]
+- !private ["SH", "NSLayoutConstraint"]
+- ["SH", ""]
+- !private ["SH", "addConstraint"]
+- !private ["SH", "awakeFromNib"]
+- !private ["SH", "constraint"]
+- !private ["SH", "deleteIcon"]
+- !private ["SH", "equal"]
+- !private ["SH", "height"]
+- !private ["SH", "imageConstraint"]
+- !private ["SH", "init"]
+- !private ["SH", "setSelected"]
+- !private ["SH", "title"]
+- !private ["SH", "width"]
+- !private ["So8NSCodingP", "NSLayoutConstraint"]
+- ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "addConstraint"]
+- !private ["So8NSCodingP", "awakeFromNib"]
+- !private ["So8NSCodingP", "constraint"]
+- !private ["So8NSCodingP", "deleteIcon"]
+- !private ["So8NSCodingP", "imageConstraint"]
+- !private ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "setSelected"]
+- !private ["So8NSCodingP", "title"]
+- !private ["So18NSLayoutConstraintC", "init"]
+- ["So8NSObjectC", "Bool"]
+- ["So8NSObjectC", "NSLayoutConstraint"]
+- ["So8NSObjectC", "UIImageView"]
+- ["So8NSObjectC", "UILabel"]
+- ["So8NSObjectC", "UITextField"]
+- !private ["So8NSObjectC", "addConstraint"]
+- ["So8NSObjectC", "awakeFromNib"]
+- ["So8NSObjectC", "constraint"]
+- ["So8NSObjectC", "deleteIcon"]
+- ["So8NSObjectC", "imageConstraint"]
+- ["So8NSObjectC", "init"]
+- ["So8NSObjectC", "inputField"]
+- ["So8NSObjectC", "setSelected"]
+- ["So8NSObjectC", "title"]
+- ["So8NSObjectC", "topConstraint"]
+- !private ["So8NSObjectP", "NSLayoutConstraint"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "addConstraint"]
+- !private ["So8NSObjectP", "awakeFromNib"]
+- !private ["So8NSObjectP", "constraint"]
+- !private ["So8NSObjectP", "deleteIcon"]
+- !private ["So8NSObjectP", "imageConstraint"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "setSelected"]
+- !private ["So8NSObjectP", "title"]
+- !private ["Sq", "addConstraint"]
+- !private ["SY", "equal"]
+- !private ["SY", "height"]
+- !private ["SY", "width"]
+- !private ["So16NSLayoutRelationV", "equal"]
+- !private ["So48UIAccessibilityContentSizeCategoryImageAdjustingP", "addConstraint"]
+- !private ["So29UIAccessibilityIdentificationP", "NSLayoutConstraint"]
+- ["So29UIAccessibilityIdentificationP", ""]
+- !private ["So29UIAccessibilityIdentificationP", "addConstraint"]
+- !private ["So29UIAccessibilityIdentificationP", "awakeFromNib"]
+- !private ["So29UIAccessibilityIdentificationP", "constraint"]
+- !private ["So29UIAccessibilityIdentificationP", "deleteIcon"]
+- !private ["So29UIAccessibilityIdentificationP", "imageConstraint"]
+- !private ["So29UIAccessibilityIdentificationP", "init"]
+- !private ["So29UIAccessibilityIdentificationP", "setSelected"]
+- !private ["So29UIAccessibilityIdentificationP", "title"]
+- !private ["So12UIAppearanceP", "NSLayoutConstraint"]
+- ["So12UIAppearanceP", ""]
+- !private ["So12UIAppearanceP", "addConstraint"]
+- !private ["So12UIAppearanceP", "awakeFromNib"]
+- !private ["So12UIAppearanceP", "constraint"]
+- !private ["So12UIAppearanceP", "deleteIcon"]
+- !private ["So12UIAppearanceP", "imageConstraint"]
+- !private ["So12UIAppearanceP", "init"]
+- !private ["So12UIAppearanceP", "setSelected"]
+- !private ["So12UIAppearanceP", "title"]
+- !private ["So21UIAppearanceContainerP", "NSLayoutConstraint"]
+- ["So21UIAppearanceContainerP", ""]
+- !private ["So21UIAppearanceContainerP", "addConstraint"]
+- !private ["So21UIAppearanceContainerP", "awakeFromNib"]
+- !private ["So21UIAppearanceContainerP", "constraint"]
+- !private ["So21UIAppearanceContainerP", "deleteIcon"]
+- !private ["So21UIAppearanceContainerP", "imageConstraint"]
+- !private ["So21UIAppearanceContainerP", "init"]
+- !private ["So21UIAppearanceContainerP", "setSelected"]
+- !private ["So21UIAppearanceContainerP", "title"]
+- !private ["So30UIContentSizeCategoryAdjustingP", "addConstraint"]
+- !private ["So17UICoordinateSpaceP", "NSLayoutConstraint"]
+- ["So17UICoordinateSpaceP", ""]
+- !private ["So17UICoordinateSpaceP", "addConstraint"]
+- !private ["So17UICoordinateSpaceP", "awakeFromNib"]
+- !private ["So17UICoordinateSpaceP", "constraint"]
+- !private ["So17UICoordinateSpaceP", "deleteIcon"]
+- !private ["So17UICoordinateSpaceP", "imageConstraint"]
+- !private ["So17UICoordinateSpaceP", "init"]
+- !private ["So17UICoordinateSpaceP", "setSelected"]
+- !private ["So17UICoordinateSpaceP", "title"]
+- !private ["So13UIDynamicItemP", "NSLayoutConstraint"]
+- ["So13UIDynamicItemP", ""]
+- !private ["So13UIDynamicItemP", "addConstraint"]
+- !private ["So13UIDynamicItemP", "awakeFromNib"]
+- !private ["So13UIDynamicItemP", "constraint"]
+- !private ["So13UIDynamicItemP", "deleteIcon"]
+- !private ["So13UIDynamicItemP", "imageConstraint"]
+- !private ["So13UIDynamicItemP", "init"]
+- !private ["So13UIDynamicItemP", "setSelected"]
+- !private ["So13UIDynamicItemP", "title"]
+- !private ["So18UIFocusEnvironmentP", "NSLayoutConstraint"]
+- ["So18UIFocusEnvironmentP", ""]
+- !private ["So18UIFocusEnvironmentP", "addConstraint"]
+- !private ["So18UIFocusEnvironmentP", "awakeFromNib"]
+- !private ["So18UIFocusEnvironmentP", "constraint"]
+- !private ["So18UIFocusEnvironmentP", "deleteIcon"]
+- !private ["So18UIFocusEnvironmentP", "imageConstraint"]
+- !private ["So18UIFocusEnvironmentP", "init"]
+- !private ["So18UIFocusEnvironmentP", "setSelected"]
+- !private ["So18UIFocusEnvironmentP", "title"]
+- !private ["So11UIFocusItemP", "NSLayoutConstraint"]
+- ["So11UIFocusItemP", ""]
+- !private ["So11UIFocusItemP", "addConstraint"]
+- !private ["So11UIFocusItemP", "awakeFromNib"]
+- !private ["So11UIFocusItemP", "constraint"]
+- !private ["So11UIFocusItemP", "deleteIcon"]
+- !private ["So11UIFocusItemP", "imageConstraint"]
+- !private ["So11UIFocusItemP", "init"]
+- !private ["So11UIFocusItemP", "setSelected"]
+- !private ["So11UIFocusItemP", "title"]
+- !private ["So20UIFocusItemContainerP", "NSLayoutConstraint"]
+- ["So20UIFocusItemContainerP", ""]
+- !private ["So20UIFocusItemContainerP", "addConstraint"]
+- !private ["So20UIFocusItemContainerP", "awakeFromNib"]
+- !private ["So20UIFocusItemContainerP", "constraint"]
+- !private ["So20UIFocusItemContainerP", "deleteIcon"]
+- !private ["So20UIFocusItemContainerP", "imageConstraint"]
+- !private ["So20UIFocusItemContainerP", "init"]
+- !private ["So20UIFocusItemContainerP", "setSelected"]
+- !private ["So20UIFocusItemContainerP", "title"]
+- !private ["So27UIGestureRecognizerDelegateP", "NSLayoutConstraint"]
+- ["So27UIGestureRecognizerDelegateP", ""]
+- !private ["So27UIGestureRecognizerDelegateP", "awakeFromNib"]
+- !private ["So27UIGestureRecognizerDelegateP", "constraint"]
+- !private ["So27UIGestureRecognizerDelegateP", "deleteIcon"]
+- !private ["So27UIGestureRecognizerDelegateP", "imageConstraint"]
+- !private ["So27UIGestureRecognizerDelegateP", "init"]
+- !private ["So27UIGestureRecognizerDelegateP", "setSelected"]
+- !private ["So27UIGestureRecognizerDelegateP", "title"]
+- !private ["So11UIImageViewC", "addConstraint"]
+- !private ["So7UILabelC", "addConstraint"]
+- !private ["So30UIPasteConfigurationSupportingP", "NSLayoutConstraint"]
+- ["So30UIPasteConfigurationSupportingP", ""]
+- !private ["So30UIPasteConfigurationSupportingP", "addConstraint"]
+- !private ["So30UIPasteConfigurationSupportingP", "awakeFromNib"]
+- !private ["So30UIPasteConfigurationSupportingP", "constraint"]
+- !private ["So30UIPasteConfigurationSupportingP", "deleteIcon"]
+- !private ["So30UIPasteConfigurationSupportingP", "imageConstraint"]
+- !private ["So30UIPasteConfigurationSupportingP", "init"]
+- !private ["So30UIPasteConfigurationSupportingP", "setSelected"]
+- !private ["So30UIPasteConfigurationSupportingP", "title"]
+- ["So11UIResponderC", "Bool"]
+- ["So11UIResponderC", "NSLayoutConstraint"]
+- ["So11UIResponderC", "UIImageView"]
+- ["So11UIResponderC", "UILabel"]
+- ["So11UIResponderC", "UITextField"]
+- !private ["So11UIResponderC", "addConstraint"]
+- ["So11UIResponderC", "awakeFromNib"]
+- ["So11UIResponderC", "constraint"]
+- ["So11UIResponderC", "deleteIcon"]
+- ["So11UIResponderC", "imageConstraint"]
+- ["So11UIResponderC", "init"]
+- ["So11UIResponderC", "inputField"]
+- ["So11UIResponderC", "setSelected"]
+- ["So11UIResponderC", "title"]
+- ["So11UIResponderC", "topConstraint"]
+- !private ["So30UIResponderStandardEditActionsP", "NSLayoutConstraint"]
+- ["So30UIResponderStandardEditActionsP", ""]
+- !private ["So30UIResponderStandardEditActionsP", "addConstraint"]
+- !private ["So30UIResponderStandardEditActionsP", "awakeFromNib"]
+- !private ["So30UIResponderStandardEditActionsP", "constraint"]
+- !private ["So30UIResponderStandardEditActionsP", "deleteIcon"]
+- !private ["So30UIResponderStandardEditActionsP", "imageConstraint"]
+- !private ["So30UIResponderStandardEditActionsP", "init"]
+- !private ["So30UIResponderStandardEditActionsP", "setSelected"]
+- !private ["So30UIResponderStandardEditActionsP", "title"]
+- ["So15UITableViewCellC", "Bool"]
+- ["So15UITableViewCellC", "NSLayoutConstraint"]
+- ["So15UITableViewCellC", "UIImageView"]
+- ["So15UITableViewCellC", "UILabel"]
+- ["So15UITableViewCellC", "UITextField"]
+- ["So15UITableViewCellC", ""]
+- ["So15UITableViewCellC", "awakeFromNib"]
+- ["So15UITableViewCellC", "constraint"]
+- ["So15UITableViewCellC", "deleteIcon"]
+- ["So15UITableViewCellC", "imageConstraint"]
+- ["So15UITableViewCellC", "init"]
+- ["So15UITableViewCellC", "inputField"]
+- ["So15UITableViewCellC", "setSelected"]
+- ["So15UITableViewCellC", "title"]
+- ["So15UITableViewCellC", "topConstraint"]
+- !private ["So18UITraitEnvironmentP", "NSLayoutConstraint"]
+- ["So18UITraitEnvironmentP", ""]
+- !private ["So18UITraitEnvironmentP", "addConstraint"]
+- !private ["So18UITraitEnvironmentP", "awakeFromNib"]
+- !private ["So18UITraitEnvironmentP", "constraint"]
+- !private ["So18UITraitEnvironmentP", "deleteIcon"]
+- !private ["So18UITraitEnvironmentP", "imageConstraint"]
+- !private ["So18UITraitEnvironmentP", "init"]
+- !private ["So18UITraitEnvironmentP", "setSelected"]
+- !private ["So18UITraitEnvironmentP", "title"]
+- !private ["So23UIUserActivityRestoringP", "NSLayoutConstraint"]
+- ["So23UIUserActivityRestoringP", ""]
+- !private ["So23UIUserActivityRestoringP", "addConstraint"]
+- !private ["So23UIUserActivityRestoringP", "awakeFromNib"]
+- !private ["So23UIUserActivityRestoringP", "constraint"]
+- !private ["So23UIUserActivityRestoringP", "deleteIcon"]
+- !private ["So23UIUserActivityRestoringP", "imageConstraint"]
+- !private ["So23UIUserActivityRestoringP", "init"]
+- !private ["So23UIUserActivityRestoringP", "setSelected"]
+- !private ["So23UIUserActivityRestoringP", "title"]
+- ["So6UIViewC", "Bool"]
+- ["So6UIViewC", "NSLayoutConstraint"]
+- ["So6UIViewC", "UIImageView"]
+- ["So6UIViewC", "UILabel"]
+- ["So6UIViewC", "UITextField"]
+- !private ["So6UIViewC", "addConstraint"]
+- ["So6UIViewC", "awakeFromNib"]
+- ["So6UIViewC", "constraint"]
+- ["So6UIViewC", "deleteIcon"]
+- ["So6UIViewC", "imageConstraint"]
+- ["So6UIViewC", "init"]
+- ["So6UIViewC", "inputField"]
+- ["So6UIViewC", "setSelected"]
+- ["So6UIViewC", "title"]
+- ["So6UIViewC", "topConstraint"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "NSLayoutConstraint"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "addConstraint"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "awakeFromNib"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "constraint"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "deleteIcon"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "imageConstraint"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "setSelected"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "title"]
+- !private ["s21_ObjectiveCBridgeableP", "addConstraint"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "NSLayoutConstraint"]
+- ["s38__DefaultCustomPlaygroundQuickLookableP", ""]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "addConstraint"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "awakeFromNib"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "constraint"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "deleteIcon"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "imageConstraint"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "init"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "setSelected"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "title"]
+depends-nominal:
+- !private "So17NSLayoutAttributeV"
+- "So15CALayerDelegateP"
+- "s7CVarArgP"
+- "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- "SQ"
+- !private "s23ExpressibleByNilLiteralP"
+- "5FpcDF17FormTextFieldCellC"
+- "SH"
+- "So8NSCodingP"
+- !private "So18NSLayoutConstraintC"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- !private "Sq"
+- !private "SY"
+- !private "So16NSLayoutRelationV"
+- !private "So48UIAccessibilityContentSizeCategoryImageAdjustingP"
+- "So29UIAccessibilityIdentificationP"
+- "So12UIAppearanceP"
+- "So21UIAppearanceContainerP"
+- !private "So30UIContentSizeCategoryAdjustingP"
+- "So17UICoordinateSpaceP"
+- "So13UIDynamicItemP"
+- "So18UIFocusEnvironmentP"
+- "So11UIFocusItemP"
+- "So20UIFocusItemContainerP"
+- "So27UIGestureRecognizerDelegateP"
+- !private "So11UIImageViewC"
+- !private "So7UILabelC"
+- "So30UIPasteConfigurationSupportingP"
+- "So11UIResponderC"
+- "So30UIResponderStandardEditActionsP"
+- "So15UITableViewCellC"
+- "So18UITraitEnvironmentP"
+- "So23UIUserActivityRestoringP"
+- "So6UIViewC"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- !private "s21_ObjectiveCBridgeableP"
+- "s38__DefaultCustomPlaygroundQuickLookableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Modules/Alamofire.swiftmodule/x86_64.swiftmodule"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Modules/SKPhotoBrowser.swiftmodule/x86_64.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/FpcDF.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Headers/Alamofire.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Headers/SKPhotoBrowser.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Headers/Alamofire-Swift.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Headers/SKPhotoBrowser-Swift.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/build/FpcDF.build/Debug-iphonesimulator/FpcDF.build/unextended-module.modulemap"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Modules/module.modulemap"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/SafariServices.framework/Headers/SafariServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "29774a7e2a96184ea0bcfba5a7f19330"

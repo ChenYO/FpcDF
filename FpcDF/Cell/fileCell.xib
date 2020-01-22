@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="KGk-i7-Jjw" customClass="fileCell" customModule="FpcDF" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store icon-7" translatesAutoresizingMaskIntoConstraints="NO" id="tpY-ah-RRy">
+                        <rect key="frame" x="10" y="8" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="gQC-dV-ABd"/>
+                            <constraint firstAttribute="width" constant="40" id="se3-kl-Emd"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwY-Ro-R4h">
+                        <rect key="frame" x="60" y="17.5" width="215" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.10514111349999999" green="0.43963667899999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-cancel-button-blue" translatesAutoresizingMaskIntoConstraints="NO" id="baV-d4-LuN">
+                        <rect key="frame" x="285" y="15.5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="Tan-v0-ZTW"/>
+                            <constraint firstAttribute="height" constant="25" id="meh-b3-jKU"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QwY-Ro-R4h" secondAttribute="bottom" constant="10" id="0oi-tM-sq0"/>
+                    <constraint firstItem="tpY-ah-RRy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="AtS-aU-4bt"/>
+                    <constraint firstAttribute="trailing" secondItem="baV-d4-LuN" secondAttribute="trailing" constant="10" id="KYT-xC-ccH"/>
+                    <constraint firstItem="QwY-Ro-R4h" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Kmf-Z5-hVD"/>
+                    <constraint firstItem="baV-d4-LuN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="N4P-ea-Z7x"/>
+                    <constraint firstItem="tpY-ah-RRy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WUy-wk-mmC"/>
+                    <constraint firstItem="baV-d4-LuN" firstAttribute="leading" secondItem="QwY-Ro-R4h" secondAttribute="trailing" constant="10" id="lon-08-rQ5"/>
+                    <constraint firstItem="QwY-Ro-R4h" firstAttribute="leading" secondItem="tpY-ah-RRy" secondAttribute="trailing" constant="10" id="moZ-co-nJc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="deleteIcon" destination="baV-d4-LuN" id="MEf-xN-5xD"/>
+                <outlet property="fileName" destination="QwY-Ro-R4h" id="Bq3-dI-jTS"/>
+                <outlet property="imageIcon" destination="tpY-ah-RRy" id="s5a-IL-f9j"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="125.89285714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon-cancel-button-blue" width="20" height="20"/>
+        <image name="store icon-7" width="50" height="50"/>
+    </resources>
+</document>
