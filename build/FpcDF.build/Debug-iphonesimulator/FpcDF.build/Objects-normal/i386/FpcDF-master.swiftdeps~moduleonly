@@ -1,17 +1,17 @@
 version: "Apple Swift version 5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
-options: "ee3c6a0215f83e891beb0eff7e229947"
-build_time: [1579586266, 543633000]
+options: "100f154353227499991290e13268705a"
+build_time: [1580439693, 343550000]
 inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/UploadCell.swift": [1576808966, 647670351]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTextFieldCell.swift": [1577086663, 89150600]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFmainVC.swift": [1579237388, 20121033]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFmainVC.swift": [1580436879, 717693390]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFErrorType.swift": [1576832013, 176664653]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFUtil.swift": [1578558357, 672784308]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFUtil.swift": [1580436345, 83535214]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormByIdData.swift": [1576723295, 161792938]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/SingleSelectionCell.swift": [1577325693, 293673280]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFChosenModifyVC.swift": [1579237504, 976830504]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFSelectionVC.swift": [1579237492, 551603738]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFJSONKey.swift": [1578558346, 98835894]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFSelectionVC.swift": [1580439687, 619928484]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFJSONKey.swift": [1580435751, 880862942]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Extension/UIColor+extension.swift": [1574660822, 894625720]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/FpcDF.swift": [1579237492, 569179040]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Extension/UIkitExtension.swift": [1578453395, 370691766]
@@ -26,6 +26,8 @@ inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormListData.swift": [1578295670, 961354541]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormChoiceCell.swift": [1577327187, 364683986]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/MultiSelectionCell.swift": [1576214892, 520608067]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/DFLocalizable.swift": [1580435751, 887424138]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/DynamicFieldCell.swift": [1576052776, 306302929]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/UI/UILabelExtensive.swift": [1577342441, 699416688]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFResult.swift": [1580431617, 537488986]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/KeyValueCell.swift": [1578023126, 461079532]

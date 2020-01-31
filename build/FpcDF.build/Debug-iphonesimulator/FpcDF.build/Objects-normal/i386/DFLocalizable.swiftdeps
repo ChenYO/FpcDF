@@ -1,0 +1,166 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "DFLocalizable"
+provides-nominal:
+- "5FpcDF13DFLocalizableO"
+provides-member:
+- ["5FpcDF13DFLocalizableO", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "=="
+- "DFLocalizable"
+- !private "FloatLiteralType"
+- !private "IntegerLiteralType"
+- !private "NSLocalizedString"
+- "String"
+- "StringLiteralType"
+- !private "_findStringSwitchCase"
+- !private "~="
+depends-member:
+- ["5FpcDF13DFLocalizableO", "=="]
+- ["5FpcDF13DFLocalizableO", "ACCOUNT"]
+- ["5FpcDF13DFLocalizableO", "APP_FORCE_LOGOUT"]
+- ["5FpcDF13DFLocalizableO", "APP_FORCE_UPDATE"]
+- ["5FpcDF13DFLocalizableO", "APP_NAME"]
+- ["5FpcDF13DFLocalizableO", "APP_UPDATE_TIP"]
+- ["5FpcDF13DFLocalizableO", "APP_VERSION"]
+- ["5FpcDF13DFLocalizableO", "AVERAGE_CALCULATION"]
+- ["5FpcDF13DFLocalizableO", "BACK"]
+- ["5FpcDF13DFLocalizableO", "BEGIN_DATE"]
+- ["5FpcDF13DFLocalizableO", "CALCULATE"]
+- ["5FpcDF13DFLocalizableO", "CFP_COMPLETED"]
+- ["5FpcDF13DFLocalizableO", "CFP_CREATE"]
+- ["5FpcDF13DFLocalizableO", "CFP_EQUIPMENT_ACTION"]
+- ["5FpcDF13DFLocalizableO", "CFP_POST_COMMENT"]
+- ["5FpcDF13DFLocalizableO", "CFP_PROCESSING"]
+- ["5FpcDF13DFLocalizableO", "CFP_WAITING"]
+- ["5FpcDF13DFLocalizableO", "COMMAND_CANCEL"]
+- ["5FpcDF13DFLocalizableO", "COMMAND_CONFIRM"]
+- ["5FpcDF13DFLocalizableO", "COMMAND_SKIP"]
+- ["5FpcDF13DFLocalizableO", "COMMAND_UPDATE_APP"]
+- ["5FpcDF13DFLocalizableO", "DFLocalizable"]
+- ["5FpcDF13DFLocalizableO", "END"]
+- ["5FpcDF13DFLocalizableO", "END_DATE"]
+- ["5FpcDF13DFLocalizableO", "ENTRUST"]
+- ["5FpcDF13DFLocalizableO", "HYDUTY_OFF_DUTY_EMPLOYEE"]
+- ["5FpcDF13DFLocalizableO", "JW_LIMS_INSTRUMENT_VALUE_OUT_OF_RANGE"]
+- ["5FpcDF13DFLocalizableO", "JW_LIMS_SAMPLE_INSPECTION_COMPLETED"]
+- ["5FpcDF13DFLocalizableO", "JW_LIMS_SAMPLE_TEST_OUT_OF_RANGE"]
+- ["5FpcDF13DFLocalizableO", "JW_LIMS_SQC_ALARM"]
+- ["5FpcDF13DFLocalizableO", "LIMS_INSTRUMENT_VALUE_OUT_OF_RANGE"]
+- ["5FpcDF13DFLocalizableO", "LIMS_SAMPLE_COMPLETED_NOTIFICATION"]
+- ["5FpcDF13DFLocalizableO", "LIMS_SAMPLE_NOTIFICATIONS_TO_FPCIM"]
+- ["5FpcDF13DFLocalizableO", "LIMS_SQC_ALARM"]
+- ["5FpcDF13DFLocalizableO", "LOGIN_ACCOUNT_DISABLED"]
+- ["5FpcDF13DFLocalizableO", "LOGIN_ACCOUNT_IS_NOT_EXIST"]
+- ["5FpcDF13DFLocalizableO", "LOGIN_ACCOUNT_NO_PERMISSION"]
+- ["5FpcDF13DFLocalizableO", "LOGIN_ACCOUNT_PASSWORD_ERROR"]
+- ["5FpcDF13DFLocalizableO", "LOGIN_ENTER_ACCOUNT"]
+- ["5FpcDF13DFLocalizableO", "LOGIN_ENTER_PASSWORD"]
+- ["5FpcDF13DFLocalizableO", "LOGIN_FAILED"]
+- ["5FpcDF13DFLocalizableO", "LOGOUT"]
+- ["5FpcDF13DFLocalizableO", "MESSAGE_TIP"]
+- ["5FpcDF13DFLocalizableO", "NAME"]
+- ["5FpcDF13DFLocalizableO", "NOTIFICATION"]
+- ["5FpcDF13DFLocalizableO", "NO_CONTENT"]
+- ["5FpcDF13DFLocalizableO", "NO_SETTING_ITEM"]
+- ["5FpcDF13DFLocalizableO", "NO_SHIP_LOCATION"]
+- !private ["5FpcDF13DFLocalizableO", "NSLocalizedString"]
+- ["5FpcDF13DFLocalizableO", "PROMPT_DELETE_NOTIFICATION"]
+- ["5FpcDF13DFLocalizableO", "ROUTINE"]
+- ["5FpcDF13DFLocalizableO", "RawValue"]
+- ["5FpcDF13DFLocalizableO", "SAMPLE_INSPECTION_COMPLETED"]
+- ["5FpcDF13DFLocalizableO", "SAMPLE_TEST_OUT_OF_RANGE"]
+- ["5FpcDF13DFLocalizableO", "SELECT_END_DATE"]
+- ["5FpcDF13DFLocalizableO", "SETTING"]
+- ["5FpcDF13DFLocalizableO", "STATUS_A"]
+- ["5FpcDF13DFLocalizableO", "STATUS_C"]
+- ["5FpcDF13DFLocalizableO", "STATUS_V"]
+- ["5FpcDF13DFLocalizableO", "SUPPLIER"]
+- ["5FpcDF13DFLocalizableO", "String"]
+- ["5FpcDF13DFLocalizableO", "WEB_LINK"]
+- ["5FpcDF13DFLocalizableO", "_Default_RawValue"]
+- !private ["5FpcDF13DFLocalizableO", "_findStringSwitchCase"]
+- ["5FpcDF13DFLocalizableO", "_rawHashValue"]
+- ["5FpcDF13DFLocalizableO", "deinit"]
+- ["5FpcDF13DFLocalizableO", "hash"]
+- ["5FpcDF13DFLocalizableO", "hashValue"]
+- ["5FpcDF13DFLocalizableO", "init"]
+- ["5FpcDF13DFLocalizableO", "rawValue"]
+- ["5FpcDF13DFLocalizableO", "valueOf"]
+- ["SQ", "=="]
+- !private ["SQ", "NSLocalizedString"]
+- ["SQ", "RawValue"]
+- ["SQ", ""]
+- ["SQ", "_Default_RawValue"]
+- !private ["SQ", "_findStringSwitchCase"]
+- ["SQ", "_rawHashValue"]
+- ["SQ", "hash"]
+- ["SQ", "hashValue"]
+- ["SQ", "init"]
+- ["SQ", "rawValue"]
+- ["SH", "=="]
+- !private ["SH", "NSLocalizedString"]
+- ["SH", "RawValue"]
+- ["SH", ""]
+- ["SH", "_Default_RawValue"]
+- !private ["SH", "_findStringSwitchCase"]
+- ["SH", "_rawHashValue"]
+- ["SH", "hash"]
+- ["SH", "hashValue"]
+- ["SH", "init"]
+- ["SH", "rawValue"]
+- ["SY", "=="]
+- !private ["SY", "NSLocalizedString"]
+- ["SY", "RawValue"]
+- ["SY", ""]
+- ["SY", "_Default_RawValue"]
+- !private ["SY", "_findStringSwitchCase"]
+- ["SY", "_rawHashValue"]
+- ["SY", "hash"]
+- ["SY", "hashValue"]
+- ["SY", "init"]
+- ["SY", "rawValue"]
+depends-nominal:
+- "5FpcDF13DFLocalizableO"
+- "SQ"
+- "SH"
+- "SY"
+depends-dynamic-lookup:
+depends-external:
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Modules/Alamofire.swiftmodule/i386.swiftmodule"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Modules/SKPhotoBrowser.swiftmodule/i386.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/SwiftOnoneSupport.swiftmodule"
+- "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/FpcDF.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Headers/Alamofire.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Headers/SKPhotoBrowser.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Headers/Alamofire-Swift.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Headers/SKPhotoBrowser-Swift.h"
+- "/Users/chenyao/Desktop/Framework/FpcDF/build/FpcDF.build/Debug-iphonesimulator/FpcDF.build/unextended-module.modulemap"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/Alamofire.framework/Modules/module.modulemap"
+- "/Users/chenyao/Desktop/Framework/FpcDF/Carthage/Build/iOS/SKPhotoBrowser.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/SafariServices.framework/Headers/SafariServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "1325b7360e806c78810bc7fdba6e729f"

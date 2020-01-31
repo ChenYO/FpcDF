@@ -1,9 +1,18 @@
 {
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
   "commitish" : "6.1.0",
   "iOS" : [
     {
       "name" : "SKPhotoBrowser",
-      "hash" : "d5bbf4ad9b4cfb2fc52652216af195bdf439c7c1ee9da2c4286183cdddc1d672",
+      "hash" : "fed9fba4d87a0b058ebe3cb2f542dd521b4fa5d8132eb29c5148bc3c46f593b3",
       "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]

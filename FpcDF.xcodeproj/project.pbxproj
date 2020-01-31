@@ -13,7 +13,6 @@
 			buildPhases = (
 				7648786C23D1A269001E63CE /* Copy Files */,
 				7648789623D1A2E2001E63CE /* Make Universal Library */,
-				764878D323D6C9F1001E63CE /* ShellScript */,
 			);
 			dependencies = (
 			);
@@ -23,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4935B40CDB287FEEFBC0DA96 /* Pods_FpcDF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C1FC856651961B1F1AEA489 /* Pods_FpcDF.framework */; };
 		760A023D23D05C5E00CF2BC9 /* FpcDF.h in Headers */ = {isa = PBXBuildFile; fileRef = 760A023B23D05C5E00CF2BC9 /* FpcDF.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		760A025623D1321F00CF2BC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 760A025523D1321F00CF2BC9 /* Assets.xcassets */; };
 		760A026C23D1325300CF2BC9 /* FormTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760A025823D1325200CF2BC9 /* FormTextFieldCell.xib */; };
@@ -102,12 +102,15 @@
 		7648789123D1A2CA001E63CE /* DFJSONKey.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02B223D132FC00CF2BC9 /* DFJSONKey.swift */; };
 		7648789223D1A2CC001E63CE /* DFAPI.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02B123D132FC00CF2BC9 /* DFAPI.swift */; };
 		7648789323D1A2D4001E63CE /* UILabelExtensive.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */; };
-		764878BA23D691A2001E63CE /* SKPhotoBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 764878B823D691A2001E63CE /* SKPhotoBrowser.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		764878BB23D691A2001E63CE /* SKPhotoBrowser.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 764878B823D691A2001E63CE /* SKPhotoBrowser.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		764878BC23D691A2001E63CE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 764878B923D691A2001E63CE /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		764878BD23D691A2001E63CE /* Alamofire.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 764878B923D691A2001E63CE /* Alamofire.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		764878DD23D6DA08001E63CE /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 764878B923D691A2001E63CE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		764878DE23D6DA08001E63CE /* SKPhotoBrowser.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 764878B823D691A2001E63CE /* SKPhotoBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		765D529B23E3AFB300AE354C /* DFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D529A23E3AFB300AE354C /* DFResult.swift */; };
+		765D529F23E3C06200AE354C /* DFLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D529E23E3C06200AE354C /* DFLocalizable.swift */; };
+		765D52B023E3CDF100AE354C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 765D52B223E3CDF100AE354C /* Localizable.strings */; };
+		765D52B323E3CDF300AE354C /* Localizable.strings in Copy Files */ = {isa = PBXBuildFile; fileRef = 765D52B223E3CDF100AE354C /* Localizable.strings */; };
+		76B6661523D7FB1900D4BCC3 /* Pods_FpcDF.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7C1FC856651961B1F1AEA489 /* Pods_FpcDF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76B6661B23D7FBB300D4BCC3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B6661A23D7FBB300D4BCC3 /* Alamofire.framework */; };
+		76B6661D23D7FBB600D4BCC3 /* SKPhotoBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B6661C23D7FBB600D4BCC3 /* SKPhotoBrowser.framework */; };
+		76B6661E23D7FBC200D4BCC3 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76B6661A23D7FBB300D4BCC3 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76B6661F23D7FBC500D4BCC3 /* SKPhotoBrowser.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 76B6661C23D7FBB600D4BCC3 /* SKPhotoBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -117,8 +120,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				764878DD23D6DA08001E63CE /* Alamofire.framework in CopyFiles */,
-				764878DE23D6DA08001E63CE /* SKPhotoBrowser.framework in CopyFiles */,
+				76B6661F23D7FBC500D4BCC3 /* SKPhotoBrowser.framework in CopyFiles */,
+				76B6661E23D7FBC200D4BCC3 /* Alamofire.framework in CopyFiles */,
+				76B6661523D7FB1900D4BCC3 /* Pods_FpcDF.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +137,7 @@
 				7648788C23D1A2BF001E63CE /* DynamicInput.swift in Copy Files */,
 				7648786D23D1A26F001E63CE /* DFSelectionVC.swift in Copy Files */,
 				7648788823D1A2B5001E63CE /* UIColor+extension.swift in Copy Files */,
+				765D52B323E3CDF300AE354C /* Localizable.strings in Copy Files */,
 				7648787723D1A28E001E63CE /* MultiSelectionCell.xib in Copy Files */,
 				7648787023D1A278001E63CE /* FpcDF.swift in Copy Files */,
 				7648788D23D1A2C1001E63CE /* DFErrorType.swift in Copy Files */,
@@ -159,9 +164,7 @@
 				7648788B23D1A2BD001E63CE /* FormByIdData.swift in Copy Files */,
 				7648788A23D1A2BB001E63CE /* FormData.swift in Copy Files */,
 				7648787A23D1A295001E63CE /* KeyValueCell.swift in Copy Files */,
-				764878BD23D691A2001E63CE /* Alamofire.framework in Copy Files */,
 				7648788123D1A2A4001E63CE /* FormChoiceCell.xib in Copy Files */,
-				764878BB23D691A2001E63CE /* SKPhotoBrowser.framework in Copy Files */,
 				7648787F23D1A2A0001E63CE /* FormTextAreaCell.xib in Copy Files */,
 				7648789023D1A2C9001E63CE /* DFUtil.swift in Copy Files */,
 				7648787D23D1A29B001E63CE /* FormTextFieldCell.xib in Copy Files */,
@@ -176,6 +179,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0144D07D195AB953944B5559 /* Pods-FpcDF.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FpcDF.debug.xcconfig"; path = "Target Support Files/Pods-FpcDF/Pods-FpcDF.debug.xcconfig"; sourceTree = "<group>"; };
+		11D8424F4C98664A28CA3A27 /* Pods-FpcDF.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FpcDF.release.xcconfig"; path = "Target Support Files/Pods-FpcDF/Pods-FpcDF.release.xcconfig"; sourceTree = "<group>"; };
 		760A023823D05C5E00CF2BC9 /* FpcDF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FpcDF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		760A023B23D05C5E00CF2BC9 /* FpcDF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FpcDF.h; sourceTree = "<group>"; };
 		760A023C23D05C5E00CF2BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -219,8 +224,13 @@
 		760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtensive.swift; sourceTree = "<group>"; };
 		760A02C623D1333A00CF2BC9 /* DFMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DFMain.storyboard; sourceTree = "<group>"; };
 		760A02CF23D177C200CF2BC9 /* FpcDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FpcDF.swift; sourceTree = "<group>"; };
-		764878B823D691A2001E63CE /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKPhotoBrowser.framework; path = Carthage/Build/iOS/SKPhotoBrowser.framework; sourceTree = SOURCE_ROOT; };
-		764878B923D691A2001E63CE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
+		765D529A23E3AFB300AE354C /* DFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFResult.swift; sourceTree = "<group>"; };
+		765D529E23E3C06200AE354C /* DFLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFLocalizable.swift; sourceTree = "<group>"; };
+		765D52B123E3CDF100AE354C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		765D52B423E3CE0100AE354C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		76B6661A23D7FBB300D4BCC3 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		76B6661C23D7FBB600D4BCC3 /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SKPhotoBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C1FC856651961B1F1AEA489 /* Pods_FpcDF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FpcDF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,19 +238,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				764878BA23D691A2001E63CE /* SKPhotoBrowser.framework in Frameworks */,
-				764878BC23D691A2001E63CE /* Alamofire.framework in Frameworks */,
+				76B6661D23D7FBB600D4BCC3 /* SKPhotoBrowser.framework in Frameworks */,
+				76B6661B23D7FBB300D4BCC3 /* Alamofire.framework in Frameworks */,
+				4935B40CDB287FEEFBC0DA96 /* Pods_FpcDF.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F80E72C4B6CFCAAA48AA6C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76B6661C23D7FBB600D4BCC3 /* SKPhotoBrowser.framework */,
+				76B6661A23D7FBB300D4BCC3 /* Alamofire.framework */,
+				7C1FC856651961B1F1AEA489 /* Pods_FpcDF.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		760A022E23D05C5E00CF2BC9 = {
 			isa = PBXGroup;
 			children = (
 				760A023A23D05C5E00CF2BC9 /* FpcDF */,
 				760A023923D05C5E00CF2BC9 /* Products */,
+				84C3FFC3ED1E9123E5F1D297 /* Pods */,
+				3F80E72C4B6CFCAAA48AA6C1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,7 +278,7 @@
 		760A023A23D05C5E00CF2BC9 /* FpcDF */ = {
 			isa = PBXGroup;
 			children = (
-				760A025423D1320100CF2BC9 /* Frameworks */,
+				760A025423D1320100CF2BC9 /* Framework */,
 				760A025323D131FC00CF2BC9 /* UI */,
 				760A025223D131F700CF2BC9 /* VC */,
 				760A02B023D132E500CF2BC9 /* Utility */,
@@ -267,6 +290,8 @@
 				760A025523D1321F00CF2BC9 /* Assets.xcassets */,
 				760A02C623D1333A00CF2BC9 /* DFMain.storyboard */,
 				760A02CF23D177C200CF2BC9 /* FpcDF.swift */,
+				765D529E23E3C06200AE354C /* DFLocalizable.swift */,
+				765D52B223E3CDF100AE354C /* Localizable.strings */,
 			);
 			path = FpcDF;
 			sourceTree = "<group>";
@@ -340,13 +365,11 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		760A025423D1320100CF2BC9 /* Frameworks */ = {
+		760A025423D1320100CF2BC9 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				764878B923D691A2001E63CE /* Alamofire.framework */,
-				764878B823D691A2001E63CE /* SKPhotoBrowser.framework */,
 			);
-			path = Frameworks;
+			path = Framework;
 			sourceTree = "<group>";
 		};
 		760A02B023D132E500CF2BC9 /* Utility */ = {
@@ -355,8 +378,18 @@
 				760A02B123D132FC00CF2BC9 /* DFAPI.swift */,
 				760A02B223D132FC00CF2BC9 /* DFJSONKey.swift */,
 				760A02B323D132FC00CF2BC9 /* DFUtil.swift */,
+				765D529A23E3AFB300AE354C /* DFResult.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		84C3FFC3ED1E9123E5F1D297 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0144D07D195AB953944B5559 /* Pods-FpcDF.debug.xcconfig */,
+				11D8424F4C98664A28CA3A27 /* Pods-FpcDF.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,12 +410,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 760A024023D05C5E00CF2BC9 /* Build configuration list for PBXNativeTarget "FpcDF" */;
 			buildPhases = (
+				A6DA241B711A1C42D8A6BDF4 /* [CP] Check Pods Manifest.lock */,
 				760A023323D05C5E00CF2BC9 /* Headers */,
 				760A023423D05C5E00CF2BC9 /* Sources */,
 				760A023523D05C5E00CF2BC9 /* Frameworks */,
 				760A023623D05C5E00CF2BC9 /* Resources */,
 				760A02D623D178B800CF2BC9 /* CopyFiles */,
-				764878DF23D6DA0D001E63CE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -417,6 +450,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hant",
 			);
 			mainGroup = 760A022E23D05C5E00CF2BC9;
 			productRefGroup = 760A023923D05C5E00CF2BC9 /* Products */;
@@ -443,6 +477,7 @@
 				760A027023D1325300CF2BC9 /* FormTitleCell.xib in Resources */,
 				760A025623D1321F00CF2BC9 /* Assets.xcassets in Resources */,
 				760A027823D1325300CF2BC9 /* KeyValueCell.xib in Resources */,
+				765D52B023E3CDF100AE354C /* Localizable.strings in Resources */,
 				760A026C23D1325300CF2BC9 /* FormTextFieldCell.xib in Resources */,
 				760A026E23D1325300CF2BC9 /* FormTextAreaCell.xib in Resources */,
 				760A02C723D1333A00CF2BC9 /* DFMain.storyboard in Resources */,
@@ -468,9 +503,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"FpcDF\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"FpcDF\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/FpcDF.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/FpcDF.framework/Modules/FpcDF.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/FpcDF.framework/Modules/FpcDF.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/FpcDF.framework/FpcDF\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/FpcDF.framework/FpcDF\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/FpcDF.framework/FpcDF\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/FpcDF.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"\n";
+			shellScript = "#!/bin/sh\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target \"FpcDF\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"FpcDF\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/FpcDF.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/FpcDF.framework/Modules/FpcDF.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/FpcDF.framework/Modules/FpcDF.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/FpcDF.framework/FpcDF\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/FpcDF.framework/FpcDF\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/FpcDF.framework/FpcDF\"\n\n# Step 5. Convenience step to copy the framework to the project's directory\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/FpcDF.framework\" \"${PROJECT_DIR}\"\n\n# Step 6. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"\n";
 		};
-		764878D323D6C9F1001E63CE /* ShellScript */ = {
+		A6DA241B711A1C42D8A6BDF4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -478,31 +513,19 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FpcDF-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\npushd FpcDF.framework/Frameworks\nfor EACH in *.framework; do\necho \"-- signing ${EACH}\"\n/usr/bin/codesign --force --deep --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --entitlements \"${TARGET_TEMP_DIR}/${PRODUCT_NAME}.app.xcent\" --timestamp=none $EACH\ndone\npopd\n";
-		};
-		764878DF23D6DA0D001E63CE /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ \"${ACTION}\" = \"build\" ]\nthen\nINSTALL_DIR=${SRCROOT}/Products/${PROJECT_NAME}.framework\n\nDEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\n\nSIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework\n\n\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\nmkdir -p \"${INSTALL_DIR}\"\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n#ditto \"${DEVICE_DIR}/Headers\" \"${INSTALL_DIR}/Headers\"\n\nlipo -create \"${DEVICE_DIR}/${PROJECT_NAME}\" \"${SIMULATOR_DIR}/${PROJECT_NAME}\" -output \"${INSTALL_DIR}/${PROJECT_NAME}\"\n\n#open \"${DEVICE_DIR}\"\nopen \"${SRCROOT}/Products\"\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -535,19 +558,34 @@
 				760A02A423D132BE00CF2BC9 /* FormListData.swift in Sources */,
 				760A026D23D1325300CF2BC9 /* FormChoiceCell.swift in Sources */,
 				760A027123D1325300CF2BC9 /* MultiSelectionCell.swift in Sources */,
+				765D529F23E3C06200AE354C /* DFLocalizable.swift in Sources */,
 				760A027523D1325300CF2BC9 /* DynamicFieldCell.swift in Sources */,
 				760A02C423D1332700CF2BC9 /* UILabelExtensive.swift in Sources */,
+				765D529B23E3AFB300AE354C /* DFResult.swift in Sources */,
 				760A027723D1325300CF2BC9 /* KeyValueCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		765D52B223E3CDF100AE354C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				765D52B123E3CDF100AE354C /* en */,
+				765D52B423E3CE0100AE354C /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		760A023E23D05C5E00CF2BC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -612,6 +650,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -668,10 +707,11 @@
 		};
 		760A024123D05C5E00CF2BC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0144D07D195AB953944B5559 /* Pods-FpcDF.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CM7H8W87DM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -679,7 +719,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/FpcDF/Frameworks",
+					"$(PROJECT_DIR)/FpcDF/Framework",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FpcDF/Info.plist;
@@ -689,24 +729,24 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"${BUILT_PRODUCTS_DIR)/Alamofire",
-					"${BUILT_PRODUCTS_DIR)/SKPhotoBrowser",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tw.com.fpc.FpcDF;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		760A024223D05C5E00CF2BC9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11D8424F4C98664A28CA3A27 /* Pods-FpcDF.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CM7H8W87DM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -714,7 +754,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/FpcDF/Frameworks",
+					"$(PROJECT_DIR)/FpcDF/Framework",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FpcDF/Info.plist;
@@ -724,13 +764,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"${BUILT_PRODUCTS_DIR)/Alamofire",
-					"${BUILT_PRODUCTS_DIR)/SKPhotoBrowser",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = tw.com.fpc.FpcDF;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -750,8 +789,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(BUILD_PRODUCTS_DIR)/Frameworks/SKPhotoBrowser",
-					"$(BUILD_PRODUCTS_DIR)/Frameworks/Alamofire",
+					"$(BUILD_PRODUCTS_DIR)/SKPhotoBrowser",
+					"$(BUILD_PRODUCTS_DIR)/Alamofire",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -772,8 +811,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-					"$(BUILD_PRODUCTS_DIR)/Frameworks/SKPhotoBrowser",
-					"$(BUILD_PRODUCTS_DIR)/Frameworks/Alamofire",
+					"$(BUILD_PRODUCTS_DIR)/SKPhotoBrowser",
+					"$(BUILD_PRODUCTS_DIR)/Alamofire",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

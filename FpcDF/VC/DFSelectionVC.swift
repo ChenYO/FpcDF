@@ -100,37 +100,39 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                 .responseJSON { response in
                                     
                                     if let json = response.result.value as? [String: Any] {
-                                        do {
-                                            
-                                            let decoder = JSONDecoder()
-                                            decoder.dateDecodingStrategy = .millisecondsSince1970
-                                            let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-                                            let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                            
-                                            let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
-                                            
-                                            self.oriFormData = obj
-                                            
-                                            self.title = obj.formTitle
-                                            self.setButtons()
-                                            
-                                            for cell in obj.cells {
-                                                let item = DynamicInput()
-                                                item.isSelected = false
-                                                item.id = cell.id
-                                                item.keyValueArray = cell.keyValueArray!
+                                        if let data = json[DFJSONKey.data] {
+                                            do {
                                                 
-                                                self.optionList.append(item)
-                                                self.oriOptionList.append(item)
+                                                let decoder = JSONDecoder()
+                                                decoder.dateDecodingStrategy = .millisecondsSince1970
+                                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                                
+                                                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                                                
+                                                self.oriFormData = obj
+                                                
+                                                self.title = obj.formTitle
+                                                self.setButtons()
+                                                
+                                                for cell in obj.cells {
+                                                    let item = DynamicInput()
+                                                    item.isSelected = false
+                                                    item.id = cell.id
+                                                    item.keyValueArray = cell.keyValueArray!
+                                                    
+                                                    self.optionList.append(item)
+                                                    self.oriOptionList.append(item)
+                                                }
+                                                
+                                                if !self.chosenItemList.isEmpty {
+                                                    self.optionList = self.chosenItemList
+                                                    self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
+                                                    self.navigationItem.rightBarButtonItems?.append(self.confirm!)
+                                                }
+                                                self.tableView.reloadData()
+                                            } catch {
                                             }
-                                            
-                                            if !self.chosenItemList.isEmpty {
-                                                self.optionList = self.chosenItemList
-                                                self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
-                                                self.navigationItem.rightBarButtonItems?.append(self.confirm!)
-                                            }
-                                            self.tableView.reloadData()
-                                        } catch {
                                         }
                                     }
                             }
@@ -186,20 +188,22 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                         ]
                         
                         DFAPI.post(address: (button?.url!)!, parameters: parameters) { (response, result, json) in
-                            if let json = response.result.value as? [Any] {
-                                do {
-                                    
-                                    let decoder = JSONDecoder()
-                                    decoder.dateDecodingStrategy = .millisecondsSince1970
-                                    let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                    
-                                    let obj = try DFUtil.decodeJsonStringAndReturnArrayObject(string: jsonString, type: DynamicInput.self)
-                                    
-                                    self.setData(data: obj)
-                                    
-                                    self.tableView.reloadData()
-                                } catch {
+                            if let json = response.result.value as? [String: Any] {
+                                if let data = json[DFJSONKey.data] {
+                                    do {
+                                        
+                                        let decoder = JSONDecoder()
+                                        decoder.dateDecodingStrategy = .millisecondsSince1970
+                                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                        
+                                        let obj = try DFUtil.decodeJsonStringAndReturnArrayObject(string: jsonString, type: DynamicInput.self)
+                                        
+                                        self.setData(data: obj)
+                                        
+                                        self.tableView.reloadData()
+                                    } catch {
+                                    }
                                 }
                             }
                         }
@@ -255,20 +259,22 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                 .responseJSON { response in
                                     
                                     print(response)
-                                    if let json = response.result.value as? [Any] {
-                                        do {
-                                            
-                                            let decoder = JSONDecoder()
-                                            decoder.dateDecodingStrategy = .millisecondsSince1970
-                                            let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-                                            let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                            
-                                            let obj = try DFUtil.decodeJsonStringAndReturnArrayObject(string: jsonString, type: DynamicInput.self)
-                                            
-                                            self.setData(data: obj)
-                                            
-                                            self.tableView.reloadData()
-                                        } catch {
+                                    if let json = response.result.value as? [String: Any] {
+                                        if let data = json[DFJSONKey.data] {
+                                            do {
+                                                
+                                                let decoder = JSONDecoder()
+                                                decoder.dateDecodingStrategy = .millisecondsSince1970
+                                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                                
+                                                let obj = try DFUtil.decodeJsonStringAndReturnArrayObject(string: jsonString, type: DynamicInput.self)
+                                                
+                                                self.setData(data: obj)
+                                                
+                                                self.tableView.reloadData()
+                                            } catch {
+                                            }
                                         }
                                     }
                             }

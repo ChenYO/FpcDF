@@ -9,19 +9,21 @@ provides-dynamic-lookup:
 depends-top-level:
 - !private "!="
 - "AssignmentPrecedence"
-- !private "BooleanLiteralType"
+- "BooleanLiteralType"
 - !private "CGFloat"
 - "DFUtil"
 - "Decodable"
 - !private "ErrorType"
-- !private "FloatLiteralType"
-- !private "IntegerLiteralType"
+- "FloatLiteralType"
+- "IntegerLiteralType"
 - !private "JSONDecoder"
 - "KeyValueCell"
 - "String"
-- !private "StringLiteralType"
+- "StringLiteralType"
+- !private "UIApplication"
 - !private "UIColor"
 - !private "UIFont"
+- "UIViewController"
 - "keyValue"
 - !private "print"
 depends-member:
@@ -35,6 +37,7 @@ depends-member:
 - !private ["So15CALayerDelegateP", "key"]
 - !private ["So15CALayerDelegateP", "key2"]
 - !private ["So15CALayerDelegateP", "key2TopConstraint"]
+- !private ["So15CALayerDelegateP", "rootViewController"]
 - !private ["So15CALayerDelegateP", "text"]
 - !private ["So15CALayerDelegateP", "textColor"]
 - !private ["So15CALayerDelegateP", "value"]
@@ -49,6 +52,10 @@ depends-member:
 - !private ["s7CVarArgP", "key"]
 - !private ["s7CVarArgP", "key2"]
 - !private ["s7CVarArgP", "key2TopConstraint"]
+- !private ["s7CVarArgP", "keyWindow"]
+- !private ["s7CVarArgP", "presentedViewController"]
+- !private ["s7CVarArgP", "rootViewController"]
+- !private ["s7CVarArgP", "shared"]
 - !private ["s7CVarArgP", "subscript"]
 - !private ["s7CVarArgP", "systemFont"]
 - !private ["s7CVarArgP", "text"]
@@ -69,6 +76,10 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "key"]
 - !private ["s28CustomDebugStringConvertibleP", "key2"]
 - !private ["s28CustomDebugStringConvertibleP", "key2TopConstraint"]
+- !private ["s28CustomDebugStringConvertibleP", "keyWindow"]
+- !private ["s28CustomDebugStringConvertibleP", "presentedViewController"]
+- !private ["s28CustomDebugStringConvertibleP", "rootViewController"]
+- !private ["s28CustomDebugStringConvertibleP", "shared"]
 - !private ["s28CustomDebugStringConvertibleP", "subscript"]
 - !private ["s28CustomDebugStringConvertibleP", "systemFont"]
 - !private ["s28CustomDebugStringConvertibleP", "text"]
@@ -91,6 +102,10 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "key"]
 - !private ["s23CustomStringConvertibleP", "key2"]
 - !private ["s23CustomStringConvertibleP", "key2TopConstraint"]
+- !private ["s23CustomStringConvertibleP", "keyWindow"]
+- !private ["s23CustomStringConvertibleP", "presentedViewController"]
+- !private ["s23CustomStringConvertibleP", "rootViewController"]
+- !private ["s23CustomStringConvertibleP", "shared"]
 - !private ["s23CustomStringConvertibleP", "subscript"]
 - !private ["s23CustomStringConvertibleP", "systemFont"]
 - !private ["s23CustomStringConvertibleP", "text"]
@@ -104,15 +119,23 @@ depends-member:
 - !private ["5FpcDF6DFUtilC", "ErrorType"]
 - !private ["5FpcDF6DFUtilC", "JSONDecoder"]
 - ["5FpcDF6DFUtilC", "KeyValueCell"]
+- ["5FpcDF6DFUtilC", "OSType"]
 - ["5FpcDF6DFUtilC", "String"]
+- !private ["5FpcDF6DFUtilC", "UIApplication"]
 - !private ["5FpcDF6DFUtilC", "UIColor"]
 - !private ["5FpcDF6DFUtilC", "UIFont"]
+- ["5FpcDF6DFUtilC", "UIViewController"]
+- ["5FpcDF6DFUtilC", "appRegion"]
 - ["5FpcDF6DFUtilC", "decodeJsonStringAndReturnArrayObject"]
 - ["5FpcDF6DFUtilC", "decodeJsonStringAndReturnObject"]
+- ["5FpcDF6DFUtilC", "forceUpdateFlag"]
+- ["5FpcDF6DFUtilC", "getTopVC"]
 - ["5FpcDF6DFUtilC", "init"]
 - ["5FpcDF6DFUtilC", "keyValue"]
 - !private ["5FpcDF6DFUtilC", "print"]
 - ["5FpcDF6DFUtilC", "setKeyValueData"]
+- ["5FpcDF6DFUtilC", "tipUpdateFlag"]
+- ["5FpcDF6DFUtilC", "versionCode"]
 - !private ["10Foundation12DataProtocolP", "subscript"]
 - !private ["Se", "color"]
 - !private ["Se", "data"]
@@ -144,6 +167,10 @@ depends-member:
 - !private ["SQ", "key"]
 - !private ["SQ", "key2"]
 - !private ["SQ", "key2TopConstraint"]
+- !private ["SQ", "keyWindow"]
+- !private ["SQ", "presentedViewController"]
+- !private ["SQ", "rootViewController"]
+- !private ["SQ", "shared"]
 - !private ["SQ", "subscript"]
 - !private ["SQ", "systemFont"]
 - !private ["SQ", "text"]
@@ -176,6 +203,10 @@ depends-member:
 - !private ["SH", "key"]
 - !private ["SH", "key2"]
 - !private ["SH", "key2TopConstraint"]
+- !private ["SH", "keyWindow"]
+- !private ["SH", "presentedViewController"]
+- !private ["SH", "rootViewController"]
+- !private ["SH", "shared"]
 - !private ["SH", "subscript"]
 - !private ["SH", "systemFont"]
 - !private ["SH", "text"]
@@ -203,6 +234,8 @@ depends-member:
 - !private ["So8NSCodingP", "key"]
 - !private ["So8NSCodingP", "key2"]
 - !private ["So8NSCodingP", "key2TopConstraint"]
+- !private ["So8NSCodingP", "presentedViewController"]
+- !private ["So8NSCodingP", "rootViewController"]
 - !private ["So8NSCodingP", "text"]
 - !private ["So8NSCodingP", "textColor"]
 - !private ["So8NSCodingP", "value"]
@@ -211,6 +244,7 @@ depends-member:
 - !private ["So9NSCopyingP", "data"]
 - !private ["So9NSCopyingP", "init"]
 - !private ["So9NSCopyingP", "systemFont"]
+- !private ["So26NSExtensionRequestHandlingP", "presentedViewController"]
 - !private ["So21NSItemProviderReadingP", "data"]
 - !private ["So21NSItemProviderReadingP", "init"]
 - !private ["So21NSItemProviderWritingP", "data"]
@@ -225,6 +259,10 @@ depends-member:
 - !private ["So8NSObjectC", "key"]
 - !private ["So8NSObjectC", "key2"]
 - !private ["So8NSObjectC", "key2TopConstraint"]
+- !private ["So8NSObjectC", "keyWindow"]
+- !private ["So8NSObjectC", "presentedViewController"]
+- !private ["So8NSObjectC", "rootViewController"]
+- !private ["So8NSObjectC", "shared"]
 - !private ["So8NSObjectC", "systemFont"]
 - !private ["So8NSObjectC", "text"]
 - !private ["So8NSObjectC", "textColor"]
@@ -239,6 +277,10 @@ depends-member:
 - !private ["So8NSObjectP", "key"]
 - !private ["So8NSObjectP", "key2"]
 - !private ["So8NSObjectP", "key2TopConstraint"]
+- !private ["So8NSObjectP", "keyWindow"]
+- !private ["So8NSObjectP", "presentedViewController"]
+- !private ["So8NSObjectP", "rootViewController"]
+- !private ["So8NSObjectP", "shared"]
 - !private ["So8NSObjectP", "systemFont"]
 - !private ["So8NSObjectP", "text"]
 - !private ["So8NSObjectP", "textColor"]
@@ -270,6 +312,7 @@ depends-member:
 - !private ["So29UIAccessibilityIdentificationP", "key"]
 - !private ["So29UIAccessibilityIdentificationP", "key2"]
 - !private ["So29UIAccessibilityIdentificationP", "key2TopConstraint"]
+- !private ["So29UIAccessibilityIdentificationP", "rootViewController"]
 - !private ["So29UIAccessibilityIdentificationP", "text"]
 - !private ["So29UIAccessibilityIdentificationP", "textColor"]
 - !private ["So29UIAccessibilityIdentificationP", "value"]
@@ -280,6 +323,7 @@ depends-member:
 - !private ["So12UIAppearanceP", "key"]
 - !private ["So12UIAppearanceP", "key2"]
 - !private ["So12UIAppearanceP", "key2TopConstraint"]
+- !private ["So12UIAppearanceP", "rootViewController"]
 - !private ["So12UIAppearanceP", "text"]
 - !private ["So12UIAppearanceP", "textColor"]
 - !private ["So12UIAppearanceP", "value"]
@@ -290,12 +334,17 @@ depends-member:
 - !private ["So21UIAppearanceContainerP", "key"]
 - !private ["So21UIAppearanceContainerP", "key2"]
 - !private ["So21UIAppearanceContainerP", "key2TopConstraint"]
+- !private ["So21UIAppearanceContainerP", "presentedViewController"]
+- !private ["So21UIAppearanceContainerP", "rootViewController"]
 - !private ["So21UIAppearanceContainerP", "text"]
 - !private ["So21UIAppearanceContainerP", "textColor"]
 - !private ["So21UIAppearanceContainerP", "value"]
 - !private ["So21UIAppearanceContainerP", "value2"]
 - !private ["So21UIAppearanceContainerP", "value2TopConstraint"]
+- !private ["So13UIApplicationC", "keyWindow"]
+- !private ["So13UIApplicationC", "shared"]
 - !private ["So7UIColorC", "init"]
+- !private ["So18UIContentContainerP", "presentedViewController"]
 - !private ["So30UIContentSizeCategoryAdjustingP", "font"]
 - !private ["So30UIContentSizeCategoryAdjustingP", "isHidden"]
 - !private ["So30UIContentSizeCategoryAdjustingP", "text"]
@@ -305,6 +354,7 @@ depends-member:
 - !private ["So17UICoordinateSpaceP", "key"]
 - !private ["So17UICoordinateSpaceP", "key2"]
 - !private ["So17UICoordinateSpaceP", "key2TopConstraint"]
+- !private ["So17UICoordinateSpaceP", "rootViewController"]
 - !private ["So17UICoordinateSpaceP", "text"]
 - !private ["So17UICoordinateSpaceP", "textColor"]
 - !private ["So17UICoordinateSpaceP", "value"]
@@ -315,6 +365,7 @@ depends-member:
 - !private ["So13UIDynamicItemP", "key"]
 - !private ["So13UIDynamicItemP", "key2"]
 - !private ["So13UIDynamicItemP", "key2TopConstraint"]
+- !private ["So13UIDynamicItemP", "rootViewController"]
 - !private ["So13UIDynamicItemP", "text"]
 - !private ["So13UIDynamicItemP", "textColor"]
 - !private ["So13UIDynamicItemP", "value"]
@@ -325,6 +376,8 @@ depends-member:
 - !private ["So18UIFocusEnvironmentP", "key"]
 - !private ["So18UIFocusEnvironmentP", "key2"]
 - !private ["So18UIFocusEnvironmentP", "key2TopConstraint"]
+- !private ["So18UIFocusEnvironmentP", "presentedViewController"]
+- !private ["So18UIFocusEnvironmentP", "rootViewController"]
 - !private ["So18UIFocusEnvironmentP", "text"]
 - !private ["So18UIFocusEnvironmentP", "textColor"]
 - !private ["So18UIFocusEnvironmentP", "value"]
@@ -335,6 +388,7 @@ depends-member:
 - !private ["So11UIFocusItemP", "key"]
 - !private ["So11UIFocusItemP", "key2"]
 - !private ["So11UIFocusItemP", "key2TopConstraint"]
+- !private ["So11UIFocusItemP", "rootViewController"]
 - !private ["So11UIFocusItemP", "text"]
 - !private ["So11UIFocusItemP", "textColor"]
 - !private ["So11UIFocusItemP", "value"]
@@ -345,6 +399,7 @@ depends-member:
 - !private ["So20UIFocusItemContainerP", "key"]
 - !private ["So20UIFocusItemContainerP", "key2"]
 - !private ["So20UIFocusItemContainerP", "key2TopConstraint"]
+- !private ["So20UIFocusItemContainerP", "rootViewController"]
 - !private ["So20UIFocusItemContainerP", "text"]
 - !private ["So20UIFocusItemContainerP", "textColor"]
 - !private ["So20UIFocusItemContainerP", "value"]
@@ -366,6 +421,10 @@ depends-member:
 - !private ["So30UIPasteConfigurationSupportingP", "key"]
 - !private ["So30UIPasteConfigurationSupportingP", "key2"]
 - !private ["So30UIPasteConfigurationSupportingP", "key2TopConstraint"]
+- !private ["So30UIPasteConfigurationSupportingP", "keyWindow"]
+- !private ["So30UIPasteConfigurationSupportingP", "presentedViewController"]
+- !private ["So30UIPasteConfigurationSupportingP", "rootViewController"]
+- !private ["So30UIPasteConfigurationSupportingP", "shared"]
 - !private ["So30UIPasteConfigurationSupportingP", "text"]
 - !private ["So30UIPasteConfigurationSupportingP", "textColor"]
 - !private ["So30UIPasteConfigurationSupportingP", "value"]
@@ -376,6 +435,10 @@ depends-member:
 - !private ["So11UIResponderC", "key"]
 - !private ["So11UIResponderC", "key2"]
 - !private ["So11UIResponderC", "key2TopConstraint"]
+- !private ["So11UIResponderC", "keyWindow"]
+- !private ["So11UIResponderC", "presentedViewController"]
+- !private ["So11UIResponderC", "rootViewController"]
+- !private ["So11UIResponderC", "shared"]
 - !private ["So11UIResponderC", "text"]
 - !private ["So11UIResponderC", "textColor"]
 - !private ["So11UIResponderC", "value"]
@@ -386,11 +449,16 @@ depends-member:
 - !private ["So30UIResponderStandardEditActionsP", "key"]
 - !private ["So30UIResponderStandardEditActionsP", "key2"]
 - !private ["So30UIResponderStandardEditActionsP", "key2TopConstraint"]
+- !private ["So30UIResponderStandardEditActionsP", "keyWindow"]
+- !private ["So30UIResponderStandardEditActionsP", "presentedViewController"]
+- !private ["So30UIResponderStandardEditActionsP", "rootViewController"]
+- !private ["So30UIResponderStandardEditActionsP", "shared"]
 - !private ["So30UIResponderStandardEditActionsP", "text"]
 - !private ["So30UIResponderStandardEditActionsP", "textColor"]
 - !private ["So30UIResponderStandardEditActionsP", "value"]
 - !private ["So30UIResponderStandardEditActionsP", "value2"]
 - !private ["So30UIResponderStandardEditActionsP", "value2TopConstraint"]
+- !private ["So16UIStateRestoringP", "presentedViewController"]
 - !private ["So15UITableViewCellC", "key"]
 - !private ["So15UITableViewCellC", "key2"]
 - !private ["So15UITableViewCellC", "key2TopConstraint"]
@@ -402,6 +470,8 @@ depends-member:
 - !private ["So18UITraitEnvironmentP", "key"]
 - !private ["So18UITraitEnvironmentP", "key2"]
 - !private ["So18UITraitEnvironmentP", "key2TopConstraint"]
+- !private ["So18UITraitEnvironmentP", "presentedViewController"]
+- !private ["So18UITraitEnvironmentP", "rootViewController"]
 - !private ["So18UITraitEnvironmentP", "text"]
 - !private ["So18UITraitEnvironmentP", "textColor"]
 - !private ["So18UITraitEnvironmentP", "value"]
@@ -412,6 +482,10 @@ depends-member:
 - !private ["So23UIUserActivityRestoringP", "key"]
 - !private ["So23UIUserActivityRestoringP", "key2"]
 - !private ["So23UIUserActivityRestoringP", "key2TopConstraint"]
+- !private ["So23UIUserActivityRestoringP", "keyWindow"]
+- !private ["So23UIUserActivityRestoringP", "presentedViewController"]
+- !private ["So23UIUserActivityRestoringP", "rootViewController"]
+- !private ["So23UIUserActivityRestoringP", "shared"]
 - !private ["So23UIUserActivityRestoringP", "text"]
 - !private ["So23UIUserActivityRestoringP", "textColor"]
 - !private ["So23UIUserActivityRestoringP", "value"]
@@ -422,11 +496,14 @@ depends-member:
 - !private ["So6UIViewC", "key"]
 - !private ["So6UIViewC", "key2"]
 - !private ["So6UIViewC", "key2TopConstraint"]
+- !private ["So6UIViewC", "rootViewController"]
 - !private ["So6UIViewC", "text"]
 - !private ["So6UIViewC", "textColor"]
 - !private ["So6UIViewC", "value"]
 - !private ["So6UIViewC", "value2"]
 - !private ["So6UIViewC", "value2TopConstraint"]
+- !private ["So16UIViewControllerC", "presentedViewController"]
+- !private ["So8UIWindowC", "rootViewController"]
 - !private ["9Alamofire14URLConvertibleP", "data"]
 - !private ["s14_ArrayProtocolP", "subscript"]
 - !private ["s15_CVarArgAlignedP", "init"]
@@ -449,6 +526,10 @@ depends-member:
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "key"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "key2"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "key2TopConstraint"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "keyWindow"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "presentedViewController"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "rootViewController"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "shared"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "systemFont"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "text"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "textColor"]
@@ -467,6 +548,7 @@ depends-member:
 - !private ["s38__DefaultCustomPlaygroundQuickLookableP", "key"]
 - !private ["s38__DefaultCustomPlaygroundQuickLookableP", "key2"]
 - !private ["s38__DefaultCustomPlaygroundQuickLookableP", "key2TopConstraint"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "rootViewController"]
 - !private ["s38__DefaultCustomPlaygroundQuickLookableP", "text"]
 - !private ["s38__DefaultCustomPlaygroundQuickLookableP", "textColor"]
 - !private ["s38__DefaultCustomPlaygroundQuickLookableP", "value"]
@@ -515,6 +597,7 @@ depends-nominal:
 - !private "10Foundation19MutableDataProtocolP"
 - !private "So8NSCodingP"
 - !private "So9NSCopyingP"
+- !private "So26NSExtensionRequestHandlingP"
 - !private "So21NSItemProviderReadingP"
 - !private "So21NSItemProviderWritingP"
 - !private "So18NSLayoutConstraintC"
@@ -538,7 +621,9 @@ depends-nominal:
 - !private "So29UIAccessibilityIdentificationP"
 - !private "So12UIAppearanceP"
 - !private "So21UIAppearanceContainerP"
+- !private "So13UIApplicationC"
 - !private "So7UIColorC"
+- !private "So18UIContentContainerP"
 - !private "So30UIContentSizeCategoryAdjustingP"
 - !private "So17UICoordinateSpaceP"
 - !private "So13UIDynamicItemP"
@@ -551,10 +636,13 @@ depends-nominal:
 - !private "So30UIPasteConfigurationSupportingP"
 - !private "So11UIResponderC"
 - !private "So30UIResponderStandardEditActionsP"
+- !private "So16UIStateRestoringP"
 - !private "So15UITableViewCellC"
 - !private "So18UITraitEnvironmentP"
 - !private "So23UIUserActivityRestoringP"
 - !private "So6UIViewC"
+- !private "So16UIViewControllerC"
+- !private "So8UIWindowC"
 - !private "9Alamofire14URLConvertibleP"
 - !private "s14_ArrayProtocolP"
 - !private "s15_CVarArgAlignedP"
@@ -608,4 +696,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "1bebc5e66bfb6e15e40e32304097c34d"
+interface-hash: "da3dac57fd4c88ef2d2994d4b2c35b3e"

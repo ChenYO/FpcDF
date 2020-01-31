@@ -12,6 +12,9 @@ depends-member:
 - ["5FpcDF9DFJSONKeyV", "data"]
 - ["5FpcDF9DFJSONKeyV", "init"]
 - ["5FpcDF9DFJSONKeyV", "result"]
+- ["5FpcDF9DFJSONKeyV", "storeAppURL"]
+- ["5FpcDF9DFJSONKeyV", "updateComment"]
+- ["5FpcDF9DFJSONKeyV", "webDownloadAppURL"]
 depends-nominal:
 - "5FpcDF9DFJSONKeyV"
 depends-dynamic-lookup:
@@ -51,4 +54,4 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "57f8f302b662bad0a6686bce9e825f6c"
+interface-hash: "740be2509f6a326b9205b9269869dbbb"

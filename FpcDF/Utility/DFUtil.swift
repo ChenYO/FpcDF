@@ -11,6 +11,12 @@ import UIKit
 
 class DFUtil {
     
+    static let versionCode = 1
+    static let OSType = "iOS" // iOS, Android
+    static let appRegion = "International" // International, China
+    static var forceUpdateFlag = false
+    static var tipUpdateFlag = false
+    
     static func decodeJsonStringAndReturnArrayObject<T: Decodable>(string: String, type: T.Type) throws -> [T] {
         let jsonData = string.data(using: .utf8)!
         let decoder = JSONDecoder()
@@ -93,5 +99,15 @@ class DFUtil {
             cell.value2.textColor = UIColor(hexString: fontColor)
         }
         
+    }
+    
+    static func getTopVC() -> UIViewController? {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            return topController
+        }
+        return nil
     }
 }

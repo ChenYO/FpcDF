@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  FpcDF
+
+  Created by 陳仲堯 on 2020/1/31.
+  Copyright © 2020 陳仲堯. All rights reserved.
+*/
+"APP_FORCE_UPDATE" = "In order to continue, you must update App now";
+"APP_UPDATE_TIP" = "App has new version, do you want update now?";
+"COMMAND_CONFIRM" = "Confirm";
+"COMMAND_CANCEL" = "Cancel";
+"COMMAND_UPDATE_APP" = "Update App";
+"COMMAND_SKIP" = "Skip";

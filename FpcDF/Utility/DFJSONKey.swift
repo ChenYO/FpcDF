@@ -11,4 +11,7 @@ import Foundation
 struct DFJSONKey {
     static let result = "result"
     static let data = "data"
+    static let storeAppURL = "storeAppURL"
+    static let webDownloadAppURL = "webDownloadAppURL"
+    static let updateComment = "updateComment"
 }

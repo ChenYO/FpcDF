@@ -3,7 +3,7 @@
   'case-sensitive': 'false',
   'roots': [{
     'type': 'directory',
-    'name': "/Users/chenyao/Library/Developer/Xcode/DerivedData/FpcDF-exknkezvwbtydmcokfjrnatubihh/Build/Products/Debug-iphonesimulator/FpcDF.framework/Modules"
+    'name': "/Users/chenyao/Library/Developer/Xcode/DerivedData/FpcDF-cilpuzucriaadoduxdgovhmczoqb/Build/Intermediates.noindex/IBDesignables/Products/Debug-iphonesimulator/FpcDF.framework/Modules"
     'contents': [{
       'type': 'file',
       'name': "module.modulemap",

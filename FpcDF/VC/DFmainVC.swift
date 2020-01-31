@@ -57,9 +57,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.separatorStyle = .none
         self.navigationItem.rightBarButtonItems = []
         
-        tokenURL = "https://appcloud.fpcetg.com.tw/factoryCloud/api/common/getDisposableToken"
-        accessToken = "1ca449f4-ff8b-478d-bd02-92a9b8f6a76c"
-        tokenKey = "factorycloudToken"
+//        tokenURL = "https://appcloud.fpcetg.com.tw/factoryCloud/api/common/getDisposableToken"
+//        accessToken = "1ca449f4-ff8b-478d-bd02-92a9b8f6a76c"
+//        tokenKey = "factorycloudToken"
+        
+
         
         if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
             DFAPI.post(address: tokenURL, parameters: [
@@ -95,8 +97,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //getForm 取得表單
     func load(urlString: String, accessToken: String) {
         
+        let parameters = [
+            tokenKey!: accessToken,
+            "versionCode": DFUtil.versionCode,
+            "OSType": DFUtil.OSType,
+            "appRegion": DFUtil.appRegion
+            ] as [String : Any]
         
-        Alamofire.request(urlString, method: .get, parameters: [tokenKey!: accessToken], encoding: URLEncoding(destination: .queryString))
+        Alamofire.request(urlString, method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
             .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
                 print("Progress: \(progress.fractionCompleted)")
             }
@@ -106,24 +114,71 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             .responseJSON { response in
                 
                 if let json = response.result.value as? [String: Any] {
-                    do {
+                    if let result = json[DFJSONKey.result] as? String {
+                        print(result)
                         
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .millisecondsSince1970
-                        let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                        
-                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
-                        
-                        self.oriFormData = obj
-                        self.clear()
-                    
-                        
-                        self.title = obj.formTitle
-                        self.setButtons()
-                        self.setFormData()
-                        self.tableView.reloadData()
-                    } catch {
+                        if result == DFResult.TOKEN_EXPIRED {
+                        } else if result == DFResult.TOKEN_INVALID {
+                        } else if result == DFResult.APP_FORCE_UPDATE {
+                            if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
+                                print(webDownloadAppURL)
+                                
+                                let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
+                                    let url : URL = URL(string: storeAppURL)!
+                                    if UIApplication.shared.canOpenURL(url) {
+                                        UIApplication.shared.openURL(url)
+                                    }
+                                }))
+                                if let vc = DFUtil.getTopVC() {
+                                    vc.present(alert, animated: true, completion: nil)
+                                }
+                                DFUtil.forceUpdateFlag = true
+                            }
+                        } else if result == DFResult.APP_UPDATE_TIP {
+                            
+                            if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
+                                print(webDownloadAppURL)
+                                
+                                let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_UPDATE_TIP), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_SKIP), style: UIAlertAction.Style.default, handler: { (action) in
+                                    //                                    self.gotoMainVC(animated: true)
+                                }))
+                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
+                                    let url : URL = URL(string: storeAppURL)!
+                                    if UIApplication.shared.canOpenURL(url) {
+                                        UIApplication.shared.openURL(url)
+                                    }
+                                    //                                    self.gotoMainVC(animated: true)
+                                }))
+                                if let vc = DFUtil.getTopVC() {
+                                    vc.present(alert, animated: true, completion: nil)
+                                }
+                                DFUtil.tipUpdateFlag = true
+                            }
+                            
+                        } else {
+                            if let data = json[DFJSONKey.data] as? [String: Any] {
+                                do {
+                                    
+                                    let decoder = JSONDecoder()
+                                    decoder.dateDecodingStrategy = .millisecondsSince1970
+                                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                    
+                                    let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                                    
+                                    self.oriFormData = obj
+                                    self.clear()
+                                    
+                                    self.title = obj.formTitle
+                                    self.setButtons()
+                                    self.setFormData()
+                                    self.tableView.reloadData()
+                                } catch {
+                                }
+                            }
+                        }
                     }
                 }
         }
