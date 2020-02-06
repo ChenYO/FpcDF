@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import Alamofire
 
 class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomLabel: UILabel!
@@ -43,8 +42,8 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         tableView.delegate = self
         tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "KeyValueCell")
         
-//        confirm = UIBarButtonItem(title: "選擇項目", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toFormVC))
-
+        //        confirm = UIBarButtonItem(title: "選擇項目", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toFormVC))
+        
         total.layer.cornerRadius = 5
         
         constraint = NSLayoutConstraint(item: bottomView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0)
@@ -55,7 +54,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         bottomView.addGestureRecognizer(bottomViewTapRecognizer)
         
         self.navigationItem.rightBarButtonItems = []
-//        self.navigationItem.rightBarButtonItems = [self.confirm!]
+        //        self.navigationItem.rightBarButtonItems = [self.confirm!]
         
         if type == "singleSelection" {
             constraint?.constant = 0
@@ -73,10 +72,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         if optionList.count == 0 {
             if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
-                DFAPI.post(address: tokenURL, parameters: [
+                DFAPI.customPost(address: tokenURL, parameters: [
                     "accessToken": accessToken,
                     "comment" : "DynamicForm"
-                ]) { (response, result, json) in
+                ]) { json in
                     //            print(json)
                     
                     if let data = json[DFJSONKey.data] {
@@ -89,52 +88,48 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                             
                             let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
                             print(obj)
-                            
-                            Alamofire.request(self.urlString!, method: .get, parameters: [self.tokenKey!: obj.accessTokenSHA256], encoding: URLEncoding(destination: .queryString))
-                                .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                                    print("Progress: \(progress.fractionCompleted)")
-                                }
-                                .validate { request, response, data in
-                                    return .success
-                                }
-                                .responseJSON { response in
-                                    
-                                    if let json = response.result.value as? [String: Any] {
-                                        if let data = json[DFJSONKey.data] {
-                                            do {
-                                                
-                                                let decoder = JSONDecoder()
-                                                decoder.dateDecodingStrategy = .millisecondsSince1970
-                                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                                
-                                                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
-                                                
-                                                self.oriFormData = obj
-                                                
-                                                self.title = obj.formTitle
-                                                self.setButtons()
-                                                
-                                                for cell in obj.cells {
-                                                    let item = DynamicInput()
-                                                    item.isSelected = false
-                                                    item.id = cell.id
-                                                    item.keyValueArray = cell.keyValueArray!
-                                                    
-                                                    self.optionList.append(item)
-                                                    self.oriOptionList.append(item)
-                                                }
-                                                
-                                                if !self.chosenItemList.isEmpty {
-                                                    self.optionList = self.chosenItemList
-                                                    self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
-                                                    self.navigationItem.rightBarButtonItems?.append(self.confirm!)
-                                                }
-                                                self.tableView.reloadData()
-                                            } catch {
-                                            }
+                            let parameters = [
+                                self.tokenKey!: obj.accessTokenSHA256
+                            ]
+                            DFAPI.customGet(address: self.urlString!, parameters: parameters) {
+                                json in
+                                
+                                if let data = json[DFJSONKey.data] {
+                                    do {
+                                        
+                                        let decoder = JSONDecoder()
+                                        decoder.dateDecodingStrategy = .millisecondsSince1970
+                                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                        
+                                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                                        
+                                        self.oriFormData = obj
+                                        
+                                        self.title = obj.formTitle
+                                        self.setButtons()
+                                        
+                                        for cell in obj.cells {
+                                            let item = DynamicInput()
+                                            item.isSelected = false
+                                            item.id = cell.id
+                                            item.keyValueArray = cell.keyValueArray!
+                                            
+                                            self.optionList.append(item)
+                                            self.oriOptionList.append(item)
                                         }
+                                        
+                                        if !self.chosenItemList.isEmpty {
+                                            self.optionList = self.chosenItemList
+                                            self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
+                                            self.navigationItem.rightBarButtonItems?.append(self.confirm!)
+                                        }
+                                        DispatchQueue.main.async {
+                                            self.tableView.reloadData()
+                                        }
+                                    } catch {
                                     }
+                                }
                             }
                             
                         } catch {
@@ -163,12 +158,12 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         optionList = []
         oriOptionList = []
         let button = oriFormData?.buttons[sender.tag]
-
+        
         if button?.type == "searchPost" {
-            DFAPI.post(address: tokenURL!, parameters: [
+            DFAPI.customPost(address: tokenURL!, parameters: [
                 "accessToken": accessToken!,
                 "comment" : "DynamicForm"
-            ]) { (response, result, json) in
+            ]) { json in
                 //            print(json)
                 
                 if let data = json[DFJSONKey.data] {
@@ -181,14 +176,15 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                         
                         let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
                         print(obj)
-                        
-                        let parameters = [
-                            "pattern": self.searchBar.text!,
-                            "accessTokenSHA256": obj.accessTokenSHA256
-                        ]
-                        
-                        DFAPI.post(address: (button?.url!)!, parameters: parameters) { (response, result, json) in
-                            if let json = response.result.value as? [String: Any] {
+                        DispatchQueue.main.async {
+                            let parameters = [
+                                "pattern": self.searchBar.text!,
+                                "accessTokenSHA256": obj.accessTokenSHA256
+                            ]
+                            
+                            DFAPI.customPost(address: (button?.url!)!, parameters: parameters) {
+                                json in
+                                
                                 if let data = json[DFJSONKey.data] {
                                     do {
                                         
@@ -201,7 +197,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                         
                                         self.setData(data: obj)
                                         
-                                        self.tableView.reloadData()
+                                        DispatchQueue.main.async {
+                                            self.tableView.reloadData()
+                                        }
                                     } catch {
                                     }
                                 }
@@ -227,10 +225,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                 ]
                 
                 print(parameters)
-                DFAPI.post(address: tokenURL!, parameters: [
+                DFAPI.customPost(address: tokenURL!, parameters: [
                     "accessToken": accessToken!,
                     "comment" : "DynamicForm"
-                ]) { (response, result, json) in
+                ]) { json in
                     //            print(json)
                     
                     if let data = json[DFJSONKey.data] {
@@ -244,39 +242,34 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                             let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
                             print(obj)
                             
-                            let parameters = [
-                                "pattern": self.searchBar.text!,
-                                "accessTokenSHA256": obj.accessTokenSHA256
-                            ]
-                            
-                            Alamofire.request(String(url), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
-                                .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                                    print("Progress: \(progress.fractionCompleted)")
-                                }
-                                .validate { request, response, data in
-                                    return .success
-                                }
-                                .responseJSON { response in
+                            DispatchQueue.main.async {
+                                let parameters = [
+                                    "pattern": self.searchBar.text!,
+                                    "accessTokenSHA256": obj.accessTokenSHA256
+                                ]
+                                
+                                DFAPI.customGet(address: String(url), parameters: parameters) {
+                                    json in
                                     
-                                    print(response)
-                                    if let json = response.result.value as? [String: Any] {
-                                        if let data = json[DFJSONKey.data] {
-                                            do {
-                                                
-                                                let decoder = JSONDecoder()
-                                                decoder.dateDecodingStrategy = .millisecondsSince1970
-                                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                                
-                                                let obj = try DFUtil.decodeJsonStringAndReturnArrayObject(string: jsonString, type: DynamicInput.self)
-                                                
-                                                self.setData(data: obj)
-                                                
+                                    if let data = json[DFJSONKey.data] {
+                                        do {
+                                            
+                                            let decoder = JSONDecoder()
+                                            decoder.dateDecodingStrategy = .millisecondsSince1970
+                                            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                            let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                            
+                                            let obj = try DFUtil.decodeJsonStringAndReturnArrayObject(string: jsonString, type: DynamicInput.self)
+                                            
+                                            self.setData(data: obj)
+                                            
+                                            DispatchQueue.main.async {
                                                 self.tableView.reloadData()
-                                            } catch {
                                             }
+                                        } catch {
                                         }
                                     }
+                                }
                             }
                             
                         } catch {
@@ -330,7 +323,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
         let vc = storyboard.instantiateViewController(withIdentifier: "DFChosenModifyVC") as? DFChosenModifyVC
         
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier : "ChosenModifyVC") as? DFChosenModifyVC
+        //        let vc = UIStoryboard(name: "Main", bundle: Bundle(for: FpcDF.self)).instantiateViewController(withIdentifier : "ChosenModifyVC") as? DFChosenModifyVC
         
         vc?.oriChosenItemList = chosenItemList
         vc?.chosenItemList = chosenItemList
@@ -342,7 +335,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     }
     
     @objc func toFormVC(sender: AnyObject) {
-
+        
         self.performSegue(withIdentifier: "toFormVC", sender: nil)
     }
     
@@ -362,7 +355,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             let parameters = [
                 "keywords" : searchBarTextString
             ]
-           
+            
             
         }
     }
@@ -386,18 +379,18 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         let option = optionList[indexPath.row]
         
         let checkTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(checkTap))
-    
+        
         if type == "singleSelection" {
             cell.imageConstraint?.constant = 0
         }else if type == "multipleSelection" {
             cell.imageConstraint?.constant = 25
         }
         
-
+        
         if option.isSelected! {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_checked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "icon_checksign_checked")
         }else {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked")
         }
         
         cell.checkIcon.addGestureRecognizer(checkTapRecognizer)
@@ -409,7 +402,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         return cell
     }
     
-
+    
     @objc func checkTap(sender:UITapGestureRecognizer) {
         let indexPath = IndexPath(row: (sender.view?.tag)!, section: 0)
         let choseOption = optionList[(sender.view?.tag)!]
@@ -418,11 +411,11 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         choseOption.isSelected = !choseOption.isSelected!
         
         if choseOption.isSelected! {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_checked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "icon_checksign_checked")
             chosenItemList.append(choseOption)
         }else {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
-
+            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked")
+            
             for (index, option) in chosenItemList.enumerated() {
                 if option.id == choseOption.id {
                     chosenItemList.remove(at: index)

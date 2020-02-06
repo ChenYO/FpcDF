@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import Alamofire
 import SafariServices
 import SKPhotoBrowser
 import MobileCoreServices
 
 public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     //存放原始表單資料
@@ -22,7 +21,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var screenHeight:CGFloat = 0.0
     
     var formDataList = [FormData]()
-
+    
     //存放各個dataFormatter
     var dateFormatterList = [dateFormatterObj]()
     
@@ -31,6 +30,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var accessToken: String?
     var tokenURL: String?
     
+    var isFirstLayer = true
+    
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
     override public func viewDidLoad() {
@@ -38,7 +39,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         screenHeight = self.view.bounds.height
         
-//        let FormTitleCellNib = UINib.init(nibName: "FormTitleCell", bundle: Bundle(for: FpcFpcDF.self))
+        //        let FormTitleCellNib = UINib.init(nibName: "FormTitleCell", bundle: Bundle(for: FpcFpcDF.self))
         
         tableView.register(UINib(nibName: "FormTitleCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "FormTitleCell")
         tableView.register(UINib(nibName: "FormTextFieldCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "FormTextFieldCell")
@@ -57,18 +58,25 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.separatorStyle = .none
         self.navigationItem.rightBarButtonItems = []
         
-//        tokenURL = "https://appcloud.fpcetg.com.tw/factoryCloud/api/common/getDisposableToken"
-//        accessToken = "1ca449f4-ff8b-478d-bd02-92a9b8f6a76c"
-//        tokenKey = "factorycloudToken"
+        //        let backItem = UIBarButtonItem()
+        //        backItem.title = "Back"
+        //        self.navigationItem.backBarButtonItem = backItem
         
-
+        if isFirstLayer {
+            let backItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+            navigationItem.leftBarButtonItem = backItem
+        }
+        
+        //        navigationItem.hidesBackButton = false
+        
+        //        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back1", style: .plain, target: nil, action: #selector(back))
         
         if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
-            DFAPI.post(address: tokenURL, parameters: [
+            DFAPI.customPost(address: tokenURL, parameters: [
                 "accessToken": accessToken,
                 "comment" : "DynamicForm"
-            ]) { (response, result, json) in
-                //            print(json)
+            ]) {
+                json in
                 
                 if let data = json[DFJSONKey.data] {
                     
@@ -83,7 +91,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if let urlString = self.urlString {
                             self.load(urlString: urlString, accessToken: obj.accessTokenSHA256)
                         }else {
-                            self.load(urlString: "https://appcloud.fpcetg.com.tw/rtcapi/getFormList", accessToken: obj.accessTokenSHA256)
+                            self.load(urlString: "https://appcloud.fpcetg.com.tw/rtcapi/getFactoryFormList", accessToken: obj.accessTokenSHA256)
                         }
                         
                     } catch {
@@ -92,6 +100,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         }
+    }
+    
+    @objc func back() {
+        print("back")
+        
+        if isModal() {
+            self.dismiss(animated: true, completion: nil)
+            
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
+    
+    func isModal() -> Bool {
+        return self.presentingViewController?.presentedViewController == self
+            || (self.navigationController != nil && self.navigationController?.presentingViewController?.presentedViewController == self.navigationController)
+            || self.tabBarController?.presentingViewController is UITabBarController
     }
     
     //getForm 取得表單
@@ -104,133 +130,125 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             "appRegion": DFUtil.appRegion
             ] as [String : Any]
         
-        Alamofire.request(urlString, method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
-            .downloadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-                print("Progress: \(progress.fractionCompleted)")
-            }
-            .validate { request, response, data in
-                return .success
-            }
-            .responseJSON { response in
+        DFAPI.customGet(address: urlString, parameters: parameters) {
+            json in
+            
+            if let result = json[DFJSONKey.result] as? String {
+                print(result)
                 
-                if let json = response.result.value as? [String: Any] {
-                    if let result = json[DFJSONKey.result] as? String {
-                        print(result)
+                if result == DFResult.TOKEN_EXPIRED {
+                } else if result == DFResult.TOKEN_INVALID {
+                } else if result == DFResult.APP_FORCE_UPDATE {
+                    if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
+                        print(webDownloadAppURL)
                         
-                        if result == DFResult.TOKEN_EXPIRED {
-                        } else if result == DFResult.TOKEN_INVALID {
-                        } else if result == DFResult.APP_FORCE_UPDATE {
-                            if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
-                                print(webDownloadAppURL)
-                                
-                                let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
-                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
-                                    let url : URL = URL(string: storeAppURL)!
-                                    if UIApplication.shared.canOpenURL(url) {
-                                        UIApplication.shared.openURL(url)
-                                    }
-                                }))
-                                if let vc = DFUtil.getTopVC() {
-                                    vc.present(alert, animated: true, completion: nil)
-                                }
-                                DFUtil.forceUpdateFlag = true
+                        let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
+                            let url : URL = URL(string: storeAppURL)!
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.openURL(url)
                             }
-                        } else if result == DFResult.APP_UPDATE_TIP {
-                            
-                            if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
-                                print(webDownloadAppURL)
-                                
-                                let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_UPDATE_TIP), message: updateComment, preferredStyle: UIAlertController.Style.alert)
-                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_SKIP), style: UIAlertAction.Style.default, handler: { (action) in
-                                    //                                    self.gotoMainVC(animated: true)
-                                }))
-                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
-                                    let url : URL = URL(string: storeAppURL)!
-                                    if UIApplication.shared.canOpenURL(url) {
-                                        UIApplication.shared.openURL(url)
-                                    }
-                                    //                                    self.gotoMainVC(animated: true)
-                                }))
-                                if let vc = DFUtil.getTopVC() {
-                                    vc.present(alert, animated: true, completion: nil)
-                                }
-                                DFUtil.tipUpdateFlag = true
+                        }))
+                        if let vc = DFUtil.getTopVC() {
+                            vc.present(alert, animated: true, completion: nil)
+                        }
+                        DFUtil.forceUpdateFlag = true
+                    }
+                } else if result == DFResult.APP_UPDATE_TIP {
+                    
+                    if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
+                        print(webDownloadAppURL)
+                        
+                        let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_UPDATE_TIP), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_SKIP), style: UIAlertAction.Style.default, handler: { (action) in
+                            //                                    self.gotoMainVC(animated: true)
+                        }))
+                        alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
+                            let url : URL = URL(string: storeAppURL)!
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.openURL(url)
                             }
-                            
-                        } else {
-                            if let data = json[DFJSONKey.data] as? [String: Any] {
-                                do {
-                                    
-                                    let decoder = JSONDecoder()
-                                    decoder.dateDecodingStrategy = .millisecondsSince1970
-                                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                    
-                                    let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
-                                    
-                                    self.oriFormData = obj
-                                    self.clear()
-                                    
-                                    self.title = obj.formTitle
-                                    self.setButtons()
-                                    self.setFormData()
-                                    self.tableView.reloadData()
-                                } catch {
-                                }
+                            //                                    self.gotoMainVC(animated: true)
+                        }))
+                        if let vc = DFUtil.getTopVC() {
+                            vc.present(alert, animated: true, completion: nil)
+                        }
+                        DFUtil.tipUpdateFlag = true
+                    }
+                    
+                } else {
+                    if let data = json[DFJSONKey.data] as? [String: Any] {
+                        DispatchQueue.main.async {
+                            do {
+                                
+                                let decoder = JSONDecoder()
+                                decoder.dateDecodingStrategy = .millisecondsSince1970
+                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                
+                                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                                
+                                self.oriFormData = obj
+                                self.clear()
+                                
+                                self.title = obj.formTitle
+                                self.setButtons()
+                                self.setFormData()
+                                self.tableView.reloadData()
+                            } catch {
                             }
                         }
                     }
                 }
+            }
         }
     }
     
     //執行送出
     func sendAPI(address: String, parameters: [String: Any], type: String) {
-        DFAPI.post(address: address, parameters: parameters) { (response, result, json) in
-            if let json = response.result.value as? [String: Any] {
-                print(json)
-                if type == "send" {
-                    if let result = json["result"] as? String {
-                        if result == "FAIL" {
-                            let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
-                            
-                            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
-                                action in
-                            })
-                            confirmSheet.addAction(confirmAction)
-                            self.present(confirmSheet, animated: true, completion: nil)
-                        }else {
-                            let confirmSheet = UIAlertController(title: "Tips", message: "Success", preferredStyle: .alert)
-                            
-                            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
-                                action in
-                            })
-                            confirmSheet.addAction(confirmAction)
-                            self.present(confirmSheet, animated: true, completion: nil)
-                        }
+        DFAPI.customPost(address: address, parameters: parameters) { json in
+            print(json)
+            if type == "send" {
+                if let result = json["result"] as? String {
+                    if result == "FAIL" {
+                        let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
+                        
+                        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                            action in
+                        })
+                        confirmSheet.addAction(confirmAction)
+                        self.present(confirmSheet, animated: true, completion: nil)
+                    }else {
+                        let confirmSheet = UIAlertController(title: "Tips", message: "Success", preferredStyle: .alert)
+                        
+                        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                            action in
+                        })
+                        confirmSheet.addAction(confirmAction)
+                        self.present(confirmSheet, animated: true, completion: nil)
                     }
-                }else {
-                    if let formJson = json["formJson"] as? Any {
-                        do {
-                            let decoder = JSONDecoder()
-                            decoder.dateDecodingStrategy = .millisecondsSince1970
-                            let jsonData = try JSONSerialization.data(withJSONObject: formJson, options: .prettyPrinted)
-                            let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                            
-                            let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormByIdData.self)
-                            
-                            print(obj.formJson!)
-                            let oriForm = try DFUtil.decodeJsonStringAndReturnObject(string: obj.formJson!, type: FormListData.self)
-                            
-                            self.oriFormData = oriForm
-                            self.clear()
-                            
-                            self.title = oriForm.formTitle
-                            self.setButtons()
-                            self.setFormData()
-                            self.tableView.reloadData()
-                        } catch {
-                        }
+                }
+            }else {
+                if let formJson = json["formJson"]  {
+                    do {
+                        let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .millisecondsSince1970
+                        let jsonData = try JSONSerialization.data(withJSONObject: formJson, options: .prettyPrinted)
+                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                        
+                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormByIdData.self)
+                        
+                        print(obj.formJson!)
+                        let oriForm = try DFUtil.decodeJsonStringAndReturnObject(string: obj.formJson!, type: FormListData.self)
+                        
+                        self.oriFormData = oriForm
+                        self.clear()
+                        
+                        self.title = oriForm.formTitle
+                        self.setButtons()
+                        self.setFormData()
+                        self.tableView.reloadData()
+                    } catch {
                     }
                 }
             }
@@ -250,7 +268,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @objc func buttonClick(sender: UIBarButtonItem) {
         self.view.endEditing(true)
-
+        
         let button = oriFormData?.buttons[sender.tag]
         
         if button?.type == "subForm" {
@@ -279,10 +297,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         switch type {
         case "send":
-            DFAPI.post(address: tokenURL!, parameters: [
+            DFAPI.customPost(address: tokenURL!, parameters: [
                 "accessToken": accessToken!,
                 "comment" : "DynamicForm"
-            ]) { (response, result, json) in
+            ]) { json in
                 print(json)
                 
                 if let data = json[DFJSONKey.data] {
@@ -316,12 +334,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         case "form":
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
             let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
-   
+            
             vc?.urlString = urlString
             vc?.accessToken = accessToken
             vc?.tokenKey = tokenKey
             vc?.tokenURL = tokenURL
-
+            vc?.isFirstLayer = false
+            
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
             self.navigationItem.backBarButtonItem = backItem
@@ -498,11 +517,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         pictureData.mainType = mainType
         pictureData.formId = "\(inputNumber)"
         pictureData.isReadOnly = isReadOnly
-
+        
         let imageUrl: URL = URL(string: imageUrlString)!
         print(imageUrl)
         print("test")
-
+        
         DispatchQueue.global(qos: .userInitiated).async {
             if let imageData:NSData = NSData(contentsOf: imageUrl) {
                 DispatchQueue.main.async {
@@ -556,17 +575,17 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         }
-
+        
         tableView.reloadData()
     }
     
     //附件/照片刪除動作
     @objc func deleteFileTapped(sender:UITapGestureRecognizer) {
         let tagInt = sender.view?.tag
-
+        
         self.oriFormData?.cells[tagInt!].fileList?.remove(at: sender.inputNumber)
         var newIndex = 0
-  
+        
         for (index, formData) in formDataList.enumerated() {
             if formData.formType == "picture" {
                 if formData.mainType == "upload", tagInt == formData.formNumber, sender.inputNumber == formData.inputNumber {
@@ -581,7 +600,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-
+        
         for formData in formDataList {
             if formData.formType == "picture" {
                 if formData.mainType == "upload", tagInt! == formData.formNumber {
@@ -649,11 +668,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let required = oriFormData?.cells[formNumber!].required {
                 cell.requireLabel.isHidden = !required
             }
-       
+            
             cell.title.text = formData.title
             return cell
         case "textField":
-      
+            
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
@@ -777,9 +796,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             if formData.isCheck == false {
-                cell.checkIcon.image = UIImage(named: "icon_single_selection_unchecked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "icon_single_selection_unchecked")
             } else {
-                cell.checkIcon.image = UIImage(named: "icon_single_selection_checked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "icon_single_selection_checked")
             }
             
             cell.option.text = formData.title
@@ -789,9 +808,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             if formData.isCheck == false {
-                cell.checkIcon.image = UIImage(named: "icon_multiple_selection_unchecked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "icon_multiple_selection_unchecked")
             } else {
-                cell.checkIcon.image = UIImage(named: "icon_multiple_selection_checked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "icon_multiple_selection_checked")
             }
             
             cell.option.text = formData.title
@@ -815,7 +834,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             setFont(cell: cell, formNumber: formNumber!, formData: formData)
             setDatePicker(type: "date", formNumber: formNumber!, cell: cell)
-
+            
             cell.inputField.text = ""
             
             if formData.inputValue != "" {
@@ -871,7 +890,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             setFont(cell: cell, formNumber: formNumber!, formData: formData)
             setDatePicker(type: "dateTime", formNumber: formNumber!, cell: cell)
-
+            
             
             cell.inputField.text = ""
             
@@ -916,13 +935,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             if formData.title!.contains(".pdf"){
-                cell.imageIcon.image = UIImage(named: "new_pdf.png", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "new_pdf.png")
             }else if formData.title!.contains(".doc") || formData.title!.contains(".docx") {
-                cell.imageIcon.image = UIImage(named: "new_doc.png", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "new_doc.png")
             }else if formData.title!.contains(".xlsx") || formData.title!.contains(".xls") {
-                cell.imageIcon.image = UIImage(named: "new_xls.png", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "new_xls.png")
             }else if formData.title!.contains(".ppt") || formData.title!.contains(".pptx") {
-                cell.imageIcon.image = UIImage(named: "new_ppt.png", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "new_ppt.png")
             }
             return cell
         case "picture":
@@ -948,7 +967,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 cell.deleteIcon.tag = formNumber!
             }
-         
+            
             return cell
         case "dynamicTextField", "dynamicTextArea":
             let cell: DynamicFieldCell = tableView.dequeueReusableCell(withIdentifier: "DynamicFieldCell", for: indexPath) as! DynamicFieldCell
@@ -1021,7 +1040,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.oriFormData?.cells[sender.tag].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
             }
         }
-
+        
         for formData in formDataList {
             if sender.tag == formData.formNumber {
                 formData.inputValue = self.oriFormData?.cells[sender.tag].textValue
@@ -1036,7 +1055,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let toolBar = UIToolbar()
         let formatter = DateFormatter()
         let datePicker:UIDatePicker = UIDatePicker()
-   
+        
         if type == "date" {
             formatter.dateFormat = "yyyy-MM-dd"
             datePicker.datePickerMode = .date
@@ -1052,13 +1071,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         datePicker.date = NSDate() as Date
         
         toolBar.sizeToFit()
-
+        
         let dateFormatter = dateFormatterObj()
         dateFormatter.index = formNumber
         dateFormatter.dateFormatter = formatter
         dateFormatter.datePicker = datePicker
         dateFormatterList.append(dateFormatter)
-
+        
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         toolBar.setItems([doneButton], animated: true)
         
@@ -1072,7 +1091,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let timestamp = Int(timestampString)!
         let date = Date(timeIntervalSince1970: TimeInterval(timestamp / 1000))
         let dateFormatter = DateFormatter()
-
+        
         dateFormatter.dateFormat = format
         let strDate = dateFormatter.string(from: date)
         
@@ -1089,7 +1108,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 return
             }
         }
-       
+        
         
         if let actions = formData.actions, actions.count > 0 {
             let action = formData.actions![0]
@@ -1142,7 +1161,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let browser = SKPhotoBrowser(photos: images)
             browser.initializePageIndex(finalIndex)
             present(browser, animated: true, completion: nil)
-
+            
         case "attachment":
             if #available(iOS 9.0, *) {
                 if let url = URL(string: formData.fileUrl!) {
@@ -1156,12 +1175,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         case "dynamicTextField":
             setInputView(formData: formData, formType: "textField")
-            
-            tableView.reloadData()
         case "dynamicTextArea":
             setInputView(formData: formData, formType: "textArea")
-            
-            tableView.reloadData()
         case "singleSelection":
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
             let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
@@ -1179,7 +1194,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let dynamicInput = DynamicInput()
                     
                     var item1 = keyValue()
-   
+                    
                     item1.title = option.name
                     dynamicInput.id = option.id
                     dynamicInput.isSelected = false
@@ -1192,7 +1207,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     optionList.append(dynamicInput)
                 }
             }
-
+            
             
             vc?.type = formData.formType
             vc?.id = (self.oriFormData?.cells[formData.formNumber!].id)!
@@ -1327,10 +1342,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         if let image = (info[UIImagePickerController.InfoKey.editedImage] ?? info[UIImagePickerController.InfoKey.originalImage]) as? UIImage {
             let imageName = UUID().uuidString + ".jpg"
             print(picker.formNumber)
-            upload(oriImage: image, fileUrl: nil, fileName: imageName, formNumber: picker.formNumber, type: "picture")
+            customUpload(oriImage: image, fileUrl: nil, fileName: imageName, formNumber: picker.formNumber, type: "picture")
             
         }
         picker.presentingViewController?.dismiss(animated: true)
@@ -1349,72 +1365,129 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //選擇檔案後上傳
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         
-        upload(oriImage: nil, fileUrl: url, fileName: url.lastPathComponent, formNumber: controller.formNumber, type: "attachment")
+        customUpload(oriImage: nil, fileUrl: url, fileName: url.lastPathComponent, formNumber: controller.formNumber, type: "attachment")
     }
     
-    func upload(oriImage: UIImage?, fileUrl: URL?, fileName: String, formNumber: Int, type: String) {
-        Alamofire.upload(multipartFormData: { multipartFormData in
-            
-            if let image = oriImage{
-                if let compressImage = image.jpegData(compressionQuality: 0.5) {
-                    multipartFormData.append(compressImage, withName: "file", fileName: fileName, mimeType: "image/jpeg")
-                }
-            }else if let url = fileUrl {
-                multipartFormData.append(url, withName: "file")
+    func customUpload(oriImage: UIImage?, fileUrl: URL?, fileName: String, formNumber: Int, type: String) {
+        
+        //分隔線
+        let boundary = "Boundary-\(UUID().uuidString)"
+        
+        let url = URL(string: DFAPI.fileUploadUrl)!
+        var request = URLRequest(url: url)
+        //請求類型為POST
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)",
+            forHTTPHeaderField: "Content-Type")
+        
+        //傳遞的參數
+        let parameters = [
+            "file": "file",
+        ]
+        
+        //傳遞的文件
+        if let image = oriImage{
+            if let compressImage = image.jpegData(compressionQuality: 0.5) {
+                //                multipartFormData.append(compressImage, withName: "file", fileName: fileName, mimeType: "image/jpeg")
+                //創建表單body
+                request.httpBody = try! createBody(with: parameters, data: compressImage, mimeType: "image/jpeg", filename: fileName, boundary: boundary)
             }
-            
-        }, to: DFAPI.fileUploadUrl) {
-            result in
-            switch result {
-            case .success(let upload, _, _):
+        }else if let url = fileUrl {
+            do {
+                let data = try Data(contentsOf: url)
+                request.httpBody = try! createBody(with: parameters, data: data, mimeType: url.pathExtension, filename: fileName, boundary: boundary)
+            }catch {
                 
-                upload.responseJSON { responseStr in
-                    if let response = responseStr.result.value as? [String: Any] {
+            }
+        }
+        
+        //創建一個表單上傳任務
+        let session = URLSession.shared
+        let uploadTask = session.dataTask(with: request, completionHandler: {
+            (data, response, error) -> Void in
+            //上傳完畢後
+            if error != nil{
+                print(error!)
+            }else{
+                let str = String(data: data!, encoding: String.Encoding.utf8)
+                let json = DFAPI.convertToDictionary(text: str!)
+                
+                if let result = json!["result"] as? String{
+                    if result == "SUCCESS" {
                         
-                        if let result = response["result"] as? String{
-                            if result == "SUCCESS" {
-                                
-                                if let data = response["data"] as? [String: Any]{
-                                    
-                                    print(data)
-                                    var fileData = file()
-                                    fileData.title = (data["originalname"] as! String)
-                                    fileData.type = type
-                                    fileData.url = (data["fileurl"] as! String)
-                                    
-                                    self.oriFormData?.cells[formNumber].fileList?.append(fileData)
-                                    
-                                    for (index, file) in self.formDataList.enumerated() {
-                                        if formNumber == file.formNumber {
-                                            let fileData = FormData()
-                                            fileData.formNumber = formNumber
-                                            fileData.title = fileName
-                                            fileData.inputNumber = (self.oriFormData?.cells[formNumber].fileList!.count)! - 1
-                                            fileData.formType = type
-                                            fileData.mainType = "upload"
-                                            fileData.formId = "\((self.oriFormData?.cells[formNumber].fileList!.count)! - 1)"
-                                            fileData.image = oriImage
-                                            fileData.fileUrl = (data["fileurl"] as! String)
-                                            fileData.isReadOnly = false
-                                            self.formDataList.insert(fileData, at: index + (self.oriFormData?.cells[formNumber].fileList?.count)!)
-                                            break
-                                        }
-                                    }
-                                    
-                                    self.tableView.reloadData()
+                        if let data = json!["data"] as? [String: Any]{
+                            
+                            print(data)
+                            var fileData = file()
+                            fileData.title = (data["originalname"] as! String)
+                            fileData.type = type
+                            fileData.url = (data["fileurl"] as! String)
+                            
+                            self.oriFormData?.cells[formNumber].fileList?.append(fileData)
+                            
+                            for (index, file) in self.formDataList.enumerated() {
+                                if formNumber == file.formNumber {
+                                    let fileData = FormData()
+                                    fileData.formNumber = formNumber
+                                    fileData.title = fileName
+                                    fileData.inputNumber = (self.oriFormData?.cells[formNumber].fileList!.count)! - 1
+                                    fileData.formType = type
+                                    fileData.mainType = "upload"
+                                    fileData.formId = "\((self.oriFormData?.cells[formNumber].fileList!.count)! - 1)"
+                                    fileData.image = oriImage
+                                    fileData.fileUrl = (data["fileurl"] as! String)
+                                    fileData.isReadOnly = false
+                                    self.formDataList.insert(fileData, at: index + (self.oriFormData?.cells[formNumber].fileList?.count)!)
+                                    break
                                 }
+                            }
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
                             }
                         }
                     }
                 }
-            case .failure(let error):
-                print("UPLOAD Error: \(error)")
+            }
+        })
+        
+        //使用resume方法啟動任務
+        uploadTask.resume()
+    }
+    
+    private func createBody(with parameters: [String: String]?,
+                            data: Data,
+                            mimeType: String,
+                            filename: String,
+                            boundary: String) throws -> Data {
+        var body = Data()
+        
+        //添加普通參數數據
+        if parameters != nil {
+            for (key, value) in parameters! {
+                // 數據之前要用 --分隔線 來隔開 ，否則後台會解析失敗
+                body.append("--\(boundary)\r\n")
+                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                body.append("\(value)\r\n")
             }
         }
+        
+        // 數據之前要用 --分隔線 來隔開 ，否則後台會解析失敗
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; "
+            + "name=\"file\"; filename=\"\(filename)\"\r\n")
+        body.append("Content-Type: \(mimeType)\r\n\r\n") //文件類型
+        body.append(data) //文件主體
+        body.append("\r\n") //使用\r\n來表示這個這個值的結束符
+        
+        // --分隔線-- 為整個表單的結束符
+        body.append("--\(boundary)--\r\n")
+        return body
     }
     
     //新增動態列表
     func setInputView(formData: FormData, formType: String) {
+        var scrollIndex = 0
+        
         for (index, data) in formDataList.enumerated() {
             if formData.formNumber! == data.formNumber {
                 let inputField = FormData()
@@ -1422,19 +1495,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 inputField.inputNumber = self.oriFormData?.cells[formData.formNumber!].count
                 inputField.formType = formType
                 inputField.mainType = formData.formType
-                
-                formDataList.insert(inputField, at: index + (self.oriFormData?.cells[formData.formNumber!].count)! + 1)
+                inputField.isReadOnly = false
+                scrollIndex = index + (self.oriFormData?.cells[formData.formNumber!].count)! + 1
+                formDataList.insert(inputField, at: scrollIndex)
                 break
             }
         }
-        var dynamicValue = DynamicInput()
+        let dynamicValue = DynamicInput()
         dynamicValue.id = UUID().uuidString
         dynamicValue.name = ""
         self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(dynamicValue)
         self.oriFormData?.cells[formData.formNumber!].count = (self.oriFormData?.cells[formData.formNumber!].count)! + 1
+        
+        tableView.reloadData()
+        tableView.scrollToRow(at: IndexPath(row: scrollIndex, section: 0), at: .bottom, animated: true)
     }
     
-
+    
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -1552,9 +1629,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.oriFormData?.cells[formData.formNumber!].dynamicField = []
                         formData.dynamicField = []
                         for option in selectionVC.chosenItemList {
-//                            var input = DynamicInput()
-//                            input.id = option.id
-//                            input.name = option.keyValueArray![0].title
                             formData.dynamicField?.append(option)
                             self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
                         }
@@ -1562,9 +1636,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.oriFormData?.cells[formData.formNumber!].dynamicField = []
                         formData.dynamicField = []
                         for option in selectionVC.chosenItemList {
-//                            var input = DynamicInput()
-//                            input.id = option.id
-//                            input.name = option.keyValueArray![0].title
                             formData.dynamicField?.append(option)
                             self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
                         }
@@ -1574,5 +1645,28 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
     }
+    
+    //根據後綴獲取對應的Mime-Type
+    private func mimeType(pathExtension: String) -> String {
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,
+                                                           pathExtension as NSString,
+                                                           nil)?.takeRetainedValue() {
+            if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?
+                .takeRetainedValue() {
+                return mimetype as String
+            }
+        }
+        //文件資源類型如果不知道，傳萬能類型application/octet-stream，服務器會自動解析文件類
+        return "application/octet-stream"
+    }
 }
 
+//擴展Data
+extension Data {
+    //增加直接添加String數據的方法
+    mutating func append(_ string: String, using encoding: String.Encoding = .utf8) {
+        if let data = string.data(using: encoding) {
+            append(data)
+        }
+    }
+}

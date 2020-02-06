@@ -10,7 +10,6 @@ import UIKit
 
 public class FpcDF: UIViewController {
 
-    
     public static func createForm(urlString: String, tokenURL: String, accessToken: String, tokenKey: String) -> DFmainVC {
         //        let vc = UIStoryboard(name: "DFMain", bundle: nil).instantiateViewController(withIdentifier : "mainVC") as? DFmainVC
         let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
@@ -20,13 +19,6 @@ public class FpcDF: UIViewController {
         vc!.tokenURL = tokenURL
         vc!.accessToken = accessToken
         vc!.tokenKey = tokenKey
-        
-        //        let backItem = UIBarButtonItem()
-        //        backItem.title = "Back"
-        //        self.navigationItem.backBarButtonItem = backItem
-        //        self.navigationController?.pushViewController(vc!, animated: true)
-        
-        //        present(vc!, animated: true, completion: nil)
         
         return vc!
         
