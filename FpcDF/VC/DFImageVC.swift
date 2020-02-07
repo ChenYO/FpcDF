@@ -13,18 +13,22 @@ class DFImageVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     
-    
-    
-    var image: UIImage?
+    var imageIndex = 0
+    var images: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scrollView.delegate = self
         scrollView.backgroundColor = UIColor.black
-        
-        imageView.image = image
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        imageView.image = images[imageIndex]
         setZoomScale()
+        setupGestureRecognizer()
+        setupSwipeGestureRecognizer()
     }
     
     @IBAction func close(_ sender: Any) {
@@ -57,5 +61,45 @@ class DFImageVC: UIViewController, UIScrollViewDelegate {
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
         
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
+    }
+    
+    func setupSwipeGestureRecognizer() {
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
+        swipeRightGesture.direction = UISwipeGestureRecognizer.Direction.right
+        swipeLeftGesture.direction = UISwipeGestureRecognizer.Direction.left
+        scrollView.addGestureRecognizer(swipeRightGesture)
+        scrollView.addGestureRecognizer(swipeLeftGesture)
+    }
+    
+    @objc func handleSwipe(gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            imageIndex = imageIndex - 1
+            if imageIndex < 0 {
+                imageIndex = images.count - 1
+            }
+            
+        } else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+            imageIndex = imageIndex + 1
+            if imageIndex > images.count - 1 {
+                imageIndex = 0
+            }
+        }
+        print(imageIndex)
+        imageView.image = images[imageIndex]
+    }
+    
+    func setupGestureRecognizer() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTap.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(doubleTap)
+    }
+
+    @objc func handleDoubleTap(recognizer: UITapGestureRecognizer) {
+        if (scrollView.zoomScale > scrollView.minimumZoomScale) {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        } else {
+            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+        }
     }
 }

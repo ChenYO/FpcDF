@@ -1,10 +1,10 @@
 version: "Apple Swift version 5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
 options: "a36c02f383504dee462dadd9ca7f0583"
-build_time: [1581063068, 880077000]
+build_time: [1581066160, 942668000]
 inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/UploadCell.swift": [1576808966, 647670388]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTextFieldCell.swift": [1577086663, 89150548]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFmainVC.swift": [1581057772, 111263358]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFmainVC.swift": [1581066131, 192461239]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFErrorType.swift": [1576832013, 176664710]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFUtil.swift": [1580436345, 83535194]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormByIdData.swift": [1576723295, 161792994]
@@ -22,7 +22,7 @@ inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DynamicInput.swift": [1578296645, 321133137]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTitleCell.swift": [1574749539, 927837253]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFVersionCode.swift": [1580975732, 840178382]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFImageVC.swift": [1581062973, 78958946]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFImageVC.swift": [1581066116, 196027685]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormData.swift": [1578300822, 497796893]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTextAreaCell.swift": [1577086865, 376501560]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormListData.swift": [1578295670, 961354494]

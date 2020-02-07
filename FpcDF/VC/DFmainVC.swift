@@ -1146,28 +1146,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
             let imageVC = storyboard.instantiateViewController(withIdentifier: "DFImageVC") as? DFImageVC
             
-            imageVC!.image = formData.image
+            var index = 0
+            var finalIndex = 0
+            for imageFormData in formDataList {
+                if imageFormData.formType == "picture" {
+                    if let image = imageFormData.image{
+                        imageVC!.images.append(image)
+                        if imageFormData.formId == formData.formId {
+                            finalIndex = index
+                        }
+                        index += 1
+                    }
+                }
+            }
+            
+            imageVC?.imageIndex = finalIndex
             
             present(imageVC!, animated: true)
-//            var images = [SKPhoto]()
-//            var index = 0
-//            var finalIndex = 0
-//            for imageFormData in formDataList {
-//                if imageFormData.formType == "picture" {
-//                    if let image = imageFormData.image{
-//                        let photo = SKPhoto.photoWithImage(image)
-//                        photo.shouldCachePhotoURLImage = false
-//                        images.append(photo)
-//                        if imageFormData.formId == formData.formId {
-//                            finalIndex = index
-//                        }
-//                        index += 1
-//                    }
-//                }
-//            }
-//            let browser = SKPhotoBrowser(photos: images)
-//            browser.initializePageIndex(finalIndex)
-//            present(browser, animated: true, completion: nil)
                 break
         case "attachment":
             if #available(iOS 9.0, *) {
