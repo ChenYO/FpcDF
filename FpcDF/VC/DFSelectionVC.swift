@@ -40,7 +40,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "KeyValueCell")
+        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "KeyValueCell")
         
         //        confirm = UIBarButtonItem(title: "選擇項目", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toFormVC))
         
@@ -320,10 +320,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     }
     
     @objc func bottomViewTap(sender:UITapGestureRecognizer) {
-        let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
+        let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
         let vc = storyboard.instantiateViewController(withIdentifier: "DFChosenModifyVC") as? DFChosenModifyVC
         
-        //        let vc = UIStoryboard(name: "Main", bundle: Bundle(for: FpcDF.self)).instantiateViewController(withIdentifier : "ChosenModifyVC") as? DFChosenModifyVC
+        //        let vc = UIStoryboard(name: "Main", bundle: Bundle(for: DynamicForm.self)).instantiateViewController(withIdentifier : "ChosenModifyVC") as? DFChosenModifyVC
         
         vc?.oriChosenItemList = chosenItemList
         vc?.chosenItemList = chosenItemList

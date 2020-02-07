@@ -8,7 +8,6 @@
 
 import UIKit
 import SafariServices
-import SKPhotoBrowser
 import MobileCoreServices
 
 public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate {
@@ -39,17 +38,17 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         screenHeight = self.view.bounds.height
         
-        //        let FormTitleCellNib = UINib.init(nibName: "FormTitleCell", bundle: Bundle(for: FpcFpcDF.self))
+        //        let FormTitleCellNib = UINib.init(nibName: "FormTitleCell", bundle: Bundle(for: FpcDynamicForm.self))
         
-        tableView.register(UINib(nibName: "FormTitleCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "FormTitleCell")
-        tableView.register(UINib(nibName: "FormTextFieldCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "FormTextFieldCell")
-        tableView.register(UINib(nibName: "FormChoiceCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "FormChoiceCell")
-        tableView.register(UINib(nibName: "FormTextAreaCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "FormTextAreaCell")
-        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "KeyValueCell")
-        tableView.register(UINib(nibName: "fileCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "fileCell")
-        tableView.register(UINib(nibName: "DynamicFieldCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "DynamicFieldCell")
-        tableView.register(UINib(nibName: "SingleSelectionCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "SingleSelectionCell")
-        tableView.register(UINib(nibName: "UploadCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "UploadCell")
+        tableView.register(UINib(nibName: "FormTitleCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTitleCell")
+        tableView.register(UINib(nibName: "FormTextFieldCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTextFieldCell")
+        tableView.register(UINib(nibName: "FormChoiceCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormChoiceCell")
+        tableView.register(UINib(nibName: "FormTextAreaCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTextAreaCell")
+        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "KeyValueCell")
+        tableView.register(UINib(nibName: "fileCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "fileCell")
+        tableView.register(UINib(nibName: "DynamicFieldCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "DynamicFieldCell")
+        tableView.register(UINib(nibName: "SingleSelectionCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "SingleSelectionCell")
+        tableView.register(UINib(nibName: "UploadCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "UploadCell")
         
         
         tableView.dataSource = self
@@ -90,8 +89,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         if let urlString = self.urlString {
                             self.load(urlString: urlString, accessToken: obj.accessTokenSHA256)
-                        }else {
-                            self.load(urlString: "https://appcloud.fpcetg.com.tw/rtcapi/getFactoryFormList", accessToken: obj.accessTokenSHA256)
                         }
                         
                     } catch {
@@ -133,71 +130,78 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         DFAPI.customGet(address: urlString, parameters: parameters) {
             json in
             
-            if let result = json[DFJSONKey.result] as? String {
-                print(result)
-                
-                if result == DFResult.TOKEN_EXPIRED {
-                } else if result == DFResult.TOKEN_INVALID {
-                } else if result == DFResult.APP_FORCE_UPDATE {
-                    if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
-                        print(webDownloadAppURL)
+            if let data = json[DFJSONKey.data] as? [String: Any] {
+                DispatchQueue.main.async {
+                    do {
                         
-                        let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
-                            let url : URL = URL(string: storeAppURL)!
-                            if UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.openURL(url)
-                            }
-                        }))
-                        if let vc = DFUtil.getTopVC() {
-                            vc.present(alert, animated: true, completion: nil)
-                        }
-                        DFUtil.forceUpdateFlag = true
-                    }
-                } else if result == DFResult.APP_UPDATE_TIP {
-                    
-                    if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
-                        print(webDownloadAppURL)
+                        let decoder = JSONDecoder()
+                        decoder.dateDecodingStrategy = .millisecondsSince1970
+                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
                         
-                        let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_UPDATE_TIP), message: updateComment, preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_SKIP), style: UIAlertAction.Style.default, handler: { (action) in
-                            //                                    self.gotoMainVC(animated: true)
-                        }))
-                        alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
-                            let url : URL = URL(string: storeAppURL)!
-                            if UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.openURL(url)
+                        let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
+                        
+                        if DFUtil.versionCode < versionCode.versionCode! {
+                            DFAPI.customPost(address: self.tokenURL!, parameters: [
+                                "accessToken": self.accessToken!,
+                                "comment" : "DynamicForm"
+                            ]) {
+                                json in
+                                
+                                print(json)
+                                
+                                if let data = json[DFJSONKey.data] {
+                                    
+                                    do {
+                                        let decoder = JSONDecoder()
+                                        decoder.dateDecodingStrategy = .millisecondsSince1970
+                                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                        
+                                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
+                                        
+                                        let parameters = [
+                                            self.tokenKey!: obj.accessTokenSHA256
+                                        ]
+                                        
+                                        DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
+                                            print(json)
+                                            
+                                            if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
+                                                print(webDownloadAppURL)
+                                                
+                                                let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+                                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
+                                                    let url : URL = URL(string: storeAppURL)!
+                                                    if UIApplication.shared.canOpenURL(url) {
+                                                        UIApplication.shared.openURL(url)
+                                                    }
+                                                }))
+                                                if let vc = DFUtil.getTopVC() {
+                                                    vc.present(alert, animated: true, completion: nil)
+                                                }
+                                                DFUtil.forceUpdateFlag = true
+                                            }
+                                        }
+                                        
+                                    } catch {
+                                        
+                                    }
+                                }
+                                
                             }
-                            //                                    self.gotoMainVC(animated: true)
-                        }))
-                        if let vc = DFUtil.getTopVC() {
-                            vc.present(alert, animated: true, completion: nil)
+                            
+                        }else {
+                            let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                            self.oriFormData = obj
+                            self.clear()
+                            
+                            self.title = obj.formTitle
+                            self.setButtons()
+                            self.setFormData()
+                            self.tableView.reloadData()
                         }
-                        DFUtil.tipUpdateFlag = true
-                    }
-                    
-                } else {
-                    if let data = json[DFJSONKey.data] as? [String: Any] {
-                        DispatchQueue.main.async {
-                            do {
-                                
-                                let decoder = JSONDecoder()
-                                decoder.dateDecodingStrategy = .millisecondsSince1970
-                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                
-                                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
-                                
-                                self.oriFormData = obj
-                                self.clear()
-                                
-                                self.title = obj.formTitle
-                                self.setButtons()
-                                self.setFormData()
-                                self.tableView.reloadData()
-                            } catch {
-                            }
-                        }
+                    } catch {
                     }
                 }
             }
@@ -332,7 +336,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         case "form":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
             let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
             
             vc?.urlString = urlString
@@ -677,7 +681,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             cell.inputField.placeholder = ""
-            
+            cell.inputField.keyboardType = UIKeyboardType.default
             
             setFont(cell: cell, formNumber: formNumber!, formData: formData)
             
@@ -697,10 +701,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if let type = inputConfig.type {
                     if type == "number" {
                         cell.inputField.keyboardType = UIKeyboardType.decimalPad
-                    }else {
-                        cell.inputField.keyboardType = UIKeyboardType.default
                     }
-                    
                 }
             }
             
@@ -1142,26 +1143,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             tableView.reloadData()
         case "picture":
-            var images = [SKPhoto]()
-            var index = 0
-            var finalIndex = 0
-            for imageFormData in formDataList {
-                if imageFormData.formType == "picture" {
-                    if let image = imageFormData.image{
-                        let photo = SKPhoto.photoWithImage(image)
-                        photo.shouldCachePhotoURLImage = false
-                        images.append(photo)
-                        if imageFormData.formId == formData.formId {
-                            finalIndex = index
-                        }
-                        index += 1
-                    }
-                }
-            }
-            let browser = SKPhotoBrowser(photos: images)
-            browser.initializePageIndex(finalIndex)
-            present(browser, animated: true, completion: nil)
-            
+//            var images = [SKPhoto]()
+//            var index = 0
+//            var finalIndex = 0
+//            for imageFormData in formDataList {
+//                if imageFormData.formType == "picture" {
+//                    if let image = imageFormData.image{
+//                        let photo = SKPhoto.photoWithImage(image)
+//                        photo.shouldCachePhotoURLImage = false
+//                        images.append(photo)
+//                        if imageFormData.formId == formData.formId {
+//                            finalIndex = index
+//                        }
+//                        index += 1
+//                    }
+//                }
+//            }
+//            let browser = SKPhotoBrowser(photos: images)
+//            browser.initializePageIndex(finalIndex)
+//            present(browser, animated: true, completion: nil)
+                break
         case "attachment":
             if #available(iOS 9.0, *) {
                 if let url = URL(string: formData.fileUrl!) {
@@ -1178,7 +1179,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         case "dynamicTextArea":
             setInputView(formData: formData, formType: "textArea")
         case "singleSelection":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
             let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
             
             var optionList = [DynamicInput]()
@@ -1222,7 +1223,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.navigationController?.pushViewController(vc!, animated: true)
             
         case "multipleSelection":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: FpcDF.self))
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
             let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
             
             var optionList = [DynamicInput]()

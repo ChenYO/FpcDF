@@ -22,7 +22,7 @@ class DFChosenModifyVC: UIViewController, UISearchBarDelegate, UITableViewDataSo
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: FpcDF.self)), forCellReuseIdentifier: "KeyValueCell")
+        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "KeyValueCell")
 
         let modify = UIBarButtonItem(title: "確認修改" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(confirm))
         
@@ -77,9 +77,9 @@ class DFChosenModifyVC: UIViewController, UISearchBarDelegate, UITableViewDataSo
         cell.imageConstraint?.constant = 25
         
         if option.isSelected! {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_checked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "icon_checksign_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
         }else {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
         }
        
         cell.checkIcon.addGestureRecognizer(checkTapRecognizer)
@@ -99,10 +99,10 @@ class DFChosenModifyVC: UIViewController, UISearchBarDelegate, UITableViewDataSo
         choseOption.isSelected = !choseOption.isSelected!
         
         if choseOption.isSelected! {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_checked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "icon_checksign_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             chosenItemList.append(choseOption)
         }else {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked", in: Bundle(for: FpcDF.self), compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             
             for (index, option) in chosenItemList.enumerated() {
                 if option.id == choseOption.id {
