@@ -107,6 +107,7 @@
 		765D52B323E3CDF300AE354C /* Localizable.strings in Copy Files */ = {isa = PBXBuildFile; fileRef = 765D52B223E3CDF100AE354C /* Localizable.strings */; };
 		76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
 		76B11BFE23EBF96000F407DE /* DFVersionCode.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
+		76B11C2A23ED3D6F00F407DE /* DFImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11C2923ED3D6F00F407DE /* DFImageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -221,6 +222,7 @@
 		765D52B123E3CDF100AE354C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		765D52B423E3CE0100AE354C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFVersionCode.swift; sourceTree = "<group>"; };
+		76B11C2923ED3D6F00F407DE /* DFImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFImageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +339,7 @@
 				760A02BC23D1330D00CF2BC9 /* DFChosenModifyVC.swift */,
 				760A02BA23D1330D00CF2BC9 /* DFmainVC.swift */,
 				760A02BB23D1330D00CF2BC9 /* DFSelectionVC.swift */,
+				76B11C2923ED3D6F00F407DE /* DFImageVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				760A02A223D132BE00CF2BC9 /* DynamicInput.swift in Sources */,
 				760A026F23D1325300CF2BC9 /* FormTitleCell.swift in Sources */,
 				76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */,
+				76B11C2A23ED3D6F00F407DE /* DFImageVC.swift in Sources */,
 				760A02A623D132BE00CF2BC9 /* FormData.swift in Sources */,
 				760A027923D1325300CF2BC9 /* FormTextAreaCell.swift in Sources */,
 				760A02A423D132BE00CF2BC9 /* FormListData.swift in Sources */,

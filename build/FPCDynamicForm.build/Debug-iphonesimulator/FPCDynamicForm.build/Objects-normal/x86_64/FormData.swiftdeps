@@ -8,7 +8,6 @@ provides-member:
 provides-dynamic-lookup:
 depends-top-level:
 - "Bool"
-- "BooleanLiteralType"
 - "DynamicInput"
 - "FormData"
 - "Int"

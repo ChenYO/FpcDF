@@ -52,6 +52,7 @@ depends-top-level:
 - "CastingPrecedence"
 - !private "DFAPI"
 - !private "DFDisposableToken"
+- !private "DFImageVC"
 - !private "DFJSONKey"
 - !private "DFLocalizable"
 - !private "DFSelectionVC"
@@ -1295,6 +1296,7 @@ depends-member:
 - !private ["14FPCDynamicForm5DFAPIC", "versionCodeCheckUrl"]
 - !private ["14FPCDynamicForm17DFDisposableTokenC", "accessTokenSHA256"]
 - !private ["14FPCDynamicForm17DFDisposableTokenC", "deinit"]
+- !private ["14FPCDynamicForm9DFImageVCC", "image"]
 - !private ["14FPCDynamicForm9DFJSONKeyV", "data"]
 - !private ["14FPCDynamicForm9DFJSONKeyV", "storeAppURL"]
 - !private ["14FPCDynamicForm9DFJSONKeyV", "updateComment"]
@@ -1325,6 +1327,7 @@ depends-member:
 - !private ["14FPCDynamicForm8DFmainVCC", "CGRect"]
 - !private ["14FPCDynamicForm8DFmainVCC", "DFAPI"]
 - !private ["14FPCDynamicForm8DFmainVCC", "DFDisposableToken"]
+- !private ["14FPCDynamicForm8DFmainVCC", "DFImageVC"]
 - !private ["14FPCDynamicForm8DFmainVCC", "DFJSONKey"]
 - !private ["14FPCDynamicForm8DFmainVCC", "DFLocalizable"]
 - !private ["14FPCDynamicForm8DFmainVCC", "DFSelectionVC"]
@@ -2900,6 +2903,7 @@ depends-member:
 - !private ["So26NSExtensionRequestHandlingP", "formNumber"]
 - !private ["So26NSExtensionRequestHandlingP", "heightDictionary"]
 - !private ["So26NSExtensionRequestHandlingP", "id"]
+- !private ["So26NSExtensionRequestHandlingP", "image"]
 - ["So26NSExtensionRequestHandlingP", "imagePickerController"]
 - ["So26NSExtensionRequestHandlingP", "imagePickerControllerDidCancel"]
 - ["So26NSExtensionRequestHandlingP", "indexPathForPreferredFocusedView"]
@@ -3017,6 +3021,7 @@ depends-member:
 - !private ["So8NSObjectC", "CGRect"]
 - !private ["So8NSObjectC", "DFAPI"]
 - !private ["So8NSObjectC", "DFDisposableToken"]
+- !private ["So8NSObjectC", "DFImageVC"]
 - !private ["So8NSObjectC", "DFJSONKey"]
 - !private ["So8NSObjectC", "DFLocalizable"]
 - !private ["So8NSObjectC", "DFSelectionVC"]
@@ -4250,6 +4255,7 @@ depends-member:
 - !private ["So18UIContentContainerP", "formNumber"]
 - !private ["So18UIContentContainerP", "heightDictionary"]
 - !private ["So18UIContentContainerP", "id"]
+- !private ["So18UIContentContainerP", "image"]
 - ["So18UIContentContainerP", "imagePickerController"]
 - ["So18UIContentContainerP", "imagePickerControllerDidCancel"]
 - ["So18UIContentContainerP", "indexPathForPreferredFocusedView"]
@@ -5796,6 +5802,7 @@ depends-member:
 - !private ["So11UIResponderC", "CGRect"]
 - !private ["So11UIResponderC", "DFAPI"]
 - !private ["So11UIResponderC", "DFDisposableToken"]
+- !private ["So11UIResponderC", "DFImageVC"]
 - !private ["So11UIResponderC", "DFJSONKey"]
 - !private ["So11UIResponderC", "DFLocalizable"]
 - !private ["So11UIResponderC", "DFSelectionVC"]
@@ -6381,6 +6388,7 @@ depends-member:
 - !private ["So20UIScrollViewDelegateP", "formDataList"]
 - !private ["So20UIScrollViewDelegateP", "heightDictionary"]
 - !private ["So20UIScrollViewDelegateP", "id"]
+- !private ["So20UIScrollViewDelegateP", "image"]
 - ["So20UIScrollViewDelegateP", "imagePickerController"]
 - ["So20UIScrollViewDelegateP", "imagePickerControllerDidCancel"]
 - ["So20UIScrollViewDelegateP", "indexPathForPreferredFocusedView"]
@@ -6574,6 +6582,7 @@ depends-member:
 - !private ["So16UIStateRestoringP", "formNumber"]
 - !private ["So16UIStateRestoringP", "heightDictionary"]
 - !private ["So16UIStateRestoringP", "id"]
+- !private ["So16UIStateRestoringP", "image"]
 - ["So16UIStateRestoringP", "imagePickerController"]
 - ["So16UIStateRestoringP", "imagePickerControllerDidCancel"]
 - ["So16UIStateRestoringP", "indexPathForPreferredFocusedView"]
@@ -7932,6 +7941,7 @@ depends-member:
 - !private ["So16UIViewControllerC", "CGRect"]
 - !private ["So16UIViewControllerC", "DFAPI"]
 - !private ["So16UIViewControllerC", "DFDisposableToken"]
+- !private ["So16UIViewControllerC", "DFImageVC"]
 - !private ["So16UIViewControllerC", "DFJSONKey"]
 - !private ["So16UIViewControllerC", "DFLocalizable"]
 - !private ["So16UIViewControllerC", "DFSelectionVC"]
@@ -8040,6 +8050,7 @@ depends-member:
 - !private ["So16UIViewControllerC", "formNumber"]
 - ["So16UIViewControllerC", "heightDictionary"]
 - !private ["So16UIViewControllerC", "id"]
+- !private ["So16UIViewControllerC", "image"]
 - ["So16UIViewControllerC", "imagePickerController"]
 - ["So16UIViewControllerC", "imagePickerControllerDidCancel"]
 - ["So16UIViewControllerC", "indexPathForPreferredFocusedView"]
@@ -8726,6 +8737,7 @@ depends-nominal:
 - "s23CustomStringConvertibleP"
 - !private "14FPCDynamicForm5DFAPIC"
 - !private "14FPCDynamicForm17DFDisposableTokenC"
+- !private "14FPCDynamicForm9DFImageVCC"
 - !private "14FPCDynamicForm9DFJSONKeyV"
 - !private "14FPCDynamicForm13DFLocalizableO"
 - !private "14FPCDynamicForm13DFSelectionVCC"

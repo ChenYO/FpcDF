@@ -9,6 +9,8 @@ provides-dynamic-lookup:
 depends-top-level:
 - "=="
 - "DFLocalizable"
+- !private "FloatLiteralType"
+- !private "IntegerLiteralType"
 - !private "NSLocalizedString"
 - "String"
 - "StringLiteralType"

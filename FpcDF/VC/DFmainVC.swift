@@ -1143,6 +1143,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             tableView.reloadData()
         case "picture":
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
+            let imageVC = storyboard.instantiateViewController(withIdentifier: "DFImageVC") as? DFImageVC
+            
+            imageVC!.image = formData.image
+            
+            present(imageVC!, animated: true)
 //            var images = [SKPhoto]()
 //            var index = 0
 //            var finalIndex = 0

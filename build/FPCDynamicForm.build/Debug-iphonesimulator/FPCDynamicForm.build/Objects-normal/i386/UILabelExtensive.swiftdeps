@@ -18,6 +18,7 @@ depends-top-level:
 - "CGFloat"
 - "CGRect"
 - "CGSize"
+- "FloatLiteralType"
 - "PaddingLabel"
 - !private "UIEdgeInsets"
 - "UILabel"
