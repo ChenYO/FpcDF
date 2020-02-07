@@ -1,0 +1,687 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "DFUtil"
+provides-nominal:
+- "14FPCDynamicForm6DFUtilC"
+provides-member:
+- ["14FPCDynamicForm6DFUtilC", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "!="
+- "AssignmentPrecedence"
+- "BooleanLiteralType"
+- !private "CGFloat"
+- "DFUtil"
+- "Decodable"
+- !private "ErrorType"
+- "FloatLiteralType"
+- "IntegerLiteralType"
+- !private "JSONDecoder"
+- "KeyValueCell"
+- "String"
+- "StringLiteralType"
+- !private "UIApplication"
+- !private "UIColor"
+- !private "UIFont"
+- "UIViewController"
+- "keyValue"
+- !private "print"
+depends-member:
+- !private ["s18AdditiveArithmeticP", "init"]
+- !private ["Sa", "subscript"]
+- !private ["SK", "data"]
+- !private ["SK", "subscript"]
+- !private ["SB", "init"]
+- !private ["So15CALayerDelegateP", "font"]
+- !private ["So15CALayerDelegateP", "isHidden"]
+- !private ["So15CALayerDelegateP", "key"]
+- !private ["So15CALayerDelegateP", "key2"]
+- !private ["So15CALayerDelegateP", "key2TopConstraint"]
+- !private ["So15CALayerDelegateP", "rootViewController"]
+- !private ["So15CALayerDelegateP", "text"]
+- !private ["So15CALayerDelegateP", "textColor"]
+- !private ["So15CALayerDelegateP", "value"]
+- !private ["So15CALayerDelegateP", "value2"]
+- !private ["So15CALayerDelegateP", "value2TopConstraint"]
+- !private ["12CoreGraphics7CGFloatV", "init"]
+- !private ["s7CVarArgP", "constant"]
+- !private ["s7CVarArgP", "data"]
+- !private ["s7CVarArgP", "font"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "isHidden"]
+- !private ["s7CVarArgP", "key"]
+- !private ["s7CVarArgP", "key2"]
+- !private ["s7CVarArgP", "key2TopConstraint"]
+- !private ["s7CVarArgP", "keyWindow"]
+- !private ["s7CVarArgP", "presentedViewController"]
+- !private ["s7CVarArgP", "rootViewController"]
+- !private ["s7CVarArgP", "shared"]
+- !private ["s7CVarArgP", "subscript"]
+- !private ["s7CVarArgP", "systemFont"]
+- !private ["s7CVarArgP", "text"]
+- !private ["s7CVarArgP", "textColor"]
+- !private ["s7CVarArgP", "value"]
+- !private ["s7CVarArgP", "value2"]
+- !private ["s7CVarArgP", "value2TopConstraint"]
+- !private ["Sl", "data"]
+- !private ["Sl", "subscript"]
+- !private ["SL", "data"]
+- !private ["SL", "init"]
+- !private ["10Foundation15ContiguousBytesP", "subscript"]
+- !private ["s28CustomDebugStringConvertibleP", "constant"]
+- !private ["s28CustomDebugStringConvertibleP", "data"]
+- !private ["s28CustomDebugStringConvertibleP", "font"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "isHidden"]
+- !private ["s28CustomDebugStringConvertibleP", "key"]
+- !private ["s28CustomDebugStringConvertibleP", "key2"]
+- !private ["s28CustomDebugStringConvertibleP", "key2TopConstraint"]
+- !private ["s28CustomDebugStringConvertibleP", "keyWindow"]
+- !private ["s28CustomDebugStringConvertibleP", "presentedViewController"]
+- !private ["s28CustomDebugStringConvertibleP", "rootViewController"]
+- !private ["s28CustomDebugStringConvertibleP", "shared"]
+- !private ["s28CustomDebugStringConvertibleP", "subscript"]
+- !private ["s28CustomDebugStringConvertibleP", "systemFont"]
+- !private ["s28CustomDebugStringConvertibleP", "text"]
+- !private ["s28CustomDebugStringConvertibleP", "textColor"]
+- !private ["s28CustomDebugStringConvertibleP", "value"]
+- !private ["s28CustomDebugStringConvertibleP", "value2"]
+- !private ["s28CustomDebugStringConvertibleP", "value2TopConstraint"]
+- !private ["s17CustomReflectableP", "data"]
+- !private ["s17CustomReflectableP", "font"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "isHidden"]
+- !private ["s17CustomReflectableP", "subscript"]
+- !private ["s17CustomReflectableP", "text"]
+- !private ["s17CustomReflectableP", "textColor"]
+- !private ["s23CustomStringConvertibleP", "constant"]
+- !private ["s23CustomStringConvertibleP", "data"]
+- !private ["s23CustomStringConvertibleP", "font"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "isHidden"]
+- !private ["s23CustomStringConvertibleP", "key"]
+- !private ["s23CustomStringConvertibleP", "key2"]
+- !private ["s23CustomStringConvertibleP", "key2TopConstraint"]
+- !private ["s23CustomStringConvertibleP", "keyWindow"]
+- !private ["s23CustomStringConvertibleP", "presentedViewController"]
+- !private ["s23CustomStringConvertibleP", "rootViewController"]
+- !private ["s23CustomStringConvertibleP", "shared"]
+- !private ["s23CustomStringConvertibleP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "systemFont"]
+- !private ["s23CustomStringConvertibleP", "text"]
+- !private ["s23CustomStringConvertibleP", "textColor"]
+- !private ["s23CustomStringConvertibleP", "utf8"]
+- !private ["s23CustomStringConvertibleP", "value"]
+- !private ["s23CustomStringConvertibleP", "value2"]
+- !private ["s23CustomStringConvertibleP", "value2TopConstraint"]
+- !private ["14FPCDynamicForm6DFUtilC", "CGFloat"]
+- ["14FPCDynamicForm6DFUtilC", "Decodable"]
+- !private ["14FPCDynamicForm6DFUtilC", "ErrorType"]
+- !private ["14FPCDynamicForm6DFUtilC", "JSONDecoder"]
+- ["14FPCDynamicForm6DFUtilC", "KeyValueCell"]
+- ["14FPCDynamicForm6DFUtilC", "OSType"]
+- ["14FPCDynamicForm6DFUtilC", "String"]
+- !private ["14FPCDynamicForm6DFUtilC", "UIApplication"]
+- !private ["14FPCDynamicForm6DFUtilC", "UIColor"]
+- !private ["14FPCDynamicForm6DFUtilC", "UIFont"]
+- ["14FPCDynamicForm6DFUtilC", "UIViewController"]
+- ["14FPCDynamicForm6DFUtilC", "appRegion"]
+- ["14FPCDynamicForm6DFUtilC", "decodeJsonStringAndReturnArrayObject"]
+- ["14FPCDynamicForm6DFUtilC", "decodeJsonStringAndReturnObject"]
+- ["14FPCDynamicForm6DFUtilC", "forceUpdateFlag"]
+- ["14FPCDynamicForm6DFUtilC", "getTopVC"]
+- ["14FPCDynamicForm6DFUtilC", "init"]
+- ["14FPCDynamicForm6DFUtilC", "keyValue"]
+- !private ["14FPCDynamicForm6DFUtilC", "print"]
+- ["14FPCDynamicForm6DFUtilC", "setKeyValueData"]
+- ["14FPCDynamicForm6DFUtilC", "tipUpdateFlag"]
+- ["14FPCDynamicForm6DFUtilC", "versionCode"]
+- !private ["10Foundation12DataProtocolP", "subscript"]
+- !private ["Se", "color"]
+- !private ["Se", "data"]
+- !private ["Se", "font"]
+- !private ["Se", "init"]
+- !private ["Se", "isHidden"]
+- !private ["Se", "size"]
+- !private ["Se", "subscript"]
+- !private ["Se", "text"]
+- !private ["Se", "textColor"]
+- !private ["Se", "title"]
+- !private ["SE", "color"]
+- !private ["SE", "data"]
+- !private ["SE", "font"]
+- !private ["SE", "init"]
+- !private ["SE", "isHidden"]
+- !private ["SE", "size"]
+- !private ["SE", "subscript"]
+- !private ["SE", "text"]
+- !private ["SE", "textColor"]
+- !private ["SE", "title"]
+- !private ["SS10FoundationE8EncodingV", "utf8"]
+- !private ["SQ", "JSONParseError"]
+- !private ["SQ", "constant"]
+- !private ["SQ", "data"]
+- !private ["SQ", "font"]
+- !private ["SQ", "init"]
+- !private ["SQ", "isHidden"]
+- !private ["SQ", "key"]
+- !private ["SQ", "key2"]
+- !private ["SQ", "key2TopConstraint"]
+- !private ["SQ", "keyWindow"]
+- !private ["SQ", "presentedViewController"]
+- !private ["SQ", "rootViewController"]
+- !private ["SQ", "shared"]
+- !private ["SQ", "subscript"]
+- !private ["SQ", "systemFont"]
+- !private ["SQ", "text"]
+- !private ["SQ", "textColor"]
+- !private ["SQ", "utf8"]
+- !private ["SQ", "value"]
+- !private ["SQ", "value2"]
+- !private ["SQ", "value2TopConstraint"]
+- !private ["s5ErrorP", "JSONParseError"]
+- !private ["14FPCDynamicForm9ErrorTypeO", "JSONParseError"]
+- !private ["14FPCDynamicForm9ErrorTypeO", "deinit"]
+- !private ["s25ExpressibleByArrayLiteralP", "subscript"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "data"]
+- !private ["s25ExpressibleByFloatLiteralP", "init"]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s23ExpressibleByNilLiteralP", "font"]
+- !private ["s23ExpressibleByNilLiteralP", "isHidden"]
+- !private ["s23ExpressibleByNilLiteralP", "text"]
+- !private ["s23ExpressibleByNilLiteralP", "textColor"]
+- !private ["s32ExpressibleByStringInterpolationP", "data"]
+- !private ["s26ExpressibleByStringLiteralP", "data"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "data"]
+- !private ["SF", "init"]
+- !private ["SH", "JSONParseError"]
+- !private ["SH", "constant"]
+- !private ["SH", "data"]
+- !private ["SH", "font"]
+- !private ["SH", "init"]
+- !private ["SH", "isHidden"]
+- !private ["SH", "key"]
+- !private ["SH", "key2"]
+- !private ["SH", "key2TopConstraint"]
+- !private ["SH", "keyWindow"]
+- !private ["SH", "presentedViewController"]
+- !private ["SH", "rootViewController"]
+- !private ["SH", "shared"]
+- !private ["SH", "subscript"]
+- !private ["SH", "systemFont"]
+- !private ["SH", "text"]
+- !private ["SH", "textColor"]
+- !private ["SH", "utf8"]
+- !private ["SH", "value"]
+- !private ["SH", "value2"]
+- !private ["SH", "value2TopConstraint"]
+- !private ["10Foundation11JSONDecoderC", "decode"]
+- !private ["10Foundation11JSONDecoderC", "init"]
+- !private ["14FPCDynamicForm12KeyValueCellC", "key"]
+- !private ["14FPCDynamicForm12KeyValueCellC", "key2"]
+- !private ["14FPCDynamicForm12KeyValueCellC", "key2TopConstraint"]
+- !private ["14FPCDynamicForm12KeyValueCellC", "value"]
+- !private ["14FPCDynamicForm12KeyValueCellC", "value2"]
+- !private ["14FPCDynamicForm12KeyValueCellC", "value2TopConstraint"]
+- !private ["s25LosslessStringConvertibleP", "data"]
+- !private ["s10MirrorPathP", "data"]
+- !private ["SM", "subscript"]
+- !private ["10Foundation19MutableDataProtocolP", "subscript"]
+- !private ["So8NSCodingP", "data"]
+- !private ["So8NSCodingP", "font"]
+- !private ["So8NSCodingP", "init"]
+- !private ["So8NSCodingP", "isHidden"]
+- !private ["So8NSCodingP", "key"]
+- !private ["So8NSCodingP", "key2"]
+- !private ["So8NSCodingP", "key2TopConstraint"]
+- !private ["So8NSCodingP", "presentedViewController"]
+- !private ["So8NSCodingP", "rootViewController"]
+- !private ["So8NSCodingP", "text"]
+- !private ["So8NSCodingP", "textColor"]
+- !private ["So8NSCodingP", "value"]
+- !private ["So8NSCodingP", "value2"]
+- !private ["So8NSCodingP", "value2TopConstraint"]
+- !private ["So9NSCopyingP", "data"]
+- !private ["So9NSCopyingP", "init"]
+- !private ["So9NSCopyingP", "systemFont"]
+- !private ["So26NSExtensionRequestHandlingP", "presentedViewController"]
+- !private ["So21NSItemProviderReadingP", "data"]
+- !private ["So21NSItemProviderReadingP", "init"]
+- !private ["So21NSItemProviderWritingP", "data"]
+- !private ["So21NSItemProviderWritingP", "init"]
+- !private ["So18NSLayoutConstraintC", "constant"]
+- !private ["So16NSMutableCopyingP", "data"]
+- !private ["So8NSObjectC", "constant"]
+- !private ["So8NSObjectC", "data"]
+- !private ["So8NSObjectC", "font"]
+- !private ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "isHidden"]
+- !private ["So8NSObjectC", "key"]
+- !private ["So8NSObjectC", "key2"]
+- !private ["So8NSObjectC", "key2TopConstraint"]
+- !private ["So8NSObjectC", "keyWindow"]
+- !private ["So8NSObjectC", "presentedViewController"]
+- !private ["So8NSObjectC", "rootViewController"]
+- !private ["So8NSObjectC", "shared"]
+- !private ["So8NSObjectC", "systemFont"]
+- !private ["So8NSObjectC", "text"]
+- !private ["So8NSObjectC", "textColor"]
+- !private ["So8NSObjectC", "value"]
+- !private ["So8NSObjectC", "value2"]
+- !private ["So8NSObjectC", "value2TopConstraint"]
+- !private ["So8NSObjectP", "constant"]
+- !private ["So8NSObjectP", "data"]
+- !private ["So8NSObjectP", "font"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "isHidden"]
+- !private ["So8NSObjectP", "key"]
+- !private ["So8NSObjectP", "key2"]
+- !private ["So8NSObjectP", "key2TopConstraint"]
+- !private ["So8NSObjectP", "keyWindow"]
+- !private ["So8NSObjectP", "presentedViewController"]
+- !private ["So8NSObjectP", "rootViewController"]
+- !private ["So8NSObjectP", "shared"]
+- !private ["So8NSObjectP", "systemFont"]
+- !private ["So8NSObjectP", "text"]
+- !private ["So8NSObjectP", "textColor"]
+- !private ["So8NSObjectP", "value"]
+- !private ["So8NSObjectP", "value2"]
+- !private ["So8NSObjectP", "value2TopConstraint"]
+- !private ["So14NSSecureCodingP", "data"]
+- !private ["So14NSSecureCodingP", "init"]
+- !private ["So8NSStringC", "data"]
+- !private ["Sj", "init"]
+- !private ["Sq", "font"]
+- !private ["Sq", "isHidden"]
+- !private ["Sq", "text"]
+- !private ["Sq", "textColor"]
+- !private ["Sk", "subscript"]
+- !private ["Sm", "data"]
+- !private ["Sm", "subscript"]
+- !private ["SY", "utf8"]
+- !private ["ST", "data"]
+- !private ["ST", "subscript"]
+- !private ["s13SignedNumericP", "init"]
+- !private ["Sx", "init"]
+- !private ["SS", "data"]
+- !private ["Sy", "data"]
+- !private ["s16TextOutputStreamP", "data"]
+- !private ["s20TextOutputStreamableP", "data"]
+- !private ["So29UIAccessibilityIdentificationP", "font"]
+- !private ["So29UIAccessibilityIdentificationP", "isHidden"]
+- !private ["So29UIAccessibilityIdentificationP", "key"]
+- !private ["So29UIAccessibilityIdentificationP", "key2"]
+- !private ["So29UIAccessibilityIdentificationP", "key2TopConstraint"]
+- !private ["So29UIAccessibilityIdentificationP", "rootViewController"]
+- !private ["So29UIAccessibilityIdentificationP", "text"]
+- !private ["So29UIAccessibilityIdentificationP", "textColor"]
+- !private ["So29UIAccessibilityIdentificationP", "value"]
+- !private ["So29UIAccessibilityIdentificationP", "value2"]
+- !private ["So29UIAccessibilityIdentificationP", "value2TopConstraint"]
+- !private ["So12UIAppearanceP", "font"]
+- !private ["So12UIAppearanceP", "isHidden"]
+- !private ["So12UIAppearanceP", "key"]
+- !private ["So12UIAppearanceP", "key2"]
+- !private ["So12UIAppearanceP", "key2TopConstraint"]
+- !private ["So12UIAppearanceP", "rootViewController"]
+- !private ["So12UIAppearanceP", "text"]
+- !private ["So12UIAppearanceP", "textColor"]
+- !private ["So12UIAppearanceP", "value"]
+- !private ["So12UIAppearanceP", "value2"]
+- !private ["So12UIAppearanceP", "value2TopConstraint"]
+- !private ["So21UIAppearanceContainerP", "font"]
+- !private ["So21UIAppearanceContainerP", "isHidden"]
+- !private ["So21UIAppearanceContainerP", "key"]
+- !private ["So21UIAppearanceContainerP", "key2"]
+- !private ["So21UIAppearanceContainerP", "key2TopConstraint"]
+- !private ["So21UIAppearanceContainerP", "presentedViewController"]
+- !private ["So21UIAppearanceContainerP", "rootViewController"]
+- !private ["So21UIAppearanceContainerP", "text"]
+- !private ["So21UIAppearanceContainerP", "textColor"]
+- !private ["So21UIAppearanceContainerP", "value"]
+- !private ["So21UIAppearanceContainerP", "value2"]
+- !private ["So21UIAppearanceContainerP", "value2TopConstraint"]
+- !private ["So13UIApplicationC", "keyWindow"]
+- !private ["So13UIApplicationC", "shared"]
+- !private ["So7UIColorC", "init"]
+- !private ["So18UIContentContainerP", "presentedViewController"]
+- !private ["So30UIContentSizeCategoryAdjustingP", "font"]
+- !private ["So30UIContentSizeCategoryAdjustingP", "isHidden"]
+- !private ["So30UIContentSizeCategoryAdjustingP", "text"]
+- !private ["So30UIContentSizeCategoryAdjustingP", "textColor"]
+- !private ["So17UICoordinateSpaceP", "font"]
+- !private ["So17UICoordinateSpaceP", "isHidden"]
+- !private ["So17UICoordinateSpaceP", "key"]
+- !private ["So17UICoordinateSpaceP", "key2"]
+- !private ["So17UICoordinateSpaceP", "key2TopConstraint"]
+- !private ["So17UICoordinateSpaceP", "rootViewController"]
+- !private ["So17UICoordinateSpaceP", "text"]
+- !private ["So17UICoordinateSpaceP", "textColor"]
+- !private ["So17UICoordinateSpaceP", "value"]
+- !private ["So17UICoordinateSpaceP", "value2"]
+- !private ["So17UICoordinateSpaceP", "value2TopConstraint"]
+- !private ["So13UIDynamicItemP", "font"]
+- !private ["So13UIDynamicItemP", "isHidden"]
+- !private ["So13UIDynamicItemP", "key"]
+- !private ["So13UIDynamicItemP", "key2"]
+- !private ["So13UIDynamicItemP", "key2TopConstraint"]
+- !private ["So13UIDynamicItemP", "rootViewController"]
+- !private ["So13UIDynamicItemP", "text"]
+- !private ["So13UIDynamicItemP", "textColor"]
+- !private ["So13UIDynamicItemP", "value"]
+- !private ["So13UIDynamicItemP", "value2"]
+- !private ["So13UIDynamicItemP", "value2TopConstraint"]
+- !private ["So18UIFocusEnvironmentP", "font"]
+- !private ["So18UIFocusEnvironmentP", "isHidden"]
+- !private ["So18UIFocusEnvironmentP", "key"]
+- !private ["So18UIFocusEnvironmentP", "key2"]
+- !private ["So18UIFocusEnvironmentP", "key2TopConstraint"]
+- !private ["So18UIFocusEnvironmentP", "presentedViewController"]
+- !private ["So18UIFocusEnvironmentP", "rootViewController"]
+- !private ["So18UIFocusEnvironmentP", "text"]
+- !private ["So18UIFocusEnvironmentP", "textColor"]
+- !private ["So18UIFocusEnvironmentP", "value"]
+- !private ["So18UIFocusEnvironmentP", "value2"]
+- !private ["So18UIFocusEnvironmentP", "value2TopConstraint"]
+- !private ["So11UIFocusItemP", "font"]
+- !private ["So11UIFocusItemP", "isHidden"]
+- !private ["So11UIFocusItemP", "key"]
+- !private ["So11UIFocusItemP", "key2"]
+- !private ["So11UIFocusItemP", "key2TopConstraint"]
+- !private ["So11UIFocusItemP", "rootViewController"]
+- !private ["So11UIFocusItemP", "text"]
+- !private ["So11UIFocusItemP", "textColor"]
+- !private ["So11UIFocusItemP", "value"]
+- !private ["So11UIFocusItemP", "value2"]
+- !private ["So11UIFocusItemP", "value2TopConstraint"]
+- !private ["So20UIFocusItemContainerP", "font"]
+- !private ["So20UIFocusItemContainerP", "isHidden"]
+- !private ["So20UIFocusItemContainerP", "key"]
+- !private ["So20UIFocusItemContainerP", "key2"]
+- !private ["So20UIFocusItemContainerP", "key2TopConstraint"]
+- !private ["So20UIFocusItemContainerP", "rootViewController"]
+- !private ["So20UIFocusItemContainerP", "text"]
+- !private ["So20UIFocusItemContainerP", "textColor"]
+- !private ["So20UIFocusItemContainerP", "value"]
+- !private ["So20UIFocusItemContainerP", "value2"]
+- !private ["So20UIFocusItemContainerP", "value2TopConstraint"]
+- !private ["So6UIFontC", "systemFont"]
+- !private ["So27UIGestureRecognizerDelegateP", "key"]
+- !private ["So27UIGestureRecognizerDelegateP", "key2"]
+- !private ["So27UIGestureRecognizerDelegateP", "key2TopConstraint"]
+- !private ["So27UIGestureRecognizerDelegateP", "value"]
+- !private ["So27UIGestureRecognizerDelegateP", "value2"]
+- !private ["So27UIGestureRecognizerDelegateP", "value2TopConstraint"]
+- !private ["So7UILabelC", "font"]
+- !private ["So7UILabelC", "isHidden"]
+- !private ["So7UILabelC", "text"]
+- !private ["So7UILabelC", "textColor"]
+- !private ["So30UIPasteConfigurationSupportingP", "font"]
+- !private ["So30UIPasteConfigurationSupportingP", "isHidden"]
+- !private ["So30UIPasteConfigurationSupportingP", "key"]
+- !private ["So30UIPasteConfigurationSupportingP", "key2"]
+- !private ["So30UIPasteConfigurationSupportingP", "key2TopConstraint"]
+- !private ["So30UIPasteConfigurationSupportingP", "keyWindow"]
+- !private ["So30UIPasteConfigurationSupportingP", "presentedViewController"]
+- !private ["So30UIPasteConfigurationSupportingP", "rootViewController"]
+- !private ["So30UIPasteConfigurationSupportingP", "shared"]
+- !private ["So30UIPasteConfigurationSupportingP", "text"]
+- !private ["So30UIPasteConfigurationSupportingP", "textColor"]
+- !private ["So30UIPasteConfigurationSupportingP", "value"]
+- !private ["So30UIPasteConfigurationSupportingP", "value2"]
+- !private ["So30UIPasteConfigurationSupportingP", "value2TopConstraint"]
+- !private ["So11UIResponderC", "font"]
+- !private ["So11UIResponderC", "isHidden"]
+- !private ["So11UIResponderC", "key"]
+- !private ["So11UIResponderC", "key2"]
+- !private ["So11UIResponderC", "key2TopConstraint"]
+- !private ["So11UIResponderC", "keyWindow"]
+- !private ["So11UIResponderC", "presentedViewController"]
+- !private ["So11UIResponderC", "rootViewController"]
+- !private ["So11UIResponderC", "shared"]
+- !private ["So11UIResponderC", "text"]
+- !private ["So11UIResponderC", "textColor"]
+- !private ["So11UIResponderC", "value"]
+- !private ["So11UIResponderC", "value2"]
+- !private ["So11UIResponderC", "value2TopConstraint"]
+- !private ["So30UIResponderStandardEditActionsP", "font"]
+- !private ["So30UIResponderStandardEditActionsP", "isHidden"]
+- !private ["So30UIResponderStandardEditActionsP", "key"]
+- !private ["So30UIResponderStandardEditActionsP", "key2"]
+- !private ["So30UIResponderStandardEditActionsP", "key2TopConstraint"]
+- !private ["So30UIResponderStandardEditActionsP", "keyWindow"]
+- !private ["So30UIResponderStandardEditActionsP", "presentedViewController"]
+- !private ["So30UIResponderStandardEditActionsP", "rootViewController"]
+- !private ["So30UIResponderStandardEditActionsP", "shared"]
+- !private ["So30UIResponderStandardEditActionsP", "text"]
+- !private ["So30UIResponderStandardEditActionsP", "textColor"]
+- !private ["So30UIResponderStandardEditActionsP", "value"]
+- !private ["So30UIResponderStandardEditActionsP", "value2"]
+- !private ["So30UIResponderStandardEditActionsP", "value2TopConstraint"]
+- !private ["So16UIStateRestoringP", "presentedViewController"]
+- !private ["So15UITableViewCellC", "key"]
+- !private ["So15UITableViewCellC", "key2"]
+- !private ["So15UITableViewCellC", "key2TopConstraint"]
+- !private ["So15UITableViewCellC", "value"]
+- !private ["So15UITableViewCellC", "value2"]
+- !private ["So15UITableViewCellC", "value2TopConstraint"]
+- !private ["So18UITraitEnvironmentP", "font"]
+- !private ["So18UITraitEnvironmentP", "isHidden"]
+- !private ["So18UITraitEnvironmentP", "key"]
+- !private ["So18UITraitEnvironmentP", "key2"]
+- !private ["So18UITraitEnvironmentP", "key2TopConstraint"]
+- !private ["So18UITraitEnvironmentP", "presentedViewController"]
+- !private ["So18UITraitEnvironmentP", "rootViewController"]
+- !private ["So18UITraitEnvironmentP", "text"]
+- !private ["So18UITraitEnvironmentP", "textColor"]
+- !private ["So18UITraitEnvironmentP", "value"]
+- !private ["So18UITraitEnvironmentP", "value2"]
+- !private ["So18UITraitEnvironmentP", "value2TopConstraint"]
+- !private ["So23UIUserActivityRestoringP", "font"]
+- !private ["So23UIUserActivityRestoringP", "isHidden"]
+- !private ["So23UIUserActivityRestoringP", "key"]
+- !private ["So23UIUserActivityRestoringP", "key2"]
+- !private ["So23UIUserActivityRestoringP", "key2TopConstraint"]
+- !private ["So23UIUserActivityRestoringP", "keyWindow"]
+- !private ["So23UIUserActivityRestoringP", "presentedViewController"]
+- !private ["So23UIUserActivityRestoringP", "rootViewController"]
+- !private ["So23UIUserActivityRestoringP", "shared"]
+- !private ["So23UIUserActivityRestoringP", "text"]
+- !private ["So23UIUserActivityRestoringP", "textColor"]
+- !private ["So23UIUserActivityRestoringP", "value"]
+- !private ["So23UIUserActivityRestoringP", "value2"]
+- !private ["So23UIUserActivityRestoringP", "value2TopConstraint"]
+- !private ["So6UIViewC", "font"]
+- !private ["So6UIViewC", "isHidden"]
+- !private ["So6UIViewC", "key"]
+- !private ["So6UIViewC", "key2"]
+- !private ["So6UIViewC", "key2TopConstraint"]
+- !private ["So6UIViewC", "rootViewController"]
+- !private ["So6UIViewC", "text"]
+- !private ["So6UIViewC", "textColor"]
+- !private ["So6UIViewC", "value"]
+- !private ["So6UIViewC", "value2"]
+- !private ["So6UIViewC", "value2TopConstraint"]
+- !private ["So16UIViewControllerC", "presentedViewController"]
+- !private ["So8UIWindowC", "rootViewController"]
+- !private ["s14_ArrayProtocolP", "subscript"]
+- !private ["s15_CVarArgAlignedP", "init"]
+- !private ["s22_CVarArgPassedAsDoubleP", "init"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "data"]
+- !private ["s24_DestructorSafeContainerP", "subscript"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "data"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "data"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "data"]
+- !private ["s26_ExpressibleByColorLiteralP", "init"]
+- !private ["s19_HasContiguousBytesP", "data"]
+- !private ["s19_HasContiguousBytesP", "subscript"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "data"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "constant"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "data"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "font"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "isHidden"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "key"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "key2"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "key2TopConstraint"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "keyWindow"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "presentedViewController"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "rootViewController"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "shared"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "systemFont"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "text"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "textColor"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "value"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "value2"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "value2TopConstraint"]
+- !private ["s21_ObjectiveCBridgeableP", "data"]
+- !private ["s21_ObjectiveCBridgeableP", "font"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "isHidden"]
+- !private ["s21_ObjectiveCBridgeableP", "subscript"]
+- !private ["s21_ObjectiveCBridgeableP", "text"]
+- !private ["s21_ObjectiveCBridgeableP", "textColor"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "font"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "isHidden"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "key"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "key2"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "key2TopConstraint"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "rootViewController"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "text"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "textColor"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "value"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "value2"]
+- !private ["s38__DefaultCustomPlaygroundQuickLookableP", "value2TopConstraint"]
+- !private ["14FPCDynamicForm8keyValueV", "color"]
+- !private ["14FPCDynamicForm8keyValueV", "size"]
+- !private ["14FPCDynamicForm8keyValueV", "title"]
+depends-nominal:
+- !private "s18AdditiveArithmeticP"
+- !private "Sa"
+- !private "SK"
+- !private "SB"
+- !private "So15CALayerDelegateP"
+- !private "12CoreGraphics7CGFloatV"
+- !private "s7CVarArgP"
+- !private "Sl"
+- !private "SL"
+- !private "10Foundation15ContiguousBytesP"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- "14FPCDynamicForm6DFUtilC"
+- !private "10Foundation12DataProtocolP"
+- !private "Se"
+- !private "SE"
+- !private "SS10FoundationE8EncodingV"
+- !private "SQ"
+- !private "s5ErrorP"
+- !private "14FPCDynamicForm9ErrorTypeO"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s25ExpressibleByFloatLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s23ExpressibleByNilLiteralP"
+- !private "s32ExpressibleByStringInterpolationP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "SF"
+- !private "SH"
+- !private "10Foundation11JSONDecoderC"
+- !private "14FPCDynamicForm12KeyValueCellC"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "SM"
+- !private "10Foundation19MutableDataProtocolP"
+- !private "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So26NSExtensionRequestHandlingP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So18NSLayoutConstraintC"
+- !private "So16NSMutableCopyingP"
+- !private "So8NSObjectC"
+- !private "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
+- !private "Sj"
+- !private "Sq"
+- !private "Sk"
+- !private "Sm"
+- !private "SY"
+- !private "ST"
+- !private "s13SignedNumericP"
+- !private "Sx"
+- !private "SS"
+- !private "Sy"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- !private "So29UIAccessibilityIdentificationP"
+- !private "So12UIAppearanceP"
+- !private "So21UIAppearanceContainerP"
+- !private "So13UIApplicationC"
+- !private "So7UIColorC"
+- !private "So18UIContentContainerP"
+- !private "So30UIContentSizeCategoryAdjustingP"
+- !private "So17UICoordinateSpaceP"
+- !private "So13UIDynamicItemP"
+- !private "So18UIFocusEnvironmentP"
+- !private "So11UIFocusItemP"
+- !private "So20UIFocusItemContainerP"
+- !private "So6UIFontC"
+- !private "So27UIGestureRecognizerDelegateP"
+- !private "So7UILabelC"
+- !private "So30UIPasteConfigurationSupportingP"
+- !private "So11UIResponderC"
+- !private "So30UIResponderStandardEditActionsP"
+- !private "So16UIStateRestoringP"
+- !private "So15UITableViewCellC"
+- !private "So18UITraitEnvironmentP"
+- !private "So23UIUserActivityRestoringP"
+- !private "So6UIViewC"
+- !private "So16UIViewControllerC"
+- !private "So8UIWindowC"
+- !private "s14_ArrayProtocolP"
+- !private "s15_CVarArgAlignedP"
+- !private "s22_CVarArgPassedAsDoubleP"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s24_DestructorSafeContainerP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s26_ExpressibleByColorLiteralP"
+- !private "s19_HasContiguousBytesP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "s21_ObjectiveCBridgeableP"
+- !private "s38__DefaultCustomPlaygroundQuickLookableP"
+- !private "14FPCDynamicForm8keyValueV"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/SwiftOnoneSupport.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/SafariServices.framework/Headers/SafariServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "da3dac57fd4c88ef2d2994d4b2c35b3e"

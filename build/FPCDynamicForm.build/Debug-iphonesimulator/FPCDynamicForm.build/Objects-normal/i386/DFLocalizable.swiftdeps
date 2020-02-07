@@ -1,0 +1,154 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "DFLocalizable"
+provides-nominal:
+- "14FPCDynamicForm13DFLocalizableO"
+provides-member:
+- ["14FPCDynamicForm13DFLocalizableO", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "=="
+- "DFLocalizable"
+- !private "NSLocalizedString"
+- "String"
+- "StringLiteralType"
+- !private "_findStringSwitchCase"
+- !private "~="
+depends-member:
+- ["14FPCDynamicForm13DFLocalizableO", "=="]
+- ["14FPCDynamicForm13DFLocalizableO", "ACCOUNT"]
+- ["14FPCDynamicForm13DFLocalizableO", "APP_FORCE_LOGOUT"]
+- ["14FPCDynamicForm13DFLocalizableO", "APP_FORCE_UPDATE"]
+- ["14FPCDynamicForm13DFLocalizableO", "APP_NAME"]
+- ["14FPCDynamicForm13DFLocalizableO", "APP_UPDATE_TIP"]
+- ["14FPCDynamicForm13DFLocalizableO", "APP_VERSION"]
+- ["14FPCDynamicForm13DFLocalizableO", "AVERAGE_CALCULATION"]
+- ["14FPCDynamicForm13DFLocalizableO", "BACK"]
+- ["14FPCDynamicForm13DFLocalizableO", "BEGIN_DATE"]
+- ["14FPCDynamicForm13DFLocalizableO", "CALCULATE"]
+- ["14FPCDynamicForm13DFLocalizableO", "CFP_COMPLETED"]
+- ["14FPCDynamicForm13DFLocalizableO", "CFP_CREATE"]
+- ["14FPCDynamicForm13DFLocalizableO", "CFP_EQUIPMENT_ACTION"]
+- ["14FPCDynamicForm13DFLocalizableO", "CFP_POST_COMMENT"]
+- ["14FPCDynamicForm13DFLocalizableO", "CFP_PROCESSING"]
+- ["14FPCDynamicForm13DFLocalizableO", "CFP_WAITING"]
+- ["14FPCDynamicForm13DFLocalizableO", "COMMAND_CANCEL"]
+- ["14FPCDynamicForm13DFLocalizableO", "COMMAND_CONFIRM"]
+- ["14FPCDynamicForm13DFLocalizableO", "COMMAND_SKIP"]
+- ["14FPCDynamicForm13DFLocalizableO", "COMMAND_UPDATE_APP"]
+- ["14FPCDynamicForm13DFLocalizableO", "DFLocalizable"]
+- ["14FPCDynamicForm13DFLocalizableO", "END"]
+- ["14FPCDynamicForm13DFLocalizableO", "END_DATE"]
+- ["14FPCDynamicForm13DFLocalizableO", "ENTRUST"]
+- ["14FPCDynamicForm13DFLocalizableO", "HYDUTY_OFF_DUTY_EMPLOYEE"]
+- ["14FPCDynamicForm13DFLocalizableO", "JW_LIMS_INSTRUMENT_VALUE_OUT_OF_RANGE"]
+- ["14FPCDynamicForm13DFLocalizableO", "JW_LIMS_SAMPLE_INSPECTION_COMPLETED"]
+- ["14FPCDynamicForm13DFLocalizableO", "JW_LIMS_SAMPLE_TEST_OUT_OF_RANGE"]
+- ["14FPCDynamicForm13DFLocalizableO", "JW_LIMS_SQC_ALARM"]
+- ["14FPCDynamicForm13DFLocalizableO", "LIMS_INSTRUMENT_VALUE_OUT_OF_RANGE"]
+- ["14FPCDynamicForm13DFLocalizableO", "LIMS_SAMPLE_COMPLETED_NOTIFICATION"]
+- ["14FPCDynamicForm13DFLocalizableO", "LIMS_SAMPLE_NOTIFICATIONS_TO_FPCIM"]
+- ["14FPCDynamicForm13DFLocalizableO", "LIMS_SQC_ALARM"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGIN_ACCOUNT_DISABLED"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGIN_ACCOUNT_IS_NOT_EXIST"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGIN_ACCOUNT_NO_PERMISSION"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGIN_ACCOUNT_PASSWORD_ERROR"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGIN_ENTER_ACCOUNT"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGIN_ENTER_PASSWORD"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGIN_FAILED"]
+- ["14FPCDynamicForm13DFLocalizableO", "LOGOUT"]
+- ["14FPCDynamicForm13DFLocalizableO", "MESSAGE_TIP"]
+- ["14FPCDynamicForm13DFLocalizableO", "NAME"]
+- ["14FPCDynamicForm13DFLocalizableO", "NOTIFICATION"]
+- ["14FPCDynamicForm13DFLocalizableO", "NO_CONTENT"]
+- ["14FPCDynamicForm13DFLocalizableO", "NO_SETTING_ITEM"]
+- ["14FPCDynamicForm13DFLocalizableO", "NO_SHIP_LOCATION"]
+- !private ["14FPCDynamicForm13DFLocalizableO", "NSLocalizedString"]
+- ["14FPCDynamicForm13DFLocalizableO", "PROMPT_DELETE_NOTIFICATION"]
+- ["14FPCDynamicForm13DFLocalizableO", "ROUTINE"]
+- ["14FPCDynamicForm13DFLocalizableO", "RawValue"]
+- ["14FPCDynamicForm13DFLocalizableO", "SAMPLE_INSPECTION_COMPLETED"]
+- ["14FPCDynamicForm13DFLocalizableO", "SAMPLE_TEST_OUT_OF_RANGE"]
+- ["14FPCDynamicForm13DFLocalizableO", "SELECT_END_DATE"]
+- ["14FPCDynamicForm13DFLocalizableO", "SETTING"]
+- ["14FPCDynamicForm13DFLocalizableO", "STATUS_A"]
+- ["14FPCDynamicForm13DFLocalizableO", "STATUS_C"]
+- ["14FPCDynamicForm13DFLocalizableO", "STATUS_V"]
+- ["14FPCDynamicForm13DFLocalizableO", "SUPPLIER"]
+- ["14FPCDynamicForm13DFLocalizableO", "String"]
+- ["14FPCDynamicForm13DFLocalizableO", "WEB_LINK"]
+- ["14FPCDynamicForm13DFLocalizableO", "_Default_RawValue"]
+- !private ["14FPCDynamicForm13DFLocalizableO", "_findStringSwitchCase"]
+- ["14FPCDynamicForm13DFLocalizableO", "_rawHashValue"]
+- ["14FPCDynamicForm13DFLocalizableO", "deinit"]
+- ["14FPCDynamicForm13DFLocalizableO", "hash"]
+- ["14FPCDynamicForm13DFLocalizableO", "hashValue"]
+- ["14FPCDynamicForm13DFLocalizableO", "init"]
+- ["14FPCDynamicForm13DFLocalizableO", "rawValue"]
+- ["14FPCDynamicForm13DFLocalizableO", "valueOf"]
+- ["SQ", "=="]
+- !private ["SQ", "NSLocalizedString"]
+- ["SQ", "RawValue"]
+- ["SQ", ""]
+- ["SQ", "_Default_RawValue"]
+- !private ["SQ", "_findStringSwitchCase"]
+- ["SQ", "_rawHashValue"]
+- ["SQ", "hash"]
+- ["SQ", "hashValue"]
+- ["SQ", "init"]
+- ["SQ", "rawValue"]
+- ["SH", "=="]
+- !private ["SH", "NSLocalizedString"]
+- ["SH", "RawValue"]
+- ["SH", ""]
+- ["SH", "_Default_RawValue"]
+- !private ["SH", "_findStringSwitchCase"]
+- ["SH", "_rawHashValue"]
+- ["SH", "hash"]
+- ["SH", "hashValue"]
+- ["SH", "init"]
+- ["SH", "rawValue"]
+- ["SY", "=="]
+- !private ["SY", "NSLocalizedString"]
+- ["SY", "RawValue"]
+- ["SY", ""]
+- ["SY", "_Default_RawValue"]
+- !private ["SY", "_findStringSwitchCase"]
+- ["SY", "_rawHashValue"]
+- ["SY", "hash"]
+- ["SY", "hashValue"]
+- ["SY", "init"]
+- ["SY", "rawValue"]
+depends-nominal:
+- "14FPCDynamicForm13DFLocalizableO"
+- "SQ"
+- "SH"
+- "SY"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/ObjectiveC.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreImage.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/QuartzCore.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Metal.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Darwin.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Foundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreFoundation.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/CoreGraphics.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Swift.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/UIKit.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/SwiftOnoneSupport.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/i386/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/SafariServices.framework/Headers/SafariServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator12.4.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "1325b7360e806c78810bc7fdba6e729f"
