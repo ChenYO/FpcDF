@@ -35,9 +35,12 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     var searchBarTextString = ""
     var constraint: NSLayoutConstraint?
     
+    var isFilter = false
+    var isFirstCheck = true 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "KeyValueCell")
@@ -351,12 +354,20 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     }
     
     @objc func doSearch() {
-        if searchBarTextString != "" {
-            let parameters = [
-                "keywords" : searchBarTextString
-            ]
+        if isFilter {
+            optionList = []
+            if searchBarTextString != "" {
+                for option in oriOptionList {
+                    if (option.name?.contains(searchBarTextString))! {
+                        optionList.append(option)
+                    }
+                }
+                
+            }else {
+                optionList = oriOptionList
+            }
             
-            
+            tableView.reloadData()
         }
     }
     
@@ -388,9 +399,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         
         if option.isSelected! {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_checked")
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
         }else {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked")
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
         }
         
         cell.checkIcon.addGestureRecognizer(checkTapRecognizer)
@@ -411,10 +422,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         choseOption.isSelected = !choseOption.isSelected!
         
         if choseOption.isSelected! {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_checked")
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             chosenItemList.append(choseOption)
         }else {
-            cell.checkIcon.image = UIImage(named: "icon_checksign_unchecked")
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             
             for (index, option) in chosenItemList.enumerated() {
                 if option.id == choseOption.id {
@@ -432,7 +443,11 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             self.navigationItem.rightBarButtonItems?.append(confirm!)
         }else {
             confirm?.title = "確認(\(chosenItemList.count))"
-            self.navigationItem.rightBarButtonItems?.popLast()
+            if !isFirstCheck {
+                self.navigationItem.rightBarButtonItems?.popLast()
+            }else {
+                isFirstCheck = false
+            }
             self.navigationItem.rightBarButtonItems?.append(confirm!)
         }
         

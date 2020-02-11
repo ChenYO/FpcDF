@@ -57,18 +57,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.separatorStyle = .none
         self.navigationItem.rightBarButtonItems = []
         
-        //        let backItem = UIBarButtonItem()
-        //        backItem.title = "Back"
-        //        self.navigationItem.backBarButtonItem = backItem
-        
         if isFirstLayer {
             let backItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
             navigationItem.leftBarButtonItem = backItem
         }
         
-        //        navigationItem.hidesBackButton = false
-        
-        //        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back1", style: .plain, target: nil, action: #selector(back))
         
         if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
             DFAPI.customPost(address: tokenURL, parameters: [
@@ -104,7 +97,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if isModal() {
             self.dismiss(animated: true, completion: nil)
-            
         }else {
             self.navigationController?.popViewController(animated: true)
         }
@@ -227,6 +219,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
                             action in
+                            if self.isModal() {
+                                self.dismiss(animated: true, completion: nil)
+                            }else {
+                                self.navigationController?.popViewController(animated: true)
+                            }
                         })
                         confirmSheet.addAction(confirmAction)
                         self.present(confirmSheet, animated: true, completion: nil)
@@ -797,9 +794,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             if formData.isCheck == false {
-                cell.checkIcon.image = UIImage(named: "icon_single_selection_unchecked")
+                cell.checkIcon.image = UIImage(named: "df_icon_single_selection_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             } else {
-                cell.checkIcon.image = UIImage(named: "icon_single_selection_checked")
+                cell.checkIcon.image = UIImage(named: "df_icon_single_selection_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             }
             
             cell.option.text = formData.title
@@ -809,9 +806,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             if formData.isCheck == false {
-                cell.checkIcon.image = UIImage(named: "icon_multiple_selection_unchecked")
+                cell.checkIcon.image = UIImage(named: "df_icon_multiple_selection_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             } else {
-                cell.checkIcon.image = UIImage(named: "icon_multiple_selection_checked")
+                cell.checkIcon.image = UIImage(named: "df_icon_multiple_selection_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             }
             
             cell.option.text = formData.title
@@ -936,13 +933,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             if formData.title!.contains(".pdf"){
-                cell.imageIcon.image = UIImage(named: "new_pdf.png")
+                cell.imageIcon.image = UIImage(named: "df_new_pdf.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             }else if formData.title!.contains(".doc") || formData.title!.contains(".docx") {
-                cell.imageIcon.image = UIImage(named: "new_doc.png")
+                cell.imageIcon.image = UIImage(named: "df_new_doc.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             }else if formData.title!.contains(".xlsx") || formData.title!.contains(".xls") {
-                cell.imageIcon.image = UIImage(named: "new_xls.png")
+                cell.imageIcon.image = UIImage(named: "df_new_xls.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             }else if formData.title!.contains(".ppt") || formData.title!.contains(".pptx") {
-                cell.imageIcon.image = UIImage(named: "new_ppt.png")
+                cell.imageIcon.image = UIImage(named: "df_new_ppt.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
             }
             return cell
         case "picture":
@@ -1210,9 +1207,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
+            if !optionList.isEmpty {
+                vc?.isFilter = true
+            }
             
             vc?.type = formData.formType
             vc?.id = (self.oriFormData?.cells[formData.formNumber!].id)!
+            vc?.oriOptionList = optionList
             vc?.optionList = optionList
             vc?.accessToken = accessToken
             vc?.tokenKey = tokenKey
@@ -1257,8 +1258,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 vc?.chosenItemList = oriOptionList
             }
             
+            if !optionList.isEmpty {
+                vc?.isFilter = true
+            }
+            
             vc?.type = formData.formType
             vc?.id = (self.oriFormData?.cells[formData.formNumber!].id)!
+            vc?.oriOptionList = optionList
             vc?.optionList = optionList
             vc?.accessToken = accessToken
             vc?.tokenKey = tokenKey
