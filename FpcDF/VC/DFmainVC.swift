@@ -38,7 +38,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         screenHeight = self.view.bounds.height
         
-        //        let FormTitleCellNib = UINib.init(nibName: "FormTitleCell", bundle: Bundle(for: FpcDynamicForm.self))
+        //        let FormTitleCellNib = UINib.init(nibName: "FormTitleCell", bundle: Bundle(for: DynamicForm.self ))
         
         tableView.register(UINib(nibName: "FormTitleCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTitleCell")
         tableView.register(UINib(nibName: "FormTextFieldCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTextFieldCell")
