@@ -59,6 +59,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if isFirstLayer {
             let backItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
             navigationItem.leftBarButtonItem = backItem
         }
         
@@ -69,7 +72,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 "comment" : "DynamicForm"
             ]) {
                 json in
-                
+                print(json)
                 if let data = json[DFJSONKey.data] {
                     
                     do {
@@ -262,7 +265,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let buttonItem = UIBarButtonItem(title: button.name, style: UIBarButtonItem.Style.plain, target: self, action: #selector(buttonClick))
             
             buttonItem.tag = index
-            
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                buttonItem.tintColor = .white
+            }
             self.navigationItem.rightBarButtonItems?.append(buttonItem)
         }
     }
@@ -344,6 +349,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
+            
             self.navigationItem.backBarButtonItem = backItem
             self.navigationController?.pushViewController(vc!, animated: true)
         case "link":
@@ -1220,6 +1229,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.tokenURL = tokenURL
             
             let backItem = UIBarButtonItem()
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
             backItem.title = "Back"
             self.navigationItem.backBarButtonItem = backItem
             self.navigationController?.pushViewController(vc!, animated: true)
@@ -1271,6 +1283,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.tokenURL = tokenURL
             
             let backItem = UIBarButtonItem()
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
             backItem.title = "Back"
             self.navigationItem.backBarButtonItem = backItem
             self.navigationController?.pushViewController(vc!, animated: true)

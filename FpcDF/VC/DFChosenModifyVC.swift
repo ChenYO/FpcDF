@@ -18,6 +18,8 @@ class DFChosenModifyVC: UIViewController, UISearchBarDelegate, UITableViewDataSo
     var timer: Timer?
     var searchBarTextString = ""
     
+    var tokenKey: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -25,7 +27,9 @@ class DFChosenModifyVC: UIViewController, UISearchBarDelegate, UITableViewDataSo
         tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "KeyValueCell")
 
         let modify = UIBarButtonItem(title: "確認修改" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(confirm))
-        
+        if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+            modify.tintColor = .white
+        }
         self.navigationItem.rightBarButtonItems = [modify]
     }
     

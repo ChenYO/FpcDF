@@ -36,7 +36,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     var constraint: NSLayoutConstraint?
     
     var isFilter = false
-    var isFirstCheck = true 
+    var isFirstCheck = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +125,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                         if !self.chosenItemList.isEmpty {
                                             self.optionList = self.chosenItemList
                                             self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
+                                            if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {
+                                                self.confirm!.tintColor = .white
+                                            }
                                             self.navigationItem.rightBarButtonItems?.append(self.confirm!)
                                         }
                                         DispatchQueue.main.async {
@@ -150,7 +153,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             let buttonItem = UIBarButtonItem(title: button.name, style: UIBarButtonItem.Style.plain, target: self, action: #selector(buttonClick))
             
             buttonItem.tag = index
-            
+            if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {
+                buttonItem.tintColor = .white
+            }
             self.navigationItem.rightBarButtonItems?.append(buttonItem)
         }
     }
@@ -330,9 +335,12 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         vc?.oriChosenItemList = chosenItemList
         vc?.chosenItemList = chosenItemList
-        
+        vc?.tokenKey = self.tokenKey
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
+        if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {
+            backItem.tintColor = .white
+        }
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(vc!, animated: true)
     }
