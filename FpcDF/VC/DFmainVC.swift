@@ -117,10 +117,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func load(urlString: String, accessToken: String) {
         
         let parameters = [
-            tokenKey!: accessToken,
-            "versionCode": DFUtil.versionCode,
-            "OSType": DFUtil.OSType,
-            "appRegion": DFUtil.appRegion
+            tokenKey!: accessToken
             ] as [String : Any]
         
         DFAPI.customGet(address: urlString, parameters: parameters) {
@@ -198,13 +195,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
             print(webDownloadAppURL)
             
-            let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
+            let alert = UIAlertController(title: DFLocalizable.valueOf(.DF_APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+            let confirmAction = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CONFIRM), style: .default, handler: { (action) in
                 let url : URL = URL(string: storeAppURL)!
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.openURL(url)
                 }
-            }))
+            })
+
+            let cancelAction = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CANCEL), style: .destructive, handler: { (action) in
+                if self.isModal() {
+                    self.dismiss(animated: true, completion: nil)
+                }else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
             if let vc = DFUtil.getTopVC() {
                 vc.present(alert, animated: true, completion: nil)
             }

@@ -186,6 +186,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+
 @class UITableView;
 @class UITableViewCell;
 @class UIImagePickerController;
@@ -196,7 +198,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class UIEvent;
 @class UIScrollView;
 @class UITextView;
-@class NSBundle;
 @class NSCoder;
 
 SWIFT_CLASS("_TtC14FPCDynamicForm8DFmainVC")

@@ -62,6 +62,7 @@
 		760A02C423D1332700CF2BC9 /* UILabelExtensive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */; };
 		760A02C723D1333A00CF2BC9 /* DFMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 760A02C623D1333A00CF2BC9 /* DFMain.storyboard */; };
 		760A02D023D177C200CF2BC9 /* DynamicForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760A02CF23D177C200CF2BC9 /* DynamicForm.swift */; };
+		76275F7223F3D972003F240F /* DFLocalizable.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 765D529E23E3C06200AE354C /* DFLocalizable.swift */; };
 		7648786D23D1A26F001E63CE /* DFSelectionVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BB23D1330D00CF2BC9 /* DFSelectionVC.swift */; };
 		7648786E23D1A272001E63CE /* DFmainVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BA23D1330D00CF2BC9 /* DFmainVC.swift */; };
 		7648786F23D1A274001E63CE /* DFChosenModifyVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BC23D1330D00CF2BC9 /* DFChosenModifyVC.swift */; };
@@ -160,6 +161,7 @@
 				7648788A23D1A2BB001E63CE /* FormData.swift in Copy Files */,
 				7648787A23D1A295001E63CE /* KeyValueCell.swift in Copy Files */,
 				7648788123D1A2A4001E63CE /* FormChoiceCell.xib in Copy Files */,
+				76275F7223F3D972003F240F /* DFLocalizable.swift in Copy Files */,
 				7648787F23D1A2A0001E63CE /* FormTextAreaCell.xib in Copy Files */,
 				7648789023D1A2C9001E63CE /* DFUtil.swift in Copy Files */,
 				7648787D23D1A29B001E63CE /* FormTextFieldCell.xib in Copy Files */,

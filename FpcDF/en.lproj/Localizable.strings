@@ -5,3 +5,9 @@
   Created by 陳仲堯 on 2020/1/31.
   Copyright © 2020 陳仲堯. All rights reserved.
 */
+"DF_APP_FORCE_UPDATE" = "In order to continue, you must update App now";
+"DF_APP_UPDATE_TIP" = "App has new version, do you want update now?";
+"DF_COMMAND_CONFIRM" = "Confirm";
+"DF_COMMAND_CANCEL" = "Cancel";
+"DF_COMMAND_UPDATE_APP" = "Update App";
+"DF_COMMAND_SKIP" = "Skip";

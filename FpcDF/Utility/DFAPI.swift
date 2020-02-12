@@ -64,6 +64,7 @@ class DFAPI {
         var getAddress = address
         var isFirst = true
         
+        
         if !address.contains("?") {
             for (key, value) in parameters {
                 if isFirst {
@@ -73,7 +74,13 @@ class DFAPI {
                     getAddress += "&" + key + "=" + String(describing: value)
                 }
             }
+        }else {
+            for (key, value) in parameters {
+                getAddress += "&" + key + "=" + String(describing: value)
+            }
         }
+        
+        print(getAddress)
         
         let url = URL(string: getAddress.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         guard let requestUrl = url else { fatalError() }
