@@ -126,81 +126,89 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         DFAPI.customGet(address: urlString, parameters: parameters) {
             json in
             
-            if let data = json[DFJSONKey.data] as? [String: Any] {
-                DispatchQueue.main.async {
-                    do {
-                        
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .millisecondsSince1970
-                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                        
-                        let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
-                        
-                        if DFUtil.versionCode < versionCode.versionCode! {
-                            DFAPI.customPost(address: self.tokenURL!, parameters: [
-                                "accessToken": self.accessToken!,
-                                "comment" : "DynamicForm"
-                            ]) {
-                                json in
+            if let result = json["result"] as? String {
+                if result == DFResult.APP_FORCE_UPDATE {
+                    self.checkIsUpdate(json: json)
+                }else {
+                    if let data = json[DFJSONKey.data] as? [String: Any] {
+                        DispatchQueue.main.async {
+                            do {
+                                print(data)
+                                let decoder = JSONDecoder()
+                                decoder.dateDecodingStrategy = .millisecondsSince1970
+                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
                                 
-                                print(json)
+                                let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
                                 
-                                if let data = json[DFJSONKey.data] {
-                                    
-                                    do {
-                                        let decoder = JSONDecoder()
-                                        decoder.dateDecodingStrategy = .millisecondsSince1970
-                                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                if DFUtil.versionCode < versionCode.versionCode! {
+                                    DFAPI.customPost(address: self.tokenURL!, parameters: [
+                                        "accessToken": self.accessToken!,
+                                        "comment" : "DynamicForm"
+                                    ]) {
+                                        json in
                                         
-                                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
-                                        
-                                        let parameters = [
-                                            self.tokenKey!: obj.accessTokenSHA256
-                                        ]
-                                        
-                                        DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
-                                            print(json)
+                                        if let data = json[DFJSONKey.data] {
                                             
-                                            if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
-                                                print(webDownloadAppURL)
+                                            do {
+                                                let decoder = JSONDecoder()
+                                                decoder.dateDecodingStrategy = .millisecondsSince1970
+                                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
                                                 
-                                                let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
-                                                alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
-                                                    let url : URL = URL(string: storeAppURL)!
-                                                    if UIApplication.shared.canOpenURL(url) {
-                                                        UIApplication.shared.openURL(url)
-                                                    }
-                                                }))
-                                                if let vc = DFUtil.getTopVC() {
-                                                    vc.present(alert, animated: true, completion: nil)
+                                                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
+                                                
+                                                let parameters = [
+                                                    self.tokenKey!: obj.accessTokenSHA256
+                                                ]
+                                                
+                                                DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
+                                                    print(json)
+                                                    self.checkIsUpdate(json: json)
                                                 }
-                                                DFUtil.forceUpdateFlag = true
+                                                
+                                            } catch {
+                                                
                                             }
                                         }
                                         
-                                    } catch {
-                                        
                                     }
+                                    
+                                }else {
+                                    let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                                    self.oriFormData = obj
+                                    self.clear()
+                                    
+                                    self.title = obj.formTitle
+                                    self.setButtons()
+                                    self.setFormData()
+                                    self.tableView.reloadData()
                                 }
-                                
+                            } catch {
                             }
-                            
-                        }else {
-                            let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
-                            self.oriFormData = obj
-                            self.clear()
-                            
-                            self.title = obj.formTitle
-                            self.setButtons()
-                            self.setFormData()
-                            self.tableView.reloadData()
                         }
-                    } catch {
                     }
                 }
             }
+        }
+    }
+    
+    func checkIsUpdate(json: [String: Any]){
+        
+        if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
+            print(webDownloadAppURL)
+            
+            let alert = UIAlertController(title: DFLocalizable.valueOf(.APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: DFLocalizable.valueOf(.COMMAND_UPDATE_APP), style: UIAlertAction.Style.default, handler: { (action) in
+                let url : URL = URL(string: storeAppURL)!
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.openURL(url)
+                }
+            }))
+            if let vc = DFUtil.getTopVC() {
+                vc.present(alert, animated: true, completion: nil)
+            }
+            DFUtil.forceUpdateFlag = true
         }
     }
     
