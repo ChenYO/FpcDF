@@ -710,9 +710,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if let isReadOnly = formData.isReadOnly {
                 if isReadOnly {
-                    cell.inputField.isUserInteractionEnabled = false
+                    cell.isUserInteractionEnabled = false
                 }else {
-                    cell.inputField.isUserInteractionEnabled = true
+                    cell.isUserInteractionEnabled = true
                 }
             }
             
@@ -771,6 +771,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if let fontColor = oriFormData?.cells[formNumber!].titleFont?.color {
                 cell.title.textColor = UIColor(hexString: fontColor)
+            }
+            
+            if let isReadOnly = formData.isReadOnly {
+                if isReadOnly {
+                    cell.isUserInteractionEnabled = false
+                }else {
+                    cell.isUserInteractionEnabled = true
+                }
             }
             
             if let title = formData.title, title != "" {

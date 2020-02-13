@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
 options: "08fc849be0ff5142c8da818013a0d567"
-build_time: [1581493199, 244279000]
+build_time: [1581554507, 531390000]
 inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/UploadCell.swift": [9223372036, 854775807]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTextFieldCell.swift": [9223372036, 854775807]
