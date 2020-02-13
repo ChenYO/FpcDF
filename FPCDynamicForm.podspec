@@ -25,6 +25,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
+                    Dynamic Form is for FPC's App product
                    DESC
 
   spec.homepage     = "https://github.com/ChenYO/FpcDF"
@@ -90,9 +91,12 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
+  spec.source_files  = "FpcDF/*.{swift}", "FpcDF/**/*.{swift}"
   spec.exclude_files = "Classes/Exclude"
+  spec.resources = "FpcDF/*.storybord", "FpcDF/**/*.xib", "FpcDF/Assets.xcassets", "FpcDF/*.strings"
 
+  spec.platform     = :ios, "8.0"
+  spec.swift_version = "4.2"
   # spec.public_header_files = "Classes/**/*.h"
 
 
