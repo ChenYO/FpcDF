@@ -40,15 +40,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         //        let FormTitleCellNib = UINib.init(nibName: "FormTitleCell", bundle: Bundle(for: DynamicForm.self ))
         
-        tableView.register(UINib(nibName: "FormTitleCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTitleCell")
-        tableView.register(UINib(nibName: "FormTextFieldCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTextFieldCell")
-        tableView.register(UINib(nibName: "FormChoiceCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormChoiceCell")
-        tableView.register(UINib(nibName: "FormTextAreaCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "FormTextAreaCell")
-        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "KeyValueCell")
-        tableView.register(UINib(nibName: "fileCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "fileCell")
-        tableView.register(UINib(nibName: "DynamicFieldCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "DynamicFieldCell")
-        tableView.register(UINib(nibName: "SingleSelectionCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "SingleSelectionCell")
-        tableView.register(UINib(nibName: "UploadCell", bundle: Bundle(for: DynamicForm.self)), forCellReuseIdentifier: "UploadCell")
+        tableView.register(UINib(nibName: "FormTitleCell", bundle: Bundle.module), forCellReuseIdentifier: "FormTitleCell")
+        tableView.register(UINib(nibName: "FormTextFieldCell", bundle: Bundle.module), forCellReuseIdentifier: "FormTextFieldCell")
+        tableView.register(UINib(nibName: "FormChoiceCell", bundle: Bundle.module), forCellReuseIdentifier: "FormChoiceCell")
+        tableView.register(UINib(nibName: "FormTextAreaCell", bundle: Bundle.module), forCellReuseIdentifier: "FormTextAreaCell")
+        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle.module), forCellReuseIdentifier: "KeyValueCell")
+        tableView.register(UINib(nibName: "fileCell", bundle: Bundle.module), forCellReuseIdentifier: "fileCell")
+        tableView.register(UINib(nibName: "DynamicFieldCell", bundle: Bundle.module), forCellReuseIdentifier: "DynamicFieldCell")
+        tableView.register(UINib(nibName: "SingleSelectionCell", bundle: Bundle.module), forCellReuseIdentifier: "SingleSelectionCell")
+        tableView.register(UINib(nibName: "UploadCell", bundle: Bundle.module), forCellReuseIdentifier: "UploadCell")
         
         
         tableView.dataSource = self
@@ -355,7 +355,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         case "form":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle.module)
             let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
             
             vc?.urlString = urlString
@@ -828,9 +828,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             if formData.isCheck == false {
-                cell.checkIcon.image = UIImage(named: "df_icon_single_selection_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "df_icon_single_selection_unchecked", in: Bundle.module, compatibleWith: nil)
             } else {
-                cell.checkIcon.image = UIImage(named: "df_icon_single_selection_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "df_icon_single_selection_checked", in: Bundle.module, compatibleWith: nil)
             }
             
             cell.option.text = formData.title
@@ -840,9 +840,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             if formData.isCheck == false {
-                cell.checkIcon.image = UIImage(named: "df_icon_multiple_selection_unchecked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "df_icon_multiple_selection_unchecked", in: Bundle.module, compatibleWith: nil)
             } else {
-                cell.checkIcon.image = UIImage(named: "df_icon_multiple_selection_checked", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.checkIcon.image = UIImage(named: "df_icon_multiple_selection_checked", in: Bundle.module, compatibleWith: nil)
             }
             
             cell.option.text = formData.title
@@ -967,13 +967,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             if formData.title!.contains(".pdf"){
-                cell.imageIcon.image = UIImage(named: "df_new_pdf.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "df_new_pdf.png", in: Bundle.module, compatibleWith: nil)
             }else if formData.title!.contains(".doc") || formData.title!.contains(".docx") {
-                cell.imageIcon.image = UIImage(named: "df_new_doc.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "df_new_doc.png", in: Bundle.module, compatibleWith: nil)
             }else if formData.title!.contains(".xlsx") || formData.title!.contains(".xls") {
-                cell.imageIcon.image = UIImage(named: "df_new_xls.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "df_new_xls.png", in: Bundle.module, compatibleWith: nil)
             }else if formData.title!.contains(".ppt") || formData.title!.contains(".pptx") {
-                cell.imageIcon.image = UIImage(named: "df_new_ppt.png", in: Bundle(for: DynamicForm.self), compatibleWith: nil)
+                cell.imageIcon.image = UIImage(named: "df_new_ppt.png", in: Bundle.module, compatibleWith: nil)
             }
             return cell
         case "picture":
@@ -1174,7 +1174,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             tableView.reloadData()
         case "picture":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle.module)
             let imageVC = storyboard.instantiateViewController(withIdentifier: "DFImageVC") as? DFImageVC
             
             var index = 0
@@ -1211,7 +1211,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         case "dynamicTextArea":
             setInputView(formData: formData, formType: "textArea")
         case "singleSelection":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle.module)
             let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
             
             var optionList = [DynamicInput]()
@@ -1262,7 +1262,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.navigationController?.pushViewController(vc!, animated: true)
             
         case "multipleSelection":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle.module)
             let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
             
             var optionList = [DynamicInput]()
