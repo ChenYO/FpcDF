@@ -110,7 +110,6 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                         self.oriFormData = obj
                                         
                                         self.title = obj.formTitle
-                                        self.setButtons()
                                         
                                         for cell in obj.cells {
                                             let item = DynamicInput()
@@ -131,6 +130,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                             self.navigationItem.rightBarButtonItems?.append(self.confirm!)
                                         }
                                         DispatchQueue.main.async {
+                                            self.setButtons()
                                             self.tableView.reloadData()
                                         }
                                     } catch {
