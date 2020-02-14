@@ -104,8 +104,6 @@
 		7648789323D1A2D4001E63CE /* UILabelExtensive.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */; };
 		765D529B23E3AFB300AE354C /* DFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D529A23E3AFB300AE354C /* DFResult.swift */; };
 		765D529F23E3C06200AE354C /* DFLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D529E23E3C06200AE354C /* DFLocalizable.swift */; };
-		765D52B023E3CDF100AE354C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 765D52B223E3CDF100AE354C /* Localizable.strings */; };
-		765D52B323E3CDF300AE354C /* Localizable.strings in Copy Files */ = {isa = PBXBuildFile; fileRef = 765D52B223E3CDF100AE354C /* Localizable.strings */; };
 		76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
 		76B11BFE23EBF96000F407DE /* DFVersionCode.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
 		76B11C2A23ED3D6F00F407DE /* DFImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11C2923ED3D6F00F407DE /* DFImageVC.swift */; };
@@ -132,7 +130,6 @@
 				7648788C23D1A2BF001E63CE /* DynamicInput.swift in Copy Files */,
 				7648786D23D1A26F001E63CE /* DFSelectionVC.swift in Copy Files */,
 				7648788823D1A2B5001E63CE /* UIColor+extension.swift in Copy Files */,
-				765D52B323E3CDF300AE354C /* Localizable.strings in Copy Files */,
 				7648787723D1A28E001E63CE /* MultiSelectionCell.xib in Copy Files */,
 				7648787023D1A278001E63CE /* DynamicForm.swift in Copy Files */,
 				7648788D23D1A2C1001E63CE /* DFErrorType.swift in Copy Files */,
@@ -221,8 +218,6 @@
 		760A02CF23D177C200CF2BC9 /* DynamicForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicForm.swift; sourceTree = "<group>"; };
 		765D529A23E3AFB300AE354C /* DFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFResult.swift; sourceTree = "<group>"; };
 		765D529E23E3C06200AE354C /* DFLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFLocalizable.swift; sourceTree = "<group>"; };
-		765D52B123E3CDF100AE354C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		765D52B423E3CE0100AE354C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFVersionCode.swift; sourceTree = "<group>"; };
 		76B11C2923ED3D6F00F407DE /* DFImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFImageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -278,7 +273,6 @@
 				760A02C623D1333A00CF2BC9 /* DFMain.storyboard */,
 				760A02CF23D177C200CF2BC9 /* DynamicForm.swift */,
 				765D529E23E3C06200AE354C /* DFLocalizable.swift */,
-				765D52B223E3CDF100AE354C /* Localizable.strings */,
 			);
 			path = FpcDF;
 			sourceTree = "<group>";
@@ -456,7 +450,6 @@
 				760A027023D1325300CF2BC9 /* FormTitleCell.xib in Resources */,
 				760A025623D1321F00CF2BC9 /* Assets.xcassets in Resources */,
 				760A027823D1325300CF2BC9 /* KeyValueCell.xib in Resources */,
-				765D52B023E3CDF100AE354C /* Localizable.strings in Resources */,
 				760A026C23D1325300CF2BC9 /* FormTextFieldCell.xib in Resources */,
 				760A026E23D1325300CF2BC9 /* FormTextAreaCell.xib in Resources */,
 				760A02C723D1333A00CF2BC9 /* DFMain.storyboard in Resources */,
@@ -526,18 +519,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		765D52B223E3CDF100AE354C /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				765D52B123E3CDF100AE354C /* en */,
-				765D52B423E3CE0100AE354C /* zh-Hant */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		760A023E23D05C5E00CF2BC9 /* Debug */ = {
