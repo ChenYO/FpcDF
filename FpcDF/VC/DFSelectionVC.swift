@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let bundle = Bundle(for: DynamicForm.self)
+
 class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -43,7 +45,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: "KeyValueCell", bundle: Bundle.module), forCellReuseIdentifier: "KeyValueCell")
+        tableView.register(UINib(nibName: "KeyValueCell", bundle: bundle), forCellReuseIdentifier: "KeyValueCell")
         
         //        confirm = UIBarButtonItem(title: "選擇項目", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toFormVC))
         
@@ -328,10 +330,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     }
     
     @objc func bottomViewTap(sender:UITapGestureRecognizer) {
-        let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle.module)
+        let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "DFChosenModifyVC") as? DFChosenModifyVC
         
-        //        let vc = UIStoryboard(name: "Main", bundle: Bundle.module).instantiateViewController(withIdentifier : "ChosenModifyVC") as? DFChosenModifyVC
+        //        let vc = UIStoryboard(name: "Main", bundle: bundle).instantiateViewController(withIdentifier : "ChosenModifyVC") as? DFChosenModifyVC
         
         vc?.oriChosenItemList = chosenItemList
         vc?.chosenItemList = chosenItemList
@@ -407,9 +409,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         
         if option.isSelected! {
-            cell.checkIcon.image = UIImage(named: "df_icon_checksign_checked", in: Bundle.module, compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_checked", in: bundle, compatibleWith: nil)
         }else {
-            cell.checkIcon.image = UIImage(named: "df_icon_checksign_unchecked", in: Bundle.module, compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_unchecked", in: bundle, compatibleWith: nil)
         }
         
         cell.checkIcon.addGestureRecognizer(checkTapRecognizer)
@@ -430,10 +432,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         choseOption.isSelected = !choseOption.isSelected!
         
         if choseOption.isSelected! {
-            cell.checkIcon.image = UIImage(named: "df_icon_checksign_checked", in: Bundle.module, compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_checked", in: bundle, compatibleWith: nil)
             chosenItemList.append(choseOption)
         }else {
-            cell.checkIcon.image = UIImage(named: "df_icon_checksign_unchecked", in: Bundle.module, compatibleWith: nil)
+            cell.checkIcon.image = UIImage(named: "df_icon_checksign_unchecked", in: bundle, compatibleWith: nil)
             
             for (index, option) in chosenItemList.enumerated() {
                 if option.id == choseOption.id {
