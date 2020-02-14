@@ -36,7 +36,7 @@ enum DFLocalizable: String {
     
     static func valueOf(_ key: DFLocalizable) -> String {
 
-        return NSLocalizedString(key.rawValue, bundle: Bundle.module, comment: key.rawValue)
+        return NSLocalizedString(key.rawValue, bundle: Bundle(for: DynamicForm.self), comment: key.rawValue)
     }
 }
 
