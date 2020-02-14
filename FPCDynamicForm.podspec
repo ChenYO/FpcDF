@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FPCDynamicForm"
-  spec.version      = "1.0.9"
+  spec.version      = "1.1.0"
   spec.summary      = "A short description of FPCDynamicForm."
 
   # This description is used to generate tags and improve search results.
@@ -93,7 +93,7 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "FpcDF/*.{swift}", "FpcDF/**/*.{swift}"
   spec.exclude_files = "Classes/Exclude"
-  spec.resources = "FpcDF/*.xcassets", "FpcDF/*.strings", "FpcDF/**/*.strings", "FpcDF/*.storyboard", "FpcDF/**/*.xib"
+  spec.resources = "FpcDF/*.xcassets", "FpcDF/**/*.strings", "FpcDF/*.storyboard", "FpcDF/**/*.xib"
 
   spec.platform     = :ios, "8.0"
   spec.swift_version = "4.2"
