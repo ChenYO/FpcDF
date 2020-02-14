@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		76095C9923F693D000C1A73A /* DFLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76095C9C23F693D000C1A73A /* DFLocalizable.strings */; };
+		76095C9A23F693D000C1A73A /* DFLocalizable.strings in Copy Files */ = {isa = PBXBuildFile; fileRef = 76095C9C23F693D000C1A73A /* DFLocalizable.strings */; };
 		760A023D23D05C5E00CF2BC9 /* FpcDF.h in Headers */ = {isa = PBXBuildFile; fileRef = 760A023B23D05C5E00CF2BC9 /* FpcDF.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		760A025623D1321F00CF2BC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 760A025523D1321F00CF2BC9 /* Assets.xcassets */; };
 		760A026C23D1325300CF2BC9 /* FormTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760A025823D1325200CF2BC9 /* FormTextFieldCell.xib */; };
@@ -156,6 +158,7 @@
 				7648786E23D1A272001E63CE /* DFmainVC.swift in Copy Files */,
 				7648788B23D1A2BD001E63CE /* FormByIdData.swift in Copy Files */,
 				7648788A23D1A2BB001E63CE /* FormData.swift in Copy Files */,
+				76095C9A23F693D000C1A73A /* DFLocalizable.strings in Copy Files */,
 				7648787A23D1A295001E63CE /* KeyValueCell.swift in Copy Files */,
 				7648788123D1A2A4001E63CE /* FormChoiceCell.xib in Copy Files */,
 				76275F7223F3D972003F240F /* DFLocalizable.swift in Copy Files */,
@@ -173,6 +176,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		76095C9B23F693D000C1A73A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/DFLocalizable.strings"; sourceTree = "<group>"; };
+		76095C9D23F693D400C1A73A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DFLocalizable.strings; sourceTree = "<group>"; };
 		760A023823D05C5E00CF2BC9 /* FPCDynamicForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FPCDynamicForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		760A023B23D05C5E00CF2BC9 /* FpcDF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FpcDF.h; sourceTree = "<group>"; };
 		760A023C23D05C5E00CF2BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -273,6 +278,7 @@
 				760A02C623D1333A00CF2BC9 /* DFMain.storyboard */,
 				760A02CF23D177C200CF2BC9 /* DynamicForm.swift */,
 				765D529E23E3C06200AE354C /* DFLocalizable.swift */,
+				76095C9C23F693D000C1A73A /* DFLocalizable.strings */,
 			);
 			path = FpcDF;
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 				760A027323D1325300CF2BC9 /* fileCell.xib in Resources */,
 				760A027E23D1325300CF2BC9 /* DynamicFieldCell.xib in Resources */,
 				760A027023D1325300CF2BC9 /* FormTitleCell.xib in Resources */,
+				76095C9923F693D000C1A73A /* DFLocalizable.strings in Resources */,
 				760A025623D1321F00CF2BC9 /* Assets.xcassets in Resources */,
 				760A027823D1325300CF2BC9 /* KeyValueCell.xib in Resources */,
 				760A026C23D1325300CF2BC9 /* FormTextFieldCell.xib in Resources */,
@@ -519,6 +526,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		76095C9C23F693D000C1A73A /* DFLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76095C9B23F693D000C1A73A /* zh-Hant */,
+				76095C9D23F693D400C1A73A /* en */,
+			);
+			name = DFLocalizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		760A023E23D05C5E00CF2BC9 /* Debug */ = {
