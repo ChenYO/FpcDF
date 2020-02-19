@@ -875,6 +875,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             setDatePicker(type: "date", formNumber: formNumber!, cell: cell)
             
             cell.inputField.text = ""
+            cell.inputField.tag = formNumber!
             
             if formData.inputValue != "" {
                 cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: "yyyy-MM-dd")
@@ -898,11 +899,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     cell.inputField.placeholder = placeholder
                 }
             }
-            cell.inputField.text = ""
+            
             setFont(cell: cell, formNumber: formNumber!, formData: formData)
             setDatePicker(type: "time", formNumber: formNumber!, cell: cell)
             
             cell.inputField.text = ""
+            cell.inputField.tag = formNumber!
             
             if formData.inputValue != "" {
                 cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: "HH:mm")
@@ -932,6 +934,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             
             cell.inputField.text = ""
+            cell.inputField.tag = formNumber!
             
             if formData.inputValue != "" {
                 cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: "yyyy-MM-dd HH:mm")
