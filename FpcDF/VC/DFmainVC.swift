@@ -858,89 +858,21 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
-            cell.inputField.text = ""
-            
-            if formData.isReadOnly! {
-                cell.inputField.isUserInteractionEnabled = false
-            }else {
-                cell.inputField.isUserInteractionEnabled = true
-            }
-            
-            if let inputConfig = oriFormData?.cells[formNumber!].inputConfig {
-                if let placeholder = inputConfig.placeholder {
-                    cell.inputField.placeholder = placeholder
-                }
-            }
-            setFont(cell: cell, formNumber: formNumber!, formData: formData)
-            setDatePicker(type: "date", formNumber: formNumber!, cell: cell)
-            
-            cell.inputField.text = ""
-            cell.inputField.tag = formNumber!
-            
-            if formData.inputValue != "" {
-                cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: "yyyy-MM-dd")
-            }
-            
-            cell.deleteIcon.isHidden = true
+            setDateCell(formData: formData, type: "date", format: "yyyy-MM-dd", formNumber: formNumber!, cell: cell)
             
             return cell
         case "time":
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
-            if formData.isReadOnly! {
-                cell.inputField.isUserInteractionEnabled = false
-            }else {
-                cell.inputField.isUserInteractionEnabled = true
-            }
-            
-            if let inputConfig = oriFormData?.cells[formNumber!].inputConfig {
-                if let placeholder = inputConfig.placeholder {
-                    cell.inputField.placeholder = placeholder
-                }
-            }
-            
-            setFont(cell: cell, formNumber: formNumber!, formData: formData)
-            setDatePicker(type: "time", formNumber: formNumber!, cell: cell)
-            
-            cell.inputField.text = ""
-            cell.inputField.tag = formNumber!
-            
-            if formData.inputValue != "" {
-                cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: "HH:mm")
-            }
-            
-            cell.deleteIcon.isHidden = true
+            setDateCell(formData: formData, type: "time", format: "HH:mm", formNumber: formNumber!, cell: cell)
             
             return cell
         case "dateTime":
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
-            if formData.isReadOnly! {
-                cell.inputField.isUserInteractionEnabled = false
-            }else {
-                cell.inputField.isUserInteractionEnabled = true
-            }
-            
-            if let inputConfig = oriFormData?.cells[formNumber!].inputConfig {
-                if let placeholder = inputConfig.placeholder {
-                    cell.inputField.placeholder = placeholder
-                }
-            }
-            
-            setFont(cell: cell, formNumber: formNumber!, formData: formData)
-            setDatePicker(type: "dateTime", formNumber: formNumber!, cell: cell)
-            
-            
-            cell.inputField.text = ""
-            cell.inputField.tag = formNumber!
-            
-            if formData.inputValue != "" {
-                cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: "yyyy-MM-dd HH:mm")
-            }
-            
-            cell.deleteIcon.isHidden = true
+            setDateCell(formData: formData, type: "dateTime", format: "yyyy-MM-dd HH:mm", formNumber: formNumber!, cell: cell)
             
             return cell
         case "keyValue":
@@ -1090,6 +1022,32 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         self.tableView.reloadData()
         self.view.endEditing(true)
+    }
+    
+    func setDateCell(formData: FormData, type: String, format: String, formNumber: Int, cell: FormTextFieldCell) {
+        if formData.isReadOnly! {
+            cell.inputField.isUserInteractionEnabled = false
+        }else {
+            cell.inputField.isUserInteractionEnabled = true
+        }
+        
+        if let inputConfig = oriFormData?.cells[formNumber].inputConfig {
+            if let placeholder = inputConfig.placeholder {
+                cell.inputField.placeholder = placeholder
+            }
+        }
+        
+        setFont(cell: cell, formNumber: formNumber, formData: formData)
+        setDatePicker(type: type, formNumber: formNumber, cell: cell)
+        
+        
+        cell.inputField.text = ""
+        cell.inputField.tag = formNumber
+        if formData.inputValue != "" {
+            cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: format)
+        }
+        
+        cell.deleteIcon.isHidden = true
     }
     
     //設定date, time, dateTime
