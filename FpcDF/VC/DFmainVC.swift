@@ -31,6 +31,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var accessToken: String?
     var tokenURL: String?
     
+    var activityIndicator: UIActivityIndicatorView!
     var isFirstLayer = true
     
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
@@ -67,8 +68,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             navigationItem.leftBarButtonItem = backItem
         }
         
-        
-        
+        //先使用拋棄式token取得個人身份
         if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
             DFAPI.customPost(address: tokenURL, parameters: [
                 "accessToken": accessToken,
@@ -98,9 +98,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    //依照是否有導覽列決定返回的動作
     @objc func back() {
-        print("back")
-        
         if isModal() {
             self.dismiss(animated: true, completion: nil)
         }else {
@@ -109,6 +108,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
+    //檢查APP是否有使用導覽列
     func isModal() -> Bool {
         return self.presentingViewController?.presentedViewController == self
             || (self.navigationController != nil && self.navigationController?.presentingViewController?.presentedViewController == self.navigationController)
@@ -122,12 +122,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             tokenKey!: accessToken
             ] as [String : Any]
         
+        //後端API會先檢查版本是否更新，通過後，框架仍須檢查是版本是否符合form的版本
         DFAPI.customGet(address: urlString, parameters: parameters) {
             json in
             
             if let result = json["result"] as? String {
                 if result == DFResult.APP_FORCE_UPDATE {
-                    self.checkIsUpdate(json: json)
+                    self.showUpdate(json: json)
                 }else {
                     if let data = json[DFJSONKey.data] as? [String: Any] {
                         DispatchQueue.main.async {
@@ -140,6 +141,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 
                                 let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
                                 
+                                //檢查form與框架的版本是否符合
                                 if DFUtil.versionCode < versionCode.versionCode! {
                                     DFAPI.customPost(address: self.tokenURL!, parameters: [
                                         "accessToken": self.accessToken!,
@@ -163,7 +165,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                                 
                                                 DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
                                                     print(json)
-                                                    self.checkIsUpdate(json: json)
+                                                    self.showUpdate(json: json)
                                                 }
                                                 
                                             } catch {
@@ -192,7 +194,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func checkIsUpdate(json: [String: Any]){
+    //顯示更新畫面
+    func showUpdate(json: [String: Any]){
         
         if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
             print(webDownloadAppURL)
@@ -228,56 +231,31 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //執行送出
-    func sendAPI(address: String, parameters: [String: Any], type: String) {
+    func sendAPI(address: String, parameters: [String: Any]) {
         DFAPI.customPost(address: address, parameters: parameters) { json in
             print(json)
-            if type == "send" {
-                if let result = json["result"] as? String {
-                    if result == "FAIL" {
-                        let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
-                        
-                        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
-                            action in
-                        })
-                        confirmSheet.addAction(confirmAction)
-                        self.present(confirmSheet, animated: true, completion: nil)
-                    }else {
-                        let confirmSheet = UIAlertController(title: "Tips", message: "Success", preferredStyle: .alert)
-                        
-                        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
-                            action in
-                            if self.isModal() {
-                                self.dismiss(animated: true, completion: nil)
-                            }else {
-                                self.navigationController?.popViewController(animated: true)
-                            }
-                        })
-                        confirmSheet.addAction(confirmAction)
-                        self.present(confirmSheet, animated: true, completion: nil)
-                    }
-                }
-            }else {
-                if let formJson = json["formJson"]  {
-                    do {
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .millisecondsSince1970
-                        let jsonData = try JSONSerialization.data(withJSONObject: formJson, options: .prettyPrinted)
-                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                        
-                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormByIdData.self)
-                        
-                        print(obj.formJson!)
-                        let oriForm = try DFUtil.decodeJsonStringAndReturnObject(string: obj.formJson!, type: FormListData.self)
-                        
-                        self.oriFormData = oriForm
-                        self.clear()
-                        
-                        self.title = oriForm.formTitle
-                        self.setButtons()
-                        self.setFormData()
-                        self.tableView.reloadData()
-                    } catch {
-                    }
+            if let result = json["result"] as? String {
+                if result == "FAIL" {
+                    let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
+                    
+                    let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                        action in
+                    })
+                    confirmSheet.addAction(confirmAction)
+                    self.present(confirmSheet, animated: true, completion: nil)
+                }else {
+                    let confirmSheet = UIAlertController(title: "Tips", message: "Success", preferredStyle: .alert)
+                    
+                    let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                        action in
+                        if self.isModal() {
+                            self.dismiss(animated: true, completion: nil)
+                        }else {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    })
+                    confirmSheet.addAction(confirmAction)
+                    self.present(confirmSheet, animated: true, completion: nil)
                 }
             }
         }
@@ -323,6 +301,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //依照type執行動作
+    /*
+     send: 將整個form轉成string後，回傳至後端
+     form: 取得下一層form
+     link: 打開網頁
+     */
     func execAction(type: String, title: String, urlString: String) {
         
         switch type {
@@ -354,7 +337,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             self.tokenKey!: obj.accessTokenSHA256
                         ]
                         
-                        self.sendAPI(address: urlString, parameters: parameters, type: "send")
+                        self.sendAPI(address: urlString, parameters: parameters)
                         
                     } catch {
                         
@@ -395,6 +378,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    //清空formData List
     func clear() {
         self.navigationItem.rightBarButtonItems = []
         formDataList = [FormData]()
@@ -404,7 +388,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    //設定表單UI資料
+    //設定表單UI資料，須記錄每個cell的index
     func setFormData() {
         formDataList = [FormData]()
         for (index, formData) in oriFormData!.cells.enumerated() {
@@ -450,19 +434,19 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     formDataList.append(option)
                 }
             case "attachment":
-                for attachment in formData.actions! {
+                for attachment in formData.fileList! {
                     let attachmentData = FormData()
                     attachmentData.title = attachment.title
-                    attachmentData.formType = attachment.actionType
+                    attachmentData.formType = attachment.type
                     attachmentData.isReadOnly = formData.isReadOnly
                     attachmentData.fileUrl = attachment.url
                     formDataList.append(attachmentData)
                 }
             case "picture":
-                for picture in formData.actions! {
+                for picture in formData.fileList! {
                     let pictureData = FormData()
                     pictureData.title = picture.title
-                    pictureData.formType = picture.actionType
+                    pictureData.formType = picture.type
                     pictureData.formId = formData.id
                     pictureData.isReadOnly = formData.isReadOnly
                     let imageUrlString = picture.url
@@ -493,7 +477,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
             case "upload":
                 formDataList.append(data)
-                print(index)
                 setFileData(formData: formData, index: index)
                 
             default:
@@ -1361,7 +1344,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if let image = (info[UIImagePickerController.InfoKey.editedImage] ?? info[UIImagePickerController.InfoKey.originalImage]) as? UIImage {
             let imageName = UUID().uuidString + ".jpg"
-            print(picker.formNumber)
+            
+            dfShowActivityIndicator()
             customUpload(oriImage: image, fileUrl: nil, fileName: imageName, formNumber: picker.formNumber, type: "picture")
             
         }
@@ -1381,6 +1365,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //選擇檔案後上傳
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         
+        dfShowActivityIndicator()
         customUpload(oriImage: nil, fileUrl: url, fileName: url.lastPathComponent, formNumber: controller.formNumber, type: "attachment")
     }
     
@@ -1458,6 +1443,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 }
                             }
                             DispatchQueue.main.async {
+                                self.dfStopActivityIndicator()
                                 self.tableView.reloadData()
                             }
                         }
@@ -1675,6 +1661,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //文件資源類型如果不知道，傳萬能類型application/octet-stream，服務器會自動解析文件類
         return "application/octet-stream"
     }
+    
+    private func dfShowActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .gray
+        activityIndicator.center = self.view.center
+        activityIndicator.startAnimating()
+        
+        self.view.addSubview(activityIndicator)
+    }
+    
+    private func dfStopActivityIndicator() {
+        if let indicator = activityIndicator {
+            indicator.stopAnimating()
+        }
+    }
+    
 }
 
 //擴展Data
