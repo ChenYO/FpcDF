@@ -69,6 +69,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         //先使用拋棄式token取得個人身份
+        dfShowActivityIndicator()
         if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
             DFAPI.customPost(address: tokenURL, parameters: [
                 "accessToken": accessToken,
@@ -165,6 +166,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                                 
                                                 DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
                                                     print(json)
+                                                    self.dfStopActivityIndicator()
                                                     self.showUpdate(json: json)
                                                 }
                                                 
@@ -183,6 +185,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     self.title = obj.formTitle
                                     self.setButtons()
                                     self.setFormData()
+                                    self.dfStopActivityIndicator()
                                     self.tableView.reloadData()
                                 }
                             } catch {
@@ -274,11 +277,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    //導覽列按鈕點擊事件
     @objc func buttonClick(sender: UIBarButtonItem) {
         self.view.endEditing(true)
         
         let button = oriFormData?.buttons[sender.tag]
         
+        //顯示多選項表單
         if button?.type == "subForm" {
             let actionSheet = UIAlertController(title: button?.actionTip, message: nil, preferredStyle: .actionSheet)
             
@@ -689,6 +694,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.title.text = formData.title
             return cell
         case "textField":
+            //輸入列與動態輸入列的產生
             
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -724,6 +730,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.inputField.delegate = self
             cell.inputField.tag = formNumber!
             
+            //若為動態輸入列，則可以刪除
             if formData.mainType == "dynamicTextField" {
                 let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteTapped))
                 
@@ -751,6 +758,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.inputField.inputAccessoryView = .none
             return cell
         case "textArea":
+            //輸入框與動態輸入框的產生
+            
             let cell: FormTextAreaCell = tableView.dequeueReusableCell(withIdentifier: "FormTextAreaCell", for: indexPath) as! FormTextAreaCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
@@ -788,7 +797,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.formTextArea.layer.cornerRadius = 5.0
             cell.formTextArea.tag = formNumber!
             
-            
+            //若為動態輸入列，則可以刪除
             if formData.mainType == "dynamicTextArea" {
                 let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteTapped))
                 
@@ -1317,7 +1326,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 
             }
-            actionSheet.addAction(uploadFileAction)
+            
+            if FileManager.default.ubiquityIdentityToken == nil {
+                actionSheet.addAction(uploadFileAction)
+            }
             
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)
             
