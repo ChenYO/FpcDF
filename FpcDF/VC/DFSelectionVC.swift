@@ -112,7 +112,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                         self.oriFormData = obj
                                         
                                         self.title = obj.formTitle
-                                        
+                                        DispatchQueue.main.async {
+                                            self.setButtons()
+                                        }
                                         for cell in obj.cells {
                                             let item = DynamicInput()
                                             item.isSelected = false
