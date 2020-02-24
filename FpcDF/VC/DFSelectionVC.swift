@@ -124,6 +124,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                         }
                                         
                                         if !self.chosenItemList.isEmpty {
+                                            self.isFirstCheck = false
                                             self.optionList = self.chosenItemList
                                             self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
                                             if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {

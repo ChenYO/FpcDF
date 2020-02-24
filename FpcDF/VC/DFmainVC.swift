@@ -235,8 +235,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //執行送出
     func sendAPI(address: String, parameters: [String: Any]) {
+        dfShowActivityIndicator()
         DFAPI.customPost(address: address, parameters: parameters) { json in
             print(json)
+            
+            self.dfStopActivityIndicator()
             if let result = json["result"] as? String {
                 if result == "FAIL" {
                     let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
@@ -1327,9 +1330,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
             }
             
-            if FileManager.default.ubiquityIdentityToken == nil {
-                actionSheet.addAction(uploadFileAction)
-            }
+            actionSheet.addAction(uploadFileAction)
             
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)
             
