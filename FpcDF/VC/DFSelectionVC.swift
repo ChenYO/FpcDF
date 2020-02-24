@@ -135,7 +135,6 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                             self.navigationItem.rightBarButtonItems?.append(self.confirm!)
                                         }
                                         DispatchQueue.main.async {
-                                            self.setButtons()
                                             self.tableView.reloadData()
                                         }
                                     } catch {
