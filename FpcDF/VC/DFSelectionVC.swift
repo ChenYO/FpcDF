@@ -112,9 +112,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                         self.oriFormData = obj
                                         
                                         self.title = obj.formTitle
-                                        DispatchQueue.main.async {
-                                            self.setButtons()
-                                        }
+                                        self.setButtons()
                                         for cell in obj.cells {
                                             let item = DynamicInput()
                                             item.isSelected = false
@@ -450,7 +448,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         total.text = "\(chosenItemList.count)"
         confirm = UIBarButtonItem(title: "確認(\(chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(toFormVC))
         //        saveFile!.image = UIImage(named: "top_save_button")
-        
+        if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {
+            confirm!.tintColor = .white
+        }
         if self.navigationItem.rightBarButtonItems?.count == 1 {
             self.navigationItem.rightBarButtonItems?.append(confirm!)
         }else {
