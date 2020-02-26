@@ -110,29 +110,29 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                                         let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                                         
                                         self.oriFormData = obj
-                                        
-                                        self.title = obj.formTitle
-                                        self.setButtons()
-                                        for cell in obj.cells {
-                                            let item = DynamicInput()
-                                            item.isSelected = false
-                                            item.id = cell.id
-                                            item.keyValueArray = cell.keyValueArray!
-                                            
-                                            self.optionList.append(item)
-                                            self.oriOptionList.append(item)
-                                        }
-                                        
-                                        if !self.chosenItemList.isEmpty {
-                                            self.isFirstCheck = false
-                                            self.optionList = self.chosenItemList
-                                            self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
-                                            if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {
-                                                self.confirm!.tintColor = .white
-                                            }
-                                            self.navigationItem.rightBarButtonItems?.append(self.confirm!)
-                                        }
                                         DispatchQueue.main.async {
+                                            self.title = obj.formTitle
+                                            self.setButtons()
+                                            for cell in obj.cells {
+                                                let item = DynamicInput()
+                                                item.isSelected = false
+                                                item.id = cell.id
+                                                item.keyValueArray = cell.keyValueArray!
+                                                
+                                                self.optionList.append(item)
+                                                self.oriOptionList.append(item)
+                                            }
+                                            
+                                            if !self.chosenItemList.isEmpty {
+                                                self.isFirstCheck = false
+                                                self.optionList = self.chosenItemList
+                                                self.confirm = UIBarButtonItem(title: "確認(\(self.chosenItemList.count))" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.toFormVC))
+                                                if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {
+                                                    self.confirm!.tintColor = .white
+                                                }
+                                                self.navigationItem.rightBarButtonItems?.append(self.confirm!)
+                                            }
+                                        
                                             self.tableView.reloadData()
                                         }
                                     } catch {
