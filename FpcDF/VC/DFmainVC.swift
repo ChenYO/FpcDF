@@ -248,9 +248,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         action in
                     })
                     confirmSheet.addAction(confirmAction)
-                    DispatchQueue.main.async {
-                        self.present(confirmSheet, animated: true, completion: nil)
-                    }
+                    self.present(confirmSheet, animated: true, completion: nil)
+                    
                 }else {
                     let confirmSheet = UIAlertController(title: "Tips", message: "Success", preferredStyle: .alert)
                     
@@ -263,9 +262,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     })
                     confirmSheet.addAction(confirmAction)
-                    DispatchQueue.main.async {
-                        self.present(confirmSheet, animated: true, completion: nil)
-                    }
+                    self.present(confirmSheet, animated: true, completion: nil)
                 }
             }
         }
