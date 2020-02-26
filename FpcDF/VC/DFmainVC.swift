@@ -235,10 +235,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //執行送出
     func sendAPI(address: String, parameters: [String: Any]) {
-        DispatchQueue.main.async {
-            self.dfShowActivityIndicator()
-            DFAPI.customPost(address: address, parameters: parameters) { json in
-                print(json)
+        DFAPI.customPost(address: address, parameters: parameters) { json in
+            print(json)
+                DispatchQueue.main.async {
                 self.dfStopActivityIndicator()
                 if let result = json["result"] as? String {
                     if result == "FAIL" {
@@ -316,7 +315,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
      link: 打開網頁
      */
     func execAction(type: String, title: String, urlString: String) {
-        
+        dfShowActivityIndicator()
         switch type {
         case "send":
             DFAPI.customPost(address: tokenURL!, parameters: [
