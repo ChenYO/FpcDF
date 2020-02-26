@@ -99,6 +99,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    public override func viewWillDisappear(_ animated: Bool) {
+        dfStopActivityIndicator()
+    }
+    
     //依照是否有導覽列決定返回的動作
     @objc func back() {
         if isModal() {
