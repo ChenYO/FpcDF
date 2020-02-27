@@ -53,7 +53,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.register(UINib(nibName: "SingleSelectionCell", bundle: bundle), forCellReuseIdentifier: "SingleSelectionCell")
         tableView.register(UINib(nibName: "UploadCell", bundle: bundle), forCellReuseIdentifier: "UploadCell")
         
-        
         tableView.dataSource = self
         tableView.delegate = self
         
