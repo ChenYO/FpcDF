@@ -252,7 +252,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         confirmSheet.addAction(confirmAction)
                         self.present(confirmSheet, animated: true, completion: nil)
                     }else {
-                        let confirmSheet = UIAlertController(title: "Tips", message: "Success", preferredStyle: .alert)
+                        
+                        let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
                         
                         let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
                             action in
