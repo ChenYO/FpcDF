@@ -322,7 +322,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         dfShowActivityIndicator()
         switch type {
         case "send":
-            dfStopActivityIndicator()
             let confirmSheet = UIAlertController(title: "Tips", message: title, preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
@@ -363,7 +362,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             })
             
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: {
+            action in
+                self.dfStopActivityIndicator()
+            })
             confirmSheet.addAction(confirmAction)
             confirmSheet.addAction(cancelAction)
             
