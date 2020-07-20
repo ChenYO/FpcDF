@@ -322,70 +322,40 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         dfShowActivityIndicator()
         switch type {
         case "send":
-            DFAPI.customPost(address: tokenURL!, parameters: [
-                "accessToken": accessToken!,
-                "comment" : "DynamicForm"
-            ]) { json in
-                print(json)
-                
-                if let data = json[DFJSONKey.data] {
-                    
-                    do {
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .millisecondsSince1970
-                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                        
-                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
-                        print(obj)
-                        
-                        let jsonEncoder = JSONEncoder()
-                        let oriJsonData = try jsonEncoder.encode(self.oriFormData)
-                        let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
-                        
-                        let parameters = [
-                            "formId": self.oriFormData?.formId ?? "",
-                            "formString": json ?? "",
-                            self.tokenKey!: obj.accessTokenSHA256
-                        ]
-                        
-                        self.sendAPI(address: urlString, parameters: parameters)
-                        
-                    } catch {
-                        
-                    }
-                }
-            }
-        case "form":
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
-            let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
-            
-            vc?.urlString = urlString
-            vc?.accessToken = accessToken
-            vc?.tokenKey = tokenKey
-            vc?.tokenURL = tokenURL
-            vc?.isFirstLayer = false
-            
-            let backItem = UIBarButtonItem()
-            backItem.title = "Back"
-            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
-                backItem.tintColor = .white
-            }
-            
-            self.navigationItem.backBarButtonItem = backItem
-            self.navigationController?.pushViewController(vc!, animated: true)
-        case "link":
-            if #available(iOS 9.0, *) {
-                if let url = URL(string: urlString) {
-                    let svc = SFSafariViewController(url: url)
-                    self.present(svc, animated: true, completion: nil)
-                }
-            } else {
-                if let url = URL(string: urlString) {
-                    UIApplication.shared.openURL(url)
-                }
-            }
-        case "checkConfirm":
+//            DFAPI.customPost(address: tokenURL!, parameters: [
+//                "accessToken": accessToken!,
+//                "comment" : "DynamicForm"
+//            ]) { json in
+//                print(json)
+//
+//                if let data = json[DFJSONKey.data] {
+//
+//                    do {
+//                        let decoder = JSONDecoder()
+//                        decoder.dateDecodingStrategy = .millisecondsSince1970
+//                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+//                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+//
+//                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
+//                        print(obj)
+//
+//                        let jsonEncoder = JSONEncoder()
+//                        let oriJsonData = try jsonEncoder.encode(self.oriFormData)
+//                        let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
+//
+//                        let parameters = [
+//                            "formId": self.oriFormData?.formId ?? "",
+//                            "formString": json ?? "",
+//                            self.tokenKey!: obj.accessTokenSHA256
+//                        ]
+//
+//                        self.sendAPI(address: urlString, parameters: parameters)
+//
+//                    } catch {
+//
+//                    }
+//                }
+//            }
             let confirmSheet = UIAlertController(title: "Tips", message: title, preferredStyle: .alert)
             
             let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
@@ -431,6 +401,35 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             confirmSheet.addAction(cancelAction)
             
             self.present(confirmSheet, animated: true, completion: nil)
+        case "form":
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+            let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
+            
+            vc?.urlString = urlString
+            vc?.accessToken = accessToken
+            vc?.tokenKey = tokenKey
+            vc?.tokenURL = tokenURL
+            vc?.isFirstLayer = false
+            
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
+            
+            self.navigationItem.backBarButtonItem = backItem
+            self.navigationController?.pushViewController(vc!, animated: true)
+        case "link":
+            if #available(iOS 9.0, *) {
+                if let url = URL(string: urlString) {
+                    let svc = SFSafariViewController(url: url)
+                    self.present(svc, animated: true, completion: nil)
+                }
+            } else {
+                if let url = URL(string: urlString) {
+                    UIApplication.shared.openURL(url)
+                }
+            }
         default:
             break
         }
