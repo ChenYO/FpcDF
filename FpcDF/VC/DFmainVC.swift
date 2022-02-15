@@ -240,31 +240,33 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func sendAPI(address: String, parameters: [String: Any]) {
         DFAPI.customPost(address: address, parameters: parameters) { json in
             print(json)
+            DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
                 DispatchQueue.main.async {
-                self.dfStopActivityIndicator()
-                if let result = json["result"] as? String {
-                    if result == "FAIL" {
-                        let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
-                        
-                        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
-                            action in
-                        })
-                        confirmSheet.addAction(confirmAction)
-                        self.present(confirmSheet, animated: true, completion: nil)
-                    }else {
-                        
-                        let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
-                        
-                        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
-                            action in
-                            if self.isModal() {
-                                self.dismiss(animated: true, completion: nil)
-                            }else {
-                                self.navigationController?.popViewController(animated: true)
-                            }
-                        })
-                        confirmSheet.addAction(confirmAction)
-                        self.present(confirmSheet, animated: true, completion: nil)
+                    self.dfStopActivityIndicator()
+                    if let result = json["result"] as? String {
+                        if result == "FAIL" {
+                            let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
+                            
+                            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                                action in
+                            })
+                            confirmSheet.addAction(confirmAction)
+                            self.present(confirmSheet, animated: true, completion: nil)
+                        }else {
+                            
+                            let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
+                            
+                            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                                action in
+                                if self.isModal() {
+                                    self.dismiss(animated: true, completion: nil)
+                                }else {
+                                    self.navigationController?.popViewController(animated: true)
+                                }
+                            })
+                            confirmSheet.addAction(confirmAction)
+                            self.present(confirmSheet, animated: true, completion: nil)
+                        }
                     }
                 }
             }
