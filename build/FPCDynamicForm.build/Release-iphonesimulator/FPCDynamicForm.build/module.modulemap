@@ -1,0 +1,4 @@
+framework module FPCDynamicForm {
+  header "FPCDynamicForm-Swift.h"
+  requires objc
+}
