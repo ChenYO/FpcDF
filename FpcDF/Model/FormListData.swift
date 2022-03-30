@@ -30,6 +30,7 @@ class cell: Codable {
     var required: Bool?
     var isShowTip: Bool?
     var isReadOnly: Bool?
+    var isRequired: Bool?
     var tip: String?
     var iconURL: String?
     var count: Int?
@@ -45,7 +46,9 @@ class cell: Codable {
     var textValue: String?
     var choiceValue: [Int]?
     var dynamicField: [DynamicInput]?
-    var fileList: [file]? 
+    var fileList: [file]?
+    var groupId: String?
+    var groupItemId: String?
 }
 
 struct action: Codable {

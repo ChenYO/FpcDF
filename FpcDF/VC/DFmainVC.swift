@@ -431,7 +431,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             data.optionValue = formData.choiceValue
             data.dynamicField = formData.dynamicField
             data.isReadOnly = formData.isReadOnly
-            data.required = formData.required
+            data.isRequired = formData.isRequired
             data.actionTip = formData.actionTip
             data.actions = formData.actions
             
@@ -710,7 +710,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.title.textColor = UIColor(hexString: fontColor)
             }
             
-            if let required = oriFormData?.cells[formNumber!].required {
+            if let required = oriFormData?.cells[formNumber!].isRequired {
                 cell.requireLabel.isHidden = !required
             }
             
