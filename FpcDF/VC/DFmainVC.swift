@@ -679,10 +679,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.title.textColor = UIColor(hexString: fontColor)
         }
         
-//        if let title = formData.title, title != "" {
-//            cell.title.text = title
+        if let title = formData.title, title != "" {
+            cell.title.text = title
 //            cell.topConstraint.constant = 10
-//        }else {
+        }
+//        else {
 //            cell.topConstraint.constant = 0
 //            cell.constraint?.constant = 0
 //        }
@@ -803,10 +804,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-//            if let title = formData.title, title != "" {
-//                cell.title.text = title
+            if let title = formData.title, title != "" {
+                cell.title.text = title
 //                cell.topConstraint.constant = 10
-//            }else {
+            }
+//            else {
 //                cell.topConstraint.constant = 0
 //                cell.constraint?.constant = 0
 //            }
