@@ -672,20 +672,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func setFont(cell: FormTextFieldCell, formNumber: Int, formData: FormData) {
         if let fontSize = oriFormData?.cells[formNumber].titleFont?.size {
             cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
-            cell.constraint?.constant = CGFloat(fontSize)
+//            cell.constraint?.constant = CGFloat(fontSize)
         }
         
         if let fontColor = oriFormData?.cells[formNumber].titleFont?.color {
             cell.title.textColor = UIColor(hexString: fontColor)
         }
         
-        if let title = formData.title, title != "" {
-            cell.title.text = title
-            cell.topConstraint.constant = 10
-        }else {
-            cell.topConstraint.constant = 0
-            cell.constraint?.constant = 0
-        }
+//        if let title = formData.title, title != "" {
+//            cell.title.text = title
+//            cell.topConstraint.constant = 10
+//        }else {
+//            cell.topConstraint.constant = 0
+//            cell.constraint?.constant = 0
+//        }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -803,13 +803,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            if let title = formData.title, title != "" {
-                cell.title.text = title
-                cell.topConstraint.constant = 10
-            }else {
-                cell.topConstraint.constant = 0
-                cell.constraint?.constant = 0
-            }
+//            if let title = formData.title, title != "" {
+//                cell.title.text = title
+//                cell.topConstraint.constant = 10
+//            }else {
+//                cell.topConstraint.constant = 0
+//                cell.constraint?.constant = 0
+//            }
             
             if oriFormData?.cells[formNumber!].textValue == nil {
                 cell.formTextArea.text = ""
