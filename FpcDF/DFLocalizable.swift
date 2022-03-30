@@ -24,6 +24,8 @@ enum DFLocalizable: String {
     case DF_COMMAND_UPDATE_APP = "DF_COMMAND_UPDATE_APP"
     case DF_COMMAND_SKIP = "DF_COMMAND_SKIP"
     
+    case DF_SIGN_FAILED = "DF_SIGN_FAILED"
+    case DF_CLEAR = "DF_CLEAR"
     case MESSAGE_TIP = "MESSAGE_TIP"
     
     case BACK = "BACK"

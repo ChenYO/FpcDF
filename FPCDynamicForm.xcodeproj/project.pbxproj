@@ -106,6 +106,18 @@
 		7648789323D1A2D4001E63CE /* UILabelExtensive.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */; };
 		765D529B23E3AFB300AE354C /* DFResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D529A23E3AFB300AE354C /* DFResult.swift */; };
 		765D529F23E3C06200AE354C /* DFLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765D529E23E3C06200AE354C /* DFLocalizable.swift */; };
+		76A2077C27F42725003BE45B /* DFDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A2077B27F42725003BE45B /* DFDrawingView.swift */; };
+		76A2077D27F42725003BE45B /* DFDrawingView.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76A2077B27F42725003BE45B /* DFDrawingView.swift */; };
+		76A2077F27F427EB003BE45B /* DFElecSignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A2077E27F427EB003BE45B /* DFElecSignVC.swift */; };
+		76A2078027F427EB003BE45B /* DFElecSignVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76A2077E27F427EB003BE45B /* DFElecSignVC.swift */; };
+		76A2078227F42900003BE45B /* DFUIImageExtensive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A2078127F42900003BE45B /* DFUIImageExtensive.swift */; };
+		76A2078327F42900003BE45B /* DFUIImageExtensive.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76A2078127F42900003BE45B /* DFUIImageExtensive.swift */; };
+		76A2078627F42AB2003BE45B /* DFSignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A2078427F42AB2003BE45B /* DFSignCell.swift */; };
+		76A2078727F42AB2003BE45B /* DFSignCell.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76A2078427F42AB2003BE45B /* DFSignCell.swift */; };
+		76A2078827F42AB2003BE45B /* DFSignCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76A2078527F42AB2003BE45B /* DFSignCell.xib */; };
+		76A2078927F42AB2003BE45B /* DFSignCell.xib in Copy Files */ = {isa = PBXBuildFile; fileRef = 76A2078527F42AB2003BE45B /* DFSignCell.xib */; };
+		76A2078B27F42B35003BE45B /* DFSignImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A2078A27F42B35003BE45B /* DFSignImages.swift */; };
+		76A2078C27F42B35003BE45B /* DFSignImages.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76A2078A27F42B35003BE45B /* DFSignImages.swift */; };
 		76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
 		76B11BFE23EBF96000F407DE /* DFVersionCode.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
 		76B11C2A23ED3D6F00F407DE /* DFImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11C2923ED3D6F00F407DE /* DFImageVC.swift */; };
@@ -129,10 +141,12 @@
 			files = (
 				7648787423D1A287001E63CE /* UploadCell.swift in Copy Files */,
 				7648787E23D1A29D001E63CE /* FormTextFieldCell.swift in Copy Files */,
+				76A2078727F42AB2003BE45B /* DFSignCell.swift in Copy Files */,
 				7648788C23D1A2BF001E63CE /* DynamicInput.swift in Copy Files */,
 				7648786D23D1A26F001E63CE /* DFSelectionVC.swift in Copy Files */,
 				7648788823D1A2B5001E63CE /* UIColor+extension.swift in Copy Files */,
 				7648787723D1A28E001E63CE /* MultiSelectionCell.xib in Copy Files */,
+				76A2078327F42900003BE45B /* DFUIImageExtensive.swift in Copy Files */,
 				7648787023D1A278001E63CE /* DynamicForm.swift in Copy Files */,
 				7648788D23D1A2C1001E63CE /* DFErrorType.swift in Copy Files */,
 				7648787C23D1A299001E63CE /* FormTitleCell.swift in Copy Files */,
@@ -160,15 +174,19 @@
 				7648788A23D1A2BB001E63CE /* FormData.swift in Copy Files */,
 				76095C9A23F693D000C1A73A /* DFLocalizable.strings in Copy Files */,
 				7648787A23D1A295001E63CE /* KeyValueCell.swift in Copy Files */,
+				76A2078927F42AB2003BE45B /* DFSignCell.xib in Copy Files */,
 				7648788123D1A2A4001E63CE /* FormChoiceCell.xib in Copy Files */,
 				76275F7223F3D972003F240F /* DFLocalizable.swift in Copy Files */,
 				7648787F23D1A2A0001E63CE /* FormTextAreaCell.xib in Copy Files */,
 				7648789023D1A2C9001E63CE /* DFUtil.swift in Copy Files */,
 				7648787D23D1A29B001E63CE /* FormTextFieldCell.xib in Copy Files */,
+				76A2078027F427EB003BE45B /* DFElecSignVC.swift in Copy Files */,
 				7648788623D1A2AF001E63CE /* DynamicFieldCell.swift in Copy Files */,
 				7648788023D1A2A2001E63CE /* FormTextAreaCell.swift in Copy Files */,
 				7648789323D1A2D4001E63CE /* UILabelExtensive.swift in Copy Files */,
 				7648788E23D1A2C3001E63CE /* DFDisposableToken.swift in Copy Files */,
+				76A2078C27F42B35003BE45B /* DFSignImages.swift in Copy Files */,
+				76A2077D27F42725003BE45B /* DFDrawingView.swift in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,6 +241,13 @@
 		760A02CF23D177C200CF2BC9 /* DynamicForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicForm.swift; sourceTree = "<group>"; };
 		765D529A23E3AFB300AE354C /* DFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFResult.swift; sourceTree = "<group>"; };
 		765D529E23E3C06200AE354C /* DFLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFLocalizable.swift; sourceTree = "<group>"; };
+		76A2077A27F42720003BE45B /* UniFPCDynamicForm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UniFPCDynamicForm-Bridging-Header.h"; sourceTree = "<group>"; };
+		76A2077B27F42725003BE45B /* DFDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFDrawingView.swift; sourceTree = "<group>"; };
+		76A2077E27F427EB003BE45B /* DFElecSignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFElecSignVC.swift; sourceTree = "<group>"; };
+		76A2078127F42900003BE45B /* DFUIImageExtensive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFUIImageExtensive.swift; sourceTree = "<group>"; };
+		76A2078427F42AB2003BE45B /* DFSignCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFSignCell.swift; sourceTree = "<group>"; };
+		76A2078527F42AB2003BE45B /* DFSignCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DFSignCell.xib; sourceTree = "<group>"; };
+		76A2078A27F42B35003BE45B /* DFSignImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFSignImages.swift; sourceTree = "<group>"; };
 		76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFVersionCode.swift; sourceTree = "<group>"; };
 		76B11C2923ED3D6F00F407DE /* DFImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFImageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,6 +332,8 @@
 				760A026023D1325300CF2BC9 /* UploadCell.swift */,
 				760A026823D1325300CF2BC9 /* UploadCell.xib */,
 				760A025723D1325200CF2BC9 /* UniFpcDF-Bridging-Header.h */,
+				76A2078427F42AB2003BE45B /* DFSignCell.swift */,
+				76A2078527F42AB2003BE45B /* DFSignCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -331,6 +358,7 @@
 				760A029D23D132BE00CF2BC9 /* FormData.swift */,
 				760A029C23D132BE00CF2BC9 /* FormListData.swift */,
 				76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */,
+				76A2078A27F42B35003BE45B /* DFSignImages.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -342,6 +370,7 @@
 				760A02BA23D1330D00CF2BC9 /* DFmainVC.swift */,
 				760A02BB23D1330D00CF2BC9 /* DFSelectionVC.swift */,
 				76B11C2923ED3D6F00F407DE /* DFImageVC.swift */,
+				76A2077E27F427EB003BE45B /* DFElecSignVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -350,6 +379,9 @@
 			isa = PBXGroup;
 			children = (
 				760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */,
+				76A2077B27F42725003BE45B /* DFDrawingView.swift */,
+				76A2077A27F42720003BE45B /* UniFPCDynamicForm-Bridging-Header.h */,
+				76A2078127F42900003BE45B /* DFUIImageExtensive.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -420,6 +452,7 @@
 					};
 					7648786823D1A24C001E63CE = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -459,6 +492,7 @@
 				760A027823D1325300CF2BC9 /* KeyValueCell.xib in Resources */,
 				760A026C23D1325300CF2BC9 /* FormTextFieldCell.xib in Resources */,
 				760A026E23D1325300CF2BC9 /* FormTextAreaCell.xib in Resources */,
+				76A2078827F42AB2003BE45B /* DFSignCell.xib in Resources */,
 				760A02C723D1333A00CF2BC9 /* DFMain.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +530,7 @@
 				760A02BD23D1330D00CF2BC9 /* DFmainVC.swift in Sources */,
 				760A02A823D132BE00CF2BC9 /* DFErrorType.swift in Sources */,
 				760A02B823D132FC00CF2BC9 /* DFUtil.swift in Sources */,
+				76A2078227F42900003BE45B /* DFUIImageExtensive.swift in Sources */,
 				760A02AC23D132BE00CF2BC9 /* FormByIdData.swift in Sources */,
 				760A027B23D1325300CF2BC9 /* SingleSelectionCell.swift in Sources */,
 				760A02C123D1330D00CF2BC9 /* DFChosenModifyVC.swift in Sources */,
@@ -507,11 +542,14 @@
 				760A027F23D1325300CF2BC9 /* fileCell.swift in Sources */,
 				760A02AA23D132BE00CF2BC9 /* DateFormatter.swift in Sources */,
 				760A02AE23D132BE00CF2BC9 /* DFDisposableToken.swift in Sources */,
+				76A2077F27F427EB003BE45B /* DFElecSignVC.swift in Sources */,
 				760A02B423D132FC00CF2BC9 /* DFAPI.swift in Sources */,
 				760A02A223D132BE00CF2BC9 /* DynamicInput.swift in Sources */,
 				760A026F23D1325300CF2BC9 /* FormTitleCell.swift in Sources */,
 				76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */,
+				76A2078B27F42B35003BE45B /* DFSignImages.swift in Sources */,
 				76B11C2A23ED3D6F00F407DE /* DFImageVC.swift in Sources */,
+				76A2078627F42AB2003BE45B /* DFSignCell.swift in Sources */,
 				760A02A623D132BE00CF2BC9 /* FormData.swift in Sources */,
 				760A027923D1325300CF2BC9 /* FormTextAreaCell.swift in Sources */,
 				760A02A423D132BE00CF2BC9 /* FormListData.swift in Sources */,
@@ -522,6 +560,7 @@
 				760A02C423D1332700CF2BC9 /* UILabelExtensive.swift in Sources */,
 				765D529B23E3AFB300AE354C /* DFResult.swift in Sources */,
 				760A027723D1325300CF2BC9 /* KeyValueCell.swift in Sources */,
+				76A2077C27F42725003BE45B /* DFDrawingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +792,7 @@
 		7648786A23D1A24C001E63CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_TEAM = CM7H8W87DM;
@@ -767,6 +807,8 @@
 				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FpcDF/UI/UniFPCDynamicForm-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -774,6 +816,7 @@
 		7648786B23D1A24C001E63CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEPLOYMENT_POSTPROCESSING = NO;
 				DEVELOPMENT_TEAM = CM7H8W87DM;
@@ -788,6 +831,7 @@
 				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FpcDF/UI/UniFPCDynamicForm-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

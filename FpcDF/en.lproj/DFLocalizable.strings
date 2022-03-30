@@ -11,3 +11,5 @@
 "DF_COMMAND_CANCEL" = "Cancel";
 "DF_COMMAND_UPDATE_APP" = "Update App";
 "DF_COMMAND_SKIP" = "Skip";
+"DF_SIGN_FAILED" = "Empty sign.";
+"DF_CLEAR" = "Clear";

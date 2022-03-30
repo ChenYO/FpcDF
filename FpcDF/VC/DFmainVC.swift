@@ -52,6 +52,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.register(UINib(nibName: "DynamicFieldCell", bundle: bundle), forCellReuseIdentifier: "DynamicFieldCell")
         tableView.register(UINib(nibName: "SingleSelectionCell", bundle: bundle), forCellReuseIdentifier: "SingleSelectionCell")
         tableView.register(UINib(nibName: "UploadCell", bundle: bundle), forCellReuseIdentifier: "UploadCell")
+        tableView.register(UINib(nibName: "DFSignCell", bundle: bundle), forCellReuseIdentifier: "DFSignCell")
+        
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -506,6 +508,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             case "upload":
                 formDataList.append(data)
                 setFileData(formData: formData, index: index)
+                
+            case "sign":
+                formDataList.append(data)
                 
             default:
                 formDataList.append(data)
@@ -1014,6 +1019,37 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             cell.title.text = formData.title
+            
+            return cell
+        case "sign":
+            let cell: DFSignCell = tableView.dequeueReusableCell(withIdentifier: "DFSignCell", for: indexPath) as! DFSignCell
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            cell.title.text = formData.title
+            
+            if !formData.fileList!.isEmpty {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if let imageData:NSData = NSData(contentsOf: URL(string: formData.fileList![0].url!)!) {
+                        DispatchQueue.main.async {
+                            if let image = UIImage(data: imageData as Data){
+                                cell.signImageView.image = image
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }else {
+                for imageData in DFUtil.elecSignImages {
+                    if formData.formNumber == imageData.index {
+                        DispatchQueue.main.async {
+                            if let image = UIImage(data: imageData.signImage!){
+                                cell.signImageView.image = image
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
             
             return cell
         default:

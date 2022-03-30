@@ -16,6 +16,7 @@ class DFUtil {
     static let appRegion = "International" // International, China
     static var forceUpdateFlag = false
     static var tipUpdateFlag = false
+    static var elecSignImages: [DFSignImages] = []
     
     static func decodeJsonStringAndReturnArrayObject<T: Decodable>(string: String, type: T.Type) throws -> [T] {
         let jsonData = string.data(using: .utf8)!
