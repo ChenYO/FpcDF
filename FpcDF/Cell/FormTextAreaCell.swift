@@ -21,8 +21,8 @@ class FormTextAreaCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        constraint = NSLayoutConstraint(item: title, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 21)
-        title.addConstraint(constraint!)
+//        constraint = NSLayoutConstraint(item: title, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 21)
+//        title.addConstraint(constraint!)
         
         imageConstraint = NSLayoutConstraint(item: deleteIcon, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1.0, constant: 0)
         deleteIcon.addConstraint(imageConstraint!)
