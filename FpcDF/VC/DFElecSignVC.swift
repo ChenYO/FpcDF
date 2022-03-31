@@ -83,6 +83,8 @@ class DFElecSignVC: UIViewController {
             
             DFUtil.elecSignImages.append(signData)
             
+            self.performSegue(withIdentifier: "toFormVC", sender: nil)
+            
         }else {
             let alert = UIAlertController(title: DFLocalizable.valueOf(.MESSAGE_TIP), message: DFLocalizable.valueOf(.DF_SIGN_FAILED), preferredStyle: .alert)
             let confirm = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CONFIRM), style: .default)

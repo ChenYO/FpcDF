@@ -1204,7 +1204,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if imageFormData.formType == "picture" {
                     if let image = imageFormData.image{
                         imageVC!.images.append(image)
-                        if imageFormData.formId == formData.formId {
+                        if imageFormData.formId == formData.formId && imageFormData.formNumber == formData.formNumber {
                             finalIndex = index
                         }
                         index += 1
@@ -1405,6 +1405,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 print("option menu presented")
             }
             
+        case "sign":
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+            let vc = storyboard.instantiateViewController(withIdentifier: "DFElecSignVC") as? DFElecSignVC
+            
+            vc?.index = formData.formNumber ?? -1
+            
+            let backItem = UIBarButtonItem()
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
+            
+            backItem.title = "Back"
+            self.navigationItem.backBarButtonItem = backItem
+            self.navigationController?.pushViewController(vc!, animated: true)
         default:
             tableView.reloadData()
         }
@@ -1716,6 +1730,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 tableView.reloadData()
             }
+        }else if segue.source is DFElecSignVC {
+            tableView.reloadData()
         }
     }
     
