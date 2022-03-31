@@ -16,13 +16,14 @@ class DFElecSignVC: UIViewController {
     var signatureExport: UIImage?
     var imageView: UIImageView?
     var index = 0
+    var signImage: Data?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let sendButton = UIBarButtonItem(title: DFLocalizable.valueOf(.DF_COMMAND_CONFIRM), style: UIBarButtonItem.Style.plain, target: self, action: #selector(send))
+        let sendButton = UIBarButtonItem(title: "確認", style: UIBarButtonItem.Style.plain, target: self, action: #selector(send))
         
-        let clearButton = UIBarButtonItem(title: DFLocalizable.valueOf(.DF_CLEAR), style: UIBarButtonItem.Style.plain, target: self, action: #selector(clear))
+        let clearButton = UIBarButtonItem(title: "清除", style: UIBarButtonItem.Style.plain, target: self, action: #selector(clear))
         
         //        sendButton.tintColor = .white
         //        clearButton.tintColor = .white
@@ -77,17 +78,18 @@ class DFElecSignVC: UIViewController {
         imageView?.backgroundColor = .white
         
         if let image = self.signatureExport?.rotateImageByOrientation().jpegData(compressionQuality: 0.9) {
-            let signData = DFSignImages()
-            signData.index = index
-            signData.signImage = image
+//            let signData = DFSignImages()
+//            signData.index = index
+//            signData.signImage = image
+//
+//            DFUtil.elecSignImages.append(signData)
             
-            DFUtil.elecSignImages.append(signData)
-            
+            self.signImage = image
             self.performSegue(withIdentifier: "toFormVC", sender: nil)
             
         }else {
-            let alert = UIAlertController(title: DFLocalizable.valueOf(.MESSAGE_TIP), message: DFLocalizable.valueOf(.DF_SIGN_FAILED), preferredStyle: .alert)
-            let confirm = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CONFIRM), style: .default)
+            let alert = UIAlertController(title: "訊息提示", message: "請簽名", preferredStyle: .alert)
+            let confirm = UIAlertAction(title: "確認", style: .default)
             
             alert.addAction(confirm)
             

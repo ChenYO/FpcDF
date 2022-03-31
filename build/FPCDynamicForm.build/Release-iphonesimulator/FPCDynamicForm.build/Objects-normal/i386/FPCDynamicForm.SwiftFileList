@@ -3,6 +3,7 @@
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFmainVC.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFErrorType.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFUtil.swift
+/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/UI/DFUIImageExtensive.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormByIdData.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/SingleSelectionCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFChosenModifyVC.swift
@@ -14,11 +15,14 @@
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/fileCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DateFormatter.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFDisposableToken.swift
+/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFElecSignVC.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFAPI.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DynamicInput.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTitleCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFVersionCode.swift
+/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFSignImages.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFImageVC.swift
+/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/DFSignCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormData.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTextAreaCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/FormListData.swift
@@ -29,3 +33,4 @@
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/UI/UILabelExtensive.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFResult.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/KeyValueCell.swift
+/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/UI/DFDrawingView.swift

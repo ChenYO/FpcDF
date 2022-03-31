@@ -4,6 +4,7 @@
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFmainVC.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFErrorType.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFUtil.o
+/Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFUIImageExtensive.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/FormByIdData.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/SingleSelectionCell.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFChosenModifyVC.o
@@ -15,11 +16,14 @@
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/fileCell.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DateFormatter.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFDisposableToken.o
+/Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFElecSignVC.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFAPI.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DynamicInput.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/FormTitleCell.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFVersionCode.o
+/Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFSignImages.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFImageVC.o
+/Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFSignCell.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/FormData.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/FormTextAreaCell.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/FormListData.o
@@ -30,3 +34,4 @@
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/UILabelExtensive.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFResult.o
 /Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/KeyValueCell.o
+/Users/chenyao/Desktop/Framework/FpcDF/build/FPCDynamicForm.build/Release-iphonesimulator/FPCDynamicForm.build/Objects-normal/i386/DFDrawingView.o

@@ -510,7 +510,17 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 setFileData(formData: formData, index: index)
                 
             case "sign":
-                formDataList.append(data)
+                if !formData.fileList!.isEmpty {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        if let imageData:NSData = NSData(contentsOf: URL(string: formData.fileList![0].url!)!) {
+                            DispatchQueue.main.async {
+                                if let image = UIImage(data: imageData as Data){
+                                    data.image = image
+                                }
+                            }
+                        }
+                    }
+                }
                 
             default:
                 formDataList.append(data)
@@ -1027,29 +1037,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             cell.title.text = formData.title
             
-            if !formData.fileList!.isEmpty {
-                DispatchQueue.global(qos: .userInitiated).async {
-                    if let imageData:NSData = NSData(contentsOf: URL(string: formData.fileList![0].url!)!) {
-                        DispatchQueue.main.async {
-                            if let image = UIImage(data: imageData as Data){
-                                cell.signImageView.image = image
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
-            }else {
-                for imageData in DFUtil.elecSignImages {
-                    if formData.formNumber == imageData.index {
-                        DispatchQueue.main.async {
-                            if let image = UIImage(data: imageData.signImage!){
-                                cell.signImageView.image = image
-                                self.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
+            if let image = formData.image {
+                cell.signImageView.image = image
             }
+            
             
             return cell
         default:
@@ -1731,7 +1722,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 tableView.reloadData()
             }
         }else if segue.source is DFElecSignVC {
-            tableView.reloadData()
+            if let elecSignVC = segue.source as? DFElecSignVC {
+                for formData in formDataList {
+                    if formData.formType == "sign", formData.formNumber == elecSignVC.index {
+                        
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            DispatchQueue.main.async {
+                                if let data = elecSignVC.signImage {
+                                    if let image = UIImage(data: data){
+                                        formData.image = image
+                                        self.tableView.reloadData()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
         }
     }
     
