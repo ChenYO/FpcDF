@@ -1036,6 +1036,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: DFSignCell = tableView.dequeueReusableCell(withIdentifier: "DFSignCell", for: indexPath) as! DFSignCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
+            if let fontSize = oriFormData?.cells[formNumber!].titleFont?.size {
+                cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+            }
+            
+            if let fontColor = oriFormData?.cells[formNumber!].titleFont?.color {
+                cell.title.textColor = UIColor(hexString: fontColor)
+            }
+            
             cell.title.text = formData.title
             
             if let image = formData.image {
