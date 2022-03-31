@@ -522,6 +522,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
                 
+                formDataList.append(data)
             default:
                 formDataList.append(data)
             }
