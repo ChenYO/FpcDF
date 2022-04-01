@@ -1045,6 +1045,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             cell.title.text = formData.title
+            cell.signImageView.image = nil
             
             if let image = formData.image {
                 cell.signImageView.image = image
