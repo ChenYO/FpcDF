@@ -163,63 +163,65 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.showUpdate(json: json)
                 }else {
                     if let data = json[DFJSONKey.data] as? [String: Any] {
-                        DispatchQueue.main.async {
-                            do {
-                                print(data)
-                                let decoder = JSONDecoder()
-                                decoder.dateDecodingStrategy = .millisecondsSince1970
-                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
-                                
-                                let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
-                                
-                                //檢查form與框架的版本是否符合
-                                if DFUtil.versionCode < versionCode.versionCode! {
-                                    DFAPI.customPost(address: self.tokenURL!, parameters: [
-                                        "accessToken": self.accessToken!,
-                                        "comment" : "DynamicForm"
-                                    ]) {
-                                        json in
-                                        
-                                        if let data = json[DFJSONKey.data] {
+                        DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
+                            DispatchQueue.main.async {
+                                do {
+                                    print(data)
+                                    let decoder = JSONDecoder()
+                                    decoder.dateDecodingStrategy = .millisecondsSince1970
+                                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                    
+                                    let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
+                                    
+                                    //檢查form與框架的版本是否符合
+                                    if DFUtil.versionCode < versionCode.versionCode! {
+                                        DFAPI.customPost(address: self.tokenURL!, parameters: [
+                                            "accessToken": self.accessToken!,
+                                            "comment" : "DynamicForm"
+                                        ]) {
+                                            json in
                                             
-                                            do {
-                                                let decoder = JSONDecoder()
-                                                decoder.dateDecodingStrategy = .millisecondsSince1970
-                                                let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                            if let data = json[DFJSONKey.data] {
                                                 
-                                                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
-                                                
-                                                let parameters = [
-                                                    self.tokenKey!: obj.accessTokenSHA256
-                                                ]
-                                                
-                                                DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
-                                                    print(json)
-                                                    self.dfStopActivityIndicator()
-                                                    self.showUpdate(json: json)
+                                                do {
+                                                    let decoder = JSONDecoder()
+                                                    decoder.dateDecodingStrategy = .millisecondsSince1970
+                                                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                                    
+                                                    let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
+                                                    
+                                                    let parameters = [
+                                                        self.tokenKey!: obj.accessTokenSHA256
+                                                    ]
+                                                    
+                                                    DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
+                                                        print(json)
+                                                        self.dfStopActivityIndicator()
+                                                        self.showUpdate(json: json)
+                                                    }
+                                                    
+                                                } catch {
+                                                    
                                                 }
-                                                
-                                            } catch {
-                                                
                                             }
+                                            
                                         }
                                         
+                                    }else {
+                                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                                        self.oriFormData = obj
+                                        self.clear()
+                                        
+                                        self.title = obj.formTitle
+                                        self.setButtons()
+                                        self.setFormData()
+                                        self.dfStopActivityIndicator()
+                                        self.tableView.reloadData()
                                     }
-                                    
-                                }else {
-                                    let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
-                                    self.oriFormData = obj
-                                    self.clear()
-                                    
-                                    self.title = obj.formTitle
-                                    self.setButtons()
-                                    self.setFormData()
-                                    self.dfStopActivityIndicator()
-                                    self.tableView.reloadData()
+                                } catch {
                                 }
-                            } catch {
                             }
                         }
                     }
@@ -257,11 +259,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
             alert.addAction(confirmAction)
             alert.addAction(cancelAction)
-//            if let vc = DFUtil.getTopVC() {
-//                vc.present(alert, animated: true, completion: nil)
-//            }
+            if let vc = DFUtil.getTopVC() {
+                vc.present(alert, animated: true, completion: nil)
+            }
             
-            self.present(alert, animated: true, completion: nil)
+//            self.present(alert, animated: true, completion: nil)
             
             DFUtil.forceUpdateFlag = true
         }
