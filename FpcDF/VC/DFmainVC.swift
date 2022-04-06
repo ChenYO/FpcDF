@@ -257,9 +257,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
             alert.addAction(confirmAction)
             alert.addAction(cancelAction)
-            if let vc = DFUtil.getTopVC() {
-                vc.present(alert, animated: true, completion: nil)
-            }
+//            if let vc = DFUtil.getTopVC() {
+//                vc.present(alert, animated: true, completion: nil)
+//            }
+            
+            self.present(alert, animated: true, completion: nil)
+            
             DFUtil.forceUpdateFlag = true
         }
     }
