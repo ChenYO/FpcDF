@@ -25,5 +25,16 @@ public class DynamicForm: UIViewController {
         return vc!
         
     }
+    
+    public static func loadFromJsonString(jsonString: String) -> DFmainVC {
+        
+        let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
+        let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
+        
+        vc!.isUsingJsonString = true
+        vc!.jsonString = jsonString
+        
+        return vc!
+    }
 
 }

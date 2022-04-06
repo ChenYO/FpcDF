@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
 options: "30d2e84a4dbd84abe1f41f3659fc2f4e26c6e4f680e7fad5e764d5c56541baf6"
-build_start_time: [1648704876, 430674076]
-build_end_time: [1648704881, 354343891]
+build_start_time: [1649208060, 243283987]
+build_end_time: [1649208066, 422037124]
 inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/DFSignCell.swift": [1648623683, 440763950]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/DynamicFieldCell.swift": [1576052776, 306303024]
@@ -15,7 +15,7 @@ inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/UploadCell.swift": [1576808966, 647670269]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/fileCell.swift": [1576808966, 626384496]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/DFLocalizable.swift": [1648623683, 441943645]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/DynamicForm.swift": [1581300319, 597217321]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/DynamicForm.swift": [1649208042, 98352432]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Extension/UIColor+extension.swift": [1574660822, 894625663]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Extension/UIkitExtension.swift": [1578453395, 370691776]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFDisposableToken.swift": [1578558326, 842355728]
@@ -38,4 +38,4 @@ inputs:
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFElecSignVC.swift": [1648704857, 891571044]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFImageVC.swift": [1581066116, 196027755]
   "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFSelectionVC.swift": [1582698737, 398319959]
-  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFmainVC.swift": [1648704857, 912777900]
+  "/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFmainVC.swift": [1649207973, 251464843]

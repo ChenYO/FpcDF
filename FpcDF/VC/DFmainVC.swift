@@ -33,6 +33,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     var activityIndicator: UIActivityIndicatorView!
     var isFirstLayer = true
+    var isUsingJsonString = false
+    var jsonString = ""
     
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
@@ -69,31 +71,36 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             navigationItem.leftBarButtonItem = backItem
         }
         
-        //先使用拋棄式token取得個人身份
-        dfShowActivityIndicator()
-        if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
-            DFAPI.customPost(address: tokenURL, parameters: [
-                "accessToken": accessToken,
-                "comment" : "DynamicForm"
-            ]) {
-                json in
-                print(json)
-                if let data = json[DFJSONKey.data] {
-                    
-                    do {
-                        let decoder = JSONDecoder()
-                        decoder.dateDecodingStrategy = .millisecondsSince1970
-                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                        let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+        
+        if isUsingJsonString {
+            loadFromJsonString()
+        }else {
+            //先使用拋棄式token取得個人身份
+            dfShowActivityIndicator()
+            if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
+                DFAPI.customPost(address: tokenURL, parameters: [
+                    "accessToken": accessToken,
+                    "comment" : "DynamicForm"
+                ]) {
+                    json in
+                    print(json)
+                    if let data = json[DFJSONKey.data] {
                         
-                        let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
-                        
-                        if let urlString = self.urlString {
-                            self.load(urlString: urlString, accessToken: obj.accessTokenSHA256)
+                        do {
+                            let decoder = JSONDecoder()
+                            decoder.dateDecodingStrategy = .millisecondsSince1970
+                            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                            let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                            
+                            let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
+                            
+                            if let urlString = self.urlString {
+                                self.load(urlString: urlString, accessToken: obj.accessTokenSHA256)
+                            }
+                            
+                        } catch {
+                            
                         }
-                        
-                    } catch {
-                        
                     }
                 }
             }
@@ -119,6 +126,25 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         return self.presentingViewController?.presentedViewController == self
             || (self.navigationController != nil && self.navigationController?.presentingViewController?.presentedViewController == self.navigationController)
             || self.tabBarController?.presentingViewController is UITabBarController
+    }
+    
+    //從 json string 取得表單
+    func loadFromJsonString() {
+        if self.jsonString != "" {
+            do {
+                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: self.jsonString, type: FormListData.self)
+                self.oriFormData = obj
+                self.clear()
+                
+                self.title = obj.formTitle
+                self.setButtons()
+                self.setFormData()
+                
+                self.tableView.reloadData()
+                
+            } catch {
+            }
+        }
     }
     
     //getForm 取得表單
@@ -1109,6 +1135,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let toolBar = UIToolbar()
         let formatter = DateFormatter()
         let datePicker:UIDatePicker = UIDatePicker()
+        
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
         
         if type == "date" {
             formatter.dateFormat = "yyyy-MM-dd"
