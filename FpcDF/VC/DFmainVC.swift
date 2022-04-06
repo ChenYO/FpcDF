@@ -163,7 +163,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.showUpdate(json: json)
                 }else {
                     if let data = json[DFJSONKey.data] as? [String: Any] {
-//                        DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             do {
                                 print(data)
                                 let decoder = JSONDecoder()
@@ -221,7 +221,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 }
                             } catch {
                             }
-//                        }
+                        }
                     }
                 }
             }
