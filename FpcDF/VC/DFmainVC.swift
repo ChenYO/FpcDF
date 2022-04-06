@@ -163,8 +163,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.showUpdate(json: json)
                 }else {
                     if let data = json[DFJSONKey.data] as? [String: Any] {
-                        DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
-                            DispatchQueue.main.async {
+                        
                                 do {
                                     print(data)
                                     let decoder = JSONDecoder()
@@ -223,8 +222,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 } catch {
                                 }
                             }
-                        }
-                    }
+                       
                 }
             }
         }
@@ -236,33 +234,36 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let storeAppURL = json[DFJSONKey.storeAppURL] as? String, let webDownloadAppURL = json[DFJSONKey.webDownloadAppURL] as? String, let updateComment = json[DFJSONKey.updateComment] as? String {
             print(webDownloadAppURL)
             
-//            let alert = UIAlertController(title: DFLocalizable.valueOf(.DF_APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
-            let alert = UIAlertController(title: "您必須更新App版本才能繼續操作", message: updateComment, preferredStyle: UIAlertController.Style.alert)
-            
-//            let confirmAction = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CONFIRM), style: .default, handler: { (action) in
-            let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {
-                (action) in
-                let url : URL = URL(string: storeAppURL)!
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.openURL(url)
+            DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
+                DispatchQueue.main.async {
+                    //            let alert = UIAlertController(title: DFLocalizable.valueOf(.DF_APP_FORCE_UPDATE), message: updateComment, preferredStyle: UIAlertController.Style.alert)
+                    let alert = UIAlertController(title: "您必須更新App版本才能繼續操作", message: updateComment, preferredStyle: UIAlertController.Style.alert)
+                    
+                    //            let confirmAction = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CONFIRM), style: .default, handler: { (action) in
+                    let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {
+                        (action) in
+                        let url : URL = URL(string: storeAppURL)!
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.openURL(url)
+                        }
+                    })
+                    
+                    //            let cancelAction = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CANCEL), style: .destructive, handler: { (action) in
+                    let cancelAction = UIAlertAction(title: "取消", style: .destructive, handler: { (action) in
+                        if self.isModal() {
+                            self.dismiss(animated: true, completion: nil)
+                        }else {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    })
+                    
+                    alert.addAction(confirmAction)
+                    alert.addAction(cancelAction)
+                    if let vc = DFUtil.getTopVC() {
+                        vc.present(alert, animated: true, completion: nil)
+                    }
                 }
-            })
-
-//            let cancelAction = UIAlertAction(title: DFLocalizable.valueOf(.DF_COMMAND_CANCEL), style: .destructive, handler: { (action) in
-            let cancelAction = UIAlertAction(title: "取消", style: .destructive, handler: { (action) in
-                if self.isModal() {
-                    self.dismiss(animated: true, completion: nil)
-                }else {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            })
-
-            alert.addAction(confirmAction)
-            alert.addAction(cancelAction)
-            if let vc = DFUtil.getTopVC() {
-                vc.present(alert, animated: true, completion: nil)
             }
-            
 //            self.present(alert, animated: true, completion: nil)
             
             DFUtil.forceUpdateFlag = true
