@@ -44,7 +44,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil) { _ in
-            self.width = self.view.frame.width - 110
+            self.width = self.view.frame.width - 50
             
             self.tableView.reloadData()
         }
@@ -53,7 +53,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        width = self.view.frame.width - 110
+        width = self.view.frame.width - 50
         
         screenHeight = self.view.bounds.height
         
@@ -2035,6 +2035,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     public func textViewDidChange(_ textView: UITextView) {
         let tagInt = textView.tag
+        let formNumber = textView.inputNumber
         
         for formData in formDataList {
             if formData.formType == "textArea" {
@@ -2047,6 +2048,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.oriFormData?.cells[tagInt].textValue = textView.text!
                     }
                 }
+            }else if formData.formType == "tableKey" {
+                if formData.formNumber == formNumber {
+                    formData.subCellDataList![tagInt].textValue = textView.text!
+                    
+                    self.oriFormData?.cells[formNumber].subCellDataList![tagInt].textValue = textView.text!
+                }
             }
         }
     }
@@ -2057,6 +2064,42 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let ip = indexPath {
             tableView.scrollToRow(at: ip, at: .bottom, animated: true)
         }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        let formNumber = textView.inputNumber
+        let subCellIndex = textView.tag
+        let width = textView.width
+        
+        adjustTextView(textView, layout: false, width: width, formNumber: formNumber, index: subCellIndex)
+
+    }
+    
+    func adjustTextView(_ textView: UITextView, layout: Bool, width: CGFloat, formNumber: Int, index: Int) {
+        
+        let fixedWidth = width
+        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        var newFrame = textView.frame
+        
+        var hh:CGFloat = 0
+        if newSize.height > 100 {
+            hh = 100
+        } else if newSize.height < 40 {
+            hh = 40
+        } else {
+            hh = newSize.height
+        }
+        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: hh)
+        textView.frame = newFrame;
+        
+        formDataList[formNumber].subCellDataList![index].height = hh
+
+        
+        self.tableView.reloadData()
+//        if layout == true {
+//            self.tableView.reloadData()
+//        }
     }
     
     //因reload時，height重新計算會導致cell跳動，故紀錄tableview 的 content height
