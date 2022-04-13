@@ -486,6 +486,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             data.fileList = formData.fileList
             
+            data.subCellDataList = formData.subCellDataList
+            
             switch formData.type {
             case "radio", "checkbox":
                 data.title = formData.title
