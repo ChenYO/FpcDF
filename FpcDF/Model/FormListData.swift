@@ -6,7 +6,7 @@
 //  Copyright © 2019 陳仲堯. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class FormListData: Codable {
     var versionCode: Int?
@@ -49,6 +49,7 @@ class cell: Codable {
     var fileList: [file]?
     var groupId: String?
     var groupItemId: String?
+    var subCellDataList: [subCellData]?
 }
 
 struct action: Codable {
@@ -98,4 +99,29 @@ struct file: Codable {
     var type: String?
     var title: String?
     var url: String?
+}
+
+
+struct subCellData: Codable {
+    var id: String?
+    var title: String?
+    var subType: String?
+    var dataSource: String?
+    var width: Int?
+    var cellHeight: Double?
+    var loopIndex: Int?
+    var textValue: String?
+    var options: [option]?
+    var extra1: String?
+    var extra2: String?
+    var extra3: String?
+    var extra4: String?
+    var extra5: String?
+    var extra6: String?
+    var extra7: String?
+    var extra8: String?
+    
+    var height: CGFloat?
+    var titleFont: font?
+    var choiceValue: [String]?
 }

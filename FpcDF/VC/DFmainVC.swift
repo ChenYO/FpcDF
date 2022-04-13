@@ -36,10 +36,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var isUsingJsonString = false
     var jsonString = ""
     
+    var width: CGFloat = 0.0
+    
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
+    
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.width = self.view.frame.width - 110
+            
+            self.tableView.reloadData()
+        }
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        width = self.view.frame.width - 110
         
         screenHeight = self.view.bounds.height
         
@@ -55,6 +69,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.register(UINib(nibName: "SingleSelectionCell", bundle: bundle), forCellReuseIdentifier: "SingleSelectionCell")
         tableView.register(UINib(nibName: "UploadCell", bundle: bundle), forCellReuseIdentifier: "UploadCell")
         tableView.register(UINib(nibName: "DFSignCell", bundle: bundle), forCellReuseIdentifier: "DFSignCell")
+        tableView.register(UINib(nibName: "DFTableCell", bundle: bundle), forCellReuseIdentifier: "DFTableCell")
         
         
         tableView.dataSource = self
@@ -551,6 +566,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 }
                             }
                         }
+                    }
+                }
+                
+                formDataList.append(data)
+            case "tableKey":
+                
+                for (subIndex, subCell) in data.subCellDataList!.enumerated() {
+                    if subCell.cellHeight != 0 {
+                        data.subCellDataList![subIndex].height = CGFloat(subCell.cellHeight!)
                     }
                 }
                 
@@ -1085,6 +1109,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             
             return cell
+        case "tableKey":
+            let cell: DFTableCell = tableView.dequeueReusableCell(withIdentifier: "DFTableCell", for: indexPath) as! DFTableCell
+            cell.selectionStyle = .none
+            
+            setTableCell(cell: cell, formData: formData)
+            
+            return cell
+
         default:
             return cell
         }
@@ -1186,6 +1218,296 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let strDate = dateFormatter.string(from: date)
         
         return strDate
+    }
+    
+    
+    func setTableCell(cell: DFTableCell, formData: FormData) {
+        let formNumber = formData.formNumber!
+        
+        if formData.subCellDataList!.count >= 1 {
+            setTableDetailCell(key: cell.key1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, gap: cell.keyGap1, formNumber: formNumber, index: 0, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 2 {
+            setTableDetailCell(key: cell.key2, keyWidth: cell.keyWidth2, keyHeight: cell.keyHeight2, gap: cell.keyGap1, formNumber: formNumber, index: 1, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 3 {
+            setTableDetailCell(key: cell.key3, keyWidth: cell.keyWidth3, keyHeight: cell.keyHeight3, gap: cell.keyGap2, formNumber: formNumber, index: 2, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 4 {
+            setTableDetailCell(key: cell.key4, keyWidth: cell.keyWidth4, keyHeight: cell.keyHeight4, gap: cell.keyGap3, formNumber: formNumber, index: 3, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 5 {
+            setTableDetailCell(key: cell.key5, keyWidth: cell.keyWidth5, keyHeight: cell.keyHeight5, gap: cell.keyGap4, formNumber: formNumber, index: 4, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 6 {
+            setTableDetailCell(key: cell.key6, keyWidth: cell.keyWidth6, keyHeight: cell.keyHeight6, gap: cell.keyGap5, formNumber: formNumber, index: 5, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 7 {
+            setTableDetailCell(key: cell.key7, keyWidth: cell.keyWidth7, keyHeight: cell.keyHeight7, gap: cell.keyGap6, formNumber: formNumber, index: 6, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 8 {
+            setTableDetailCell(key: cell.key8, keyWidth: cell.keyWidth8, keyHeight: cell.keyHeight8, gap: cell.keyGap7, formNumber: formNumber, index: 7, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 9 {
+            setTableDetailCell(key: cell.key9, keyWidth: cell.keyWidth9, keyHeight: cell.keyHeight9, gap: cell.keyGap8, formNumber: formNumber, index: 8, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 10 {
+            setTableDetailCell(key: cell.key10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, gap: cell.keyGap9, formNumber: formNumber, index: 9, formData: formData, cell: cell)
+        }
+    }
+    
+    func setTableDetailCell(key: UITextView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, gap: NSLayoutConstraint, formNumber: Int, index: Int, formData: FormData, cell: DFTableCell) {
+        let subCell = formData.subCellDataList![index]
+        
+        if let fontSize = oriFormData?.cells[formNumber].subCellDataList![index].titleFont?.size {
+            key.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+        }
+        
+        if let fontColor = oriFormData?.cells[formNumber].subCellDataList![index].titleFont?.color {
+            key.textColor = UIColor(hexString: fontColor)
+        }
+        
+        if let alignment = oriFormData?.cells[formNumber].subCellDataList![index].titleFont?.alignment {
+            
+            if alignment == "left" {
+                key.textAlignment = .left
+            }else if alignment == "right" {
+                key.textAlignment = .right
+            }else {
+                key.textAlignment = .center
+            }
+        }
+
+        key.layer.borderWidth = 1
+        key.layer.borderColor = UIColor.black.cgColor
+        key.backgroundColor = .white
+        keyWidth.constant = width * CGFloat(subCell.width!) / 100
+        
+        key.delegate = self
+        key.isUserInteractionEnabled = true
+        
+        key.width = keyWidth.constant
+        key.tag = index
+        key.inputNumber = formNumber
+        
+        if let height = subCell.height {
+            keyHeight.constant = height
+        }
+        
+        if subCell.textValue != "" {
+            key.text = subCell.textValue
+        }else {
+            key.text = subCell.title
+            
+//            "▣□"
+        }
+        
+
+        key.isScrollEnabled = false
+        
+        if subCell.subType == "label" {
+            
+            key.isUserInteractionEnabled = false
+        }else if subCell.subType == "dropDown" {
+            let recognizer = getDropDownGesture(cellNumber: formNumber)
+            
+            key.addGestureRecognizer(recognizer)
+        }else if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
+            
+            var format = "yyyy-MM-dd"
+            
+            if subCell.subType == "time" {
+                format = "HH:mm"
+            }
+            
+            if subCell.subType == "dateTime" {
+                format = "yyyy-MM-dd HH:mm"
+            }
+            
+            setTableTextFieldDatePicker(type: subCell.subType!, formNumber: formData.formNumber!, subCellIndex: index, key: key)
+            
+            if formData.subCellDataList![index].textValue != "" {
+                key.text = setTimestampToDate(timestampString: formData.subCellDataList![index].textValue!, format: format)
+            }
+        }else if subCell.subType == "radio" {
+            
+            let recognizer = getRadioGesture(cellNumber: formNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            var optionStr = ""
+            
+            for (index, option) in subCell.options!.enumerated() {
+                if option.id == subCell.textValue! {
+                    optionStr += "▣ \(option.name ?? "")"
+                }else {
+                    optionStr += "□ \(option.name ?? "")"
+                }
+                
+                if index != subCell.options!.count - 1 {
+                    optionStr += "\n"
+                }
+            }
+            
+            key.text = optionStr
+        }
+    }
+    
+    func setTableTextFieldDatePicker(type: String, formNumber: Int, subCellIndex: Int, key: UITextView) {
+        let toolBar = UIToolbar()
+        let formatter = DateFormatter()
+        let datePicker:UIDatePicker = UIDatePicker()
+        
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        
+        if type == "date" {
+            formatter.dateFormat = "yyyy-MM-dd"
+            datePicker.datePickerMode = .date
+        }else if type == "time" {
+            formatter.dateFormat = "HH:mm"
+            datePicker.datePickerMode = .time
+        }else if type == "dateTime" {
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            datePicker.datePickerMode = .dateAndTime
+        }
+        
+        
+        datePicker.date = NSDate() as Date
+        
+        toolBar.sizeToFit()
+        
+        let dateFormatter = dateFormatterObj()
+        dateFormatter.index = subCellIndex
+        dateFormatter.dateFormatter = formatter
+        dateFormatter.datePicker = datePicker
+        
+        formDataList[formNumber].dateFormatterList.append(dateFormatter)
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(subCellDoneButtonTapped))
+        toolBar.setItems([doneButton], animated: true)
+        
+        doneButton.tag = formNumber
+        doneButton.inputNumber = subCellIndex
+        
+        
+        key.inputView = datePicker
+        key.inputAccessoryView = toolBar
+        
+    }
+    
+    
+    @objc func subCellDoneButtonTapped(sender: UIBarButtonItem) {
+        // 依據元件的 tag 取得 UITextField
+        
+        let formNumber = sender.tag
+        let subCellIndex = sender.inputNumber
+        
+        for dateFormatter in formDataList[formNumber].dateFormatterList {
+            if dateFormatter.index == subCellIndex {
+                let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
+                print(timeInterval)
+                
+                formDataList[formNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                
+                self.oriFormData?.cells[formNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+            }
+        }
+
+        self.tableView.reloadData()
+        self.view.endEditing(true)
+    }
+    
+    func getDropDownGesture(cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(dropOption))
+        
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    
+    @objc func dropOption(_ sender: UITapGestureRecognizer) {
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
+        
+        if (self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)! >= (self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
+            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
+        }
+        
+        formDataList[cellNumber].subCellDataList![subCellIndex].title = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)!].name
+        
+        self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)!].id
+        
+        
+        tableView.reloadData()
+    }
+    
+    func getRadioGesture(cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(radioOption))
+        
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func radioOption(_ sender: UITapGestureRecognizer) {
+        
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+        
+        
+        for option in formDataList[cellNumber].subCellDataList![subCellIndex].options! {
+            let option = UIAlertAction(title: option.name, style: .default) { action in
+                
+                self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = option.id
+                
+                self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
+                
+                self.tableView.reloadData()
+            }
+            actionSheet.addAction(option)
+        }
+        
+        let option = UIAlertAction(title: "取消", style: .destructive) { action in
+            
+            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+            
+            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+            
+            self.tableView.reloadData()
+        }
+        actionSheet.addAction(option)
+        
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            let loc = sender.location(in: self.view)
+            actionSheet.modalPresentationStyle = .popover
+            actionSheet.popoverPresentationController?.sourceView = self.view
+            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+        }
+        
+        self.present(actionSheet, animated: true) {
+            print("option menu presented")
+        }
+        
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

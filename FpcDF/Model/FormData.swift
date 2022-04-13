@@ -40,4 +40,8 @@ class FormData {
     var fileUrl: String?
     
     var fileList: [file]?
+    
+    var subCellDataList: [subCellData]?
+    
+    var dateFormatterList = [dateFormatterObj]()
 }

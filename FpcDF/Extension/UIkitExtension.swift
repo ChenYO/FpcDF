@@ -28,6 +28,7 @@ extension UITextField {
 extension UITextView {
     private struct AssociatedKey {
         static var inputNumber: Int = 0
+        static var width: CGFloat = 0.0
     }
     
     public var inputNumber: Int {
@@ -37,6 +38,16 @@ extension UITextView {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.inputNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var width: CGFloat {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.width) as? CGFloat ?? 0.0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.width, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
 }
@@ -105,3 +116,18 @@ extension UIDocumentPickerViewController {
     }
 }
 
+extension UIBarButtonItem {
+    private struct AssociatedKey {
+        static var inputNumber: Int = 0
+    }
+    
+    public var inputNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.inputNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.inputNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+}
