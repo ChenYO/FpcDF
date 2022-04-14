@@ -20,6 +20,11 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var key8: UITextView!
     @IBOutlet weak var key9: UITextView!
     @IBOutlet weak var key10: UITextView!
+    @IBOutlet weak var key11: UITextView!
+    @IBOutlet weak var key12: UITextView!
+    @IBOutlet weak var key13: UITextView!
+    @IBOutlet weak var key14: UITextView!
+    @IBOutlet weak var key15: UITextView!
     
     @IBOutlet weak var keyWidth1: NSLayoutConstraint!
     @IBOutlet weak var keyWidth2: NSLayoutConstraint!
@@ -31,6 +36,11 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyWidth8: NSLayoutConstraint!
     @IBOutlet weak var keyWidth9: NSLayoutConstraint!
     @IBOutlet weak var keyWidth10: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth11: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth12: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth13: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth14: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth15: NSLayoutConstraint!
     
     @IBOutlet weak var keyHeight1: NSLayoutConstraint!
     @IBOutlet weak var keyHeight2: NSLayoutConstraint!
@@ -42,6 +52,11 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyHeight8: NSLayoutConstraint!
     @IBOutlet weak var keyHeight9: NSLayoutConstraint!
     @IBOutlet weak var keyHeight10: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight11: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight12: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight13: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight14: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight15: NSLayoutConstraint!
     
     @IBOutlet weak var keyGap1: NSLayoutConstraint!
     @IBOutlet weak var keyGap2: NSLayoutConstraint!
@@ -52,6 +67,11 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyGap7: NSLayoutConstraint!
     @IBOutlet weak var keyGap8: NSLayoutConstraint!
     @IBOutlet weak var keyGap9: NSLayoutConstraint!
+    @IBOutlet weak var keyGap10: NSLayoutConstraint!
+    @IBOutlet weak var keyGap11: NSLayoutConstraint!
+    @IBOutlet weak var keyGap12: NSLayoutConstraint!
+    @IBOutlet weak var keyGap13: NSLayoutConstraint!
+    @IBOutlet weak var keyGap14: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -67,6 +87,11 @@ class DFTableCell: UITableViewCell {
         keyWidth8.constant = 0
         keyWidth9.constant = 0
         keyWidth10.constant = 0
+        keyWidth11.constant = 0
+        keyWidth12.constant = 0
+        keyWidth13.constant = 0
+        keyWidth14.constant = 0
+        keyWidth15.constant = 0
         
         keyGap1.constant = 0
         keyGap2.constant = 0
@@ -77,6 +102,11 @@ class DFTableCell: UITableViewCell {
         keyGap7.constant = 0
         keyGap8.constant = 0
         keyGap9.constant = 0
+        keyGap10.constant = 0
+        keyGap11.constant = 0
+        keyGap12.constant = 0
+        keyGap13.constant = 0
+        keyGap14.constant = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -98,6 +128,11 @@ class DFTableCell: UITableViewCell {
         key8.text = ""
         key9.text = ""
         key10.text = ""
+        key11.text = ""
+        key12.text = ""
+        key13.text = ""
+        key14.text = ""
+        key15.text = ""
         
         keyWidth1.constant = 0
         keyWidth2.constant = 0
@@ -109,6 +144,11 @@ class DFTableCell: UITableViewCell {
         keyWidth8.constant = 0
         keyWidth9.constant = 0
         keyWidth10.constant = 0
+        keyWidth11.constant = 0
+        keyWidth12.constant = 0
+        keyWidth13.constant = 0
+        keyWidth14.constant = 0
+        keyWidth15.constant = 0
         
         keyHeight1.constant = 40
         keyHeight2.constant = 40
@@ -120,6 +160,11 @@ class DFTableCell: UITableViewCell {
         keyHeight8.constant = 40
         keyHeight9.constant = 40
         keyHeight10.constant = 40
+        keyHeight11.constant = 40
+        keyHeight12.constant = 40
+        keyHeight13.constant = 40
+        keyHeight14.constant = 40
+        keyHeight15.constant = 40
         
         key1.inputAccessoryView = nil
         key1.inputView = nil
@@ -150,6 +195,22 @@ class DFTableCell: UITableViewCell {
         
         key10.inputAccessoryView = nil
         key10.inputView = nil
+        
+        key11.inputAccessoryView = nil
+        key11.inputView = nil
+        
+        key12.inputAccessoryView = nil
+        key12.inputView = nil
+        
+        key13.inputAccessoryView = nil
+        key13.inputView = nil
+        
+        key14.inputAccessoryView = nil
+        key14.inputView = nil
+        
+        key15.inputAccessoryView = nil
+        key15.inputView = nil
+        
         
         for gesture in key1.gestureRecognizers ?? [] {
             if let g = gesture as? UITapGestureRecognizer {
@@ -210,6 +271,37 @@ class DFTableCell: UITableViewCell {
                 key10.removeGestureRecognizer(g)
             }
         }
+        
+        for gesture in key11.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key11.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key12.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key12.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key13.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key13.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key14.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key14.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key15.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key15.removeGestureRecognizer(g)
+            }
+        }
+        
     }
     
 }
