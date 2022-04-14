@@ -1400,8 +1400,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     optionStr += "□ \(option.name ?? "")  "
                 }
                 
-                if index != subCell.options!.count - 1 {
-                    optionStr += "\n"
+                if !subCell.isHorizon! {
+                    if index != subCell.options!.count - 1 {
+                        optionStr += "\n"
+                    }
                 }
             }
             
@@ -1421,8 +1423,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     optionStr += "□ \(option.name ?? "")  "
                 }
                 
-                if index != subCell.options!.count - 1 {
-                    optionStr += "\n"
+                if !subCell.isHorizon! {
+                    if index != subCell.options!.count - 1 {
+                        optionStr += "\n"
+                    }
                 }
             }
             
