@@ -35,6 +35,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var isFirstLayer = true
     var isUsingJsonString = false
     var jsonString = ""
+    var formId = ""
     
     var width: CGFloat = 0.0
     
@@ -1265,6 +1266,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if formData.subCellDataList!.count >= 10 {
             setTableDetailCell(key: cell.key10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, gap: cell.keyGap9, formNumber: formNumber, index: 9, formData: formData, cell: cell)
         }
+        
+        if formData.subCellDataList!.count >= 11 {
+            setTableDetailCell(key: cell.key11, keyWidth: cell.keyWidth11, keyHeight: cell.keyHeight11, gap: cell.keyGap10, formNumber: formNumber, index: 10, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 12 {
+            setTableDetailCell(key: cell.key12, keyWidth: cell.keyWidth12, keyHeight: cell.keyHeight12, gap: cell.keyGap11, formNumber: formNumber, index: 11, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 13 {
+            setTableDetailCell(key: cell.key13, keyWidth: cell.keyWidth13, keyHeight: cell.keyHeight13, gap: cell.keyGap12, formNumber: formNumber, index: 12, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 14 {
+            setTableDetailCell(key: cell.key14, keyWidth: cell.keyWidth14, keyHeight: cell.keyHeight14, gap: cell.keyGap13, formNumber: formNumber, index: 13, formData: formData, cell: cell)
+        }
+        
+        if formData.subCellDataList!.count >= 15 {
+            setTableDetailCell(key: cell.key15, keyWidth: cell.keyWidth15, keyHeight: cell.keyHeight15, gap: cell.keyGap14, formNumber: formNumber, index: 14, formData: formData, cell: cell)
+        }
     }
     
     func setTableDetailCell(key: UITextView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, gap: NSLayoutConstraint, formNumber: Int, index: Int, formData: FormData, cell: DFTableCell) {
@@ -1315,15 +1336,25 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
 
         key.isScrollEnabled = false
+        key.isEditable = true
         
         if subCell.subType == "label" {
             
-            key.isUserInteractionEnabled = false
+            key.isEditable = false
+        }else if subCell.subType == "textArea" {
+            
+            key.isScrollEnabled = true
+            
         }else if subCell.subType == "dropDown" {
+            
+            key.isEditable = false
+            
             let recognizer = getDropDownGesture(cellNumber: formNumber)
             
             key.addGestureRecognizer(recognizer)
         }else if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
+            
+            key.isEditable = false
             
             var format = "yyyy-MM-dd"
             
@@ -1361,6 +1392,36 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             key.text = optionStr
+        }else if subCell.subType == "checkBox" {
+            
+            let recognizer = getCheckBoxGesture(cellNumber: formNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            var optionStr = ""
+            
+            for (index, option) in subCell.options!.enumerated() {
+                if subCell.choiceValue!.contains(option.id!) {
+                    optionStr += "▣ \(option.name ?? "")"
+                }else {
+                    optionStr += "□ \(option.name ?? "")"
+                }
+                
+                if index != subCell.options!.count - 1 {
+                    optionStr += "\n"
+                }
+            }
+            
+            key.text = optionStr
+        }else if subCell.subType == "form" {
+            
+            key.isEditable = false
+            
+            let recognizer = getFormGesture(cellNumber: formNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            
         }
     }
     
@@ -1491,11 +1552,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let option = UIAlertAction(title: "取消", style: .destructive) { action in
             
-            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
-            
-            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
-            
-            self.tableView.reloadData()
+//            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.tableView.reloadData()
         }
         actionSheet.addAction(option)
         
@@ -1508,6 +1569,100 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.present(actionSheet, animated: true) {
             print("option menu presented")
+        }
+        
+    }
+    
+    func getCheckBoxGesture(cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(checkBoxOption))
+        
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func checkBoxOption(_ sender: UITapGestureRecognizer) {
+        
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+        
+        
+        for option in formDataList[cellNumber].subCellDataList![subCellIndex].options! {
+            let action = UIAlertAction(title: option.name, style: .default) { action in
+                
+                if let index = self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
+                    return option.id == id
+                }) {
+                    self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
+                } else {
+                    self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                }
+                
+                
+                self.tableView.reloadData()
+            }
+            actionSheet.addAction(action)
+        }
+        
+        let option = UIAlertAction(title: "取消", style: .destructive) { action in
+            
+//            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.tableView.reloadData()
+        }
+        actionSheet.addAction(option)
+        
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            let loc = sender.location(in: self.view)
+            actionSheet.modalPresentationStyle = .popover
+            actionSheet.popoverPresentationController?.sourceView = self.view
+            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+        }
+        
+        self.present(actionSheet, animated: true) {
+            print("option menu presented")
+        }
+        
+    }
+    
+    func getFormGesture(cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(getFrom))
+        
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func getFrom(_ sender: UITapGestureRecognizer) {
+        
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+    
+        if let dataSource = formDataList[cellNumber].subCellDataList![subCellIndex].dataSource {
+            
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+            let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
+            
+            vc?.isUsingJsonString = true
+            vc?.formId = dataSource
+            
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
+            
+            self.navigationItem.backBarButtonItem = backItem
+            self.navigationController?.pushViewController(vc!, animated: true)
         }
         
     }

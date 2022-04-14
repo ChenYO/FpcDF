@@ -11,7 +11,7 @@ import UIKit
 
 class DFUtil {
     
-    static let versionCode = 1
+    static let versionCode = 2
     static let OSType = "iOS" // iOS, Android
     static let appRegion = "International" // International, China
     static var forceUpdateFlag = false

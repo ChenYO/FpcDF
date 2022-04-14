@@ -64,10 +64,10 @@
 		760A02C423D1332700CF2BC9 /* UILabelExtensive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */; };
 		760A02C723D1333A00CF2BC9 /* DFMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 760A02C623D1333A00CF2BC9 /* DFMain.storyboard */; };
 		760A02D023D177C200CF2BC9 /* DynamicForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760A02CF23D177C200CF2BC9 /* DynamicForm.swift */; };
-		760A1F5E2806BD3F00D93BB7 /* DFTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760A1F5C2806BD3F00D93BB7 /* DFTableCell.swift */; };
-		760A1F5F2806BD4000D93BB7 /* DFTableCell.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A1F5C2806BD3F00D93BB7 /* DFTableCell.swift */; };
-		760A1F602806BD4000D93BB7 /* DFTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760A1F5D2806BD3F00D93BB7 /* DFTableCell.xib */; };
-		760A1F612806BD4000D93BB7 /* DFTableCell.xib in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A1F5D2806BD3F00D93BB7 /* DFTableCell.xib */; };
+		760A1F642807A40600D93BB7 /* DFTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 760A1F622807A40500D93BB7 /* DFTableCell.xib */; };
+		760A1F652807A40600D93BB7 /* DFTableCell.xib in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A1F622807A40500D93BB7 /* DFTableCell.xib */; };
+		760A1F662807A40600D93BB7 /* DFTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760A1F632807A40500D93BB7 /* DFTableCell.swift */; };
+		760A1F672807A40600D93BB7 /* DFTableCell.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A1F632807A40500D93BB7 /* DFTableCell.swift */; };
 		76275F7223F3D972003F240F /* DFLocalizable.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 765D529E23E3C06200AE354C /* DFLocalizable.swift */; };
 		7648786D23D1A26F001E63CE /* DFSelectionVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BB23D1330D00CF2BC9 /* DFSelectionVC.swift */; };
 		7648786E23D1A272001E63CE /* DFmainVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BA23D1330D00CF2BC9 /* DFmainVC.swift */; };
@@ -159,7 +159,6 @@
 				7648787123D1A27E001E63CE /* DFMain.storyboard in Copy Files */,
 				7648787B23D1A297001E63CE /* FormTitleCell.xib in Copy Files */,
 				7648788723D1A2B2001E63CE /* UIkitExtension.swift in Copy Files */,
-				760A1F5F2806BD4000D93BB7 /* DFTableCell.swift in Copy Files */,
 				7648787923D1A293001E63CE /* KeyValueCell.xib in Copy Files */,
 				7648786F23D1A274001E63CE /* DFChosenModifyVC.swift in Copy Files */,
 				7648789223D1A2CC001E63CE /* DFAPI.swift in Copy Files */,
@@ -173,10 +172,11 @@
 				7648787223D1A280001E63CE /* Assets.xcassets in Copy Files */,
 				7648788923D1A2B9001E63CE /* FormListData.swift in Copy Files */,
 				7648788423D1A2AB001E63CE /* fileCell.swift in Copy Files */,
-				760A1F612806BD4000D93BB7 /* DFTableCell.xib in Copy Files */,
 				7648788F23D1A2C5001E63CE /* DateFormatter.swift in Copy Files */,
+				760A1F672807A40600D93BB7 /* DFTableCell.swift in Copy Files */,
 				7648786E23D1A272001E63CE /* DFmainVC.swift in Copy Files */,
 				7648788B23D1A2BD001E63CE /* FormByIdData.swift in Copy Files */,
+				760A1F652807A40600D93BB7 /* DFTableCell.xib in Copy Files */,
 				7648788A23D1A2BB001E63CE /* FormData.swift in Copy Files */,
 				76095C9A23F693D000C1A73A /* DFLocalizable.strings in Copy Files */,
 				7648787A23D1A295001E63CE /* KeyValueCell.swift in Copy Files */,
@@ -245,8 +245,8 @@
 		760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtensive.swift; sourceTree = "<group>"; };
 		760A02C623D1333A00CF2BC9 /* DFMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DFMain.storyboard; sourceTree = "<group>"; };
 		760A02CF23D177C200CF2BC9 /* DynamicForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicForm.swift; sourceTree = "<group>"; };
-		760A1F5C2806BD3F00D93BB7 /* DFTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFTableCell.swift; sourceTree = "<group>"; };
-		760A1F5D2806BD3F00D93BB7 /* DFTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFTableCell.xib; sourceTree = "<group>"; };
+		760A1F622807A40500D93BB7 /* DFTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFTableCell.xib; sourceTree = "<group>"; };
+		760A1F632807A40500D93BB7 /* DFTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFTableCell.swift; sourceTree = "<group>"; };
 		765D529A23E3AFB300AE354C /* DFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFResult.swift; sourceTree = "<group>"; };
 		765D529E23E3C06200AE354C /* DFLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFLocalizable.swift; sourceTree = "<group>"; };
 		76A2077A27F42720003BE45B /* UniFPCDynamicForm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UniFPCDynamicForm-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -339,11 +339,11 @@
 				760A025E23D1325300CF2BC9 /* SingleSelectionCell.xib */,
 				760A026023D1325300CF2BC9 /* UploadCell.swift */,
 				760A026823D1325300CF2BC9 /* UploadCell.xib */,
-				760A1F5C2806BD3F00D93BB7 /* DFTableCell.swift */,
-				760A1F5D2806BD3F00D93BB7 /* DFTableCell.xib */,
 				760A025723D1325200CF2BC9 /* UniFpcDF-Bridging-Header.h */,
 				76A2078427F42AB2003BE45B /* DFSignCell.swift */,
 				76A2078527F42AB2003BE45B /* DFSignCell.xib */,
+				760A1F632807A40500D93BB7 /* DFTableCell.swift */,
+				760A1F622807A40500D93BB7 /* DFTableCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -490,7 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				760A1F602806BD4000D93BB7 /* DFTableCell.xib in Resources */,
+				760A1F642807A40600D93BB7 /* DFTableCell.xib in Resources */,
 				760A027D23D1325300CF2BC9 /* FormChoiceCell.xib in Resources */,
 				760A027A23D1325300CF2BC9 /* MultiSelectionCell.xib in Resources */,
 				760A027C23D1325300CF2BC9 /* UploadCell.xib in Resources */,
@@ -548,7 +548,7 @@
 				760A02BF23D1330D00CF2BC9 /* DFSelectionVC.swift in Sources */,
 				760A02B623D132FC00CF2BC9 /* DFJSONKey.swift in Sources */,
 				760A029923D1329000CF2BC9 /* UIColor+extension.swift in Sources */,
-				760A1F5E2806BD3F00D93BB7 /* DFTableCell.swift in Sources */,
+				760A1F662807A40600D93BB7 /* DFTableCell.swift in Sources */,
 				760A02D023D177C200CF2BC9 /* DynamicForm.swift in Sources */,
 				760A029723D1329000CF2BC9 /* UIkitExtension.swift in Sources */,
 				760A027F23D1325300CF2BC9 /* fileCell.swift in Sources */,
