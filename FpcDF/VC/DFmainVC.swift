@@ -1328,7 +1328,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if let gap = subCell.cellGap {
             if index != 0 {
-                keyGap.constant = gap
+                keyGap.constant = CGFloat(gap)
             }
         }
         
