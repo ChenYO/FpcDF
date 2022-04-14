@@ -109,9 +109,11 @@ struct subCellData: Codable {
     var dataSource: String?
     var width: Int?
     var cellHeight: Double?
+    var cellGap: Double?
     var loopIndex: Int?
     var textValue: String?
     var options: [option]?
+    var isHorizon: Bool?
     var extra1: String?
     var extra2: String?
     var extra3: String?
@@ -124,4 +126,5 @@ struct subCellData: Codable {
     var height: CGFloat?
     var titleFont: font?
     var choiceValue: [String]?
+    var keyBoardType: String?
 }
