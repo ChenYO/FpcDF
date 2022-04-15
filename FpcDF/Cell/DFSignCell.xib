@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYq-jZ-4Dp">
-                        <rect key="frame" x="20" y="10" width="452" height="20.5"/>
+                        <rect key="frame" x="10" y="10" width="462" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A4y-AH-NQY">
-                        <rect key="frame" x="20" y="35.5" width="442" height="100"/>
+                        <rect key="frame" x="10" y="35.5" width="462" height="100"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="ppG-PD-Ihh"/>
@@ -39,11 +39,11 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="hYq-jZ-4Dp" secondAttribute="trailing" constant="10" id="Jeg-6x-efD"/>
                     <constraint firstItem="A4y-AH-NQY" firstAttribute="top" secondItem="hYq-jZ-4Dp" secondAttribute="bottom" constant="5" id="MD7-fu-1Zg"/>
-                    <constraint firstItem="hYq-jZ-4Dp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="OS9-Ui-i2i"/>
+                    <constraint firstItem="hYq-jZ-4Dp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="OS9-Ui-i2i"/>
                     <constraint firstItem="hYq-jZ-4Dp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="VoO-go-fyW"/>
-                    <constraint firstAttribute="trailing" secondItem="A4y-AH-NQY" secondAttribute="trailing" constant="20" id="bB7-ns-056"/>
+                    <constraint firstAttribute="trailing" secondItem="A4y-AH-NQY" secondAttribute="trailing" constant="10" id="bB7-ns-056"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="A4y-AH-NQY" secondAttribute="bottom" constant="10" id="bBI-pd-Fbm"/>
-                    <constraint firstItem="A4y-AH-NQY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="v1Y-xf-fRT"/>
+                    <constraint firstItem="A4y-AH-NQY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="v1Y-xf-fRT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

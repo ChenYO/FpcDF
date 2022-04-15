@@ -127,4 +127,5 @@ struct subCellData: Codable {
     var titleFont: font?
     var choiceValue: [String]?
     var keyBoardType: String?
+    var borderColor: String?
 }

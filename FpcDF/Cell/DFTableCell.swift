@@ -166,6 +166,22 @@ class DFTableCell: UITableViewCell {
         keyHeight14.constant = 40
         keyHeight15.constant = 40
         
+        
+        keyGap1.constant = 0
+        keyGap2.constant = 0
+        keyGap3.constant = 0
+        keyGap4.constant = 0
+        keyGap5.constant = 0
+        keyGap6.constant = 0
+        keyGap7.constant = 0
+        keyGap8.constant = 0
+        keyGap9.constant = 0
+        keyGap10.constant = 0
+        keyGap11.constant = 0
+        keyGap12.constant = 0
+        keyGap13.constant = 0
+        keyGap14.constant = 0
+        
         key1.inputAccessoryView = nil
         key1.inputView = nil
         

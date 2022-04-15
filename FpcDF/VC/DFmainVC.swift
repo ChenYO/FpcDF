@@ -45,7 +45,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil) { _ in
-            self.width = self.view.frame.width - 50
+            self.width = self.view.frame.width - 20
             
             self.tableView.reloadData()
         }
@@ -54,7 +54,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        width = self.view.frame.width - 50
+        width = self.view.frame.width - 20
         
         screenHeight = self.view.bounds.height
         
@@ -1328,8 +1328,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if let gap = subCell.cellGap {
             if index != 0 {
-                keyGap.constant = CGFloat(gap)
+                keyGap.constant = width * CGFloat(gap) / 100
             }
+        }
+        
+        if let borderColor = subCell.borderColor {
+            key.layer.borderColor = UIColor(hexString: borderColor).cgColor
         }
         
         key.text = subCell.title
