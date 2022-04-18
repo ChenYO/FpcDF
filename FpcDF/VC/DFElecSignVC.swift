@@ -16,7 +16,10 @@ class DFElecSignVC: UIViewController {
     var signatureExport: UIImage?
     var imageView: UIImageView?
     var index = 0
+    var subCellIndex = 0
     var signImage: Data?
+    var isFromSubCell = false
+    var signUrl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,13 +81,29 @@ class DFElecSignVC: UIViewController {
         imageView?.backgroundColor = .white
         
         if let image = self.signatureExport?.rotateImageByOrientation().jpegData(compressionQuality: 0.9) {
-//            let signData = DFSignImages()
-//            signData.index = index
-//            signData.signImage = image
-//
-//            DFUtil.elecSignImages.append(signData)
+
             
-            self.signImage = image
+            if !isFromSubCell {
+                self.signImage = image
+            }else {
+                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                // choose a name for your image
+                let fileName = "\(UUID().uuidString).jpg"
+                // create the destination file url to save your image
+                let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                
+                print(fileURL)
+                self.signUrl = fileName
+                do {
+
+
+                    try image.write(to: fileURL)
+                    print("file saved")
+                } catch {
+                    print("error saving file:", error)
+                }
+            }
+            
             self.performSegue(withIdentifier: "toFormVC", sender: nil)
             
         }else {

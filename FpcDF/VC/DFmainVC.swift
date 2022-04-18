@@ -1228,67 +1228,67 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let formNumber = formData.formNumber!
         
         if formData.subCellDataList!.count >= 1 {
-            setTableDetailCell(key: cell.key1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, keyGap: cell.keyGap1, formNumber: formNumber, index: 0, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key1, imageView: cell.imageView1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, keyGap: cell.keyGap1, imageHeight: cell.imageHeight1, ImageGap: cell.keyGap1, formNumber: formNumber, index: 0, formData: formData, cell: cell)
         }
         
         if formData.subCellDataList!.count >= 2 {
-            setTableDetailCell(key: cell.key2, keyWidth: cell.keyWidth2, keyHeight: cell.keyHeight2, keyGap: cell.keyGap1, formNumber: formNumber, index: 1, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key2, imageView: cell.imageView2, keyWidth: cell.keyWidth2, keyHeight: cell.keyHeight2, keyGap: cell.keyGap1, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap1, formNumber: formNumber, index: 1, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 3 {
-            setTableDetailCell(key: cell.key3, keyWidth: cell.keyWidth3, keyHeight: cell.keyHeight3, keyGap: cell.keyGap2, formNumber: formNumber, index: 2, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key3, imageView: cell.imageView3, keyWidth: cell.keyWidth3, keyHeight: cell.keyHeight3, keyGap: cell.keyGap2, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap2, formNumber: formNumber, index: 2, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 4 {
-            setTableDetailCell(key: cell.key4, keyWidth: cell.keyWidth4, keyHeight: cell.keyHeight4, keyGap: cell.keyGap3, formNumber: formNumber, index: 3, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key4, imageView: cell.imageView4, keyWidth: cell.keyWidth4, keyHeight: cell.keyHeight4, keyGap: cell.keyGap3, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap3, formNumber: formNumber, index: 3, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 5 {
-            setTableDetailCell(key: cell.key5, keyWidth: cell.keyWidth5, keyHeight: cell.keyHeight5, keyGap: cell.keyGap4, formNumber: formNumber, index: 4, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key5, imageView: cell.imageView5, keyWidth: cell.keyWidth5, keyHeight: cell.keyHeight5, keyGap: cell.keyGap4, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap4, formNumber: formNumber, index: 4, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 6 {
-            setTableDetailCell(key: cell.key6, keyWidth: cell.keyWidth6, keyHeight: cell.keyHeight6, keyGap: cell.keyGap5, formNumber: formNumber, index: 5, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key6, imageView: cell.imageView6, keyWidth: cell.keyWidth6, keyHeight: cell.keyHeight6, keyGap: cell.keyGap5, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap5, formNumber: formNumber, index: 5, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 7 {
-            setTableDetailCell(key: cell.key7, keyWidth: cell.keyWidth7, keyHeight: cell.keyHeight7, keyGap: cell.keyGap6, formNumber: formNumber, index: 6, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key7, imageView: cell.imageView7, keyWidth: cell.keyWidth7, keyHeight: cell.keyHeight7, keyGap: cell.keyGap6, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap6, formNumber: formNumber, index: 6, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 8 {
-            setTableDetailCell(key: cell.key8, keyWidth: cell.keyWidth8, keyHeight: cell.keyHeight8, keyGap: cell.keyGap7, formNumber: formNumber, index: 7, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key8, imageView: cell.imageView8, keyWidth: cell.keyWidth8, keyHeight: cell.keyHeight8, keyGap: cell.keyGap7, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap7, formNumber: formNumber, index: 7, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 9 {
-            setTableDetailCell(key: cell.key9, keyWidth: cell.keyWidth9, keyHeight: cell.keyHeight9, keyGap: cell.keyGap8, formNumber: formNumber, index: 8, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key9, imageView: cell.imageView9, keyWidth: cell.keyWidth9, keyHeight: cell.keyHeight9, keyGap: cell.keyGap8, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap8, formNumber: formNumber, index: 8, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 10 {
-            setTableDetailCell(key: cell.key10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, keyGap: cell.keyGap9, formNumber: formNumber, index: 9, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key10, imageView: cell.imageView10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, keyGap: cell.keyGap9, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap9, formNumber: formNumber, index: 9, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 11 {
-            setTableDetailCell(key: cell.key11, keyWidth: cell.keyWidth11, keyHeight: cell.keyHeight11, keyGap: cell.keyGap10, formNumber: formNumber, index: 10, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key11, imageView: cell.imageView11, keyWidth: cell.keyWidth11, keyHeight: cell.keyHeight11, keyGap: cell.keyGap10, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap10, formNumber: formNumber, index: 10, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 12 {
-            setTableDetailCell(key: cell.key12, keyWidth: cell.keyWidth12, keyHeight: cell.keyHeight12, keyGap: cell.keyGap11, formNumber: formNumber, index: 11, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key12, imageView: cell.imageView12, keyWidth: cell.keyWidth12, keyHeight: cell.keyHeight12, keyGap: cell.keyGap11, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap11, formNumber: formNumber, index: 11, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 13 {
-            setTableDetailCell(key: cell.key13, keyWidth: cell.keyWidth13, keyHeight: cell.keyHeight13, keyGap: cell.keyGap12, formNumber: formNumber, index: 12, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key13, imageView: cell.imageView13, keyWidth: cell.keyWidth13, keyHeight: cell.keyHeight13, keyGap: cell.keyGap12, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap12, formNumber: formNumber, index: 12, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 14 {
-            setTableDetailCell(key: cell.key14, keyWidth: cell.keyWidth14, keyHeight: cell.keyHeight14, keyGap: cell.keyGap13, formNumber: formNumber, index: 13, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key14, imageView: cell.imageView14, keyWidth: cell.keyWidth14, keyHeight: cell.keyHeight14, keyGap: cell.keyGap13, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap13, formNumber: formNumber, index: 13, formData: formData, cell: cell)
         }
-        
+
         if formData.subCellDataList!.count >= 15 {
-            setTableDetailCell(key: cell.key15, keyWidth: cell.keyWidth15, keyHeight: cell.keyHeight15, keyGap: cell.keyGap14, formNumber: formNumber, index: 14, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key15, imageView: cell.imageView15, keyWidth: cell.keyWidth15, keyHeight: cell.keyHeight15, keyGap: cell.keyGap14, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap14, formNumber: formNumber, index: 14, formData: formData, cell: cell)
         }
     }
     
-    func setTableDetailCell(key: UITextView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, formNumber: Int, index: Int, formData: FormData, cell: DFTableCell) {
+    func setTableDetailCell(key: UITextView, imageView: UIImageView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, imageHeight: NSLayoutConstraint, ImageGap: NSLayoutConstraint, formNumber: Int, index: Int, formData: FormData, cell: DFTableCell) {
         let subCell = formData.subCellDataList![index]
         
         if let fontSize = oriFormData?.cells[formNumber].subCellDataList![index].titleFont?.size {
@@ -1322,9 +1322,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         key.tag = index
         key.inputNumber = formNumber
         
+        imageView.tag = index
+        imageView.inputNumber = formNumber
+        
+        imageView.isHidden = true
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.black.cgColor
+        
         if let height = subCell.height {
             keyHeight.constant = height
         }
+        
+        imageHeight.constant = keyHeight.constant
         
         if let gap = subCell.cellGap {
             if index != 0 {
@@ -1447,6 +1456,27 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 key.backgroundColor = .yellow
             }else {
                 key.backgroundColor = .white
+            }
+            
+        }else if subCell.subType == "sign" {
+            
+            key.isEditable = false
+            key.isHidden = true
+            imageView.isHidden = false
+            
+        
+            let recognizer = getSignGesture(cellNumber: formNumber)
+            
+            imageView.addGestureRecognizer(recognizer)
+            
+            
+            if let signUrl = subCell.signUrl {
+                let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+                if let imageData = NSData(contentsOf: fileURL!) {
+                    let image = UIImage(data: imageData as Data)
+                    
+                    imageView.image = image
+                }
             }
             
         }else if subCell.subType == "form" {
@@ -1694,6 +1724,37 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         self.tableView.reloadData()
+        
+    }
+    
+    func getSignGesture(cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(toSign))
+        
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func toSign(_ sender: UITapGestureRecognizer) {
+        
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+    
+        let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+        let vc = storyboard.instantiateViewController(withIdentifier: "DFElecSignVC") as? DFElecSignVC
+        
+        
+        vc!.index = cellNumber
+        vc!.subCellIndex = subCellIndex
+        vc!.isFromSubCell = true
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        self.navigationItem.backBarButtonItem = backItem
+        self.navigationController?.pushViewController(vc!, animated: true)
         
     }
     
@@ -2357,22 +2418,39 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }else if segue.source is DFElecSignVC {
             if let elecSignVC = segue.source as? DFElecSignVC {
-                for formData in formDataList {
-                    if formData.formType == "sign", formData.formNumber == elecSignVC.index {
-                        
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            DispatchQueue.main.async {
-                                if let data = elecSignVC.signImage {
-                                    if let image = UIImage(data: data){
-                                        formData.image = image
-                                        self.tableView.reloadData()
+                if !elecSignVC.isFromSubCell {
+                    for formData in formDataList {
+                        if formData.formType == "sign", formData.formNumber == elecSignVC.index {
+                            
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                DispatchQueue.main.async {
+                                    if let data = elecSignVC.signImage {
+                                        if let image = UIImage(data: data){
+                                            formData.image = image
+                                            self.tableView.reloadData()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else {
+                    for formData in formDataList {
+                        if formData.formType == "sign", formData.formNumber == elecSignVC.index {
+                            
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                DispatchQueue.main.async {
+                                    if let data = elecSignVC.signImage {
+                                        if let image = UIImage(data: data){
+                                            formData.image = image
+                                            self.tableView.reloadData()
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-                
             }
         }
     }

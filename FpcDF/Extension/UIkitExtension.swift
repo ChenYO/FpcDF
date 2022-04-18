@@ -131,3 +131,19 @@ extension UIBarButtonItem {
         }
     }
 }
+
+extension UIImageView {
+    private struct AssociatedKey {
+        static var inputNumber: Int = 0
+    }
+    
+    public var inputNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.inputNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.inputNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+}

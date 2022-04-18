@@ -128,4 +128,6 @@ struct subCellData: Codable {
     var choiceValue: [String]?
     var keyBoardType: String?
     var borderColor: String?
+    
+    var signUrl: String?
 }
