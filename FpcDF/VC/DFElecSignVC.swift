@@ -13,6 +13,9 @@ class DFElecSignVC: UIViewController {
     @IBOutlet weak var drawingView: DFDrawingView!
     @IBOutlet weak var tipLabel: UILabel!
     
+    @IBOutlet weak var signImageView: UIImageView!
+    @IBOutlet weak var signTip: UILabel!
+    
     var signatureExport: UIImage?
     var imageView: UIImageView?
     var index = 0
@@ -35,10 +38,19 @@ class DFElecSignVC: UIViewController {
         
         tipLabel.isHidden = true
         
-//        self.view.makeToast(DFLocalizable.valueOf(.DF_SIGN_FAILED), duration: TimeInterval(1.0), position: CSToastPositionCenter)
-        //        let tap: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(imageTaped))
-        //
-        //        drawingView!.addGestureRecognizer(tap)
+        if signUrl != "" {
+            
+            drawingView.isHidden = true
+            let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+            if let imageData = NSData(contentsOf: fileURL!) {
+                let image = UIImage(data: imageData as Data)
+                
+                self.signImageView.image = image
+            }
+        }else {
+            self.signImageView.isHidden = true
+            self.signTip.isHidden = true
+        }
     }
     
     @objc func imageTaped(sender: UISwipeGestureRecognizer) {
@@ -54,6 +66,15 @@ class DFElecSignVC: UIViewController {
         if let imageView = imageView {
             imageView.removeFromSuperview()
         }
+        
+        if signUrl != "" {
+            drawingView.isHidden = false
+            signTip.isHidden = true
+            if let imageView = signImageView {
+                imageView.removeFromSuperview()
+            }
+
+        }
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -63,7 +84,7 @@ class DFElecSignVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        clearImage()
+//        clearImage()
     }
     
     

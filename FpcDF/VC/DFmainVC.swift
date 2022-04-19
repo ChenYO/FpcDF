@@ -1751,6 +1751,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         vc!.index = cellNumber
         vc!.subCellIndex = subCellIndex
         vc!.isFromSubCell = true
+        vc!.signUrl = formDataList[cellNumber].subCellDataList![subCellIndex].signUrl ?? ""
         
         let backItem = UIBarButtonItem()
         backItem.title = "Back"

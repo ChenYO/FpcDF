@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FPCDynamicForm"
-  spec.version      = "1.7.9"
+  spec.version      = "1.8.0"
   spec.summary      = "A short description of FPCDynamicForm."
 
   # This description is used to generate tags and improve search results.
