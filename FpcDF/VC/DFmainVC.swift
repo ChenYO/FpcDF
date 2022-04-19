@@ -1338,6 +1338,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let gap = subCell.cellGap {
             if index != 0 {
                 keyGap.constant = width * CGFloat(gap) / 100
+                ImageGap.constant = width * CGFloat(gap) / 100
             }
         }
         
@@ -2435,21 +2436,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 }else {
-                    for formData in formDataList {
-                        if formData.formType == "sign", formData.formNumber == elecSignVC.index {
-                            
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                DispatchQueue.main.async {
-                                    if let data = elecSignVC.signImage {
-                                        if let image = UIImage(data: data){
-                                            formData.image = image
-                                            self.tableView.reloadData()
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    formDataList[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
+                    
+                    self.tableView.reloadData()
                 }
             }
         }
