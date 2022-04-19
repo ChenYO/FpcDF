@@ -1314,7 +1314,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         key.layer.borderColor = UIColor.black.cgColor
         key.backgroundColor = .white
         keyWidth.constant = width * CGFloat(subCell.width!) / 100
-        
+        key.isHidden = false
         key.delegate = self
         key.isUserInteractionEnabled = true
         
