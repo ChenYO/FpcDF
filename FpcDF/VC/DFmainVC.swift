@@ -153,13 +153,36 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.clear()
                 
                 self.title = obj.formTitle
-                self.setButtons()
+//                self.setButtons()
+                
+                let buttonItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
+                
+//                buttonItem.tag = index
+//                if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+//                    buttonItem.tintColor = .white
+//                }
+                self.navigationItem.rightBarButtonItems?.append(buttonItem)
+                
                 self.setFormData()
                 
                 self.tableView.reloadData()
                 
             } catch {
             }
+        }
+    }
+ 
+    @objc func saveForm() {
+        do {
+            let jsonEncoder = JSONEncoder()
+            let oriJsonData = try jsonEncoder.encode(self.oriFormData)
+            let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
+            
+            UserDefaults.standard.set(json, forKey: "formString")
+            
+            print("save")
+        } catch {
+            
         }
     }
     
@@ -2438,6 +2461,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }else {
                     formDataList[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
+                    
+                    self.oriFormData?.cells[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
                     
                     self.tableView.reloadData()
                 }
