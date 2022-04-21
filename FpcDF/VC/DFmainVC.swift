@@ -2372,6 +2372,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     formData.subCellDataList![tagInt].textValue = textView.text!
                     
                     self.oriFormData?.cells[formNumber].subCellDataList![tagInt].textValue = textView.text!
+                    self.saveForm()
                 }
             }
         }
