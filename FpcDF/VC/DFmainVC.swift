@@ -1586,7 +1586,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.oriFormData?.cells[formNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
             }
         }
-
+        self.saveForm()
         self.tableView.reloadData()
         self.view.endEditing(true)
     }
@@ -1616,7 +1616,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)!].id
         
-        
+        self.saveForm()
         tableView.reloadData()
     }
     
@@ -1644,7 +1644,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = option.id
                 
                 self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
-                
+                self.saveForm()
                 self.tableView.reloadData()
             }
             actionSheet.addAction(option)
@@ -1698,11 +1698,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     return option.id == id
                 }) {
                     self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
+                    self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
                 } else {
                     self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                    self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
                 }
                 
-                
+                self.saveForm()
                 self.tableView.reloadData()
             }
             actionSheet.addAction(action)
@@ -1756,7 +1758,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
         }
         
-        
+        self.saveForm()
         self.tableView.reloadData()
         
     }

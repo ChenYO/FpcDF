@@ -71,7 +71,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OyF-kt-xLz" customClass="PaddingLabel" customModule="FPCDynamicForm" customModuleProvider="target">
-                                        <rect key="frame" x="381.5" y="8" width="22.5" height="24.5"/>
+                                        <rect key="frame" x="393.5" y="10" width="10.5" height="20.5"/>
                                         <color key="backgroundColor" red="0.36577099410000002" green="0.42444721629999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -247,7 +247,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8vx-5A-pqO">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="30" y="74" width="354" height="758"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欲重新簽名請按清除" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6JU-Pc-Zyv">
@@ -260,15 +260,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UkO-hA-GcF" firstAttribute="top" secondItem="h2P-pS-DfI" secondAttribute="bottom" id="AT7-4N-LTl"/>
-                            <constraint firstAttribute="trailing" secondItem="8vx-5A-pqO" secondAttribute="trailing" id="BGG-sk-boJ"/>
+                            <constraint firstAttribute="trailing" secondItem="8vx-5A-pqO" secondAttribute="trailing" constant="30" id="BGG-sk-boJ"/>
                             <constraint firstItem="h2P-pS-DfI" firstAttribute="leading" secondItem="Gh6-fj-nd5" secondAttribute="leading" id="Ef5-0X-rYT"/>
-                            <constraint firstItem="8vx-5A-pqO" firstAttribute="top" secondItem="BSd-bO-Yrm" secondAttribute="bottom" id="I4H-5l-eZu"/>
-                            <constraint firstItem="UkO-hA-GcF" firstAttribute="top" secondItem="8vx-5A-pqO" secondAttribute="bottom" id="IhM-RP-Wjg"/>
+                            <constraint firstItem="8vx-5A-pqO" firstAttribute="top" secondItem="BSd-bO-Yrm" secondAttribute="bottom" constant="30" id="I4H-5l-eZu"/>
+                            <constraint firstItem="UkO-hA-GcF" firstAttribute="top" secondItem="8vx-5A-pqO" secondAttribute="bottom" constant="30" id="IhM-RP-Wjg"/>
                             <constraint firstItem="h2P-pS-DfI" firstAttribute="top" secondItem="BSd-bO-Yrm" secondAttribute="bottom" id="R8w-AO-QfD"/>
                             <constraint firstItem="UkO-hA-GcF" firstAttribute="top" secondItem="6JU-Pc-Zyv" secondAttribute="bottom" constant="20" id="VW2-lq-6nw"/>
                             <constraint firstAttribute="trailing" secondItem="h2P-pS-DfI" secondAttribute="trailing" id="WF9-M6-kRa"/>
                             <constraint firstAttribute="trailing" secondItem="6JU-Pc-Zyv" secondAttribute="trailing" constant="20" id="dd0-8G-chc"/>
-                            <constraint firstItem="8vx-5A-pqO" firstAttribute="leading" secondItem="Gh6-fj-nd5" secondAttribute="leading" id="vhQ-Uh-Kg2"/>
+                            <constraint firstItem="8vx-5A-pqO" firstAttribute="leading" secondItem="Gh6-fj-nd5" secondAttribute="leading" constant="30" id="vhQ-Uh-Kg2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -287,7 +287,7 @@
     </scenes>
     <designables>
         <designable name="OyF-kt-xLz">
-            <size key="intrinsicContentSize" width="22.5" height="24.5"/>
+            <size key="intrinsicContentSize" width="10.5" height="20.5"/>
         </designable>
     </designables>
     <resources>
