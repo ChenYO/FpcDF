@@ -602,6 +602,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if subCell.cellHeight != 0 {
                         data.subCellDataList![subIndex].height = CGFloat(subCell.cellHeight!)
                     }
+                    
+                    if subCell.subType == "dropDown" {
+                        if subCell.textValue != "" {
+                            for option in subCell.options! {
+                                if option.id == subCell.textValue {
+                                    subCell.title = option.name
+                                }
+                            }
+                        }
+                    }
                 }
                 
                 formDataList.append(data)
