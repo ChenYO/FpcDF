@@ -102,7 +102,7 @@ struct file: Codable {
 }
 
 
-struct subCellData: Codable {
+class subCellData: Codable {
     var id: String?
     var title: String?
     var subType: String?
