@@ -284,7 +284,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         (action) in
                         let url : URL = URL(string: storeAppURL)!
                         if UIApplication.shared.canOpenURL(url) {
-                            UIApplication.shared.open(url)
+                            UIApplication.shared.openURL(url)
                         }
                     })
                     
