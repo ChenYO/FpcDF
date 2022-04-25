@@ -11,6 +11,7 @@ import UIKit
 class FormData {
     var mainType: String?
     var formType: String?
+    var index: Int?
     var formNumber: Int?
     var cellNumber: Int?
     var formId: String?

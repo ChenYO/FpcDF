@@ -27,8 +27,19 @@ extension UITextField {
 
 extension UITextView {
     private struct AssociatedKey {
+        static var formNumber: Int = 0
         static var inputNumber: Int = 0
         static var width: CGFloat = 0.0
+    }
+    
+    public var formNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.formNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
     public var inputNumber: Int {
@@ -54,7 +65,29 @@ extension UITextView {
 
 extension UITapGestureRecognizer {
     private struct AssociatedKey {
+        static var index: Int = 0
+        static var formNumber: Int = 0
         static var inputNumber: Int = 0
+    }
+    
+    public var index: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.index) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.index, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var formNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.formNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
     public var inputNumber: Int {
@@ -118,7 +151,29 @@ extension UIDocumentPickerViewController {
 
 extension UIBarButtonItem {
     private struct AssociatedKey {
+        static var index: Int = 0
+        static var formNumber: Int = 0
         static var inputNumber: Int = 0
+    }
+    
+    public var index: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.index) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.index, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var formNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.formNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
     public var inputNumber: Int {
@@ -134,7 +189,18 @@ extension UIBarButtonItem {
 
 extension UIImageView {
     private struct AssociatedKey {
+        static var formNumber: Int = 0
         static var inputNumber: Int = 0
+    }
+    
+    public var formNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.formNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
     public var inputNumber: Int {

@@ -19,6 +19,8 @@ class DFElecSignVC: UIViewController {
     var signatureExport: UIImage?
     var imageView: UIImageView?
     var index = 0
+    var formNumber = 0
+    var cellIndex = 0
     var subCellIndex = 0
     var signImage: Data?
     var isFromSubCell = false

@@ -17,6 +17,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var tableView: UITableView!
     
     //存放原始表單資料
+    var oriFormDataList: [FormListData] = []
     var oriFormData: FormListData?
     var keyboardPresented = false
     var screenHeight:CGFloat = 0.0
@@ -163,7 +164,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //                }
                 self.navigationItem.rightBarButtonItems?.append(buttonItem)
                 
-                self.setFormData()
+                self.setTableFormData()
                 
                 self.tableView.reloadData()
                 
@@ -282,8 +283,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {
                         (action) in
                         let url : URL = URL(string: storeAppURL)!
-                        if UIApplication.shared.canOpenURL(url) {
-                            UIApplication.shared.openURL(url)
+                        if UIApplication.shared.canOpenUL(url) {
+                            UIApplication.shared.open(url)
                         }
                     })
                     
@@ -489,9 +490,68 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    func setTableFormData() {
+        formDataList = [FormData]()
+        
+        var index = 0
+        for (formIndex, form) in oriFormDataList.enumerated() {
+            for (cellIndex, formData) in form.cells.enumerated() {
+                let data = FormData()
+                
+                data.formNumber = formIndex
+                data.cellNumber = cellIndex
+                data.index = index
+                data.title = formData.title
+                data.formType = formData.type
+                data.formId = formData.id
+                data.keyValueArray = formData.keyValueArray
+                data.inputValue = formData.textValue
+                data.optionValue = formData.choiceValue
+                data.dynamicField = formData.dynamicField
+                data.isReadOnly = formData.isReadOnly
+                data.isRequired = formData.isRequired
+                data.actionTip = formData.actionTip
+                data.actions = formData.actions
+                
+                data.fileList = formData.fileList
+                
+                data.subCellDataList = formData.subCellDataList
+                
+                index += 1
+                
+                switch formData.type {
+                case "tableKey":
+                    
+                    for (subIndex, subCell) in data.subCellDataList!.enumerated() {
+                        if subCell.cellHeight != 0 {
+                            data.subCellDataList![subIndex].height = CGFloat(subCell.cellHeight!)
+                        }
+                        
+                        if subCell.subType == "dropDown" {
+                            if subCell.textValue != "" {
+                                for option in subCell.options! {
+                                    if option.id == subCell.textValue {
+                                        subCell.title = option.name
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    formDataList.append(data)
+                case "tableTextField":
+                    formDataList.append(data)
+                default:
+                    formDataList.append(data)
+                }
+            }
+        }
+    }
+    
     //設定表單UI資料，須記錄每個cell的index
     func setFormData() {
         formDataList = [FormData]()
+        
         for (index, formData) in oriFormData!.cells.enumerated() {
             let data = FormData()
             
@@ -1262,78 +1322,80 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = formData.cellNumber!
         
         if formData.subCellDataList!.count >= 1 {
-            setTableDetailCell(key: cell.key1, imageView: cell.imageView1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, keyGap: cell.keyGap1, keyTop: cell.keyTop1, imageHeight: cell.imageHeight1, ImageGap: cell.keyGap1, cellNumber: cellNumber, index: 0, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key1, imageView: cell.imageView1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, keyGap: cell.keyGap1, keyTop: cell.keyTop1, imageHeight: cell.imageHeight1, ImageGap: cell.keyGap1, cellNumber: cellNumber, cellIndex: 0, formData: formData, cell: cell)
         }
         
         if formData.subCellDataList!.count >= 2 {
-            setTableDetailCell(key: cell.key2, imageView: cell.imageView2, keyWidth: cell.keyWidth2, keyHeight: cell.keyHeight2, keyGap: cell.keyGap1, keyTop: cell.keyTop2, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap1, cellNumber: cellNumber, index: 1, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key2, imageView: cell.imageView2, keyWidth: cell.keyWidth2, keyHeight: cell.keyHeight2, keyGap: cell.keyGap1, keyTop: cell.keyTop2, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap1, cellNumber: cellNumber, cellIndex: 1, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 3 {
-            setTableDetailCell(key: cell.key3, imageView: cell.imageView3, keyWidth: cell.keyWidth3, keyHeight: cell.keyHeight3, keyGap: cell.keyGap2, keyTop: cell.keyTop3, imageHeight: cell.imageHeight3, ImageGap: cell.ImageGap2, cellNumber: cellNumber, index: 2, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key3, imageView: cell.imageView3, keyWidth: cell.keyWidth3, keyHeight: cell.keyHeight3, keyGap: cell.keyGap2, keyTop: cell.keyTop3, imageHeight: cell.imageHeight3, ImageGap: cell.ImageGap2, cellNumber: cellNumber, cellIndex: 2, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 4 {
-            setTableDetailCell(key: cell.key4, imageView: cell.imageView4, keyWidth: cell.keyWidth4, keyHeight: cell.keyHeight4, keyGap: cell.keyGap3, keyTop: cell.keyTop4, imageHeight: cell.imageHeight4, ImageGap: cell.ImageGap3, cellNumber: cellNumber, index: 3, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key4, imageView: cell.imageView4, keyWidth: cell.keyWidth4, keyHeight: cell.keyHeight4, keyGap: cell.keyGap3, keyTop: cell.keyTop4, imageHeight: cell.imageHeight4, ImageGap: cell.ImageGap3, cellNumber: cellNumber, cellIndex: 3, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 5 {
-            setTableDetailCell(key: cell.key5, imageView: cell.imageView5, keyWidth: cell.keyWidth5, keyHeight: cell.keyHeight5, keyGap: cell.keyGap4, keyTop: cell.keyTop5, imageHeight: cell.imageHeight5, ImageGap: cell.ImageGap4, cellNumber: cellNumber, index: 4, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key5, imageView: cell.imageView5, keyWidth: cell.keyWidth5, keyHeight: cell.keyHeight5, keyGap: cell.keyGap4, keyTop: cell.keyTop5, imageHeight: cell.imageHeight5, ImageGap: cell.ImageGap4, cellNumber: cellNumber, cellIndex: 4, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 6 {
-            setTableDetailCell(key: cell.key6, imageView: cell.imageView6, keyWidth: cell.keyWidth6, keyHeight: cell.keyHeight6, keyGap: cell.keyGap5, keyTop: cell.keyTop6, imageHeight: cell.imageHeight6, ImageGap: cell.ImageGap5, cellNumber: cellNumber, index: 5, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key6, imageView: cell.imageView6, keyWidth: cell.keyWidth6, keyHeight: cell.keyHeight6, keyGap: cell.keyGap5, keyTop: cell.keyTop6, imageHeight: cell.imageHeight6, ImageGap: cell.ImageGap5, cellNumber: cellNumber, cellIndex: 5, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 7 {
-            setTableDetailCell(key: cell.key7, imageView: cell.imageView7, keyWidth: cell.keyWidth7, keyHeight: cell.keyHeight7, keyGap: cell.keyGap6, keyTop: cell.keyTop7, imageHeight: cell.imageHeight7, ImageGap: cell.ImageGap6, cellNumber: cellNumber, index: 6, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key7, imageView: cell.imageView7, keyWidth: cell.keyWidth7, keyHeight: cell.keyHeight7, keyGap: cell.keyGap6, keyTop: cell.keyTop7, imageHeight: cell.imageHeight7, ImageGap: cell.ImageGap6, cellNumber: cellNumber, cellIndex: 6, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 8 {
-            setTableDetailCell(key: cell.key8, imageView: cell.imageView8, keyWidth: cell.keyWidth8, keyHeight: cell.keyHeight8, keyGap: cell.keyGap7, keyTop: cell.keyTop8, imageHeight: cell.imageHeight8, ImageGap: cell.ImageGap7, cellNumber: cellNumber, index: 7, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key8, imageView: cell.imageView8, keyWidth: cell.keyWidth8, keyHeight: cell.keyHeight8, keyGap: cell.keyGap7, keyTop: cell.keyTop8, imageHeight: cell.imageHeight8, ImageGap: cell.ImageGap7, cellNumber: cellNumber, cellIndex: 7, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 9 {
-            setTableDetailCell(key: cell.key9, imageView: cell.imageView9, keyWidth: cell.keyWidth9, keyHeight: cell.keyHeight9, keyGap: cell.keyGap8, keyTop: cell.keyTop9, imageHeight: cell.imageHeight9, ImageGap: cell.ImageGap8, cellNumber: cellNumber, index: 8, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key9, imageView: cell.imageView9, keyWidth: cell.keyWidth9, keyHeight: cell.keyHeight9, keyGap: cell.keyGap8, keyTop: cell.keyTop9, imageHeight: cell.imageHeight9, ImageGap: cell.ImageGap8, cellNumber: cellNumber, cellIndex: 8, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 10 {
-            setTableDetailCell(key: cell.key10, imageView: cell.imageView10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, keyGap: cell.keyGap9, keyTop: cell.keyTop10, imageHeight: cell.imageHeight10, ImageGap: cell.ImageGap9, cellNumber: cellNumber, index: 9, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key10, imageView: cell.imageView10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, keyGap: cell.keyGap9, keyTop: cell.keyTop10, imageHeight: cell.imageHeight10, ImageGap: cell.ImageGap9, cellNumber: cellNumber, cellIndex: 9, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 11 {
-            setTableDetailCell(key: cell.key11, imageView: cell.imageView11, keyWidth: cell.keyWidth11, keyHeight: cell.keyHeight11, keyGap: cell.keyGap10, keyTop: cell.keyTop11, imageHeight: cell.imageHeight11, ImageGap: cell.ImageGap10, cellNumber: cellNumber, index: 10, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key11, imageView: cell.imageView11, keyWidth: cell.keyWidth11, keyHeight: cell.keyHeight11, keyGap: cell.keyGap10, keyTop: cell.keyTop11, imageHeight: cell.imageHeight11, ImageGap: cell.ImageGap10, cellNumber: cellNumber, cellIndex: 10, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 12 {
-            setTableDetailCell(key: cell.key12, imageView: cell.imageView12, keyWidth: cell.keyWidth12, keyHeight: cell.keyHeight12, keyGap: cell.keyGap11, keyTop: cell.keyTop12, imageHeight: cell.imageHeight12, ImageGap: cell.ImageGap11, cellNumber: cellNumber, index: 11, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key12, imageView: cell.imageView12, keyWidth: cell.keyWidth12, keyHeight: cell.keyHeight12, keyGap: cell.keyGap11, keyTop: cell.keyTop12, imageHeight: cell.imageHeight12, ImageGap: cell.ImageGap11, cellNumber: cellNumber, cellIndex: 11, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 13 {
-            setTableDetailCell(key: cell.key13, imageView: cell.imageView13, keyWidth: cell.keyWidth13, keyHeight: cell.keyHeight13, keyGap: cell.keyGap12, keyTop: cell.keyTop13, imageHeight: cell.imageHeight13, ImageGap: cell.ImageGap12, cellNumber: cellNumber, index: 12, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key13, imageView: cell.imageView13, keyWidth: cell.keyWidth13, keyHeight: cell.keyHeight13, keyGap: cell.keyGap12, keyTop: cell.keyTop13, imageHeight: cell.imageHeight13, ImageGap: cell.ImageGap12, cellNumber: cellNumber, cellIndex: 12, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 14 {
-            setTableDetailCell(key: cell.key14, imageView: cell.imageView14, keyWidth: cell.keyWidth14, keyHeight: cell.keyHeight14, keyGap: cell.keyGap13, keyTop: cell.keyTop14, imageHeight: cell.imageHeight14, ImageGap: cell.ImageGap13, cellNumber: cellNumber, index: 13, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key14, imageView: cell.imageView14, keyWidth: cell.keyWidth14, keyHeight: cell.keyHeight14, keyGap: cell.keyGap13, keyTop: cell.keyTop14, imageHeight: cell.imageHeight14, ImageGap: cell.ImageGap13, cellNumber: cellNumber, cellIndex: 13, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 15 {
-            setTableDetailCell(key: cell.key15, imageView: cell.imageView15, keyWidth: cell.keyWidth15, keyHeight: cell.keyHeight15, keyGap: cell.keyGap14, keyTop: cell.keyTop15, imageHeight: cell.imageHeight15, ImageGap: cell.ImageGap14, cellNumber: cellNumber, index: 14, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key15, imageView: cell.imageView15, keyWidth: cell.keyWidth15, keyHeight: cell.keyHeight15, keyGap: cell.keyGap14, keyTop: cell.keyTop15, imageHeight: cell.imageHeight15, ImageGap: cell.ImageGap14, cellNumber: cellNumber, cellIndex: 14, formData: formData, cell: cell)
         }
     }
     
-    func setTableDetailCell(key: UITextView, imageView: UIImageView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, keyTop: NSLayoutConstraint, imageHeight: NSLayoutConstraint, ImageGap: NSLayoutConstraint, cellNumber: Int, index: Int, formData: FormData, cell: DFTableCell) {
-        let subCell = formData.subCellDataList![index]
+    func setTableDetailCell(key: UITextView, imageView: UIImageView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, keyTop: NSLayoutConstraint, imageHeight: NSLayoutConstraint, ImageGap: NSLayoutConstraint, cellNumber: Int, cellIndex: Int, formData: FormData, cell: DFTableCell) {
+        let subCell = formData.subCellDataList![cellIndex]
         
-        if let fontSize = oriFormData?.cells[cellNumber].subCellDataList![index].titleFont?.size {
+        let formNumber = formData.formNumber
+        
+        if let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![cellIndex].titleFont?.size {
             key.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         }
         
-        if let fontColor = oriFormData?.cells[cellNumber].subCellDataList![index].titleFont?.color {
+        if let fontColor = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![cellIndex].titleFont?.color {
             key.textColor = UIColor(hexString: fontColor)
         }
         
-        if let alignment = oriFormData?.cells[cellNumber].subCellDataList![index].titleFont?.alignment {
+        if let alignment = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![cellIndex].titleFont?.alignment {
             
             if alignment == "left" {
                 key.textAlignment = .left
@@ -1344,24 +1406,30 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
 
+        
         key.layer.borderWidth = 1
         key.layer.borderColor = UIColor.black.cgColor
         key.backgroundColor = .white
-        keyWidth.constant = width * CGFloat(subCell.width!) / 100
         key.isHidden = false
         key.delegate = self
         key.isUserInteractionEnabled = true
         
         key.width = keyWidth.constant
-        key.tag = index
+        key.tag = cellIndex
+        key.formNumber = formNumber!
         key.inputNumber = cellNumber
-        
-        imageView.tag = index
+        imageView.tag = cellIndex
+        imageView.formNumber = formNumber!
         imageView.inputNumber = cellNumber
+        
+        keyWidth.constant = width * CGFloat(subCell.width!) / 100
+        
         
         imageView.isHidden = true
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.black.cgColor
+        
+        
         
         if let height = subCell.height {
             keyHeight.constant = height
@@ -1370,7 +1438,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         imageHeight.constant = keyHeight.constant
         
         if let gap = subCell.cellGap {
-            if index != 0 {
+            if cellIndex != 0 {
                 keyGap.constant = width * CGFloat(gap) / 100
                 ImageGap.constant = width * CGFloat(gap) / 100
             }
@@ -1382,7 +1450,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         key.text = subCell.title
         
-
         key.isScrollEnabled = false
         key.isEditable = true
         
@@ -1394,7 +1461,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if subCell.subType == "label" {
             
+//            key.backgroundColor = UIColor(hexString: "#F0F0F0")
             key.isEditable = false
+            
         }else if subCell.subType == "textArea" {
             
             key.isScrollEnabled = true
@@ -1407,7 +1476,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.isEditable = false
             
-            let recognizer = getDropDownGesture(cellNumber: cellNumber)
+            let recognizer = getDropDownGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1417,7 +1486,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }else if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
             
             key.isEditable = false
-            
             var format = "yyyy-MM-dd"
             
             if subCell.subType == "time" {
@@ -1428,14 +1496,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 format = "yyyy-MM-dd HH:mm"
             }
             
-            setTableTextFieldDatePicker(type: subCell.subType!, formNumber: formData.formNumber!, subCellIndex: index, key: key)
+            setTableTextFieldDatePicker(type: subCell.subType!, index: formData.index!, formNumber: formNumber!, cellNumber: formData.cellNumber!, subCellIndex: cellIndex, key: key)
             
-            if formData.subCellDataList![index].textValue != "" {
-                key.text = setTimestampToDate(timestampString: formData.subCellDataList![index].textValue!, format: format)
+            if formData.subCellDataList![cellIndex].textValue != "" {
+                key.text = setTimestampToDate(timestampString: formData.subCellDataList![cellIndex].textValue!, format: format)
             }
+            
         }else if subCell.subType == "radio" {
             
-            let recognizer = getRadioGesture(cellNumber: cellNumber)
+            let recognizer = getRadioGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1453,12 +1522,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         optionStr += "\n"
                     }
                 }
+                
             }
             
             key.text = optionStr
         }else if subCell.subType == "checkBox" {
             
-            let recognizer = getCheckBoxGesture(cellNumber: cellNumber)
+            let recognizer = getCheckBoxGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1483,7 +1553,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.isEditable = false
             
-            let recognizer = getSingleChoiceGesture(cellNumber: cellNumber)
+            let recognizer = getSingleChoiceGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1500,7 +1570,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             imageView.isHidden = false
             
         
-            let recognizer = getSignGesture(cellNumber: cellNumber)
+            let recognizer = getSignGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             imageView.addGestureRecognizer(recognizer)
             
@@ -1523,15 +1593,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.isEditable = false
             
-            let recognizer = getFormGesture(cellNumber: cellNumber)
+            let recognizer = getFormGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
-            
-            
         }
     }
     
-    func setTableTextFieldDatePicker(type: String, formNumber: Int, subCellIndex: Int, key: UITextView) {
+    func setTableTextFieldDatePicker(type: String, index: Int, formNumber: Int, cellNumber: Int, subCellIndex: Int, key: UITextView) {
         let toolBar = UIToolbar()
         let formatter = DateFormatter()
         let datePicker:UIDatePicker = UIDatePicker()
@@ -1561,12 +1629,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         dateFormatter.dateFormatter = formatter
         dateFormatter.datePicker = datePicker
         
-        formDataList[formNumber].dateFormatterList.append(dateFormatter)
+        formDataList[index].dateFormatterList.removeAll()
+        
+        formDataList[index].dateFormatterList.append(dateFormatter)
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(subCellDoneButtonTapped))
         toolBar.setItems([doneButton], animated: true)
         
-        doneButton.tag = formNumber
+        doneButton.tag = cellNumber
+        doneButton.index = index
+        doneButton.formNumber = formNumber
         doneButton.inputNumber = subCellIndex
         
         
@@ -1579,17 +1651,19 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @objc func subCellDoneButtonTapped(sender: UIBarButtonItem) {
         // 依據元件的 tag 取得 UITextField
         
-        let formNumber = sender.tag
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.tag
         let subCellIndex = sender.inputNumber
         
-        for dateFormatter in formDataList[formNumber].dateFormatterList {
+        for dateFormatter in formDataList[index].dateFormatterList {
             if dateFormatter.index == subCellIndex {
                 let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
                 print(timeInterval)
                 
-                formDataList[formNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                formDataList[index].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
                 
-                self.oriFormData?.cells[formNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
             }
         }
         self.saveForm()
@@ -1597,10 +1671,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.view.endEditing(true)
     }
     
-    func getDropDownGesture(cellNumber: Int) -> UITapGestureRecognizer{
+    func getDropDownGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(dropOption))
         
+        recognizer.index = index
+        recognizer.formNumber = formNumber
         recognizer.inputNumber = cellNumber
         
         
@@ -1609,27 +1685,33 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @objc func dropOption(_ sender: UITapGestureRecognizer) {
+        let index = sender.index
+        let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
-        self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
+        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
         
-        if (self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)! >= (self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
-            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
+        
+        if (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!) >= (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
         }
         
-        formDataList[cellNumber].subCellDataList![subCellIndex].title = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)!].name
+        formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
         
-        self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)!].id
+        
+        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)!].id
         
         self.saveForm()
         tableView.reloadData()
     }
     
-    func getRadioGesture(cellNumber: Int) -> UITapGestureRecognizer{
+    func getRadioGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(radioOption))
         
+        recognizer.index = index
+        recognizer.formNumber = formNumber
         recognizer.inputNumber = cellNumber
         
         
@@ -1637,23 +1719,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @objc func radioOption(_ sender: UITapGestureRecognizer) {
-        
+        let index = sender.index
+        let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
         let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
         
         
-        for option in formDataList[cellNumber].subCellDataList![subCellIndex].options! {
-            let option = UIAlertAction(title: option.name, style: .default) { action in
+        for option in formDataList[index].subCellDataList![subCellIndex].options! {
+            let action = UIAlertAction(title: option.name, style: .default) { action in
                 
-                self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = option.id
+                self.formDataList[index].subCellDataList![subCellIndex].textValue = option.id
                 
-                self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
                 self.saveForm()
                 self.tableView.reloadData()
             }
-            actionSheet.addAction(option)
+            actionSheet.addAction(action)
         }
         
         let option = UIAlertAction(title: "取消", style: .destructive) { action in
@@ -1679,10 +1762,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
-    func getCheckBoxGesture(cellNumber: Int) -> UITapGestureRecognizer{
+    func getCheckBoxGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(checkBoxOption))
         
+        recognizer.index = index
+        recognizer.formNumber = formNumber
         recognizer.inputNumber = cellNumber
         
         
@@ -1690,24 +1775,25 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @objc func checkBoxOption(_ sender: UITapGestureRecognizer) {
-        
+        let index = sender.index
+        let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
         let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
         
         
-        for option in formDataList[cellNumber].subCellDataList![subCellIndex].options! {
+        for option in formDataList[index].subCellDataList![subCellIndex].options! {
             let action = UIAlertAction(title: option.name, style: .default) { action in
                 
-                if let index = self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
+                if let index = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
                     return option.id == id
                 }) {
-                    self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
-                    self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
+                    self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
                 } else {
-                    self.formDataList[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
-                    self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                    self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
                 }
                 
                 self.saveForm()
@@ -1739,10 +1825,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
-    func getSingleChoiceGesture(cellNumber: Int) -> UITapGestureRecognizer{
+    func getSingleChoiceGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(singleChoice))
         
+        recognizer.index = index
+        recognizer.formNumber = formNumber
         recognizer.inputNumber = cellNumber
         
         
@@ -1750,18 +1838,19 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @objc func singleChoice(_ sender: UITapGestureRecognizer) {
-        
+        let index = sender.index
+        let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
-        if self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
-            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = "Y"
+        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
+            self.formDataList[index].subCellDataList![subCellIndex].textValue = "Y"
             
-            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = "Y"
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = "Y"
         }else {
-            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+            self.formDataList[index].subCellDataList![subCellIndex].textValue = ""
             
-            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
         }
         
         self.saveForm()
@@ -1769,10 +1858,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
-    func getSignGesture(cellNumber: Int) -> UITapGestureRecognizer{
+    func getSignGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(toSign))
         
+        recognizer.index = index
+        recognizer.formNumber = formNumber
         recognizer.inputNumber = cellNumber
         
         
@@ -1780,7 +1871,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @objc func toSign(_ sender: UITapGestureRecognizer) {
-        
+        let index = sender.index
+        let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
@@ -1788,11 +1880,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "DFElecSignVC") as? DFElecSignVC
         
-        
-        vc!.index = cellNumber
+        vc!.index = index
+        vc!.formNumber = formNumber
+        vc!.cellIndex = cellNumber
         vc!.subCellIndex = subCellIndex
         vc!.isFromSubCell = true
-        vc!.signUrl = formDataList[cellNumber].subCellDataList![subCellIndex].signUrl ?? ""
+        vc!.signUrl = formDataList[index].subCellDataList![subCellIndex].signUrl ?? ""
         
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
@@ -1801,10 +1894,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
-    func getFormGesture(cellNumber: Int) -> UITapGestureRecognizer{
+    func getFormGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(getFrom))
         
+        recognizer.index = index
+        recognizer.formNumber = formNumber
         recognizer.inputNumber = cellNumber
         
         
@@ -1812,7 +1907,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @objc func getFrom(_ sender: UITapGestureRecognizer) {
-        
+        let index = sender.index
+        let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
@@ -2095,7 +2191,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
             let vc = storyboard.instantiateViewController(withIdentifier: "DFElecSignVC") as? DFElecSignVC
             
-            vc?.index = formData.formNumber ?? -1
+            vc?.cellIndex = formData.formNumber ?? -1
             
             let backItem = UIBarButtonItem()
             if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
@@ -2359,25 +2455,27 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     public func textViewDidChange(_ textView: UITextView) {
-        let tagInt = textView.tag
-        let formNumber = textView.inputNumber
+        
+        let formNumber = textView.formNumber
+        let subCellIndex = textView.tag
+        let cellNumber = textView.inputNumber
         
         for formData in formDataList {
             if formData.formType == "textArea" {
-                if formData.mainType == "dynamicTextArea", tagInt == formData.formNumber {
+                if formData.mainType == "dynamicTextArea", subCellIndex == formData.formNumber {
                     formData.inputValue = textView.text!
-                    self.oriFormData?.cells[tagInt].dynamicField?[textView.inputNumber].name = textView.text!
+                    self.oriFormData?.cells[subCellIndex].dynamicField?[textView.inputNumber].name = textView.text!
                 }else {
-                    if tagInt == formData.formNumber {
+                    if subCellIndex == formData.formNumber {
                         formData.inputValue = textView.text!
-                        self.oriFormData?.cells[tagInt].textValue = textView.text!
+                        self.oriFormData?.cells[subCellIndex].textValue = textView.text!
                     }
                 }
             }else if formData.formType == "tableKey" {
-                if formData.formNumber == formNumber {
-                    formData.subCellDataList![tagInt].textValue = textView.text!
+                if formData.formNumber == cellNumber, formData.formNumber == formNumber {
+                    formData.subCellDataList![subCellIndex].textValue = textView.text!
                     
-                    self.oriFormData?.cells[formNumber].subCellDataList![tagInt].textValue = textView.text!
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textView.text!
                     self.saveForm()
                 }
             }
@@ -2393,15 +2491,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        let formNumber = textView.inputNumber
+        let formNumber = textView.formNumber
+        let cellNumber = textView.inputNumber
         let subCellIndex = textView.tag
         let width = textView.width
         
-        adjustTextView(textView, layout: false, width: width, formNumber: formNumber, index: subCellIndex)
+        adjustTextView(textView, layout: false, width: width, cellNumber: cellNumber, index: subCellIndex)
 
     }
     
-    func adjustTextView(_ textView: UITextView, layout: Bool, width: CGFloat, formNumber: Int, index: Int) {
+    func adjustTextView(_ textView: UITextView, layout: Bool, width: CGFloat, cellNumber: Int, index: Int) {
         
         let fixedWidth = width
         textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -2464,7 +2563,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let elecSignVC = segue.source as? DFElecSignVC {
                 if !elecSignVC.isFromSubCell {
                     for formData in formDataList {
-                        if formData.formType == "sign", formData.formNumber == elecSignVC.index {
+                        if formData.formType == "sign", formData.formNumber == elecSignVC.cellIndex {
                             
                             DispatchQueue.global(qos: .userInitiated).async {
                                 DispatchQueue.main.async {
@@ -2481,7 +2580,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }else {
                     formDataList[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
                     
-                    self.oriFormData?.cells[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
+                    self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
                     
                     self.tableView.reloadData()
                 }
