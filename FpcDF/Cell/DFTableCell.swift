@@ -107,7 +107,22 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyGap13: NSLayoutConstraint!
     @IBOutlet weak var keyGap14: NSLayoutConstraint!
     
-
+    @IBOutlet weak var keyTop1: NSLayoutConstraint!
+    @IBOutlet weak var keyTop2: NSLayoutConstraint!
+    @IBOutlet weak var keyTop3: NSLayoutConstraint!
+    @IBOutlet weak var keyTop4: NSLayoutConstraint!
+    @IBOutlet weak var keyTop5: NSLayoutConstraint!
+    @IBOutlet weak var keyTop6: NSLayoutConstraint!
+    @IBOutlet weak var keyTop7: NSLayoutConstraint!
+    @IBOutlet weak var keyTop8: NSLayoutConstraint!
+    @IBOutlet weak var keyTop9: NSLayoutConstraint!
+    @IBOutlet weak var keyTop10: NSLayoutConstraint!
+    @IBOutlet weak var keyTop11: NSLayoutConstraint!
+    @IBOutlet weak var keyTop12: NSLayoutConstraint!
+    @IBOutlet weak var keyTop13: NSLayoutConstraint!
+    @IBOutlet weak var keyTop14: NSLayoutConstraint!
+    @IBOutlet weak var keyTop15: NSLayoutConstraint!
+    
     @IBOutlet weak var ImageGap1: NSLayoutConstraint!
     @IBOutlet weak var ImageGap2: NSLayoutConstraint!
     @IBOutlet weak var ImageGap3: NSLayoutConstraint!
@@ -170,6 +185,22 @@ class DFTableCell: UITableViewCell {
         keyGap12.constant = 0
         keyGap13.constant = 0
         keyGap14.constant = 0
+        
+        keyTop1.constant = 0
+        keyTop2.constant = 0
+        keyTop3.constant = 0
+        keyTop4.constant = 0
+        keyTop5.constant = 0
+        keyTop6.constant = 0
+        keyTop7.constant = 0
+        keyTop8.constant = 0
+        keyTop9.constant = 0
+        keyTop10.constant = 0
+        keyTop11.constant = 0
+        keyTop12.constant = 0
+        keyTop13.constant = 0
+        keyTop14.constant = 0
+        keyTop15.constant = 0
         
         ImageGap1.constant = 0
         ImageGap2.constant = 0
@@ -291,6 +322,22 @@ class DFTableCell: UITableViewCell {
         keyGap12.constant = 0
         keyGap13.constant = 0
         keyGap14.constant = 0
+        
+        keyTop1.constant = 0
+        keyTop2.constant = 0
+        keyTop3.constant = 0
+        keyTop4.constant = 0
+        keyTop5.constant = 0
+        keyTop6.constant = 0
+        keyTop7.constant = 0
+        keyTop8.constant = 0
+        keyTop9.constant = 0
+        keyTop10.constant = 0
+        keyTop11.constant = 0
+        keyTop12.constant = 0
+        keyTop13.constant = 0
+        keyTop14.constant = 0
+        keyTop15.constant = 0
         
         ImageGap1.constant = 0
         ImageGap2.constant = 0
