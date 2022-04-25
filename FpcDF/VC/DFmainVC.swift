@@ -283,7 +283,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {
                         (action) in
                         let url : URL = URL(string: storeAppURL)!
-                        if UIApplication.shared.canOpenUL(url) {
+                        if UIApplication.shared.canOpenURL(url) {
                             UIApplication.shared.open(url)
                         }
                     })
@@ -1415,6 +1415,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         key.isUserInteractionEnabled = true
         
         key.width = keyWidth.constant
+        key.index = formData.index!
         key.tag = cellIndex
         key.formNumber = formNumber!
         key.inputNumber = cellNumber
@@ -2491,12 +2492,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        let index = textView.index
         let formNumber = textView.formNumber
         let cellNumber = textView.inputNumber
         let subCellIndex = textView.tag
         let width = textView.width
         
-        adjustTextView(textView, layout: false, width: width, cellNumber: cellNumber, index: subCellIndex)
+        adjustTextView(textView, layout: false, width: width, cellNumber: index, index: subCellIndex)
 
     }
     
@@ -2518,7 +2520,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: hh)
         textView.frame = newFrame;
         
-        formDataList[formNumber].subCellDataList![index].height = hh
+        formDataList[cellNumber].subCellDataList![index].height = hh
 
         
         self.tableView.reloadData()

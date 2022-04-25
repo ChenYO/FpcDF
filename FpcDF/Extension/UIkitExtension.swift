@@ -27,9 +27,20 @@ extension UITextField {
 
 extension UITextView {
     private struct AssociatedKey {
+        static var index: Int = 0
         static var formNumber: Int = 0
         static var inputNumber: Int = 0
         static var width: CGFloat = 0.0
+    }
+    
+    public var index: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.index) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.index, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
     public var formNumber: Int {
