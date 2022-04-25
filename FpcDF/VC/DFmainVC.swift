@@ -496,6 +496,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let data = FormData()
             
             data.formNumber = index
+            data.cellNumber = index
             data.title = formData.title
             data.formType = formData.type
             data.formId = formData.id
@@ -1258,7 +1259,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     func setTableCell(cell: DFTableCell, formData: FormData) {
-        let formNumber = formData.formNumber!
+        let cellNumber = formData.cellNumber!
         
         if formData.subCellDataList!.count >= 1 {
             setTableDetailCell(key: cell.key1, imageView: cell.imageView1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, keyGap: cell.keyGap1, keyTop: cell.keyTop1, imageHeight: cell.imageHeight1, ImageGap: cell.keyGap1, cellNumber: cellNumber, index: 0, formData: formData, cell: cell)
@@ -1321,18 +1322,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func setTableDetailCell(key: UITextView, imageView: UIImageView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, keyTop: NSLayoutConstraint, imageHeight: NSLayoutConstraint, ImageGap: NSLayoutConstraint, formNumber: Int, index: Int, formData: FormData, cell: DFTableCell) {
+    func setTableDetailCell(key: UITextView, imageView: UIImageView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, keyTop: NSLayoutConstraint, imageHeight: NSLayoutConstraint, ImageGap: NSLayoutConstraint, cellNumber: Int, index: Int, formData: FormData, cell: DFTableCell) {
         let subCell = formData.subCellDataList![index]
         
-        if let fontSize = oriFormData?.cells[formNumber].subCellDataList![index].titleFont?.size {
+        if let fontSize = oriFormData?.cells[cellNumber].subCellDataList![index].titleFont?.size {
             key.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         }
         
-        if let fontColor = oriFormData?.cells[formNumber].subCellDataList![index].titleFont?.color {
+        if let fontColor = oriFormData?.cells[cellNumber].subCellDataList![index].titleFont?.color {
             key.textColor = UIColor(hexString: fontColor)
         }
         
-        if let alignment = oriFormData?.cells[formNumber].subCellDataList![index].titleFont?.alignment {
+        if let alignment = oriFormData?.cells[cellNumber].subCellDataList![index].titleFont?.alignment {
             
             if alignment == "left" {
                 key.textAlignment = .left
@@ -1353,10 +1354,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         key.width = keyWidth.constant
         key.tag = index
-        key.inputNumber = formNumber
+        key.inputNumber = cellNumber
         
         imageView.tag = index
-        imageView.inputNumber = formNumber
+        imageView.inputNumber = cellNumber
         
         imageView.isHidden = true
         imageView.layer.borderWidth = 1
@@ -1406,7 +1407,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.isEditable = false
             
-            let recognizer = getDropDownGesture(cellNumber: formNumber)
+            let recognizer = getDropDownGesture(cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1434,7 +1435,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }else if subCell.subType == "radio" {
             
-            let recognizer = getRadioGesture(cellNumber: formNumber)
+            let recognizer = getRadioGesture(cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1457,7 +1458,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.text = optionStr
         }else if subCell.subType == "checkBox" {
             
-            let recognizer = getCheckBoxGesture(cellNumber: formNumber)
+            let recognizer = getCheckBoxGesture(cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1482,7 +1483,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.isEditable = false
             
-            let recognizer = getSingleChoiceGesture(cellNumber: formNumber)
+            let recognizer = getSingleChoiceGesture(cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
@@ -1499,7 +1500,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             imageView.isHidden = false
             
         
-            let recognizer = getSignGesture(cellNumber: formNumber)
+            let recognizer = getSignGesture(cellNumber: cellNumber)
             
             imageView.addGestureRecognizer(recognizer)
             
@@ -1522,7 +1523,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.isEditable = false
             
-            let recognizer = getFormGesture(cellNumber: formNumber)
+            let recognizer = getFormGesture(cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             

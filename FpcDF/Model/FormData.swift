@@ -12,6 +12,7 @@ class FormData {
     var mainType: String?
     var formType: String?
     var formNumber: Int?
+    var cellNumber: Int?
     var formId: String?
     
     var isReadOnly: Bool?
