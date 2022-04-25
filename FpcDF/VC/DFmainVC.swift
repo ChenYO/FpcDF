@@ -150,7 +150,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if self.jsonString != "" {
             do {
                 let obj = try DFUtil.decodeJsonStringAndReturnObject(string: self.jsonString, type: FormListData.self)
-                self.oriFormData = obj
+                
+                self.oriFormDataList.append(obj)
+//                self.oriFormData = obj
                 self.clear()
                 
                 self.title = obj.formTitle
@@ -555,7 +557,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         for (index, formData) in oriFormData!.cells.enumerated() {
             let data = FormData()
             
-            data.formNumber = index
+            data.index = index
+            data.formNumber = 0
             data.cellNumber = index
             data.title = formData.title
             data.formType = formData.type
