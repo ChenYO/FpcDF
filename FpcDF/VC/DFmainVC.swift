@@ -252,6 +252,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         
                                     }else {
                                         let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                                        
+                                        self.oriFormDataList.append(obj)
                                         self.oriFormData = obj
                                         self.clear()
                                         
