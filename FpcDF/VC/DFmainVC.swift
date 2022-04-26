@@ -148,6 +148,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //從 json string 取得表單
     func loadFromJsonString() {
         
+        let buttonItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
+        
+//                buttonItem.tag = index
+//                if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+//                    buttonItem.tintColor = .white
+//                }
+        self.navigationItem.rightBarButtonItems?.append(buttonItem)
+        
         if !self.jsonStringList.isEmpty {
             
             for jsonString in self.jsonStringList {
@@ -155,37 +163,32 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                     
                     self.oriFormDataList.append(obj)
-    //                self.oriFormData = obj
-                    self.clear()
-                    
-                    self.title = obj.formTitle
-    //                self.setButtons()
-                    
-                    let buttonItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
-                    
-    //                buttonItem.tag = index
-    //                if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
-    //                    buttonItem.tintColor = .white
-    //                }
-                    self.navigationItem.rightBarButtonItems?.append(buttonItem)
-                     
-                    self.tableView.reloadData()
-                    
+
                 } catch {
                 }
             }
             
             self.setTableFormData()
+            
+            self.tableView.reloadData()
         }
     }
  
     @objc func saveForm() {
         do {
-            let jsonEncoder = JSONEncoder()
-            let oriJsonData = try jsonEncoder.encode(self.oriFormDataList)
-            let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
+            var formList: [String] = []
             
-            UserDefaults.standard.set(json, forKey: "formString")
+            for form in self.oriFormDataList {
+                let jsonEncoder = JSONEncoder()
+                let oriJsonData = try jsonEncoder.encode(form)
+                let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
+                
+                formList.append(json!)
+            }
+            
+            
+            UserDefaults.standard.set(formList, forKey: "formList")
+            
             
             print("save")
         } catch {
