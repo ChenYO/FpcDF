@@ -35,7 +35,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var activityIndicator: UIActivityIndicatorView!
     var isFirstLayer = true
     var isUsingJsonString = false
-    var jsonString = ""
+    var jsonStringList: [String] = []
     var formId = ""
     
     var width: CGFloat = 0.0
@@ -147,38 +147,42 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //從 json string 取得表單
     func loadFromJsonString() {
-        if self.jsonString != "" {
-            do {
-                let obj = try DFUtil.decodeJsonStringAndReturnObject(string: self.jsonString, type: FormListData.self)
-                
-                self.oriFormDataList.append(obj)
-//                self.oriFormData = obj
-                self.clear()
-                
-                self.title = obj.formTitle
-//                self.setButtons()
-                
-                let buttonItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
-                
-//                buttonItem.tag = index
-//                if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
-//                    buttonItem.tintColor = .white
-//                }
-                self.navigationItem.rightBarButtonItems?.append(buttonItem)
-                
-                self.setTableFormData()
-                
-                self.tableView.reloadData()
-                
-            } catch {
+        
+        if !self.jsonStringList.isEmpty {
+            
+            for jsonString in self.jsonStringList {
+                do {
+                    let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                    
+                    self.oriFormDataList.append(obj)
+    //                self.oriFormData = obj
+                    self.clear()
+                    
+                    self.title = obj.formTitle
+    //                self.setButtons()
+                    
+                    let buttonItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
+                    
+    //                buttonItem.tag = index
+    //                if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+    //                    buttonItem.tintColor = .white
+    //                }
+                    self.navigationItem.rightBarButtonItems?.append(buttonItem)
+                     
+                    self.tableView.reloadData()
+                    
+                } catch {
+                }
             }
+            
+            self.setTableFormData()
         }
     }
  
     @objc func saveForm() {
         do {
             let jsonEncoder = JSONEncoder()
-            let oriJsonData = try jsonEncoder.encode(self.oriFormData)
+            let oriJsonData = try jsonEncoder.encode(self.oriFormDataList)
             let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
             
             UserDefaults.standard.set(json, forKey: "formString")
