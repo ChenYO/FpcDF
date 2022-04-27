@@ -732,7 +732,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //設定動態列表資料
-    func setDynamicInputData(formData: cell, index: Int, formType: String) {
+    func setDynamicInputData(formData: cell, formNumber: Int, cellNumber: Int, formType: String) {
         for i in 0..<formData.count! {
             let inputField = FormData()
             inputField.formNumber = formNumber
