@@ -619,6 +619,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 case "attachment":
                     for attachment in formData.fileList! {
                         let attachmentData = FormData()
+                        attachmentData.index = index
+                        attachmentData.formNumber = formIndex
+                        attachmentData.cellNumber = cellIndex
                         attachmentData.title = attachment.title
                         attachmentData.formType = attachment.type
                         attachmentData.isReadOnly = formData.isReadOnly
@@ -628,6 +631,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 case "picture":
                     for picture in formData.fileList! {
                         let pictureData = FormData()
+                        pictureData.index = index
+                        pictureData.formNumber = formIndex
+                        pictureData.cellNumber = cellIndex
                         pictureData.title = picture.title
                         pictureData.formType = picture.type
                         pictureData.formId = formData.id
