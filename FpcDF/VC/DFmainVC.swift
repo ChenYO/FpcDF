@@ -563,133 +563,170 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func setFormData() {
         formDataList = [FormData]()
         
-        for (index, formData) in oriFormData!.cells.enumerated() {
-            let data = FormData()
-            
-            data.index = index
-            data.formNumber = 0
-            data.cellNumber = index
-            data.title = formData.title
-            data.formType = formData.type
-            data.formId = formData.id
-            data.keyValueArray = formData.keyValueArray
-            data.inputValue = formData.textValue
-            data.optionValue = formData.choiceValue
-            data.dynamicField = formData.dynamicField
-            data.isReadOnly = formData.isReadOnly
-            data.isRequired = formData.isRequired
-            data.actionTip = formData.actionTip
-            data.actions = formData.actions
-            
-            data.fileList = formData.fileList
-            
-            data.subCellDataList = formData.subCellDataList
-            
-            switch formData.type {
-            case "radio", "checkbox":
+        var index = 0
+        for (formIndex, form) in oriFormDataList.enumerated() {
+            for (cellIndex, formData) in form.cells.enumerated() {
+                let data = FormData()
+                
+                data.formNumber = formIndex
+                data.cellNumber = cellIndex
+                data.index = index
                 data.title = formData.title
-                data.formType = "label"
-                formDataList.append(data)
+                data.formType = formData.type
+                data.formId = formData.id
+                data.keyValueArray = formData.keyValueArray
+                data.inputValue = formData.textValue
+                data.optionValue = formData.choiceValue
+                data.dynamicField = formData.dynamicField
+                data.isReadOnly = formData.isReadOnly
+                data.isRequired = formData.isRequired
+                data.actionTip = formData.actionTip
+                data.actions = formData.actions
                 
-                for (optionIndex, radioOption) in formData.options!.enumerated() {
-                    let option = FormData()
-                    option.formNumber = index
-                    option.optionNumber = optionIndex
-                    option.title = radioOption.name
-                    option.formType = formData.type
-                    option.isReadOnly = formData.isReadOnly
+                data.fileList = formData.fileList
+                
+                data.subCellDataList = formData.subCellDataList
+                
+                index += 1
+                
+                switch formData.type {
+                case "radio", "checkbox":
+                    data.title = formData.title
+                    data.formType = "label"
+                    formDataList.append(data)
                     
-                    for choice in formData.choiceValue! {
-                        print("\(radioOption) \(choice) \(optionIndex)")
-                        if choice == optionIndex {
-                            option.isCheck = true
-                            break
+                    for (optionIndex, radioOption) in formData.options!.enumerated() {
+                        let option = FormData()
+                        option.formNumber = formIndex
+                        option.cellNumber = cellIndex
+                        option.index = index
+                        
+                        option.optionNumber = optionIndex
+                        option.title = radioOption.name
+                        option.formType = formData.type
+                        option.isReadOnly = formData.isReadOnly
+                        
+                        for choice in formData.choiceValue! {
+                            print("\(radioOption) \(choice) \(optionIndex)")
+                            if choice == optionIndex {
+                                option.isCheck = true
+                                break
+                            }
                         }
+                        
+                        formDataList.append(option)
+                    }
+                case "attachment":
+                    for attachment in formData.fileList! {
+                        let attachmentData = FormData()
+                        attachmentData.title = attachment.title
+                        attachmentData.formType = attachment.type
+                        attachmentData.isReadOnly = formData.isReadOnly
+                        attachmentData.fileUrl = attachment.url
+                        formDataList.append(attachmentData)
+                    }
+                case "picture":
+                    for picture in formData.fileList! {
+                        let pictureData = FormData()
+                        pictureData.title = picture.title
+                        pictureData.formType = picture.type
+                        pictureData.formId = formData.id
+                        pictureData.isReadOnly = formData.isReadOnly
+                        let imageUrlString = picture.url
+                        let imageUrl: URL = URL(string: imageUrlString!)!
+                        
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            if let imageData:NSData = NSData(contentsOf: imageUrl) {
+                                DispatchQueue.main.async {
+                                    if let image = UIImage(data: imageData as Data){
+                                        pictureData.image = image
+                                    }
+                                }
+                            }
+                        }
+                        
+                        formDataList.append(pictureData)
+                    }
+                case "dynamicTextField":
+                    formDataList.append(data)
+//                    setDynamicInputData(formData: formData, index: index, formType: "textField")
+                    
+                    for i in 0..<formData.count! {
+                        let inputField = FormData()
+                        inputField.index = index
+                        inputField.formNumber = formIndex
+                        inputField.cellNumber = cellIndex
+                        inputField.inputNumber = i
+                        inputField.formType = "textField"
+                        inputField.mainType = formData.type
+                        inputField.isReadOnly = formData.isReadOnly
+                        
+                        index += 1
+                        
+                        formDataList.append(inputField)
+                    }
+                case "dynamicTextArea":
+                    formDataList.append(data)
+//                    setDynamicInputData(formData: formData, index: index, formType: "textArea")
+                    
+                    for i in 0..<formData.count! {
+                        let inputField = FormData()
+                        inputField.index = index
+                        inputField.formNumber = formIndex
+                        inputField.cellNumber = cellIndex
+                        inputField.inputNumber = i
+                        inputField.formType = "textArea"
+                        inputField.mainType = formData.type
+                        inputField.isReadOnly = formData.isReadOnly
+                        
+                        index += 1
+                        
+                        formDataList.append(inputField)
                     }
                     
-                    formDataList.append(option)
-                }
-            case "attachment":
-                for attachment in formData.fileList! {
-                    let attachmentData = FormData()
-                    attachmentData.title = attachment.title
-                    attachmentData.formType = attachment.type
-                    attachmentData.isReadOnly = formData.isReadOnly
-                    attachmentData.fileUrl = attachment.url
-                    formDataList.append(attachmentData)
-                }
-            case "picture":
-                for picture in formData.fileList! {
-                    let pictureData = FormData()
-                    pictureData.title = picture.title
-                    pictureData.formType = picture.type
-                    pictureData.formId = formData.id
-                    pictureData.isReadOnly = formData.isReadOnly
-                    let imageUrlString = picture.url
-                    let imageUrl: URL = URL(string: imageUrlString!)!
+                case "singleSelection", "multipleSelection":
+                    formDataList.append(data)
                     
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        if let imageData:NSData = NSData(contentsOf: imageUrl) {
-                            DispatchQueue.main.async {
-                                if let image = UIImage(data: imageData as Data){
-                                    pictureData.image = image
+                case "upload":
+                    formDataList.append(data)
+                    setFileData(formData: formData, index: index)
+                    
+                case "sign":
+                    if !formData.fileList!.isEmpty {
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            if let imageData:NSData = NSData(contentsOf: URL(string: formData.fileList![0].url!)!) {
+                                DispatchQueue.main.async {
+                                    if let image = UIImage(data: imageData as Data){
+                                        data.image = image
+                                    }
                                 }
                             }
                         }
                     }
                     
-                    formDataList.append(pictureData)
-                }
-            case "dynamicTextField":
-                formDataList.append(data)
-                setDynamicInputData(formData: formData, index: index, formType: "textField")
-                
-            case "dynamicTextArea":
-                formDataList.append(data)
-                setDynamicInputData(formData: formData, index: index, formType: "textArea")
-                
-            case "singleSelection", "multipleSelection":
-                formDataList.append(data)
-                
-            case "upload":
-                formDataList.append(data)
-                setFileData(formData: formData, index: index)
-                
-            case "sign":
-                if !formData.fileList!.isEmpty {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        if let imageData:NSData = NSData(contentsOf: URL(string: formData.fileList![0].url!)!) {
-                            DispatchQueue.main.async {
-                                if let image = UIImage(data: imageData as Data){
-                                    data.image = image
+                    formDataList.append(data)
+                case "tableKey":
+                    
+                    for (subIndex, subCell) in data.subCellDataList!.enumerated() {
+                        if subCell.cellHeight != 0 {
+                            data.subCellDataList![subIndex].height = CGFloat(subCell.cellHeight!)
+                        }
+                        
+                        if subCell.subType == "dropDown" {
+                            if subCell.textValue != "" {
+                                for option in subCell.options! {
+                                    if option.id == subCell.textValue {
+                                        subCell.title = option.name
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-                
-                formDataList.append(data)
-            case "tableKey":
-                
-                for (subIndex, subCell) in data.subCellDataList!.enumerated() {
-                    if subCell.cellHeight != 0 {
-                        data.subCellDataList![subIndex].height = CGFloat(subCell.cellHeight!)
                     }
                     
-                    if subCell.subType == "dropDown" {
-                        if subCell.textValue != "" {
-                            for option in subCell.options! {
-                                if option.id == subCell.textValue {
-                                    subCell.title = option.name
-                                }
-                            }
-                        }
-                    }
+                    formDataList.append(data)
+                default:
+                    formDataList.append(data)
                 }
-                
-                formDataList.append(data)
-            default:
-                formDataList.append(data)
             }
         }
     }
@@ -698,7 +735,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func setDynamicInputData(formData: cell, index: Int, formType: String) {
         for i in 0..<formData.count! {
             let inputField = FormData()
-            inputField.formNumber = index
+            inputField.formNumber = formNumber
+            inputField.cellNumber = cellNumber
             inputField.inputNumber = i
             inputField.formType = formType
             inputField.mainType = formData.type
@@ -764,18 +802,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //動態列表刪除動作
     @objc func deleteTapped(sender:UITapGestureRecognizer) {
         let tagInt = sender.view?.tag
-        self.oriFormData?.cells[tagInt!].dynamicField?.remove(at: sender.inputNumber)
-        self.oriFormData?.cells[tagInt!].count = (self.oriFormData?.cells[tagInt!].count)! - 1
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let inputIndex = sender.index
+        
+        self.oriFormDataList[formNumber].cells[cellNumber].dynamicField?.remove(at: inputIndex)
+        self.oriFormDataList[formNumber].cells[cellNumber].count = self.oriFormDataList[formNumber].cells[cellNumber].count! - 1
+        
         var newIndex = 0
         
         for (index, formData) in formDataList.enumerated() {
             if formData.formType == "textField" {
-                if formData.mainType == "dynamicTextField", tagInt == formData.formNumber, sender.inputNumber == formData.inputNumber {
+                if formData.mainType == "dynamicTextField", formNumber == formData.formNumber, cellNumber == formData.cellNumber, inputIndex == formData.inputNumber {
                     formDataList.remove(at: index)
                     break
                 }
             }else if formData.formType == "textArea" {
-                if formData.mainType == "dynamicTextArea", tagInt == formData.formNumber, sender.inputNumber == formData.inputNumber {
+                if formData.mainType == "dynamicTextArea", formNumber == formData.formNumber, cellNumber == formData.cellNumber, inputIndex == formData.inputNumber {
                     formDataList.remove(at: index)
                     break
                 }
@@ -784,16 +827,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         for formData in formDataList {
             if formData.formType == "textField" {
-                if formData.mainType == "dynamicTextField", tagInt == formData.formNumber {
-                    if newIndex > (self.oriFormData?.cells[tagInt!].count)! {
+                if formData.mainType == "dynamicTextField", formNumber == formData.formNumber, cellNumber == formData.cellNumber {
+                    
+                    if newIndex > self.oriFormDataList[formNumber].cells[cellNumber].count! {
                         break
                     }
                     formData.inputNumber = newIndex
                     newIndex += 1
                 }
             }else if formData.formType == "textArea" {
-                if formData.mainType == "dynamicTextArea", tagInt == formData.formNumber {
-                    if newIndex > (self.oriFormData?.cells[tagInt!].count)! {
+                if formData.mainType == "dynamicTextArea", formNumber == formData.formNumber, cellNumber == formData.cellNumber {
+                    
+                    if newIndex > self.oriFormDataList[formNumber].cells[cellNumber].count! {
                         break
                     }
                     formData.inputNumber = newIndex
@@ -851,12 +896,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //設定字型
     func setFont(cell: FormTextFieldCell, formNumber: Int, formData: FormData) {
-        if let fontSize = oriFormData?.cells[formNumber].titleFont?.size {
+        if let fontSize = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].titleFont?.size {
             cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
 //            cell.constraint?.constant = CGFloat(fontSize)
         }
         
-        if let fontColor = oriFormData?.cells[formNumber].titleFont?.color {
+        if let fontColor = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].titleFont?.color {
             cell.title.textColor = UIColor(hexString: fontColor)
         }
         
@@ -880,19 +925,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         let formData = formDataList[indexPath.row]
         let formNumber = formData.formNumber
+        let cellNumber = formData.cellNumber!
         
         switch formData.formType {
         case "label":
             
-            if let fontSize = oriFormData?.cells[formNumber!].titleFont?.size {
+            if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
             }
             
-            if let fontColor = oriFormData?.cells[formNumber!].titleFont?.color {
+            if let fontColor = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.color {
                 cell.title.textColor = UIColor(hexString: fontColor)
             }
             
-            if let required = oriFormData?.cells[formNumber!].isRequired {
+            if let required = self.oriFormDataList[formNumber!].cells[cellNumber].isRequired {
                 cell.requireLabel.isHidden = !required
             }
             
@@ -904,6 +950,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
+            cell.title.text = ""
             cell.inputField.placeholder = ""
             cell.inputField.keyboardType = UIKeyboardType.default
             
@@ -917,7 +964,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            if let inputConfig = oriFormData?.cells[formNumber!].inputConfig {
+            if let inputConfig = self.oriFormDataList[formNumber!].cells[cellNumber].inputConfig {
                 if let placeholder = inputConfig.placeholder {
                     cell.inputField.placeholder = placeholder
                 }
@@ -929,24 +976,33 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            if oriFormData?.cells[formNumber!].textValue == nil {
+            if self.oriFormDataList[formNumber!].cells[cellNumber].textValue == nil {
                 cell.inputField.text = ""
             }
             cell.inputField.delegate = self
             cell.inputField.tag = formNumber!
+            cell.inputField.inputNumber = cellNumber
+            cell.inputField.cellIndex = cellNumber
             
             //若為動態輸入列，則可以刪除
             if formData.mainType == "dynamicTextField" {
                 let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteTapped))
                 
-                deleteRecognizer.inputNumber = formData.inputNumber!
+                deleteRecognizer.formNumber = formData.formNumber!
+                deleteRecognizer.index = formData.inputNumber!
+                deleteRecognizer.inputNumber = formData.cellNumber!
                 cell.deleteIcon.addGestureRecognizer(deleteRecognizer)
                 cell.deleteIcon.isHidden = false
                 cell.imageConstraint?.constant = 25
-                cell.deleteIcon.tag = formNumber!
+                cell.deleteIcon.tag = formData.index!
+                cell.deleteIcon.formNumber = formNumber!
+                cell.deleteIcon.cellNumber = cellNumber
                 
                 cell.inputField.inputNumber = formData.inputNumber!
-                for (index, input) in (oriFormData?.cells[formNumber!].dynamicField)!.enumerated() {
+                cell.inputField.cellIndex = formData.cellNumber!
+                cell.inputField.formNumber = formData.formNumber!
+                
+                for (index, input) in self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField!.enumerated() {
                     
                     if formData.inputNumber == index {
                         cell.inputField.text = input.name
@@ -968,12 +1024,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: FormTextAreaCell = tableView.dequeueReusableCell(withIdentifier: "FormTextAreaCell", for: indexPath) as! FormTextAreaCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
+            cell.title.text = ""
             
-            if let fontSize = oriFormData?.cells[formNumber!].titleFont?.size {
+            if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
             }
             
-            if let fontColor = oriFormData?.cells[formNumber!].titleFont?.color {
+            if let fontColor = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.color {
                 cell.title.textColor = UIColor(hexString: fontColor)
             }
             
@@ -994,7 +1051,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //                cell.constraint?.constant = 0
 //            }
             
-            if oriFormData?.cells[formNumber!].textValue == nil {
+            if self.oriFormDataList[formNumber!].cells[cellNumber].textValue == nil {
                 cell.formTextArea.text = ""
             }
             cell.formTextArea.delegate = self
@@ -1002,19 +1059,28 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.formTextArea.layer.borderColor = UIColor.lightGray.cgColor
             cell.formTextArea.layer.cornerRadius = 5.0
             cell.formTextArea.tag = formNumber!
+            cell.formTextArea.inputNumber = cellNumber
+            cell.formTextArea.signleCellIndex = cellNumber
             
             //若為動態輸入列，則可以刪除
             if formData.mainType == "dynamicTextArea" {
                 let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteTapped))
                 
-                deleteRecognizer.inputNumber = formData.inputNumber!
+                deleteRecognizer.formNumber = formData.formNumber!
+                deleteRecognizer.index = formData.inputNumber!
+                deleteRecognizer.inputNumber = formData.cellNumber!
                 cell.deleteIcon.addGestureRecognizer(deleteRecognizer)
                 cell.deleteIcon.isHidden = false
                 cell.imageConstraint?.constant = 25
-                cell.deleteIcon.tag = formNumber!
+                cell.deleteIcon.tag = formData.index!
+                cell.deleteIcon.formNumber = formNumber!
+                cell.deleteIcon.cellNumber = cellNumber
                 
-                cell.formTextArea.inputNumber = formData.inputNumber!
-                for (index, input) in (oriFormData?.cells[formNumber!].dynamicField)!.enumerated() {
+                cell.formTextArea.signleInputIndex = formData.inputNumber!
+                cell.formTextArea.signleCellIndex = formData.cellNumber!
+                cell.formTextArea.formNumber = formData.formNumber!
+                
+                for (index, input) in self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField!.enumerated() {
                     
                     if formData.inputNumber == index {
                         cell.formTextArea.text = input.name
@@ -1145,11 +1211,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: DynamicFieldCell = tableView.dequeueReusableCell(withIdentifier: "DynamicFieldCell", for: indexPath) as! DynamicFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
-            if let fontSize = oriFormData?.cells[formNumber!].titleFont?.size {
+            if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
             }
             
-            if let fontColor = oriFormData?.cells[formNumber!].titleFont?.color {
+            if let fontColor = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.color {
                 cell.title.textColor = UIColor(hexString: fontColor)
             }
             
@@ -1162,11 +1228,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             cell.actionTip.text = formData.title
             
-            if let fontSize = oriFormData?.cells[formNumber!].titleFont?.size {
+            if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.actionTip.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
             }
             
-            if let fontColor = oriFormData?.cells[formNumber!].titleFont?.color {
+            if let fontColor = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.color {
                 cell.actionTip.textColor = UIColor(hexString: fontColor)
             }
             
@@ -1201,11 +1267,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: DFSignCell = tableView.dequeueReusableCell(withIdentifier: "DFSignCell", for: indexPath) as! DFSignCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
-            if let fontSize = oriFormData?.cells[formNumber!].titleFont?.size {
+            if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
             }
             
-            if let fontColor = oriFormData?.cells[formNumber!].titleFont?.color {
+            if let fontColor = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.color {
                 cell.title.textColor = UIColor(hexString: fontColor)
             }
             
@@ -1234,17 +1300,21 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @objc func doneButtonTapped(sender: UIBarButtonItem) {
         // 依據元件的 tag 取得 UITextField
         print(sender.tag)
+        
+        let formNumber = sender.tag
+        let cellNumber = sender.inputNumber
+        
         for dateFormatter in dateFormatterList {
-            if dateFormatter.index == sender.tag {
+            if dateFormatter.index == formNumber, dateFormatter.cellIndex == cellNumber {
                 let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
                 print(timeInterval)
-                self.oriFormData?.cells[sender.tag].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                self.oriFormDataList[formNumber].cells[cellNumber].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
             }
         }
         
         for formData in formDataList {
-            if sender.tag == formData.formNumber {
-                formData.inputValue = self.oriFormData?.cells[sender.tag].textValue
+            if sender.tag == formData.formNumber, sender.inputNumber == formData.cellNumber {
+                formData.inputValue = self.oriFormDataList[formNumber].cells[cellNumber].textValue
             }
         }
         self.tableView.reloadData()
@@ -1252,24 +1322,29 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func setDateCell(formData: FormData, type: String, format: String, formNumber: Int, cell: FormTextFieldCell) {
+        
+        let cellNumber = formData.cellNumber!
+        
         if formData.isReadOnly! {
             cell.inputField.isUserInteractionEnabled = false
         }else {
             cell.inputField.isUserInteractionEnabled = true
         }
         
-        if let inputConfig = oriFormData?.cells[formNumber].inputConfig {
+        if let inputConfig = self.oriFormDataList[formNumber].cells[cellNumber].inputConfig {
             if let placeholder = inputConfig.placeholder {
                 cell.inputField.placeholder = placeholder
             }
         }
         
         setFont(cell: cell, formNumber: formNumber, formData: formData)
-        setDatePicker(type: type, formNumber: formNumber, cell: cell)
+        setDatePicker(type: type, formNumber: formNumber, cellNumber: cellNumber, cell: cell)
         
         
         cell.inputField.text = ""
         cell.inputField.tag = formNumber
+        cell.inputField.inputNumber = cellNumber
+        
         if formData.inputValue != "" {
             cell.inputField.text = setTimestampToDate(timestampString: formData.inputValue!, format: format)
         }
@@ -1278,7 +1353,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //設定date, time, dateTime
-    func setDatePicker(type: String, formNumber: Int, cell: FormTextFieldCell) {
+    func setDatePicker(type: String, formNumber: Int, cellNumber: Int, cell: FormTextFieldCell) {
         let toolBar = UIToolbar()
         let formatter = DateFormatter()
         let datePicker:UIDatePicker = UIDatePicker()
@@ -1305,6 +1380,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let dateFormatter = dateFormatterObj()
         dateFormatter.index = formNumber
+        dateFormatter.cellIndex = cellNumber
         dateFormatter.dateFormatter = formatter
         dateFormatter.datePicker = datePicker
         dateFormatterList.append(dateFormatter)
@@ -1313,6 +1389,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         toolBar.setItems([doneButton], animated: true)
         
         doneButton.tag = formNumber
+        doneButton.inputNumber = cellNumber
         
         cell.inputField.inputView = datePicker
         cell.inputField.inputAccessoryView = toolBar
@@ -1799,11 +1876,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         for option in formDataList[index].subCellDataList![subCellIndex].options! {
             let action = UIAlertAction(title: option.name, style: .default) { action in
                 
-                if let index = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
+                if let optionIndex = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
                     return option.id == id
                 }) {
-                    self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: index)
+                    self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
                 } else {
                     self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
@@ -1966,27 +2043,28 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         switch formData.formType {
         case "radio":
             for data in formDataList {
-                if formData.formNumber == data.formNumber {
+                if formData.formNumber == data.formNumber, formData.cellNumber == data.cellNumber {
                     data.isCheck = false
                 }
             }
             
-            self.oriFormData?.cells[formData.formNumber!].choiceValue?.removeAll()
-            self.oriFormData?.cells[formData.formNumber!].choiceValue?.append(formData.optionNumber!)
+            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.removeAll()
+            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.append(formData.optionNumber!)
+            
             formData.isCheck = true
             
             tableView.reloadData()
         case "checkbox":
             
             if formData.isCheck {
-                self.oriFormData?.cells[formData.formNumber!].choiceValue = self.oriFormData?.cells[formData.formNumber!].choiceValue?.filter({$0 != formData.optionNumber})
+                self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue =  self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.filter({$0 != formData.optionNumber})
             }else {
-                self.oriFormData?.cells[formData.formNumber!].choiceValue?.append(formData.optionNumber!)
+                self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.append(formData.optionNumber!)
             }
             
             formData.isCheck = !formData.isCheck
             
-            self.oriFormData?.cells[formData.formNumber!].choiceValue = self.oriFormData?.cells[formData.formNumber!].choiceValue?.sorted(by: {$0 < $1})
+            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.sorted(by: {$0 < $1})
             
             tableView.reloadData()
         case "picture":
@@ -2371,14 +2449,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         var scrollIndex = 0
         
         for (index, data) in formDataList.enumerated() {
-            if formData.formNumber! == data.formNumber {
+            if formData.formNumber! == data.formNumber, formData.cellNumber == data.cellNumber {
                 let inputField = FormData()
+                
+                inputField.index = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].count! + 1
                 inputField.formNumber = formData.formNumber!
-                inputField.inputNumber = self.oriFormData?.cells[formData.formNumber!].count
+                inputField.cellNumber = formData.cellNumber!
+                inputField.inputNumber = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].count
+                
                 inputField.formType = formType
                 inputField.mainType = formData.formType
                 inputField.isReadOnly = false
-                scrollIndex = index + (self.oriFormData?.cells[formData.formNumber!].count)! + 1
+                scrollIndex = index + self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].count! + 1
                 formDataList.insert(inputField, at: scrollIndex)
                 break
             }
@@ -2386,8 +2468,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let dynamicValue = DynamicInput()
         dynamicValue.id = UUID().uuidString
         dynamicValue.name = ""
-        self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(dynamicValue)
-        self.oriFormData?.cells[formData.formNumber!].count = (self.oriFormData?.cells[formData.formNumber!].count)! + 1
+        self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField?.append(dynamicValue)
+        self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].count = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].count! + 1
         
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: scrollIndex, section: 0), at: .bottom, animated: true)
@@ -2450,17 +2532,19 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        let tagInt = textField.tag
+        let formNumber = textField.tag
+        let cellNumber = textField.cellIndex
+        let inputNumber = textField.inputNumber
         
         for formData in formDataList {
             if formData.formType == "textField" {
-                if formData.mainType == "dynamicTextField", tagInt == formData.formNumber {
+                if formData.mainType == "dynamicTextField", formNumber == formData.formNumber {
                     formData.inputValue = textField.text!
-                    self.oriFormData?.cells[tagInt].dynamicField?[textField.inputNumber].name = textField.text!
+                    self.oriFormDataList[formNumber].cells[cellNumber].dynamicField?[inputNumber].name = textField.text!
                 }else {
-                    if tagInt == formData.formNumber {
+                    if  formNumber == formData.formNumber, formData.cellNumber == cellNumber {
                         formData.inputValue = textField.text!
-                        self.oriFormData?.cells[tagInt].textValue = textField.text!
+                        self.oriFormDataList[formNumber].cells[cellNumber].textValue = textField.text!
                     }
                 }
             }
@@ -2469,19 +2553,22 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     public func textViewDidChange(_ textView: UITextView) {
         
+        let signleCellIndex = textView.signleCellIndex
+        let signleInputIndex = textView.signleInputIndex
+        
         let formNumber = textView.formNumber
         let subCellIndex = textView.tag
         let cellNumber = textView.inputNumber
         
         for formData in formDataList {
             if formData.formType == "textArea" {
-                if formData.mainType == "dynamicTextArea", subCellIndex == formData.formNumber {
+                if formData.mainType == "dynamicTextArea", formNumber == formData.formNumber {
                     formData.inputValue = textView.text!
-                    self.oriFormData?.cells[subCellIndex].dynamicField?[textView.inputNumber].name = textView.text!
+                    self.oriFormDataList[formNumber].cells[signleCellIndex].dynamicField?[signleInputIndex].name = textView.text!
                 }else {
-                    if subCellIndex == formData.formNumber {
+                    if formNumber == formData.formNumber {
                         formData.inputValue = textView.text!
-                        self.oriFormData?.cells[subCellIndex].textValue = textView.text!
+                        self.oriFormDataList[formNumber].cells[signleCellIndex].textValue = textView.text!
                     }
                 }
             }else if formData.formType == "tableKey" {
@@ -2510,8 +2597,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let subCellIndex = textView.tag
         let width = textView.width
         
-        adjustTextView(textView, layout: false, width: width, cellNumber: index, index: subCellIndex)
-
+        if width != 0 {
+            adjustTextView(textView, layout: false, width: width, cellNumber: index, index: subCellIndex)
+        }
     }
     
     func adjustTextView(_ textView: UITextView, layout: Bool, width: CGFloat, cellNumber: Int, index: Int) {

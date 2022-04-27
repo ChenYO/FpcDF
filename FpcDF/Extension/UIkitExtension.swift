@@ -11,7 +11,29 @@ import UIKit
 
 extension UITextField {
     private struct AssociatedKey {
+        static var cellIndex: Int = 0
+        static var formNumber: Int = 0
         static var inputNumber: Int = 0
+    }
+    
+    public var cellIndex: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.cellIndex) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.cellIndex, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var formNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.formNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
     public var inputNumber: Int {
@@ -29,6 +51,8 @@ extension UITextView {
     private struct AssociatedKey {
         static var index: Int = 0
         static var formNumber: Int = 0
+        static var signleCellIndex: Int = 0
+        static var signleInputIndex: Int = 0
         static var inputNumber: Int = 0
         static var width: CGFloat = 0.0
     }
@@ -40,6 +64,26 @@ extension UITextView {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.index, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var signleCellIndex: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.signleCellIndex) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.signleCellIndex, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var signleInputIndex: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.signleInputIndex) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.signleInputIndex, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
     
@@ -201,6 +245,7 @@ extension UIBarButtonItem {
 extension UIImageView {
     private struct AssociatedKey {
         static var formNumber: Int = 0
+        static var cellNumber: Int = 0
         static var inputNumber: Int = 0
     }
     
@@ -211,6 +256,16 @@ extension UIImageView {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var cellNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.cellNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.cellNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
     

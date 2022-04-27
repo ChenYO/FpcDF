@@ -10,6 +10,7 @@ import UIKit
 
 class dateFormatterObj {
     var index: Int?
+    var cellIndex: Int?
     var dateFormatter: DateFormatter?
     var datePicker: UIDatePicker?
 }
