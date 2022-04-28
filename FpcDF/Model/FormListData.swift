@@ -50,6 +50,8 @@ class cell: Codable {
     var groupId: String?
     var groupItemId: String?
     var subCellDataList: [subCellData]?
+    
+    var fileUrl: String?
 }
 
 struct action: Codable {

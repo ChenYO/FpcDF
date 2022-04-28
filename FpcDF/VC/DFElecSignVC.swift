@@ -106,9 +106,9 @@ class DFElecSignVC: UIViewController {
         if let image = self.signatureExport?.rotateImageByOrientation().jpegData(compressionQuality: 0.9) {
 
             
-            if !isFromSubCell {
-                self.signImage = image
-            }else {
+//            if !isFromSubCell {
+//                self.signImage = image
+//            }else {
                 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                 // choose a name for your image
                 let fileName = "\(UUID().uuidString).jpg"
@@ -125,7 +125,7 @@ class DFElecSignVC: UIViewController {
                 } catch {
                     print("error saving file:", error)
                 }
-            }
+//            }
             
             self.performSegue(withIdentifier: "toFormVC", sender: nil)
             

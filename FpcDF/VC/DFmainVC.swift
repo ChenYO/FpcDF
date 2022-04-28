@@ -1412,8 +1412,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.title.text = formData.title
             cell.signImageView.image = nil
             
-            if let image = formData.image {
-                cell.signImageView.image = image
+            if let signUrl = self.oriFormDataList[formNumber!].cells[cellNumber].fileUrl {
+                let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+                if let imageData = NSData(contentsOf: fileURL!) {
+                    let image = UIImage(data: imageData as Data)
+                    
+                    cell.signImageView.image = image
+                }
             }
             
             
@@ -2291,6 +2296,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.removeAll()
             self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.append(formData.optionNumber!)
             
+            self.saveForm()
+            
             formData.isCheck = true
             
             tableView.reloadData()
@@ -2305,6 +2312,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             formData.isCheck = !formData.isCheck
             
             self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.sorted(by: {$0 < $1})
+            
+            self.saveForm()
             
             tableView.reloadData()
         case "picture":
@@ -2531,6 +2540,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             vc?.formNumber = formData.formNumber!
             vc?.cellIndex = formData.cellNumber!
+            vc?.signUrl = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].fileUrl ?? ""
             
             let backItem = UIBarButtonItem()
             if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
@@ -2824,6 +2834,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         }
+        
+        self.saveForm()
     }
     
     public func textViewDidChange(_ textView: UITextView) {
@@ -2851,11 +2863,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     formData.subCellDataList![subCellIndex].textValue = textView.text!
                     
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textView.text!
-                    
-                    self.saveForm()
                 }
             }
         }
+        
+        self.saveForm()
     }
     
     public func textViewDidBeginEditing(_ textView: UITextView) {
@@ -2962,18 +2974,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     for formData in formDataList {
                         if formData.formType == "sign", formData.formNumber == elecSignVC.formNumber, formData.cellNumber == elecSignVC.cellIndex  {
                             
-                            DispatchQueue.global(qos: .userInitiated).async {
-                                DispatchQueue.main.async {
-                                    if let data = elecSignVC.signImage {
-                                        if let image = UIImage(data: data){
-                                            formData.image = image
-                                            self.tableView.reloadData()
-                                        }
-                                    }
-                                }
-                            }
+                            self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].fileUrl = elecSignVC.signUrl
+                            
+                            break
                         }
                     }
+                    
+                    self.tableView.reloadData()
                 }else {
                     formDataList[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].fileUrl = elecSignVC.signUrl
                     
