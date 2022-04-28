@@ -1636,7 +1636,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].isFinish! {
             key.backgroundColor = .white
         }else {
-            key.backgroundColor = .lightGray
+            key.backgroundColor = UIColor(hexString: "#D0D0D0")
         }
         
         key.isHidden = false
