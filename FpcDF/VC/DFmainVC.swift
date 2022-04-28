@@ -168,7 +168,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            self.setTableFormData()
+            self.setFormData()
             
             self.tableView.reloadData()
         }
