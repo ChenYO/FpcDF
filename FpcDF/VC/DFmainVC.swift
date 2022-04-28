@@ -1456,6 +1456,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 formData.inputValue = self.oriFormDataList[formNumber].cells[cellNumber].textValue
             }
         }
+        
+        self.saveForm()
+        
         self.tableView.reloadData()
         self.view.endEditing(true)
     }
@@ -2980,18 +2983,19 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                     
-                    self.tableView.reloadData()
                 }else {
                     formDataList[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].fileUrl = elecSignVC.signUrl
                     
                     self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].fileUrl = elecSignVC.signUrl
                     
                     self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].isFinish = true
-                    
-                    self.tableView.reloadData()
+
                 }
             }
         }
+        
+        self.saveForm()
+        self.tableView.reloadData()
     }
     
     //根據後綴獲取對應的Mime-Type
