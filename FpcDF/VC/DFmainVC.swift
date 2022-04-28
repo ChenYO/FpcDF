@@ -2529,7 +2529,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
             let vc = storyboard.instantiateViewController(withIdentifier: "DFElecSignVC") as? DFElecSignVC
             
-            vc?.cellIndex = formData.formNumber ?? -1
+            vc?.formNumber = formData.formNumber!
+            vc?.cellIndex = formData.cellNumber!
             
             let backItem = UIBarButtonItem()
             if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
@@ -2959,7 +2960,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let elecSignVC = segue.source as? DFElecSignVC {
                 if !elecSignVC.isFromSubCell {
                     for formData in formDataList {
-                        if formData.formType == "sign", formData.formNumber == elecSignVC.cellIndex {
+                        if formData.formType == "sign", formData.formNumber == elecSignVC.formNumber, formData.cellNumber == elecSignVC.cellIndex  {
                             
                             DispatchQueue.global(qos: .userInitiated).async {
                                 DispatchQueue.main.async {
