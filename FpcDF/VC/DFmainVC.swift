@@ -2846,7 +2846,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
             }else if formData.formType == "tableKey" {
-                if formData.formNumber == cellNumber, formData.formNumber == formNumber {
+                if formData.cellNumber == cellNumber, formData.formNumber == formNumber {
                     formData.subCellDataList![subCellIndex].textValue = textView.text!
                     
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textView.text!
