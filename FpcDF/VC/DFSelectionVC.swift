@@ -27,6 +27,8 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     var accessToken: String?
     var tokenURL: String?
     
+    var formNumber = 0
+    var cellNumber = 0
     var id: String?
     var oriOptionList = [DynamicInput]()
     var optionList = [DynamicInput]()

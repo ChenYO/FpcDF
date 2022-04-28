@@ -122,6 +122,7 @@ extension UITapGestureRecognizer {
     private struct AssociatedKey {
         static var index: Int = 0
         static var formNumber: Int = 0
+        static var cellNumber: Int = 0
         static var inputNumber: Int = 0
     }
     
@@ -145,6 +146,16 @@ extension UITapGestureRecognizer {
         }
     }
     
+    public var cellNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.cellNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.cellNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
     public var inputNumber: Int {
         get {
             return objc_getAssociatedObject(self, &AssociatedKey.inputNumber) as? Int ?? 0
@@ -159,6 +170,7 @@ extension UITapGestureRecognizer {
 extension UIImagePickerController {
     private struct AssociatedKey {
         static var formNumber: Int = 0
+        static var cellNumber: Int = 0
     }
     
     public var formNumber: Int {
@@ -168,6 +180,16 @@ extension UIImagePickerController {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var cellNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.cellNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.cellNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
 }
@@ -175,6 +197,7 @@ extension UIImagePickerController {
 extension UIDocumentMenuViewController {
     private struct AssociatedKey {
         static var formNumber: Int = 0
+        static var cellNumber: Int = 0
     }
     
     public var formNumber: Int {
@@ -184,6 +207,16 @@ extension UIDocumentMenuViewController {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var cellNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.cellNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.cellNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
 }
@@ -191,6 +224,7 @@ extension UIDocumentMenuViewController {
 extension UIDocumentPickerViewController {
     private struct AssociatedKey {
         static var formNumber: Int = 0
+        static var cellNumber: Int = 0
     }
     
     public var formNumber: Int {
@@ -200,6 +234,16 @@ extension UIDocumentPickerViewController {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.formNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var cellNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.cellNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.cellNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
 }

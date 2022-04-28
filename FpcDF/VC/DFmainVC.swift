@@ -18,7 +18,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //存放原始表單資料
     var oriFormDataList: [FormListData] = []
-    var oriFormData: FormListData?
+//    var oriFormData: FormListData?
     var keyboardPresented = false
     var screenHeight:CGFloat = 0.0
     
@@ -261,12 +261,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                                         
                                         self.oriFormDataList.append(obj)
-                                        self.oriFormData = obj
+//                                        self.oriFormData = obj
                                         self.clear()
                                         
                                         self.title = obj.formTitle
-                                        self.setButtons()
-                                        self.setFormData()
+                                        
+                                        if !self.oriFormDataList.isEmpty {
+                                            self.setButtons()
+                                            self.setFormData()
+                                        }
+                                        
                                         self.dfStopActivityIndicator()
                                         self.tableView.reloadData()
                                     }
@@ -360,7 +364,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //設定導覽列button
     func setButtons() {
-        for (index, button) in oriFormData!.buttons.enumerated() {
+//        for (index, button) in oriFormData!.buttons.enumerated() {
+        for (index, button) in self.oriFormDataList[0].buttons.enumerated() {
             let buttonItem = UIBarButtonItem(title: button.name, style: UIBarButtonItem.Style.plain, target: self, action: #selector(buttonClick))
             
             buttonItem.tag = index
@@ -375,16 +380,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @objc func buttonClick(sender: UIBarButtonItem) {
         self.view.endEditing(true)
         
-        let button = oriFormData?.buttons[sender.tag]
+//        let button = oriFormData?.buttons[sender.tag]
+        
+        let button = self.oriFormDataList[0].buttons[sender.tag]
         
         //顯示多選項表單
-        if button?.type == "subForm" {
-            let actionSheet = UIAlertController(title: button?.actionTip, message: nil, preferredStyle: .actionSheet)
+        if button.type == "subForm" {
+            let actionSheet = UIAlertController(title: button.actionTip, message: nil, preferredStyle: .actionSheet)
             
-            for subButton in button!.actions! {
+            for subButton in button.actions! {
                 let action = UIAlertAction(title: subButton.title, style: .default, handler: {
                     action in
-                    self.execAction(type: subButton.actionType!, title: (button?.actionTip)!, urlString: subButton.url!)
+                    self.execAction(type: subButton.actionType!, title: (button.actionTip)!, urlString: subButton.url!)
                 })
                 
                 actionSheet.addAction(action)
@@ -395,7 +402,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             present(actionSheet, animated: true)
         }else {
-            execAction(type: (button?.type)!, title: (button?.actionTip)!, urlString: (button?.url)!)
+            execAction(type: (button.type)!, title: (button.actionTip)!, urlString: (button.url)!)
         }
     }
     
@@ -413,6 +420,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
                 action in
+                
+                
                 DFAPI.customPost(address: self.tokenURL!, parameters: [
                     "accessToken": self.accessToken!,
                     "comment" : "DynamicForm"
@@ -431,11 +440,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             print(obj)
                             
                             let jsonEncoder = JSONEncoder()
-                            let oriJsonData = try jsonEncoder.encode(self.oriFormData)
+                            let oriJsonData = try jsonEncoder.encode(self.oriFormDataList[0])
+//                            let oriJsonData = try jsonEncoder.encode(self.oriFormData)
                             let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
                             
                             let parameters = [
-                                "formId": self.oriFormData?.formId ?? "",
+//                                "formId": self.oriFormData?.formId ?? "",
+                                "formId": self.oriFormDataList[0].formId ?? "",
                                 "formString": json ?? "",
                                 self.tokenKey!: obj.accessTokenSHA256
                             ]
@@ -495,10 +506,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func clear() {
         self.navigationItem.rightBarButtonItems = []
         formDataList = [FormData]()
-        for i in 0..<(oriFormData?.cells.count)! {
-            let formData = oriFormData?.cells[i]
-            formData?.inputValue = nil
+        
+        for form in self.oriFormDataList {
+            for i in 0..<form.cells.count {
+                let cell = form.cells[i]
+                cell.inputValue = nil
+            }
         }
+        
+//        for i in 0..<(oriFormData?.cells.count)! {
+//            let formData = oriFormData?.cells[i]
+//            formData?.inputValue = nil
+//        }
     }
     
     func setTableFormData() {
@@ -695,7 +714,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                 case "upload":
                     formDataList.append(data)
-                    setFileData(formData: formData, index: index)
+                    setFileData(formData: formData, formNumber: formIndex, cellNumber: cellIndex)
                     
                 case "sign":
                     if !formData.fileList!.isEmpty {
@@ -753,15 +772,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //設定附件/照片資料
-    func setFileData(formData: cell, index: Int) {
+    func setFileData(formData: cell, formNumber: Int, cellNumber: Int) {
         if let fileList = formData.fileList {
             for i in 0..<fileList.count {
                 let file = fileList[i]
                 if file.type == "picture" {
-                    insertPicture(index: index, title: file.title!, mainType: formData.type!, inputNumber: i, isReadOnly: formData.isReadOnly!, imageUrlString: file.url!)
+                    insertPicture(formNumber: formNumber, cellNumber: cellNumber, title: file.title!, mainType: formData.type!, inputNumber: i, isReadOnly: formData.isReadOnly!, imageUrlString: file.url!)
                 }else if file.type == "attachment" {
                     let attachmentData = FormData()
-                    attachmentData.formNumber = index
+                    attachmentData.formNumber = formNumber
+                    attachmentData.cellNumber = cellNumber
                     attachmentData.inputNumber = i
                     attachmentData.title = file.title
                     attachmentData.formType = "attachment"
@@ -778,9 +798,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //新增照片資料
-    func insertPicture(index: Int, title: String, mainType: String, inputNumber: Int, isReadOnly: Bool, imageUrlString: String) {
+    func insertPicture(formNumber: Int, cellNumber: Int, title: String, mainType: String, inputNumber: Int, isReadOnly: Bool, imageUrlString: String) {
         let pictureData = FormData()
-        pictureData.formNumber = index
+        pictureData.formNumber = formNumber
+        pictureData.cellNumber = cellNumber
         pictureData.title = title
         pictureData.inputNumber = inputNumber
         pictureData.formType = "picture"
@@ -858,19 +879,22 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //附件/照片刪除動作
     @objc func deleteFileTapped(sender:UITapGestureRecognizer) {
-        let tagInt = sender.view?.tag
+        let formNumber = sender.formNumber
+        let cellNumber = sender.cellNumber
+        let inputNumber = sender.inputNumber
         
-        self.oriFormData?.cells[tagInt!].fileList?.remove(at: sender.inputNumber)
+        self.oriFormDataList[formNumber].cells[cellNumber].fileList?.remove(at: inputNumber)
+        
         var newIndex = 0
         
         for (index, formData) in formDataList.enumerated() {
             if formData.formType == "picture" {
-                if formData.mainType == "upload", tagInt == formData.formNumber, sender.inputNumber == formData.inputNumber {
+                if formData.mainType == "upload", formNumber == formData.formNumber, cellNumber == formData.cellNumber, inputNumber == formData.inputNumber {
                     formDataList.remove(at: index)
                     break
                 }
             }else if formData.formType == "attachment" {
-                if formData.mainType == "upload", tagInt == formData.formNumber, sender.inputNumber == formData.inputNumber {
+                if formData.mainType == "upload", formNumber == formData.formNumber, cellNumber == formData.cellNumber, inputNumber == formData.inputNumber {
                     formDataList.remove(at: index)
                     break
                 }
@@ -880,16 +904,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         for formData in formDataList {
             if formData.formType == "picture" {
-                if formData.mainType == "upload", tagInt! == formData.formNumber {
-                    if newIndex > (self.oriFormData?.cells[formData.formNumber!].fileList?.count)! {
+                if formData.mainType == "upload", formNumber == formData.formNumber, cellNumber == formData.cellNumber {
+                    if newIndex > self.oriFormDataList[formNumber].cells[cellNumber].fileList!.count {
                         break
                     }
                     formData.inputNumber = newIndex
                     newIndex += 1
                 }
             }else if formData.formType == "attachment" {
-                if formData.mainType == "upload", tagInt == formData.formNumber {
-                    if newIndex > (self.oriFormData?.cells[tagInt!].fileList?.count)! {
+                if formData.mainType == "upload", formNumber == formData.formNumber, cellNumber == formData.cellNumber {
+                    if newIndex > self.oriFormDataList[formNumber].cells[cellNumber].fileList!.count {
                         break
                     }
                     formData.inputNumber = newIndex
@@ -1170,10 +1194,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteFileTapped))
                 
+                deleteRecognizer.formNumber = formNumber!
+                deleteRecognizer.cellNumber = cellNumber
                 deleteRecognizer.inputNumber = formData.inputNumber!
                 cell.deleteIcon.addGestureRecognizer(deleteRecognizer)
                 
-                cell.deleteIcon.tag = formNumber!
+                cell.deleteIcon.formNumber = formNumber!
+                cell.deleteIcon.cellNumber = cellNumber
+                cell.deleteIcon.inputNumber = formData.inputNumber!
                 
                 
             }
@@ -1206,10 +1234,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 let deleteRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteFileTapped))
                 
+                deleteRecognizer.formNumber = formNumber!
+                deleteRecognizer.cellNumber = cellNumber
                 deleteRecognizer.inputNumber = formData.inputNumber!
                 cell.deleteIcon.addGestureRecognizer(deleteRecognizer)
                 
-                cell.deleteIcon.tag = formNumber!
+                cell.deleteIcon.formNumber = formNumber!
+                cell.deleteIcon.cellNumber = cellNumber
+                cell.deleteIcon.inputNumber = formData.inputNumber!
             }
             
             return cell
@@ -1796,7 +1828,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
         
         
-        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)!].id
+        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
         
         self.saveForm()
         tableView.reloadData()
@@ -2083,7 +2115,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if imageFormData.formType == "picture" {
                     if let image = imageFormData.image{
                         imageVC!.images.append(image)
-                        if imageFormData.formId == formData.formId && imageFormData.formNumber == formData.formNumber {
+                        if imageFormData.formId == formData.formId, imageFormData.formNumber == formData.formNumber, imageFormData.cellNumber == formData.cellNumber {
                             finalIndex = index
                         }
                         index += 1
@@ -2116,13 +2148,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             var optionList = [DynamicInput]()
             
-            if let actions = self.oriFormData?.cells[formData.formNumber!].actions {
+            if let actions = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].actions {
                 if actions.count > 0{
-                    vc?.urlString = self.oriFormData?.cells[formData.formNumber!].actions![0].url
+                    vc?.urlString = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].actions![0].url
                 }
             }
             
-            if let oriOptionList = self.oriFormData?.cells[formData.formNumber!].options, oriOptionList.count > 0 {
+            if let oriOptionList = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].options, oriOptionList.count > 0 {
                 for option in oriOptionList {
                     let dynamicInput = DynamicInput()
                     
@@ -2146,7 +2178,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             vc?.type = formData.formType
-            vc?.id = (self.oriFormData?.cells[formData.formNumber!].id)!
+            vc?.formNumber = formData.formNumber!
+            vc?.cellNumber = formData.cellNumber!
+            vc?.id = (self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].id)!
             vc?.oriOptionList = optionList
             vc?.optionList = optionList
             vc?.accessToken = accessToken
@@ -2167,13 +2201,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             var optionList = [DynamicInput]()
             
-            if let actions = self.oriFormData?.cells[formData.formNumber!].actions {
+            if let actions = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].actions {
                 if actions.count > 0{
-                    vc?.urlString = self.oriFormData?.cells[formData.formNumber!].actions![0].url
+                    vc?.urlString = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].actions![0].url
                 }
             }
             
-            if let oriOptionList = self.oriFormData?.cells[formData.formNumber!].options {
+            if let oriOptionList = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].options {
                 for option in oriOptionList {
                     let dynamicInput = DynamicInput()
                     var item1 = keyValue()
@@ -2191,7 +2225,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            if let oriOptionList = self.oriFormData?.cells[formData.formNumber!].dynamicField {
+            if let oriOptionList = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField {
                 vc?.chosenItemList = oriOptionList
             }
             
@@ -2200,7 +2234,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             vc?.type = formData.formType
-            vc?.id = (self.oriFormData?.cells[formData.formNumber!].id)!
+            vc?.formNumber = formData.formNumber!
+            vc?.cellNumber = formData.cellNumber!
+            vc?.id = (self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].id)!
             vc?.oriOptionList = optionList
             vc?.optionList = optionList
             vc?.accessToken = accessToken
@@ -2227,6 +2263,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     picker.sourceType = .camera
                     picker.allowsEditing = false
                     picker.formNumber = formData.formNumber!
+                    picker.cellNumber = formData.cellNumber!
                     self.present(picker, animated: true, completion: nil)
                 }
                 actionSheet.addAction(cameraAction)
@@ -2238,6 +2275,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     picker.allowsEditing = false // 可對照片作編輯
                     picker.delegate = self
                     picker.formNumber = formData.formNumber!
+                    picker.cellNumber = formData.cellNumber!
                     self.present(picker, animated: true, completion: nil)
                 }
                 actionSheet.addAction(photoAction)
@@ -2250,6 +2288,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     "org.openxmlformats.spreadsheetml.sheet", "org.openxmlformats.presentationml.presentation", kUTTypePlainText as String], in: .import)
                 importMenu.delegate = self
                 importMenu.formNumber = formData.formNumber!
+                importMenu.cellNumber = formData.cellNumber!
                 
                 // For iPad2 crash bug
                 if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
@@ -2310,7 +2349,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let imageName = UUID().uuidString + ".jpg"
             
             dfShowActivityIndicator()
-            customUpload(oriImage: image, fileUrl: nil, fileName: imageName, formNumber: picker.formNumber, type: "picture")
+            customUpload(oriImage: image, fileUrl: nil, fileName: imageName, formNumber: picker.formNumber, cellNumber: picker.cellNumber, type: "picture")
             
         }
         picker.presentingViewController?.dismiss(animated: true)
@@ -2323,6 +2362,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self
         documentPicker.formNumber = documentMenu.formNumber
+        documentPicker.cellNumber = documentMenu.cellNumber
         self.present(documentPicker, animated: true, completion: nil)
     }
     
@@ -2330,10 +2370,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         
         dfShowActivityIndicator()
-        customUpload(oriImage: nil, fileUrl: url, fileName: url.lastPathComponent, formNumber: controller.formNumber, type: "attachment")
+        customUpload(oriImage: nil, fileUrl: url, fileName: url.lastPathComponent, formNumber: controller.formNumber, cellNumber: controller.cellNumber, type: "attachment")
     }
     
-    func customUpload(oriImage: UIImage?, fileUrl: URL?, fileName: String, formNumber: Int, type: String) {
+    func customUpload(oriImage: UIImage?, fileUrl: URL?, fileName: String, formNumber: Int, cellNumber: Int, type: String) {
         
         //分隔線
         let boundary = "Boundary-\(UUID().uuidString)"
@@ -2388,21 +2428,22 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             fileData.type = type
                             fileData.url = (data["fileurl"] as! String)
                             
-                            self.oriFormData?.cells[formNumber].fileList?.append(fileData)
+                            self.oriFormDataList[formNumber].cells[cellNumber].fileList?.append(fileData)
                             
                             for (index, file) in self.formDataList.enumerated() {
-                                if formNumber == file.formNumber {
+                                if formNumber == file.formNumber, cellNumber == file.cellNumber {
                                     let fileData = FormData()
                                     fileData.formNumber = formNumber
+                                    fileData.cellNumber = cellNumber
                                     fileData.title = fileName
-                                    fileData.inputNumber = (self.oriFormData?.cells[formNumber].fileList!.count)! - 1
+                                    fileData.inputNumber = self.oriFormDataList[formNumber].cells[cellNumber].fileList!.count - 1
                                     fileData.formType = type
                                     fileData.mainType = "upload"
-                                    fileData.formId = "\((self.oriFormData?.cells[formNumber].fileList!.count)! - 1)"
+                                    fileData.formId = "\(self.oriFormDataList[formNumber].cells[cellNumber].fileList!.count - 1)"
                                     fileData.image = oriImage
                                     fileData.fileUrl = (data["fileurl"] as! String)
                                     fileData.isReadOnly = false
-                                    self.formDataList.insert(fileData, at: index + (self.oriFormData?.cells[formNumber].fileList?.count)!)
+                                    self.formDataList.insert(fileData, at: index + (self.oriFormDataList[formNumber].cells[cellNumber].fileList?.count)!)
                                     break
                                 }
                             }
@@ -2649,19 +2690,30 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if segue.source is DFSelectionVC {
             if let selectionVC = segue.source as? DFSelectionVC {
                 for formData in formDataList {
-                    if formData.formType == "multipleSelection", formData.formId == selectionVC.id {
-                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
+                    if formData.formType == "multipleSelection", formData.formNumber == selectionVC.formNumber, formData.cellNumber == selectionVC.cellNumber, formData.formId == selectionVC.id {
+                        
+                        self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField = []
+                        
+//                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
+                        
                         formData.dynamicField = []
                         for option in selectionVC.chosenItemList {
                             formData.dynamicField?.append(option)
-                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
+                            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField?.append(option)
+                            
+//                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
                         }
-                    }else if formData.formType == "singleSelection", formData.formId == selectionVC.id {
-                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
+                    }else if formData.formType == "singleSelection", formData.formNumber == selectionVC.formNumber, formData.cellNumber == selectionVC.cellNumber, formData.formId == selectionVC.id {
+                        
+                        self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField = []
+                        
+//                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
                         formData.dynamicField = []
                         for option in selectionVC.chosenItemList {
                             formData.dynamicField?.append(option)
-                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
+                            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField?.append(option)
+                            
+//                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
                         }
                     }
                 }
