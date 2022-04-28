@@ -808,6 +808,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 case "tableKey":
                     
                     for (subIndex, subCell) in data.subCellDataList!.enumerated() {
+                        
+                        data.subCellDataList![subIndex].isFinish = true
+                        
                         if subCell.cellHeight != 0 {
                             data.subCellDataList![subIndex].height = CGFloat(subCell.cellHeight!)
                         }
@@ -819,6 +822,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         subCell.title = option.name
                                     }
                                 }
+                            }
+                        }
+                        
+                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "sign"{
+                            
+                            if subCell.textValue == "" {
+                                data.subCellDataList![subIndex].isFinish = false
+                            }
+                            
+                        }else if subCell.subType == "checkBox" {
+                            
+                            if subCell.choiceValue!.isEmpty {
+                                data.subCellDataList![subIndex].isFinish = false
+                            }
+                        }else if subCell.subType == "sign" {
+                            
+                            if subCell.fileUrl == "" {
+                                data.subCellDataList![subIndex].isFinish = false
                             }
                         }
                     }
