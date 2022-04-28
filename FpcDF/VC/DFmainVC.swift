@@ -148,13 +148,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //從 json string 取得表單
     func loadFromJsonString() {
         
-        let buttonItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
+        let buttonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItem.Style.plain, target: self, action: #selector(finish))
+        
+        let saveItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
         
 //                buttonItem.tag = index
 //                if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
 //                    buttonItem.tintColor = .white
 //                }
-        self.navigationItem.rightBarButtonItems?.append(buttonItem)
+        self.navigationItem.rightBarButtonItems = [buttonItem, saveItem]
         
         if !self.jsonStringList.isEmpty {
             
@@ -193,6 +195,58 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             print("save")
         } catch {
             
+        }
+    }
+    
+    @objc func finish() {
+        var isFinish = true
+        
+        for form in self.oriFormDataList {
+            
+            if !isFinish {
+                break
+            }
+            
+            for cell in form.cells {
+                
+                if !isFinish {
+                    break
+                }
+                
+                if cell.type == "tableKey" {
+                    for subCell in cell.subCellDataList! {
+                        if !subCell.isFinish! {
+                            isFinish = false
+                            break
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        if !isFinish {
+            let confirmSheet = UIAlertController(title: "訊息提示", message: "表單尚未完成", preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                action in
+                
+            })
+        
+            confirmSheet.addAction(confirmAction)
+            
+            self.present(confirmSheet, animated: true, completion: nil)
+        }else {
+            let confirmSheet = UIAlertController(title: "訊息提示", message: "表單完成", preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                action in
+                
+            })
+        
+            confirmSheet.addAction(confirmAction)
+            
+            self.present(confirmSheet, animated: true, completion: nil)
         }
     }
     
@@ -553,6 +607,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 case "tableKey":
                     
                     for (subIndex, subCell) in data.subCellDataList!.enumerated() {
+                        
+                        data.subCellDataList![subIndex].isFinish = true
+                        
                         if subCell.cellHeight != 0 {
                             data.subCellDataList![subIndex].height = CGFloat(subCell.cellHeight!)
                         }
@@ -564,6 +621,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         subCell.title = option.name
                                     }
                                 }
+                            }
+                        }
+                        
+                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "sign"{
+                            
+                            if subCell.textValue == "" {
+                                data.subCellDataList![subIndex].isFinish = false
+                            }
+                            
+                        }else if subCell.subType == "checkBox" {
+                            
+                            if subCell.choiceValue!.isEmpty {
+                                data.subCellDataList![subIndex].isFinish = false
+                            }
+                        }else if subCell.subType == "sign" {
+                            
+                            if subCell.fileUrl == "" {
+                                data.subCellDataList![subIndex].isFinish = false
                             }
                         }
                     }
@@ -1449,80 +1524,80 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = formData.cellNumber!
         
         if formData.subCellDataList!.count >= 1 {
-            setTableDetailCell(key: cell.key1, imageView: cell.imageView1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, keyGap: cell.keyGap1, keyTop: cell.keyTop1, imageHeight: cell.imageHeight1, ImageGap: cell.keyGap1, cellNumber: cellNumber, cellIndex: 0, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key1, imageView: cell.imageView1, keyWidth: cell.keyWidth1, keyHeight: cell.keyHeight1, keyGap: cell.keyGap1, keyTop: cell.keyTop1, imageHeight: cell.imageHeight1, ImageGap: cell.keyGap1, cellNumber: cellNumber, subCellIndex: 0, formData: formData, cell: cell)
         }
         
         if formData.subCellDataList!.count >= 2 {
-            setTableDetailCell(key: cell.key2, imageView: cell.imageView2, keyWidth: cell.keyWidth2, keyHeight: cell.keyHeight2, keyGap: cell.keyGap1, keyTop: cell.keyTop2, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap1, cellNumber: cellNumber, cellIndex: 1, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key2, imageView: cell.imageView2, keyWidth: cell.keyWidth2, keyHeight: cell.keyHeight2, keyGap: cell.keyGap1, keyTop: cell.keyTop2, imageHeight: cell.imageHeight2, ImageGap: cell.ImageGap1, cellNumber: cellNumber, subCellIndex: 1, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 3 {
-            setTableDetailCell(key: cell.key3, imageView: cell.imageView3, keyWidth: cell.keyWidth3, keyHeight: cell.keyHeight3, keyGap: cell.keyGap2, keyTop: cell.keyTop3, imageHeight: cell.imageHeight3, ImageGap: cell.ImageGap2, cellNumber: cellNumber, cellIndex: 2, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key3, imageView: cell.imageView3, keyWidth: cell.keyWidth3, keyHeight: cell.keyHeight3, keyGap: cell.keyGap2, keyTop: cell.keyTop3, imageHeight: cell.imageHeight3, ImageGap: cell.ImageGap2, cellNumber: cellNumber, subCellIndex: 2, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 4 {
-            setTableDetailCell(key: cell.key4, imageView: cell.imageView4, keyWidth: cell.keyWidth4, keyHeight: cell.keyHeight4, keyGap: cell.keyGap3, keyTop: cell.keyTop4, imageHeight: cell.imageHeight4, ImageGap: cell.ImageGap3, cellNumber: cellNumber, cellIndex: 3, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key4, imageView: cell.imageView4, keyWidth: cell.keyWidth4, keyHeight: cell.keyHeight4, keyGap: cell.keyGap3, keyTop: cell.keyTop4, imageHeight: cell.imageHeight4, ImageGap: cell.ImageGap3, cellNumber: cellNumber, subCellIndex: 3, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 5 {
-            setTableDetailCell(key: cell.key5, imageView: cell.imageView5, keyWidth: cell.keyWidth5, keyHeight: cell.keyHeight5, keyGap: cell.keyGap4, keyTop: cell.keyTop5, imageHeight: cell.imageHeight5, ImageGap: cell.ImageGap4, cellNumber: cellNumber, cellIndex: 4, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key5, imageView: cell.imageView5, keyWidth: cell.keyWidth5, keyHeight: cell.keyHeight5, keyGap: cell.keyGap4, keyTop: cell.keyTop5, imageHeight: cell.imageHeight5, ImageGap: cell.ImageGap4, cellNumber: cellNumber, subCellIndex: 4, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 6 {
-            setTableDetailCell(key: cell.key6, imageView: cell.imageView6, keyWidth: cell.keyWidth6, keyHeight: cell.keyHeight6, keyGap: cell.keyGap5, keyTop: cell.keyTop6, imageHeight: cell.imageHeight6, ImageGap: cell.ImageGap5, cellNumber: cellNumber, cellIndex: 5, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key6, imageView: cell.imageView6, keyWidth: cell.keyWidth6, keyHeight: cell.keyHeight6, keyGap: cell.keyGap5, keyTop: cell.keyTop6, imageHeight: cell.imageHeight6, ImageGap: cell.ImageGap5, cellNumber: cellNumber, subCellIndex: 5, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 7 {
-            setTableDetailCell(key: cell.key7, imageView: cell.imageView7, keyWidth: cell.keyWidth7, keyHeight: cell.keyHeight7, keyGap: cell.keyGap6, keyTop: cell.keyTop7, imageHeight: cell.imageHeight7, ImageGap: cell.ImageGap6, cellNumber: cellNumber, cellIndex: 6, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key7, imageView: cell.imageView7, keyWidth: cell.keyWidth7, keyHeight: cell.keyHeight7, keyGap: cell.keyGap6, keyTop: cell.keyTop7, imageHeight: cell.imageHeight7, ImageGap: cell.ImageGap6, cellNumber: cellNumber, subCellIndex: 6, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 8 {
-            setTableDetailCell(key: cell.key8, imageView: cell.imageView8, keyWidth: cell.keyWidth8, keyHeight: cell.keyHeight8, keyGap: cell.keyGap7, keyTop: cell.keyTop8, imageHeight: cell.imageHeight8, ImageGap: cell.ImageGap7, cellNumber: cellNumber, cellIndex: 7, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key8, imageView: cell.imageView8, keyWidth: cell.keyWidth8, keyHeight: cell.keyHeight8, keyGap: cell.keyGap7, keyTop: cell.keyTop8, imageHeight: cell.imageHeight8, ImageGap: cell.ImageGap7, cellNumber: cellNumber, subCellIndex: 7, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 9 {
-            setTableDetailCell(key: cell.key9, imageView: cell.imageView9, keyWidth: cell.keyWidth9, keyHeight: cell.keyHeight9, keyGap: cell.keyGap8, keyTop: cell.keyTop9, imageHeight: cell.imageHeight9, ImageGap: cell.ImageGap8, cellNumber: cellNumber, cellIndex: 8, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key9, imageView: cell.imageView9, keyWidth: cell.keyWidth9, keyHeight: cell.keyHeight9, keyGap: cell.keyGap8, keyTop: cell.keyTop9, imageHeight: cell.imageHeight9, ImageGap: cell.ImageGap8, cellNumber: cellNumber, subCellIndex: 8, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 10 {
-            setTableDetailCell(key: cell.key10, imageView: cell.imageView10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, keyGap: cell.keyGap9, keyTop: cell.keyTop10, imageHeight: cell.imageHeight10, ImageGap: cell.ImageGap9, cellNumber: cellNumber, cellIndex: 9, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key10, imageView: cell.imageView10, keyWidth: cell.keyWidth10, keyHeight: cell.keyHeight10, keyGap: cell.keyGap9, keyTop: cell.keyTop10, imageHeight: cell.imageHeight10, ImageGap: cell.ImageGap9, cellNumber: cellNumber, subCellIndex: 9, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 11 {
-            setTableDetailCell(key: cell.key11, imageView: cell.imageView11, keyWidth: cell.keyWidth11, keyHeight: cell.keyHeight11, keyGap: cell.keyGap10, keyTop: cell.keyTop11, imageHeight: cell.imageHeight11, ImageGap: cell.ImageGap10, cellNumber: cellNumber, cellIndex: 10, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key11, imageView: cell.imageView11, keyWidth: cell.keyWidth11, keyHeight: cell.keyHeight11, keyGap: cell.keyGap10, keyTop: cell.keyTop11, imageHeight: cell.imageHeight11, ImageGap: cell.ImageGap10, cellNumber: cellNumber, subCellIndex: 10, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 12 {
-            setTableDetailCell(key: cell.key12, imageView: cell.imageView12, keyWidth: cell.keyWidth12, keyHeight: cell.keyHeight12, keyGap: cell.keyGap11, keyTop: cell.keyTop12, imageHeight: cell.imageHeight12, ImageGap: cell.ImageGap11, cellNumber: cellNumber, cellIndex: 11, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key12, imageView: cell.imageView12, keyWidth: cell.keyWidth12, keyHeight: cell.keyHeight12, keyGap: cell.keyGap11, keyTop: cell.keyTop12, imageHeight: cell.imageHeight12, ImageGap: cell.ImageGap11, cellNumber: cellNumber, subCellIndex: 11, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 13 {
-            setTableDetailCell(key: cell.key13, imageView: cell.imageView13, keyWidth: cell.keyWidth13, keyHeight: cell.keyHeight13, keyGap: cell.keyGap12, keyTop: cell.keyTop13, imageHeight: cell.imageHeight13, ImageGap: cell.ImageGap12, cellNumber: cellNumber, cellIndex: 12, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key13, imageView: cell.imageView13, keyWidth: cell.keyWidth13, keyHeight: cell.keyHeight13, keyGap: cell.keyGap12, keyTop: cell.keyTop13, imageHeight: cell.imageHeight13, ImageGap: cell.ImageGap12, cellNumber: cellNumber, subCellIndex: 12, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 14 {
-            setTableDetailCell(key: cell.key14, imageView: cell.imageView14, keyWidth: cell.keyWidth14, keyHeight: cell.keyHeight14, keyGap: cell.keyGap13, keyTop: cell.keyTop14, imageHeight: cell.imageHeight14, ImageGap: cell.ImageGap13, cellNumber: cellNumber, cellIndex: 13, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key14, imageView: cell.imageView14, keyWidth: cell.keyWidth14, keyHeight: cell.keyHeight14, keyGap: cell.keyGap13, keyTop: cell.keyTop14, imageHeight: cell.imageHeight14, ImageGap: cell.ImageGap13, cellNumber: cellNumber, subCellIndex: 13, formData: formData, cell: cell)
         }
 
         if formData.subCellDataList!.count >= 15 {
-            setTableDetailCell(key: cell.key15, imageView: cell.imageView15, keyWidth: cell.keyWidth15, keyHeight: cell.keyHeight15, keyGap: cell.keyGap14, keyTop: cell.keyTop15, imageHeight: cell.imageHeight15, ImageGap: cell.ImageGap14, cellNumber: cellNumber, cellIndex: 14, formData: formData, cell: cell)
+            setTableDetailCell(key: cell.key15, imageView: cell.imageView15, keyWidth: cell.keyWidth15, keyHeight: cell.keyHeight15, keyGap: cell.keyGap14, keyTop: cell.keyTop15, imageHeight: cell.imageHeight15, ImageGap: cell.ImageGap14, cellNumber: cellNumber, subCellIndex: 14, formData: formData, cell: cell)
         }
     }
     
-    func setTableDetailCell(key: UITextView, imageView: UIImageView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, keyTop: NSLayoutConstraint, imageHeight: NSLayoutConstraint, ImageGap: NSLayoutConstraint, cellNumber: Int, cellIndex: Int, formData: FormData, cell: DFTableCell) {
-        let subCell = formData.subCellDataList![cellIndex]
+    func setTableDetailCell(key: UITextView, imageView: UIImageView, keyWidth: NSLayoutConstraint, keyHeight: NSLayoutConstraint, keyGap: NSLayoutConstraint, keyTop: NSLayoutConstraint, imageHeight: NSLayoutConstraint, ImageGap: NSLayoutConstraint, cellNumber: Int, subCellIndex: Int, formData: FormData, cell: DFTableCell) {
+        let subCell = formData.subCellDataList![subCellIndex]
         
         let formNumber = formData.formNumber
         
-        if let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![cellIndex].titleFont?.size {
+        if let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.size {
             key.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         }
         
-        if let fontColor = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![cellIndex].titleFont?.color {
+        if let fontColor = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.color {
             key.textColor = UIColor(hexString: fontColor)
         }
         
-        if let alignment = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![cellIndex].titleFont?.alignment {
+        if let alignment = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.alignment {
             
             if alignment == "left" {
                 key.textAlignment = .left
@@ -1536,17 +1611,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         key.layer.borderWidth = 1
         key.layer.borderColor = UIColor.black.cgColor
-        key.backgroundColor = .white
+        
+        if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].isFinish! {
+            key.backgroundColor = .white
+        }else {
+            key.backgroundColor = .lightGray
+        }
+        
         key.isHidden = false
         key.delegate = self
         key.isUserInteractionEnabled = true
         
         key.width = keyWidth.constant
         key.index = formData.index!
-        key.tag = cellIndex
+        key.tag = subCellIndex
         key.formNumber = formNumber!
         key.inputNumber = cellNumber
-        imageView.tag = cellIndex
+        imageView.tag = subCellIndex
         imageView.formNumber = formNumber!
         imageView.inputNumber = cellNumber
         
@@ -1566,7 +1647,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         imageHeight.constant = keyHeight.constant
         
         if let gap = subCell.cellGap {
-            if cellIndex != 0 {
+            if subCellIndex != 0 {
                 keyGap.constant = width * CGFloat(gap) / 100
                 ImageGap.constant = width * CGFloat(gap) / 100
             }
@@ -1624,10 +1705,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 format = "yyyy-MM-dd HH:mm"
             }
             
-            setTableTextFieldDatePicker(type: subCell.subType!, index: formData.index!, formNumber: formNumber!, cellNumber: formData.cellNumber!, subCellIndex: cellIndex, key: key)
+            setTableTextFieldDatePicker(type: subCell.subType!, index: formData.index!, formNumber: formNumber!, cellNumber: formData.cellNumber!, subCellIndex: subCellIndex, key: key)
             
-            if formData.subCellDataList![cellIndex].textValue != "" {
-                key.text = setTimestampToDate(timestampString: formData.subCellDataList![cellIndex].textValue!, format: format)
+            if formData.subCellDataList![subCellIndex].textValue != "" {
+                key.text = setTimestampToDate(timestampString: formData.subCellDataList![subCellIndex].textValue!, format: format)
             }
             
         }else if subCell.subType == "radio" {
@@ -1705,7 +1786,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             keyTop.constant = imageHeight.constant
             keyHeight.constant = 40
             
-            if let signUrl = subCell.signUrl {
+            if let signUrl = subCell.fileUrl {
                 let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
                 if let imageData = NSData(contentsOf: fileURL!) {
                     let image = UIImage(data: imageData as Data)
@@ -1717,6 +1798,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if subCell.textValue != "" {
                 key.text = subCell.textValue
             }
+        }else if subCell.subType == "picture" {
+            key.isHidden = true
+            imageView.isHidden = false
+            
+            let recognizer = getPictureGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            imageView.addGestureRecognizer(recognizer)
+            
+            
+            if let signUrl = subCell.fileUrl {
+                let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+                if let imageData = NSData(contentsOf: fileURL!) {
+                    let image = UIImage(data: imageData as Data)
+                    
+                    imageView.image = image
+                }
+            }
+            
         }else if subCell.subType == "form" {
             
             key.isEditable = false
@@ -1792,6 +1891,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 formDataList[index].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
                 
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
             }
         }
         self.saveForm()
@@ -1830,6 +1931,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
         
+        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+        
         self.saveForm()
         tableView.reloadData()
     }
@@ -1861,6 +1964,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.formDataList[index].subCellDataList![subCellIndex].textValue = option.id
                 
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                
                 self.saveForm()
                 self.tableView.reloadData()
             }
@@ -1922,6 +2028,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 } else {
                     self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                }
+                
+                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                }else {
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
                 }
                 
                 self.saveForm()
@@ -2013,13 +2125,82 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         vc!.cellIndex = cellNumber
         vc!.subCellIndex = subCellIndex
         vc!.isFromSubCell = true
-        vc!.signUrl = formDataList[index].subCellDataList![subCellIndex].signUrl ?? ""
+        vc!.signUrl = formDataList[index].subCellDataList![subCellIndex].fileUrl ?? ""
         
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(vc!, animated: true)
         
+    }
+    
+    func getPictureGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(openCameraOrPhoto))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func openCameraOrPhoto(_ sender: UITapGestureRecognizer) {
+        
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        //檢查裝置是否有相機功能
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "拍攝照片", style: .default) { action in
+                picker.sourceType = .camera
+                picker.allowsEditing = false
+                picker.formNumber = formNumber
+                picker.cellNumber = cellNumber
+                picker.subCellNumber = subCellIndex
+                
+                self.present(picker, animated: true, completion: nil)
+            }
+            actionSheet.addAction(cameraAction)
+        }
+        // 開啟相簿
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+            let photoAction = UIAlertAction(title: "從相簿挑選照片", style: .default) { action in
+                picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                picker.allowsEditing = false // 可對照片作編輯
+                picker.delegate = self
+                picker.formNumber = formNumber
+                picker.cellNumber = cellNumber
+                picker.subCellNumber = subCellIndex
+                
+                self.present(picker, animated: true, completion: nil)
+            }
+            actionSheet.addAction(photoAction)
+        }
+        
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        actionSheet.addAction(cancelAction)
+        
+        
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            let loc = sender.location(in: self.view)
+            actionSheet.modalPresentationStyle = .popover
+            actionSheet.popoverPresentationController?.sourceView = self.view
+            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+        }
+        self.present(actionSheet, animated: true) {
+            print("option menu presented")
+        }
     }
     
     func getFormGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
@@ -2348,8 +2529,33 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let image = (info[UIImagePickerController.InfoKey.editedImage] ?? info[UIImagePickerController.InfoKey.originalImage]) as? UIImage {
             let imageName = UUID().uuidString + ".jpg"
             
-            dfShowActivityIndicator()
-            customUpload(oriImage: image, fileUrl: nil, fileName: imageName, formNumber: picker.formNumber, cellNumber: picker.cellNumber, type: "picture")
+            if isUsingJsonString {
+                let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                
+                // create the destination file url to save your image
+                let fileURL = documentsDirectory.appendingPathComponent(imageName)
+                
+                print(fileURL)
+                
+                self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl = imageName
+                
+                if let imageData = image.rotateImageByOrientation().jpegData(compressionQuality: 0.9) {
+                    do {
+
+
+                        try imageData.write(to: fileURL)
+                        
+                        self.tableView.reloadData()
+                        print("file saved")
+                    } catch {
+                        print("error saving file:", error)
+                    }
+                }
+               
+            }else {
+                dfShowActivityIndicator()
+                customUpload(oriImage: image, fileUrl: nil, fileName: imageName, formNumber: picker.formNumber, cellNumber: picker.cellNumber, type: "picture")
+            }
             
         }
         picker.presentingViewController?.dismiss(animated: true)
@@ -2623,6 +2829,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     formData.subCellDataList![subCellIndex].textValue = textView.text!
                     
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textView.text!
+                    
                     self.saveForm()
                 }
             }
@@ -2647,6 +2854,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if width != 0 {
             adjustTextView(textView, layout: false, width: width, cellNumber: index, index: subCellIndex)
         }
+        
+        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+        }else {
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+        }
+        
+        self.tableView.reloadData()
     }
     
     func adjustTextView(_ textView: UITextView, layout: Bool, width: CGFloat, cellNumber: Int, index: Int) {
@@ -2738,9 +2953,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 }else {
-                    formDataList[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
+                    formDataList[elecSignVC.index].subCellDataList![elecSignVC.subCellIndex].fileUrl = elecSignVC.signUrl
                     
-                    self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].signUrl = elecSignVC.signUrl
+                    self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].fileUrl = elecSignVC.signUrl
+                    
+                    self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].isFinish = true
                     
                     self.tableView.reloadData()
                 }

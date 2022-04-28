@@ -129,5 +129,6 @@ class subCellData: Codable {
     var keyBoardType: String?
     var borderColor: String?
     
-    var signUrl: String?
+    var fileUrl: String?
+    var isFinish: Bool?
 }

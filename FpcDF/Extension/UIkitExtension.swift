@@ -171,6 +171,7 @@ extension UIImagePickerController {
     private struct AssociatedKey {
         static var formNumber: Int = 0
         static var cellNumber: Int = 0
+        static var subCellNumber: Int = 0
     }
     
     public var formNumber: Int {
@@ -190,6 +191,16 @@ extension UIImagePickerController {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.cellNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var subCellNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.subCellNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.subCellNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
 }

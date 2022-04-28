@@ -259,6 +259,22 @@ class DFTableCell: UITableViewCell {
         key14.text = ""
         key15.text = ""
         
+        imageView1.image = nil
+        imageView2.image = nil
+        imageView3.image = nil
+        imageView4.image = nil
+        imageView5.image = nil
+        imageView6.image = nil
+        imageView7.image = nil
+        imageView8.image = nil
+        imageView9.image = nil
+        imageView10.image = nil
+        imageView11.image = nil
+        imageView12.image = nil
+        imageView13.image = nil
+        imageView14.image = nil
+        imageView15.image = nil
+        
         keyWidth1.constant = 0
         keyWidth2.constant = 0
         keyWidth3.constant = 0
