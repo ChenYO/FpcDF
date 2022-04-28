@@ -2865,7 +2865,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
+    public func textViewDidEndEditing(_ textView: UITextView) {
         let index = textView.index
         let formNumber = textView.formNumber
         let cellNumber = textView.inputNumber
