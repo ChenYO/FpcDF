@@ -939,6 +939,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     formDataList.append(data)
                 }
             }
+            
+            let data = FormData()
+            
+            data.formNumber = formIndex
+            data.index = index
+     
+            index += 1
+            
+            formDataList.append(data)
         }
     }
     
@@ -1141,7 +1150,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         let formData = formDataList[indexPath.row]
         let formNumber = formData.formNumber
-        let cellNumber = formData.cellNumber!
+        let cellNumber = formData.cellNumber ?? 0
+        
+        cell.title.text = ""
         
         switch formData.formType {
         case "label":
