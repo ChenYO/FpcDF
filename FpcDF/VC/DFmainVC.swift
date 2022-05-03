@@ -331,7 +331,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 } catch {
                                 }
                             }
-                    }else if let data = json[DFJSONKey.data] as? [Any] {
+                    }else if let data = json[DFJSONKey.data] as? [String] {
                         DispatchQueue.main.async {
                                 do {
                                     
@@ -341,12 +341,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         return
                                     }
                                     
-                                    let form = data[0]
+                                    let jsonString = data[0]
                                     
-                                    let decoder = JSONDecoder()
-                                    decoder.dateDecodingStrategy = .millisecondsSince1970
-                                    let jsonData = try JSONSerialization.data(withJSONObject: form, options: .prettyPrinted)
-                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+//                                    let decoder = JSONDecoder()
+//                                    decoder.dateDecodingStrategy = .millisecondsSince1970
+//                                    let jsonData = try JSONSerialization.data(withJSONObject: form, options: .prettyPrinted)
+//                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
                                     
                                     let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
                                     
@@ -392,10 +392,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                             let decoder = JSONDecoder()
                                             decoder.dateDecodingStrategy = .millisecondsSince1970
                                             
-                                            for form in data {
+                                            for jsonString in data {
                                                 
-                                                let jsonData = try JSONSerialization.data(withJSONObject: form, options: .prettyPrinted)
-                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+//                                                let jsonData = try JSONSerialization.data(withJSONObject: form, options: .prettyPrinted)
+//                                                let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
                                                 
                                                 let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                                                 
