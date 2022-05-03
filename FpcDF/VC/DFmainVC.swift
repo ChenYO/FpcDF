@@ -2378,7 +2378,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let formData = formDataList[indexPath.row]
         
         if formData.formType != "picture" , formData.formType != "attachment" {
-            if formData.isReadOnly! {
+            if let isReadOnly = formData.isReadOnly, isReadOnly {
                 return
             }
         }
