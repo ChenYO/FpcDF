@@ -331,6 +331,83 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 } catch {
                                 }
                             }
+                    }else if let data = json[DFJSONKey.data] as? [String] {
+                        DispatchQueue.main.async {
+                                do {
+                                    
+                                    print(data)
+                                    
+                                    if data.isEmpty {
+                                        return
+                                    }
+                                    
+                                    let form = data[0]
+                                    
+                                    let decoder = JSONDecoder()
+                                    decoder.dateDecodingStrategy = .millisecondsSince1970
+                                    let jsonData = try JSONSerialization.data(withJSONObject: form, options: .prettyPrinted)
+                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                    
+                                    let versionCode = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFVersionCode.self)
+                                    
+                                    //檢查form與框架的版本是否符合
+                                    if DFUtil.versionCode < versionCode.versionCode! {
+                                        DFAPI.customPost(address: self.tokenURL!, parameters: [
+                                            "accessToken": self.accessToken!,
+                                            "comment" : "DynamicForm"
+                                        ]) {
+                                            json in
+                                            
+                                            if let data = json[DFJSONKey.data] {
+                                                
+                                                do {
+                                                    let decoder = JSONDecoder()
+                                                    decoder.dateDecodingStrategy = .millisecondsSince1970
+                                                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                                                    let jsonString = String(data: jsonData, encoding: String.Encoding.utf8)!
+                                                    
+                                                    let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: DFDisposableToken.self)
+                                                    
+                                                    let parameters = [
+                                                        self.tokenKey!: obj.accessTokenSHA256
+                                                    ]
+                                                    
+                                                    DFAPI.customPost(address: DFAPI.versionCodeCheckUrl, parameters: parameters) { json in
+                                                        print(json)
+                                                        self.dfStopActivityIndicator()
+                                                        self.showUpdate(json: json)
+                                                    }
+                                                    
+                                                } catch {
+                                                    
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                    }else {
+                                        
+                                        for formJson in data {
+                                            let obj = try DFUtil.decodeJsonStringAndReturnObject(string: formJson, type: FormListData.self)
+                                            
+                                            self.title = obj.formTitle
+                                            self.oriFormDataList.append(obj)
+                                        }
+                                        
+//                                        self.oriFormData = obj
+                                        self.clear()
+                                        
+                                        if !self.oriFormDataList.isEmpty {
+                                            self.setButtons()
+                                            self.setFormData()
+                                        }
+                                        
+                                        self.dfStopActivityIndicator()
+                                        self.tableView.reloadData()
+                                    }
+                                } catch {
+                                }
+                            }
                     }
                 }
             }
