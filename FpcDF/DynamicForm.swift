@@ -26,13 +26,15 @@ public class DynamicForm: UIViewController {
         
     }
     
-    public static func loadFromJsonString(jsonStringList: [String]) -> DFmainVC {
+    public static func loadFromJsonString(formId: String, jsonStringList: [String], delegate: DynamicDelegate) -> DFmainVC {
         
         let storyboard = UIStoryboard.init(name: "DFMain", bundle: Bundle(for: DynamicForm.self))
         let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
         
         vc!.isUsingJsonString = true
         vc!.jsonStringList = jsonStringList
+        vc?.delegate = delegate
+        vc?.formId = formId
         
         return vc!
     }

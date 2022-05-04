@@ -24,6 +24,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     var formDataList = [FormData]()
     
+    var delegate: DynamicDelegate?
+    
     //存放各個dataFormatter
     var dateFormatterList = [dateFormatterObj]()
     
@@ -191,6 +193,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             UserDefaults.standard.set(formList, forKey: "formList")
             
+            if let callback = delegate {
+                callback.dynamicSaveForm(self.formId, formList)
+            }
             
             print("save")
         } catch {

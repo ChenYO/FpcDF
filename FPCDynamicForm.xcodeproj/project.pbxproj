@@ -121,6 +121,8 @@
 		76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
 		76B11BFE23EBF96000F407DE /* DFVersionCode.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */; };
 		76B11C2A23ED3D6F00F407DE /* DFImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11C2923ED3D6F00F407DE /* DFImageVC.swift */; };
+		76BAD60828227671002D6476 /* DynamicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD60728227671002D6476 /* DynamicDelegate.swift */; };
+		76BAD60928227671002D6476 /* DynamicDelegate.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76BAD60728227671002D6476 /* DynamicDelegate.swift */; };
 		76D2F0CB28163E760073B20A /* DFTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2F0C928163E760073B20A /* DFTableCell.swift */; };
 		76D2F0CC28163E760073B20A /* DFTableCell.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76D2F0C928163E760073B20A /* DFTableCell.swift */; };
 		76D2F0CD28163E760073B20A /* DFTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D2F0CA28163E760073B20A /* DFTableCell.xib */; };
@@ -192,6 +194,7 @@
 				7648789323D1A2D4001E63CE /* UILabelExtensive.swift in Copy Files */,
 				7648788E23D1A2C3001E63CE /* DFDisposableToken.swift in Copy Files */,
 				76A2078C27F42B35003BE45B /* DFSignImages.swift in Copy Files */,
+				76BAD60928227671002D6476 /* DynamicDelegate.swift in Copy Files */,
 				76A2077D27F42725003BE45B /* DFDrawingView.swift in Copy Files */,
 			);
 			name = "Copy Files";
@@ -256,6 +259,7 @@
 		76A2078A27F42B35003BE45B /* DFSignImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFSignImages.swift; sourceTree = "<group>"; };
 		76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFVersionCode.swift; sourceTree = "<group>"; };
 		76B11C2923ED3D6F00F407DE /* DFImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFImageVC.swift; sourceTree = "<group>"; };
+		76BAD60728227671002D6476 /* DynamicDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicDelegate.swift; sourceTree = "<group>"; };
 		76D2F0C928163E760073B20A /* DFTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFTableCell.swift; sourceTree = "<group>"; };
 		76D2F0CA28163E760073B20A /* DFTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -410,6 +414,7 @@
 				760A02B223D132FC00CF2BC9 /* DFJSONKey.swift */,
 				760A02B323D132FC00CF2BC9 /* DFUtil.swift */,
 				765D529A23E3AFB300AE354C /* DFResult.swift */,
+				76BAD60728227671002D6476 /* DynamicDelegate.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -556,6 +561,7 @@
 				760A02AE23D132BE00CF2BC9 /* DFDisposableToken.swift in Sources */,
 				76A2077F27F427EB003BE45B /* DFElecSignVC.swift in Sources */,
 				760A02B423D132FC00CF2BC9 /* DFAPI.swift in Sources */,
+				76BAD60828227671002D6476 /* DynamicDelegate.swift in Sources */,
 				760A02A223D132BE00CF2BC9 /* DynamicInput.swift in Sources */,
 				760A026F23D1325300CF2BC9 /* FormTitleCell.swift in Sources */,
 				76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */,
