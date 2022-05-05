@@ -166,7 +166,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 do {
                     let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                     
-                    if obj.formId == self.formId {
+                    if obj.formID == self.formId {
                         self.oriFormDataList.append(obj)
                     }
                     
@@ -597,7 +597,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             
                             let parameters = [
 //                                "formId": self.oriFormData?.formId ?? "",
-                                "formId": self.oriFormDataList[0].formId ?? "",
+                                "formId": self.oriFormDataList[0].formID ?? "",
                                 "formString": json ?? "",
                                 self.tokenKey!: obj.accessTokenSHA256
                             ]

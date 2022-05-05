@@ -10,8 +10,10 @@ import UIKit
 
 class FormListData: Codable {
     var versionCode: Int?
+    var formVersion: Int?
     var formTitle: String?
-    var formId: String?
+    var formID: String?
+    var dataSourceUrl: String?
     var buttons: [button]
     var cells: [cell]
 }
