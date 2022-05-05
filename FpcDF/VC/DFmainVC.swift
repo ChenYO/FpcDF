@@ -154,10 +154,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let saveItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
         
-//                buttonItem.tag = index
-//                if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
-//                    buttonItem.tintColor = .white
-//                }
+        if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+            buttonItem.tintColor = .white
+        }
+        
         self.navigationItem.rightBarButtonItems = [buttonItem, saveItem]
         
         if !self.jsonStringList.isEmpty {
@@ -166,7 +166,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 do {
                     let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                     
+                    self.title = obj.formTitle
+                    
                     if obj.formID == self.formId {
+                        
                         self.oriFormDataList.append(obj)
                     }
                     
