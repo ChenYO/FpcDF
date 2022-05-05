@@ -166,8 +166,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 do {
                     let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                     
-                    self.oriFormDataList.append(obj)
-
+                    if obj.formId == self.formId {
+                        self.oriFormDataList.append(obj)
+                    }
+                    
                 } catch {
                 }
             }
@@ -2283,7 +2285,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @objc func openCameraOrPhoto(_ sender: UITapGestureRecognizer) {
         
-        let index = sender.index
         let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
@@ -2340,7 +2341,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     func getFormGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(getFrom))
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(getForm))
         
         recognizer.index = index
         recognizer.formNumber = formNumber
@@ -2350,20 +2351,21 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         return recognizer
     }
     
-    @objc func getFrom(_ sender: UITapGestureRecognizer) {
-        let index = sender.index
+    @objc func getForm(_ sender: UITapGestureRecognizer) {
         let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
     
-        if let dataSource = formDataList[cellNumber].subCellDataList![subCellIndex].dataSource {
+        if let dataSource = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].dataSource {
             
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
             let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
             
             vc?.isUsingJsonString = true
             vc?.formId = dataSource
+            vc?.delegate = self.delegate
+            vc?.jsonStringList = self.jsonStringList
             
             let backItem = UIBarButtonItem()
             backItem.title = "Back"
