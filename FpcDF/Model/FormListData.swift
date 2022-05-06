@@ -118,6 +118,8 @@ class subCellData: Codable {
     var textValue: String?
     var options: [option]?
     var isHorizon: Bool?
+    var isReserve: Bool?
+    var isRequired: Bool?
     var extra1: String?
     var extra2: String?
     var extra3: String?

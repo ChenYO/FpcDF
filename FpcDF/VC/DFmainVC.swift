@@ -925,21 +925,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "sign"{
-                            
-                            if subCell.textValue == "" {
-                                data.subCellDataList![subIndex].isFinish = false
-                            }
-                            
-                        }else if subCell.subType == "checkBox" {
-                            
-                            if subCell.choiceValue!.isEmpty {
-                                data.subCellDataList![subIndex].isFinish = false
-                            }
-                        }else if subCell.subType == "sign" {
-                            
-                            if subCell.fileUrl == "" {
-                                data.subCellDataList![subIndex].isFinish = false
+                        if subCell.isRequired! {
+                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "sign"{
+                                
+                                if subCell.textValue == "" {
+                                    data.subCellDataList![subIndex].isFinish = false
+                                }
+                                
+                            }else if subCell.subType == "checkBox" {
+                                
+                                if subCell.choiceValue!.isEmpty {
+                                    data.subCellDataList![subIndex].isFinish = false
+                                }
+                            }else if subCell.subType == "sign" {
+                                
+                                if subCell.fileUrl == "" {
+                                    data.subCellDataList![subIndex].isFinish = false
+                                }
                             }
                         }
                     }
@@ -1996,7 +1998,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         dateFormatter.dateFormatter = formatter
         dateFormatter.datePicker = datePicker
         
-        formDataList[index].dateFormatterList.removeAll()
+//        formDataList[index].dateFormatterList.removeAll()
         
         formDataList[index].dateFormatterList.append(dateFormatter)
         
