@@ -3005,11 +3005,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             adjustTextView(textView, layout: false, width: width, cellNumber: index, index: subCellIndex)
         }
         
-        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
-            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
-        }else {
-            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! {
+            if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+            }else {
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+            }
         }
+        
         
         self.tableView.reloadData()
     }
