@@ -2172,12 +2172,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
                 }
                 
-                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
-                }else {
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! {
+                    
+                    if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                    }else {
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                    }
                 }
-                
                 self.saveForm()
                 self.tableView.reloadData()
             }
