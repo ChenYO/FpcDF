@@ -123,6 +123,8 @@
 		76B11C2A23ED3D6F00F407DE /* DFImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B11C2923ED3D6F00F407DE /* DFImageVC.swift */; };
 		76BAD60828227671002D6476 /* DynamicDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD60728227671002D6476 /* DynamicDelegate.swift */; };
 		76BAD60928227671002D6476 /* DynamicDelegate.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76BAD60728227671002D6476 /* DynamicDelegate.swift */; };
+		76BAD62928348690002D6476 /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BAD62828348690002D6476 /* UITextViewExtension.swift */; };
+		76BAD62A28348690002D6476 /* UITextViewExtension.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76BAD62828348690002D6476 /* UITextViewExtension.swift */; };
 		76D2F0CB28163E760073B20A /* DFTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2F0C928163E760073B20A /* DFTableCell.swift */; };
 		76D2F0CC28163E760073B20A /* DFTableCell.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 76D2F0C928163E760073B20A /* DFTableCell.swift */; };
 		76D2F0CD28163E760073B20A /* DFTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76D2F0CA28163E760073B20A /* DFTableCell.xib */; };
@@ -168,6 +170,7 @@
 				76B11BFE23EBF96000F407DE /* DFVersionCode.swift in Copy Files */,
 				7648788223D1A2A6001E63CE /* FormChoiceCell.swift in Copy Files */,
 				7648787523D1A28A001E63CE /* SingleSelectionCell.xib in Copy Files */,
+				76BAD62A28348690002D6476 /* UITextViewExtension.swift in Copy Files */,
 				7648788323D1A2A8001E63CE /* fileCell.xib in Copy Files */,
 				7648787623D1A28C001E63CE /* SingleSelectionCell.swift in Copy Files */,
 				7648787823D1A290001E63CE /* MultiSelectionCell.swift in Copy Files */,
@@ -260,6 +263,7 @@
 		76B11BFC23EBF95D00F407DE /* DFVersionCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFVersionCode.swift; sourceTree = "<group>"; };
 		76B11C2923ED3D6F00F407DE /* DFImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFImageVC.swift; sourceTree = "<group>"; };
 		76BAD60728227671002D6476 /* DynamicDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicDelegate.swift; sourceTree = "<group>"; };
+		76BAD62828348690002D6476 /* UITextViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewExtension.swift; sourceTree = "<group>"; };
 		76D2F0C928163E760073B20A /* DFTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFTableCell.swift; sourceTree = "<group>"; };
 		76D2F0CA28163E760073B20A /* DFTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -396,6 +400,7 @@
 				76A2077B27F42725003BE45B /* DFDrawingView.swift */,
 				76A2077A27F42720003BE45B /* UniFPCDynamicForm-Bridging-Header.h */,
 				76A2078127F42900003BE45B /* DFUIImageExtensive.swift */,
+				76BAD62828348690002D6476 /* UITextViewExtension.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -577,6 +582,7 @@
 				760A027523D1325300CF2BC9 /* DynamicFieldCell.swift in Sources */,
 				760A02C423D1332700CF2BC9 /* UILabelExtensive.swift in Sources */,
 				765D529B23E3AFB300AE354C /* DFResult.swift in Sources */,
+				76BAD62928348690002D6476 /* UITextViewExtension.swift in Sources */,
 				760A027723D1325300CF2BC9 /* KeyValueCell.swift in Sources */,
 				76A2077C27F42725003BE45B /* DFDrawingView.swift in Sources */,
 			);

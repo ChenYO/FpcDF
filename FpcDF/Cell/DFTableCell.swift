@@ -10,21 +10,21 @@ import UIKit
 
 class DFTableCell: UITableViewCell {
 
-    @IBOutlet weak var key1: UITextView!
-    @IBOutlet weak var key2: UITextView!
-    @IBOutlet weak var key3: UITextView!
-    @IBOutlet weak var key4: UITextView!
-    @IBOutlet weak var key5: UITextView!
-    @IBOutlet weak var key6: UITextView!
-    @IBOutlet weak var key7: UITextView!
-    @IBOutlet weak var key8: UITextView!
-    @IBOutlet weak var key9: UITextView!
-    @IBOutlet weak var key10: UITextView!
-    @IBOutlet weak var key11: UITextView!
-    @IBOutlet weak var key12: UITextView!
-    @IBOutlet weak var key13: UITextView!
-    @IBOutlet weak var key14: UITextView!
-    @IBOutlet weak var key15: UITextView!
+    @IBOutlet weak var key1: VerticallyCenteredTextView!
+    @IBOutlet weak var key2: VerticallyCenteredTextView!
+    @IBOutlet weak var key3: VerticallyCenteredTextView!
+    @IBOutlet weak var key4: VerticallyCenteredTextView!
+    @IBOutlet weak var key5: VerticallyCenteredTextView!
+    @IBOutlet weak var key6: VerticallyCenteredTextView!
+    @IBOutlet weak var key7: VerticallyCenteredTextView!
+    @IBOutlet weak var key8: VerticallyCenteredTextView
+    @IBOutlet weak var key9: VerticallyCenteredTextView!
+    @IBOutlet weak var key10: VerticallyCenteredTextView!
+    @IBOutlet weak var key11: VerticallyCenteredTextView!
+    @IBOutlet weak var key12: VerticallyCenteredTextView!
+    @IBOutlet weak var key13: VerticallyCenteredTextView!
+    @IBOutlet weak var key14: VerticallyCenteredTextView!
+    @IBOutlet weak var key15: VerticallyCenteredTextView!
     
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
