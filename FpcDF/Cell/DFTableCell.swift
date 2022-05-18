@@ -17,7 +17,7 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var key5: VerticallyCenteredTextView!
     @IBOutlet weak var key6: VerticallyCenteredTextView!
     @IBOutlet weak var key7: VerticallyCenteredTextView!
-    @IBOutlet weak var key8: VerticallyCenteredTextView
+    @IBOutlet weak var key8: VerticallyCenteredTextView!
     @IBOutlet weak var key9: VerticallyCenteredTextView!
     @IBOutlet weak var key10: VerticallyCenteredTextView!
     @IBOutlet weak var key11: VerticallyCenteredTextView!
