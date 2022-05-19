@@ -2364,13 +2364,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let subCellIndex = (sender.view?.tag)!
         
     
-        if let dataSource = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].dataSource {
+        if let subFormId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subFormId {
             
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
             let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
             
             vc?.isUsingJsonString = true
-            vc?.formId = dataSource
+            vc?.formId = subFormId
             vc?.delegate = self.delegate
             vc?.jsonStringList = self.jsonStringList
             

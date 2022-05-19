@@ -13,6 +13,7 @@ class FormListData: Codable {
     var formVersion: Int?
     var formTitle: String?
     var formID: String?
+    var formRandomID: String?
     var dataSourceUrl: String?
     var buttons: [button]
     var cells: [cell]
@@ -128,6 +129,7 @@ class subCellData: Codable {
     var extra6: String?
     var extra7: String?
     var extra8: String?
+    var subFormId: String?
     
     var height: CGFloat?
     var titleFont: font?
