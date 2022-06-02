@@ -53,6 +53,8 @@ class cell: Codable {
     var groupId: String?
     var groupItemId: String?
     var subCellDataList: [subCellData]?
+    var dataSource: String?
+    var paramType: String?
     
     var fileUrl: String?
 }
@@ -111,7 +113,6 @@ class subCellData: Codable {
     var id: String?
     var title: String?
     var subType: String?
-    var dataSource: String?
     var width: Int?
     var cellHeight: Double?
     var cellGap: Double?
@@ -130,6 +131,9 @@ class subCellData: Codable {
     var extra7: String?
     var extra8: String?
     var subFormId: String?
+    var dataSource: String?
+    var paramType: String?
+    var dataId: String?
     
     var height: CGFloat?
     var titleFont: font?
