@@ -150,15 +150,17 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //從 json string 取得表單
     func loadFromJsonString() {
         
-        let buttonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItem.Style.plain, target: self, action: #selector(finish))
+//        let buttonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItem.Style.plain, target: self, action: #selector(finish))
         
         let saveItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
         
-        if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
-            buttonItem.tintColor = .white
-        }
+//        if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+//            buttonItem.tintColor = .white
+//        }
         
-        self.navigationItem.rightBarButtonItems = [buttonItem, saveItem]
+//        self.navigationItem.rightBarButtonItems = [buttonItem, saveItem]
+        
+        self.navigationItem.rightBarButtonItems = [saveItem]
         
         if !self.jsonStringList.isEmpty {
             
