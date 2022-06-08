@@ -40,6 +40,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var jsonStringList: [String] = []
     var formId = ""
     
+    var isReadOnly = false
     var width: CGFloat = 0.0
     
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
@@ -160,7 +161,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
 //        self.navigationItem.rightBarButtonItems = [buttonItem, saveItem]
         
-        self.navigationItem.rightBarButtonItems = [saveItem]
+        if !isReadOnly {
+            self.navigationItem.rightBarButtonItems = [saveItem]
+        }
+        
         
         if !self.jsonStringList.isEmpty {
             
