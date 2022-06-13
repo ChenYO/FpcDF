@@ -1202,6 +1202,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             setFont(cell: cell, formNumber: formNumber!, formData: formData)
             
+            
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
+            
             if let isReadOnly = formData.isReadOnly {
                 if isReadOnly {
                     cell.isUserInteractionEnabled = false
@@ -1278,6 +1285,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if let fontColor = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.color {
                 cell.title.textColor = UIColor(hexString: fontColor)
+            }
+            
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
             }
             
             if let isReadOnly = formData.isReadOnly {
@@ -1368,6 +1381,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
+            
             setDateCell(formData: formData, type: "date", format: "yyyy-MM-dd", formNumber: formNumber!, cell: cell)
             
             return cell
@@ -1375,12 +1394,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
+            
             setDateCell(formData: formData, type: "time", format: "HH:mm", formNumber: formNumber!, cell: cell)
             
             return cell
         case "dateTime":
             let cell: FormTextFieldCell = tableView.dequeueReusableCell(withIdentifier: "FormTextFieldCell", for: indexPath) as! FormTextFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
             
             setDateCell(formData: formData, type: "dateTime", format: "yyyy-MM-dd HH:mm", formNumber: formNumber!, cell: cell)
             
@@ -1400,6 +1431,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             cell.fileName.text = formData.title
             cell.deleteIcon.isHidden = true
+            
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
             
             if formData.mainType == "upload" {
                 if formData.isReadOnly! {
@@ -1440,6 +1477,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.fileName.text = formData.title
             cell.deleteIcon.isHidden = true
             
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
             
             if formData.mainType == "upload" {
                 if formData.isReadOnly! {
@@ -1465,6 +1507,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: DynamicFieldCell = tableView.dequeueReusableCell(withIdentifier: "DynamicFieldCell", for: indexPath) as! DynamicFieldCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
+            
             if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
             }
@@ -1481,6 +1529,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
             cell.actionTip.text = formData.title
+            
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
             
             if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.actionTip.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
@@ -1521,6 +1575,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let cell: DFSignCell = tableView.dequeueReusableCell(withIdentifier: "DFSignCell", for: indexPath) as! DFSignCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
+            
             if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
                 cell.title.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
             }
@@ -1546,6 +1606,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         case "tableKey":
             let cell: DFTableCell = tableView.dequeueReusableCell(withIdentifier: "DFTableCell", for: indexPath) as! DFTableCell
             cell.selectionStyle = .none
+            
+            if isReadOnly {
+                cell.isUserInteractionEnabled = false
+            }else {
+                cell.isUserInteractionEnabled = true
+            }
             
             setTableCell(cell: cell, formData: formData)
             
