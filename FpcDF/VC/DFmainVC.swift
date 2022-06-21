@@ -12,7 +12,8 @@ import MobileCoreServices
 
 private let bundle = Bundle(for: DynamicForm.self)
 
-public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate {
+public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate, DynamicDelegate {
+
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -25,6 +26,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var formDataList = [FormData]()
     
     var delegate: DynamicDelegate?
+    var mainFormDelegate: DynamicDelegate?
     
     //存放各個dataFormatter
     var dateFormatterList = [dateFormatterObj]()
@@ -45,6 +47,32 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
+    public func dynamicSaveForm(_ formId: String, _ formStringList: [String]) {
+        
+        var newFormList: [String] = []
+        
+        for formString in self.jsonStringList {
+            do {
+                let form = try DFUtil.decodeJsonStringAndReturnObject(string: formString, type: FormListData.self)
+                
+                if form.formID != formId {
+                    newFormList.append(formString)
+                }
+            }catch {
+                
+            }
+        }
+        
+        for formString in formStringList {
+            newFormList.append(formString)
+        }
+        
+        self.jsonStringList = newFormList
+        
+        print("save main form")
+    }
+    
+    
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         super.viewWillTransition(to: size, with: coordinator)
@@ -57,6 +85,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0.0
+        }
         
         width = self.view.frame.width - 20
         
@@ -203,13 +235,17 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             
-            UserDefaults.standard.set(formList, forKey: "formList")
+//            UserDefaults.standard.set(formList, forKey: "formList")
             
             if let callback = delegate {
                 callback.dynamicSaveForm(self.formId, formList)
             }
             
-            print("save")
+            if let callback = mainFormDelegate {
+                callback.dynamicSaveForm(self.formId, formList)
+            }
+            
+            
         } catch {
             
         }
@@ -2445,6 +2481,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.isUsingJsonString = true
             vc?.formId = subFormId
             vc?.delegate = self.delegate
+            vc?.mainFormDelegate = self
             vc?.jsonStringList = self.jsonStringList
             
             let backItem = UIBarButtonItem()

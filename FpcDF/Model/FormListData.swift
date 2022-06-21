@@ -15,6 +15,8 @@ class FormListData: Codable {
     var formID: String?
     var formRandomID: String?
     var dataSourceUrl: String?
+    var thirdInputUrl: String?
+    var thirdOutputUrl: String?
     var buttons: [button]
     var cells: [cell]
 }
