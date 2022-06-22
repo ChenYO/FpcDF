@@ -205,10 +205,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 do {
                     let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                     
-                    self.title = obj.formTitle
-                    
                     if obj.formID == self.formId {
-                        
+                        self.title = obj.formTitle
                         self.oriFormDataList.append(obj)
                     }
                     
