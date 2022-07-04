@@ -2797,6 +2797,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl = imageName
                 
+                
+                self.saveForm()
                 if let imageData = image.rotateImageByOrientation().jpegData(compressionQuality: 0.9) {
                     do {
 
