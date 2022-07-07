@@ -45,6 +45,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var isReadOnly = false
     var width: CGFloat = 0.0
     
+    var searchTitle = ""
+    
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
     public func dynamicSaveForm(_ formId: String, _ formStringList: [String]) {
@@ -217,6 +219,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.setFormData()
             
             self.tableView.reloadData()
+            
+            self.scrollToSearchId()
         }
     }
  
@@ -1001,6 +1005,29 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             index += 1
             
             formDataList.append(data)
+        }
+        
+    }
+    
+    //尋找特定ID並移到該位置
+    func scrollToSearchId() {
+        
+        if self.searchTitle != "" {
+            var searchIdIndex = 0
+            
+            for (index, cell) in formDataList.enumerated() {
+                
+                if let subCellDataList = cell.subCellDataList {
+                    for subCell in subCellDataList {
+                        if subCell.title == self.searchTitle {
+                            searchIdIndex = index
+                            break
+                        }
+                    }
+                }
+            }
+            
+            self.tableView.scrollToRow(at: IndexPath(row: searchIdIndex, section: 0), at: .top, animated: true)
         }
     }
     
@@ -2481,6 +2508,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.delegate = self.delegate
             vc?.mainFormDelegate = self
             vc?.jsonStringList = self.jsonStringList
+            
+            if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].searchId != ""  {
+                vc?.searchTitle = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].title ?? ""
+            }
+            
             
             let backItem = UIBarButtonItem()
             backItem.title = "Back"

@@ -136,6 +136,7 @@ class subCellData: Codable {
     var dataSource: String?
     var paramType: String?
     var dataId: String?
+    var searchId: String?
     
     var height: CGFloat?
     var titleFont: font?
