@@ -92,6 +92,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //            tableView.sectionHeaderTopPadding = 0.0
 //        }
         
+        print("searchTitle: \(self.searchTitle)")
         width = self.view.frame.width - 20
         
         screenHeight = self.view.bounds.height
@@ -2509,8 +2510,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.mainFormDelegate = self
             vc?.jsonStringList = self.jsonStringList
             
-            if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].searchId != ""  {
-                vc?.searchTitle = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].title ?? ""
+            if let searchId =  self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].searchId, searchId != ""  {
+        
+                let searchTitleCellIndex = Int(searchId.split(separator: "_")[0])! - 1
+                let searchTitleSubCellIndex = Int(searchId.split(separator: "_")[1])! - 1
+                
+                vc?.searchTitle = self.oriFormDataList[formNumber].cells[searchTitleCellIndex].subCellDataList![searchTitleSubCellIndex].title ?? ""
             }
             
             
