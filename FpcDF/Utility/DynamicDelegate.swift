@@ -12,4 +12,6 @@ import Foundation
 public protocol DynamicDelegate {
     
     func dynamicSaveForm(_ formId: String, _ formStringList: [String])
+    
+    func dynamicSendForm(_ formId: String, _ formStringList: [String])
 }

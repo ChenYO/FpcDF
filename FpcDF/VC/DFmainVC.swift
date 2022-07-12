@@ -49,6 +49,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
+    public func dynamicSendForm(_ formId: String, _ formStringList: [String]) {
+        
+    }
+    
     public func dynamicSaveForm(_ formId: String, _ formStringList: [String]) {
         
         var newFormList: [String] = []
@@ -242,6 +246,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if let callback = delegate {
                 callback.dynamicSaveForm(self.formId, formList)
+                callback.dynamicSendForm(self.formId, formList)
             }
             
             if let callback = mainFormDelegate {
