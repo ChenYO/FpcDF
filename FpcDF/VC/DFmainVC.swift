@@ -172,6 +172,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //依照是否有導覽列決定返回的動作
     @objc func back() {
+        
+        self.sendForm()
+        
         if isModal() {
             self.dismiss(animated: true, completion: nil)
         }else {
@@ -192,7 +195,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
 //        let buttonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItem.Style.plain, target: self, action: #selector(finish))
         
-        let saveItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveForm))
+        let saveItem = UIBarButtonItem(title: "儲存", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveFormFromButton))
         
         
 //        if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
@@ -229,6 +232,35 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
  
+    @objc func saveFormFromButton() {
+        self.saveForm()
+        
+        self.sendForm()
+    }
+    
+    func sendForm() {
+        do {
+            var formList: [String] = []
+            
+            for form in self.oriFormDataList {
+                let jsonEncoder = JSONEncoder()
+                let oriJsonData = try jsonEncoder.encode(form)
+                let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
+                
+                formList.append(json!)
+            }
+            
+
+            if let callback = delegate {
+                callback.dynamicSendForm(self.formId, formList)
+            }
+            
+            
+        } catch {
+            
+        }
+    }
+    
     @objc func saveForm() {
         do {
             var formList: [String] = []
@@ -246,7 +278,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if let callback = delegate {
                 callback.dynamicSaveForm(self.formId, formList)
-                callback.dynamicSendForm(self.formId, formList)
             }
             
             if let callback = mainFormDelegate {
@@ -1033,7 +1064,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            self.tableView.scrollToRow(at: IndexPath(row: searchIdIndex, section: 0), at: .top, animated: true)
+            self.tableView.scrollToRow(at: IndexPath(row: searchIdIndex, section: 0), at: .middle, animated: true)
         }
     }
     
