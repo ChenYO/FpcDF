@@ -1068,7 +1068,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 searchIdIndex = searchIdIndex - 2
             }
             
-            self.tableView.scrollToRow(at: IndexPath(row: searchIdIndex, section: 0), at: .top, animated: true)
+            if !formDataList.isEmpty {
+                self.tableView.scrollToRow(at: IndexPath(row: searchIdIndex, section: 0), at: .top, animated: true)
+            }
+            
         }
     }
     
