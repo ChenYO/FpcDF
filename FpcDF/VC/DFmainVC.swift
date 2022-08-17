@@ -2532,13 +2532,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         actionSheet.addAction(viewAction)
         
         let deleteAction = UIAlertAction(title: "刪除圖片", style: .default) { action in
-            if let fileURL = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl, fileURL != "" {
+            if let fileName = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl, fileName != "" {
                 do {
-                    print(fileURL)
+                    let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    
+                    // create the destination file url to save your image
+                    let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                    
                     let fileManager = FileManager.default
-                    try fileManager.removeItem(at: URL(string: fileURL)!)
+                    try fileManager.removeItem(at: fileURL)
         
-                    print("delete success")
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl = ""
                     
                     self.saveForm()
@@ -2916,10 +2919,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 print(fileURL)
                 
-                if let fileURL = self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl, fileURL != "" {
+                if let fileName = self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl, fileName != "" {
                     do {
+                        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                        
+                        // create the destination file url to save your image
+                        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                        
                         let fileManager = FileManager.default
-                        try fileManager.removeItem(at: URL(string: fileURL)!)
+                        try fileManager.removeItem(at: fileURL)
             
                     } catch {
                     }
