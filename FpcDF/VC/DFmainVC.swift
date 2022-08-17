@@ -2538,6 +2538,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     try fileManager.removeItem(at: URL(string: fileURL)!)
         
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl = ""
+                    
+                    self.tableView.reloadData()
                 } catch {
                 }
             }
