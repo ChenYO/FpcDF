@@ -2128,7 +2128,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             imageView.addGestureRecognizer(recognizer)
             
             
-            if let signUrl = subCell.fileUrl {
+            if let signUrl = subCell.fileUrl, signUrl != "" {
                 let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
                 if let imageData = NSData(contentsOf: fileURL!) {
                     let image = UIImage(data: imageData as Data)
@@ -2534,11 +2534,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let deleteAction = UIAlertAction(title: "刪除圖片", style: .default) { action in
             if let fileURL = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl, fileURL != "" {
                 do {
+                    print(fileURL)
                     let fileManager = FileManager.default
                     try fileManager.removeItem(at: URL(string: fileURL)!)
         
+                    print("delete success")
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl = ""
                     
+                    self.saveForm()
                     self.tableView.reloadData()
                 } catch {
                 }
