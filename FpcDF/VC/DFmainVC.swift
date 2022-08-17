@@ -2139,6 +2139,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 imageView.image = nil
             }
             
+            
         }else if subCell.subType == "form" {
             
             key.isEditable = false
