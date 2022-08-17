@@ -246,6 +246,7 @@ SWIFT_CLASS("_TtC14FPCDynamicForm8DFmainVC")
 - (void)textFieldDidEndEditing:(UITextField * _Nonnull)textField;
 - (void)textViewDidChange:(UITextView * _Nonnull)textView;
 - (void)textViewDidBeginEditing:(UITextView * _Nonnull)textView;
+- (void)textViewDidEndEditing:(UITextView * _Nonnull)textView;
 - (void)tableView:(UITableView * _Nonnull)tableView willDisplayCell:(UITableViewCell * _Nonnull)cell forRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGFloat)tableView:(UITableView * _Nonnull)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;

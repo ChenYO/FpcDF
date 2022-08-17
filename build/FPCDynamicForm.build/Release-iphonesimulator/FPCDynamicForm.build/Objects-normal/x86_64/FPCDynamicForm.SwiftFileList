@@ -18,6 +18,7 @@
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFDisposableToken.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/VC/DFElecSignVC.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFAPI.swift
+/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DynamicDelegate.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DynamicInput.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/FormTitleCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Model/DFVersionCode.swift
@@ -33,5 +34,6 @@
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/DynamicFieldCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/UI/UILabelExtensive.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Utility/DFResult.swift
+/Users/chenyao/Desktop/Framework/FpcDF/FpcDF/UI/UITextViewExtension.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/Cell/KeyValueCell.swift
 /Users/chenyao/Desktop/Framework/FpcDF/FpcDF/UI/DFDrawingView.swift

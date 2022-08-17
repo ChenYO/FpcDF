@@ -2135,6 +2135,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     imageView.image = image
                 }
+            }else {
+                imageView.image = nil
             }
             
         }else if subCell.subType == "form" {
@@ -2508,8 +2510,40 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             actionSheet.addAction(photoAction)
         }
         
+        let viewAction = UIAlertAction(title: "預覽放大", style: .default) { action in
+            
+            let fileUrl = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl
+            if let signUrl = fileUrl {
+                let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+                if let imageData = NSData(contentsOf: fileURL!) {
+                    if let image = UIImage(data: imageData as Data) {
+                        let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+                        let imageVC = storyboard.instantiateViewController(withIdentifier: "DFImageVC") as? DFImageVC
+                        
+                        imageVC?.imageIndex = 0
+                        imageVC!.images.append(image)
+                        
+                        self.present(imageVC!, animated: true)
+                    }
+                }
+            }
+        }
+        actionSheet.addAction(viewAction)
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        let deleteAction = UIAlertAction(title: "刪除圖片", style: .default) { action in
+            if let fileURL = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl, fileURL != "" {
+                do {
+                    let fileManager = FileManager.default
+                    try fileManager.removeItem(at: URL(string: fileURL)!)
+        
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl = ""
+                } catch {
+                }
+            }
+        }
+        actionSheet.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .destructive)
         
         actionSheet.addAction(cancelAction)
         
@@ -2875,6 +2909,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let fileURL = documentsDirectory.appendingPathComponent(imageName)
                 
                 print(fileURL)
+                
+                if let fileURL = self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl, fileURL != "" {
+                    do {
+                        let fileManager = FileManager.default
+                        try fileManager.removeItem(at: URL(string: fileURL)!)
+            
+                    } catch {
+                    }
+                }
+                
                 
                 self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl = imageName
                 
