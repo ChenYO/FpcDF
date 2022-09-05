@@ -2011,7 +2011,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.addGestureRecognizer(recognizer)
             
             if subCell.textValue != "" {
-                key.text = subCell.textValue
+                for option in subCell.options! {
+                    if option.id == subCell.textValue {
+                        key.text = option.name
+                    }
+                }
             }
         }else if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
             
