@@ -806,7 +806,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "sign"{
+                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice"  || subCell.subType == "textChoice"{
                             
                             if subCell.textValue == "" {
                                 data.subCellDataList![subIndex].isFinish = false
@@ -818,6 +818,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 data.subCellDataList![subIndex].isFinish = false
                             }
                         }else if subCell.subType == "sign" {
+                            
+                            if subCell.textValue == "" {
+                                data.subCellDataList![subIndex].isFinish = false
+                            }
                             
                             if subCell.fileUrl == "" {
                                 data.subCellDataList![subIndex].isFinish = false
@@ -1008,8 +1012,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         
                         if subCell.isRequired! {
-                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "sign"{
-                                
+                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice"{
+                           
                                 if subCell.textValue == "" {
                                     data.subCellDataList![subIndex].isFinish = false
                                 }
@@ -1020,6 +1024,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     data.subCellDataList![subIndex].isFinish = false
                                 }
                             }else if subCell.subType == "sign" {
+                                
+                                if subCell.textValue == "" {
+                                    data.subCellDataList![subIndex].isFinish = false
+                                }
                                 
                                 if subCell.fileUrl == "" {
                                     data.subCellDataList![subIndex].isFinish = false
@@ -2151,6 +2159,17 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let recognizer = getFormGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
+        }else if subCell.subType == "textChoice" {
+            
+            key.isEditable = false
+            
+            let recognizer = getTextChoiceGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            if subCell.textValue != "" {
+                key.text = subCell.textValue
+            }
         }
     }
     
@@ -2263,6 +2282,65 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.saveForm()
         tableView.reloadData()
+    }
+    
+    func getTextChoiceGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(textChoiceOption))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func textChoiceOption(_ sender: UITapGestureRecognizer) {
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+        
+        
+        for option in formDataList[index].subCellDataList![subCellIndex].options! {
+            let action = UIAlertAction(title: option.name, style: .default) { action in
+                
+                self.formDataList[index].subCellDataList![subCellIndex].textValue = option.name
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.name
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                
+                self.saveForm()
+                self.tableView.reloadData()
+            }
+            actionSheet.addAction(action)
+        }
+        
+        let option = UIAlertAction(title: "取消", style: .destructive) { action in
+            
+//            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.tableView.reloadData()
+        }
+        actionSheet.addAction(option)
+        
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            let loc = sender.location(in: self.view)
+            actionSheet.modalPresentationStyle = .popover
+            actionSheet.popoverPresentationController?.sourceView = self.view
+            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+        }
+        
+        self.present(actionSheet, animated: true) {
+            print("option menu presented")
+        }
+        
     }
     
     func getRadioGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
