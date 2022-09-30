@@ -2130,7 +2130,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             keyHeight.constant = 40
             
             if isReadOnly {
-                if let signUrl = self.oriFormDataList[formNumber!].cells[cellNumber].fileUrl {
+                if let signUrl = subCell.fileUrl {
                     let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
                     if let imageData = NSData(contentsOf: fileUrl!) {
                         if let image = UIImage(data: imageData as Data) {
