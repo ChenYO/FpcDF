@@ -1691,8 +1691,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if isReadOnly {
                 cell.isUserInteractionEnabled = false
+                if let signUrl = self.oriFormDataList[formNumber!].cells[cellNumber].fileUrl {
+                    let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
+                    if let imageData = NSData(contentsOf: fileUrl!) {
+                        if let image = UIImage(data: imageData as Data) {
+                            cell.signImageView.image = image
+                        }
+                    }
+                }
             }else {
                 cell.isUserInteractionEnabled = true
+                
+                if let signUrl = self.oriFormDataList[formNumber!].cells[cellNumber].fileUrl {
+                    let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+                    if let imageData = NSData(contentsOf: fileURL!) {
+                        let image = UIImage(data: imageData as Data)
+                        
+                        cell.signImageView.image = image
+                    }
+                }
+                
             }
             
             if let fontSize = self.oriFormDataList[formNumber!].cells[cellNumber].titleFont?.size {
@@ -1706,16 +1724,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.title.text = formData.title
             cell.signImageView.image = nil
             
-            if let signUrl = self.oriFormDataList[formNumber!].cells[cellNumber].fileUrl {
-                let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
-                if let imageData = NSData(contentsOf: fileURL!) {
-                    let image = UIImage(data: imageData as Data)
-                    
-                    cell.signImageView.image = image
-                }
-            }
             
-            
+
             return cell
         case "tableKey":
             let cell: DFTableCell = tableView.dequeueReusableCell(withIdentifier: "DFTableCell", for: indexPath) as! DFTableCell
