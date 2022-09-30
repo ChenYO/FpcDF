@@ -2129,14 +2129,27 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             keyTop.constant = imageHeight.constant
             keyHeight.constant = 40
             
-            if let signUrl = subCell.fileUrl {
-                let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
-                if let imageData = NSData(contentsOf: fileURL!) {
-                    let image = UIImage(data: imageData as Data)
-                    
-                    imageView.image = image
+            if isReadOnly {
+                if let signUrl = self.oriFormDataList[formNumber!].cells[cellNumber].fileUrl {
+                    let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
+                    if let imageData = NSData(contentsOf: fileUrl!) {
+                        if let image = UIImage(data: imageData as Data) {
+                            imageView.image = image
+                        }
+                    }
+                }
+            }else {
+                if let signUrl = subCell.fileUrl {
+                    let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+                    if let imageData = NSData(contentsOf: fileURL!) {
+                        let image = UIImage(data: imageData as Data)
+                        
+                        imageView.image = image
+                    }
                 }
             }
+            
+            
             
             if subCell.textValue != "" {
                 key.text = subCell.textValue
