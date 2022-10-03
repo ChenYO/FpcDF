@@ -2080,7 +2080,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 if option.id == subCell.textValue! {
                     optionNameString = "◉ \(option.name ?? "")  "
-                    range = NSRange(location: startIndex, length: optionNameString.count - 2 + startIndex)
+                    range = NSRange(location: startIndex, length: optionNameString.count - 2)
                 }else {
                     optionNameString = "○ \(option.name ?? "")  "
                 }
@@ -2128,8 +2128,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if subCell.choiceValue!.contains(option.id!) {
                     optionNameString = "▣ \(option.name ?? "")  "
                     
-                    let range = NSRange(location: startIndex, length: optionNameString.count - 2 + startIndex)
-//                    rangeList.append(range)
+                    let range = NSRange(location: startIndex, length: optionNameString.count - 2 )
+                    rangeList.append(range)
    
                 }else {
                     optionNameString = "□ \(option.name ?? "")  "
