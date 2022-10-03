@@ -1025,9 +1025,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 }
                             }else if subCell.subType == "sign" {
                                 
-                                if subCell.textValue == "" {
-                                    data.subCellDataList![subIndex].isFinish = false
-                                }
+//                                if subCell.textValue == "" {
+//                                    data.subCellDataList![subIndex].isFinish = false
+//                                }
                                 
                                 if subCell.fileUrl == "" {
                                     data.subCellDataList![subIndex].isFinish = false
@@ -1956,7 +1956,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if subCell.isRequired! {
                 key.textColor = UIColor(hexString: subCell.finishColor!)
-                
             }
         }else {
             key.backgroundColor = UIColor(hexString: "#D0D0D0")
@@ -2072,23 +2071,41 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.addGestureRecognizer(recognizer)
             
             var optionStr = ""
+            var startIndex = 0
+            var range: NSRange = NSRange(location: 0, length: 0)
             
             for (index, option) in subCell.options!.enumerated() {
+                
+                var optionNameString = ""
+                
                 if option.id == subCell.textValue! {
-                    optionStr += "◉ \(option.name ?? "")  "
+                    optionNameString = "◉ \(option.name ?? "")  "
+                    range = NSRange(location: startIndex, length: optionNameString.count - 2 + startIndex)
                 }else {
-                    optionStr += "○ \(option.name ?? "")  "
+                    optionNameString = "○ \(option.name ?? "")  "
                 }
+                
+                startIndex += optionNameString.count
+                optionStr += optionNameString
                 
                 if !subCell.isHorizon! {
                     if index != subCell.options!.count - 1 {
                         optionStr += "\n"
+                        startIndex += 1
                     }
                 }
                 
             }
             
-            key.text = optionStr
+            let attributedString = NSMutableAttributedString(string: optionStr)
+            
+            if subCell.isRequired! {
+                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: subCell.finishColor! , range: range)
+                key.attributedText = attributedString
+            }else {
+                key.text = optionStr
+            }
+            
         }else if subCell.subType == "checkBox" {
             
             let recognizer = getCheckBoxGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
@@ -2096,22 +2113,45 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.addGestureRecognizer(recognizer)
             
             var optionStr = ""
+            var startIndex = 0
+            var rangeList: [NSRange] = []
             
             for (index, option) in subCell.options!.enumerated() {
+                
+                var optionNameString = ""
                 if subCell.choiceValue!.contains(option.id!) {
-                    optionStr += "▣ \(option.name ?? "")  "
+                    optionNameString = "▣ \(option.name ?? "")  "
+                    
+                    let range = NSRange(location: startIndex, length: optionNameString.count - 2 + startIndex)
+                    rangeList.append(range)
+   
                 }else {
-                    optionStr += "□ \(option.name ?? "")  "
+                    optionNameString = "□ \(option.name ?? "")  "
                 }
+
+                startIndex += optionNameString.count
+                optionStr += optionNameString
                 
                 if !subCell.isHorizon! {
                     if index != subCell.options!.count - 1 {
                         optionStr += "\n"
+                        startIndex += 1
                     }
                 }
             }
             
-            key.text = optionStr
+            let attributedString = NSMutableAttributedString(string: optionStr)
+            
+            if subCell.isRequired! {
+                for range in rangeList {
+                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: subCell.finishColor! , range: range)
+                }
+                key.attributedText = attributedString
+            }else {
+                key.text = optionStr
+            }
+            
+
         }else if subCell.subType == "singleChoice" {
             
             key.isEditable = false
