@@ -819,9 +819,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }else if subCell.subType == "sign" {
                             
-                            if subCell.textValue == "" {
-                                data.subCellDataList![subIndex].isFinish = false
-                            }
+//                            if subCell.textValue == "" {
+//                                data.subCellDataList![subIndex].isFinish = false
+//                            }
                             
                             if subCell.fileUrl == "" {
                                 data.subCellDataList![subIndex].isFinish = false
