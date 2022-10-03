@@ -81,6 +81,7 @@ struct font: Codable {
 struct option: Codable {
     var id: String?
     var name: String?
+    var color: String?
 }
 
 struct inputConfig: Codable {
@@ -143,6 +144,7 @@ class subCellData: Codable {
     var choiceValue: [String]?
     var keyBoardType: String?
     var borderColor: String?
+    var finishColor: String?
     
     var fileUrl: String?
     var isFinish: Bool?

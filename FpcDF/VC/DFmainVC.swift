@@ -1953,6 +1953,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].isFinish! {
             key.backgroundColor = .white
+            
+            if subCell.isRequired! {
+                key.textColor = UIColor(hexString: subCell.finishColor!)
+                
+            }
         }else {
             key.backgroundColor = UIColor(hexString: "#D0D0D0")
         }
@@ -2032,9 +2037,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 for option in subCell.options! {
                     if option.id == subCell.textValue {
                         key.text = option.name
+                        if subCell.isRequired! {
+                            key.textColor = UIColor(hexString: option.color!)
+                            
+                        }
                     }
                 }
             }
+            
+            
         }else if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
             
             key.isEditable = false
@@ -2064,9 +2075,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             for (index, option) in subCell.options!.enumerated() {
                 if option.id == subCell.textValue! {
-                    optionStr += "▣ \(option.name ?? "")  "
+                    optionStr += "◉ \(option.name ?? "")  "
                 }else {
-                    optionStr += "□ \(option.name ?? "")  "
+                    optionStr += "○ \(option.name ?? "")  "
                 }
                 
                 if !subCell.isHorizon! {
