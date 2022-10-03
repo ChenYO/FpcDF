@@ -2098,7 +2098,22 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.size ?? 16
             
-            let attributedString = NSMutableAttributedString(string: optionStr, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(fontSize))])
+            let style = NSMutableParagraphStyle()
+            
+            if let alignment = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.alignment {
+                
+                if alignment == "left" {
+                    style.alignment = NSTextAlignment.left
+                }else if alignment == "right" {
+                    style.alignment = NSTextAlignment.right
+                }else {
+                    style.alignment = NSTextAlignment.center
+                }
+            }
+            
+            
+            let attributedString = NSMutableAttributedString(string: optionStr, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(fontSize)),
+                 NSAttributedString.Key.paragraphStyle: style])
             
             if subCell.isRequired! {
                 
@@ -2149,7 +2164,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.size ?? 16
             
-            let attributedString = NSMutableAttributedString(string: optionStr, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(fontSize))])
+            let style = NSMutableParagraphStyle()
+            if let alignment = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.alignment {
+                
+                if alignment == "left" {
+                    style.alignment = NSTextAlignment.left
+                }else if alignment == "right" {
+                    style.alignment = NSTextAlignment.right
+                }else {
+                    style.alignment = NSTextAlignment.center
+                }
+            }
+            
+            let attributedString = NSMutableAttributedString(string: optionStr, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(fontSize)),
+                 NSAttributedString.Key.paragraphStyle: style])
             
             if subCell.isRequired! {
                 
