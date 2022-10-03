@@ -2072,7 +2072,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             var optionStr = ""
             var startIndex = 0
-            var range: NSRange = NSRange(location: 0, length: 0)
+            var range: NSRange?
             
             for (index, option) in subCell.options!.enumerated() {
                 
@@ -2100,8 +2100,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let attributedString = NSMutableAttributedString(string: optionStr)
             
             if subCell.isRequired! {
-                attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: subCell.finishColor! , range: range)
-                key.attributedText = attributedString
+                
+                if let realRange = range {
+                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: subCell.finishColor!) , range: realRange)
+                    key.attributedText = attributedString
+                }else {
+                    key.text = optionStr
+                }
+                
             }else {
                 key.text = optionStr
             }
@@ -2123,7 +2129,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     optionNameString = "▣ \(option.name ?? "")  "
                     
                     let range = NSRange(location: startIndex, length: optionNameString.count - 2 + startIndex)
-                    rangeList.append(range)
+//                    rangeList.append(range)
    
                 }else {
                     optionNameString = "□ \(option.name ?? "")  "
@@ -2143,10 +2149,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let attributedString = NSMutableAttributedString(string: optionStr)
             
             if subCell.isRequired! {
-                for range in rangeList {
-                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: subCell.finishColor! , range: range)
+                
+                if rangeList.isEmpty {
+                    key.text = optionStr
+                }else {
+                    for range in rangeList {
+                        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: subCell.finishColor!) , range: range)
+                    }
+                    key.attributedText = attributedString
                 }
-                key.attributedText = attributedString
+                
             }else {
                 key.text = optionStr
             }
