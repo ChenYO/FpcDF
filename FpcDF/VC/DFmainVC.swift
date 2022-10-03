@@ -2073,12 +2073,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             var optionStr = ""
             var startIndex = 0
             var range: NSRange?
+            var selectedColor = ""
             
             for (index, option) in subCell.options!.enumerated() {
                 
                 var optionNameString = ""
                 
                 if option.id == subCell.textValue! {
+                    selectedColor = option.color!
                     optionNameString = "◉ \(option.name ?? "")  "
                     range = NSRange(location: startIndex, length: optionNameString.count - 2)
                 }else {
@@ -2118,7 +2120,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if subCell.isRequired! {
                 
                 if let realRange = range {
-                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: subCell.finishColor!) , range: realRange)
+                    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: selectedColor) , range: realRange)
                     key.attributedText = attributedString
                 }else {
                     key.text = optionStr
@@ -2137,12 +2139,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             var optionStr = ""
             var startIndex = 0
             var rangeList: [NSRange] = []
+            var selectedColorList: [String] = []
             
             for (index, option) in subCell.options!.enumerated() {
                 
                 var optionNameString = ""
                 if subCell.choiceValue!.contains(option.id!) {
                     optionNameString = "▣ \(option.name ?? "")  "
+                    
+                    selectedColorList.append(option.color!)
                     
                     let range = NSRange(location: startIndex, length: optionNameString.count - 2 )
                     rangeList.append(range)
@@ -2184,8 +2189,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if rangeList.isEmpty {
                     key.text = optionStr
                 }else {
-                    for range in rangeList {
-                        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: subCell.finishColor!) , range: range)
+                    for (index, range) in rangeList.enumerated() {
+                        
+                        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: selectedColorList[index]) , range: range)
                     }
                     key.attributedText = attributedString
                 }
