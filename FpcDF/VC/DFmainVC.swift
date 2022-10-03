@@ -2096,8 +2096,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 
             }
+            let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.size ?? 16
             
-            let attributedString = NSMutableAttributedString(string: optionStr)
+            let attributedString = NSMutableAttributedString(string: optionStr, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(fontSize))])
             
             if subCell.isRequired! {
                 
@@ -2146,7 +2147,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            let attributedString = NSMutableAttributedString(string: optionStr)
+            let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.size ?? 16
+            
+            let attributedString = NSMutableAttributedString(string: optionStr, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(fontSize))])
             
             if subCell.isRequired! {
                 
