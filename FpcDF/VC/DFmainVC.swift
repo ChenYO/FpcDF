@@ -1958,7 +1958,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 key.textColor = UIColor(hexString: subCell.finishColor!)
                 
                 if subCell.isOptional! {
-                    key.backgroundColor = UIColor(hexString: "#F0F0F0")
+//                    key.backgroundColor = UIColor(hexString: "#F0F0F0")
                 }
             }
             
