@@ -1956,11 +1956,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if subCell.isRequired! {
                 key.textColor = UIColor(hexString: subCell.finishColor!)
+                
+                if subCell.isOptional! {
+                    key.backgroundColor = UIColor(hexString: "#F0F0F0")
+                }
             }
             
-            if subCell.isOptional! {
-                key.backgroundColor = UIColor(hexString: "#F0F0F0")
-            }
         }else {
             key.backgroundColor = UIColor(hexString: "#D0D0D0")
         }
