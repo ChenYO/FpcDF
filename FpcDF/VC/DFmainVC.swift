@@ -1011,7 +1011,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        if subCell.isRequired! {
+                        if subCell.isRequired! && !subCell.isOptional! {
                             if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice"{
                            
                                 if subCell.textValue == "" {
@@ -1957,9 +1957,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if subCell.isRequired! {
                 key.textColor = UIColor(hexString: subCell.finishColor!)
             }
+            
+            if subCell.isOptional! {
+                key.backgroundColor = UIColor(hexString: "#FCFCFC")
+            }
         }else {
             key.backgroundColor = UIColor(hexString: "#D0D0D0")
         }
+        
+        
         
         key.isHidden = false
         key.delegate = self
@@ -2494,7 +2500,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
                 
-                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+//                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                
+                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
+                    
+                    if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                    }else {
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                    }
+                }
                 
                 self.saveForm()
                 self.tableView.reloadData()
@@ -2559,7 +2574,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
                 }
                 
-                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! {
+                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
                     
                     if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
                         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
@@ -3461,7 +3476,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             adjustTextView(textView, layout: false, width: width, cellNumber: index, index: subCellIndex)
         }
         
-        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! {
+        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
             if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
             }else {

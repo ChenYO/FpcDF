@@ -18,6 +18,7 @@ class FormData {
     
     var isReadOnly: Bool?
     var isRequired: Bool?
+    var isOptional: Bool?
     
     var inputNumber: Int?
     
