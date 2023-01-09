@@ -373,7 +373,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             optionList = []
             if searchBarTextString != "" {
                 for option in oriOptionList {
-                    if (option.name?.contains(searchBarTextString))! {
+                    if (option.name?.uppercased().contains(searchBarTextString.uppercased()))! {
                         optionList.append(option)
                     }
                 }

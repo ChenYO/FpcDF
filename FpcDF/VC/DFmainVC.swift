@@ -2311,6 +2311,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if subCell.textValue != "" {
                 key.text = subCell.textValue
             }
+        }else if subCell.subType == "copyButton" {
+            key.isEditable = false
+            
+            let recognizer = getCopyButtonGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+        }else if subCell.subType == "deleteButton" {
+            key.isEditable = false
+            
+            let recognizer = getDeleteButtonGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
         }
     }
     
@@ -2492,7 +2506,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(vc!, animated: true)
         
-        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+//        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
 
 
 //        for option in formDataList[index].subCellDataList![subCellIndex].options! {
@@ -2897,6 +2911,142 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.navigationController?.pushViewController(vc!, animated: true)
         }
         
+    }
+    
+    func getCopyButtonGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(copyCell))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func copyCell(_ sender: UITapGestureRecognizer) {
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        let copyCellId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].copyCellId
+        
+        for (index, cell) in self.oriFormDataList[formNumber].cells.enumerated() {
+            if cell.id == copyCellId {
+                let copiedCell = getCopyCell(copyCell: cell, formNumber: formNumber)
+                
+                self.oriFormDataList[formNumber].cells.insert(copiedCell, at: index + 1)
+                break
+            }
+        }
+        
+        self.setFormData()
+        self.tableView.reloadData()
+    }
+    
+    func getCopyCell(copyCell: cell, formNumber: Int) -> cell {
+        let newCell = cell()
+        
+        let cellIndex = self.oriFormDataList[formNumber].cells.count + 1
+        
+        newCell.id = "\(cellIndex)"
+        newCell.type = copyCell.type
+        newCell.dataSource = copyCell.dataSource
+        newCell.paramType = copyCell.paramType
+        newCell.copyCellId = copyCell.copyCellId
+        newCell.copyId = copyCell.copyId
+        newCell.subCellDataList = []
+        
+        var copyIndex = 1
+        
+        for cell in self.oriFormDataList[formNumber].cells {
+            if cell.copyId == copyCell.copyId {
+                copyIndex += 1
+            }
+        }
+        
+        for (index, subCell) in copyCell.subCellDataList!.enumerated() {
+            let newSubCell = subCellData()
+            let subCellIndex = index + 1
+            
+            newSubCell.id = "\(cellIndex)_\(subCellIndex)"
+            
+            if subCell.subType == "label", subCell.title == "1" {
+                newSubCell.title = "\(copyIndex)"
+            }else {
+                newSubCell.title = subCell.title
+            }
+            
+            newSubCell.subType = subCell.subType
+            
+            if index == copyCell.subCellDataList!.count - 1 {
+                newSubCell.subType = "deleteButton"
+                newSubCell.title = "刪除"
+            }
+            
+            newSubCell.width = subCell.width
+            newSubCell.cellHeight = subCell.cellHeight
+            newSubCell.cellGap = subCell.cellGap
+            newSubCell.loopIndex = subCell.loopIndex
+            newSubCell.textValue = ""
+            newSubCell.options = subCell.options
+            newSubCell.isHorizon = subCell.isHorizon
+            newSubCell.isReserve = subCell.isReserve
+            newSubCell.isRequired = subCell.isRequired
+            newSubCell.isOptional = subCell.isOptional
+            newSubCell.extra1 = subCell.extra1
+            newSubCell.extra2 = subCell.extra2
+            newSubCell.extra3 = subCell.extra3
+            newSubCell.extra4 = subCell.extra4
+            newSubCell.extra5 = subCell.extra5
+            newSubCell.extra6 = subCell.extra6
+            newSubCell.extra7 = subCell.extra7
+            newSubCell.extra8 = subCell.extra8
+            newSubCell.subFormId = subCell.subFormId
+            newSubCell.dataSource = subCell.dataSource
+            newSubCell.paramType = subCell.paramType
+            newSubCell.dataId = subCell.dataId
+            newSubCell.searchId = subCell.searchId
+            newSubCell.copyCellId = subCell.copyCellId
+            
+            newSubCell.height = subCell.height
+            newSubCell.titleFont = subCell.titleFont
+            newSubCell.choiceValue = []
+            newSubCell.keyBoardType = subCell.keyBoardType
+            newSubCell.borderColor = subCell.borderColor
+            newSubCell.finishColor = subCell.finishColor
+            
+            newSubCell.fileUrl = ""
+            newSubCell.isFinish = false
+            
+            newCell.subCellDataList?.append(newSubCell)
+        }
+
+        return newCell
+    }
+    
+    func getDeleteButtonGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(deleteCell))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func deleteCell(_ sender: UITapGestureRecognizer) {
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        
+        
+        self.oriFormDataList[formNumber].cells.remove(at: cellNumber)
+        
+        self.setFormData()
+        self.tableView.reloadData()
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

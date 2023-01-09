@@ -57,6 +57,8 @@ class cell: Codable {
     var subCellDataList: [subCellData]?
     var dataSource: String?
     var paramType: String?
+    var copyCellId: String?
+    var copyId: String?
     
     var fileUrl: String?
 }
@@ -139,6 +141,7 @@ class subCellData: Codable {
     var paramType: String?
     var dataId: String?
     var searchId: String?
+    var copyCellId: String?
     
     var height: CGFloat?
     var titleFont: font?
