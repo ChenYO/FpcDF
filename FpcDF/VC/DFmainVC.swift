@@ -2932,11 +2932,19 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let copyCellId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].copyCellId
         
-        for (index, cell) in self.oriFormDataList[formNumber].cells.enumerated() {
+        for cell in self.oriFormDataList[formNumber].cells {
             if cell.id == copyCellId {
                 let copiedCell = getCopyCell(copyCell: cell, formNumber: formNumber)
                 
-                self.oriFormDataList[formNumber].cells.insert(copiedCell, at: index + 1)
+                var maxIndex = 1
+                
+                for (index, cell) in self.oriFormDataList[formNumber].cells.enumerated() {
+                    if copiedCell.copyId == cell.copyId {
+                        maxIndex = index
+                    }
+                }
+                
+                self.oriFormDataList[formNumber].cells.insert(copiedCell, at: maxIndex + 1)
                 break
             }
         }
@@ -2980,9 +2988,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             newSubCell.subType = subCell.subType
             
+            newSubCell.titleFont = subCell.titleFont
+            
             if index == copyCell.subCellDataList!.count - 1 {
                 newSubCell.subType = "deleteButton"
                 newSubCell.title = "刪除"
+                newSubCell.titleFont?.color = "#EA0000"
             }
             
             newSubCell.width = subCell.width
@@ -3011,7 +3022,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             newSubCell.copyCellId = subCell.copyCellId
             
             newSubCell.height = subCell.height
-            newSubCell.titleFont = subCell.titleFont
+           
             newSubCell.choiceValue = []
             newSubCell.keyBoardType = subCell.keyBoardType
             newSubCell.borderColor = subCell.borderColor
