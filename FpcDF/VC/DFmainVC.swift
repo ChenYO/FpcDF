@@ -2950,6 +2950,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         self.setFormData()
+        
+        self.saveForm()
         self.tableView.reloadData()
     }
     
@@ -3071,6 +3073,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         self.setFormData()
+        
+        self.saveForm()
         self.tableView.reloadData()
     }
     
