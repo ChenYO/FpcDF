@@ -473,7 +473,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        if type == "singleSelection" {
+        if type == "singleSelection" || type == "textChoice" {
             let choseOption = optionList[indexPath.row]
             chosenItemList = []
             chosenItemList.append(choseOption)
