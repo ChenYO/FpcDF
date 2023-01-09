@@ -2269,17 +2269,28 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             imageView.addGestureRecognizer(recognizer)
             
-            
-            if let signUrl = subCell.fileUrl, signUrl != "" {
-                let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
-                if let imageData = NSData(contentsOf: fileURL!) {
-                    let image = UIImage(data: imageData as Data)
-                    
-                    imageView.image = image
+            if isReadOnly {
+                if let signUrl = subCell.fileUrl {
+                    let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
+                    if let imageData = NSData(contentsOf: fileUrl!) {
+                        if let image = UIImage(data: imageData as Data) {
+                            imageView.image = image
+                        }
+                    }
                 }
             }else {
-                imageView.image = nil
+                if let signUrl = subCell.fileUrl, signUrl != "" {
+                    let fileURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!).appendingPathComponent(signUrl)
+                    if let imageData = NSData(contentsOf: fileURL!) {
+                        let image = UIImage(data: imageData as Data)
+                        
+                        imageView.image = image
+                    }
+                }else {
+                    imageView.image = nil
+                }
             }
+            
             
             
         }else if subCell.subType == "form" {
@@ -2432,44 +2443,93 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
-        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+        let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+        let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
+        
+        var optionList = [DynamicInput]()
         
         
-        for option in formDataList[index].subCellDataList![subCellIndex].options! {
-            let action = UIAlertAction(title: option.name, style: .default) { action in
+        if let oriOptionList = formDataList[index].subCellDataList![subCellIndex].options, oriOptionList.count > 0 {
+            for option in oriOptionList {
+                let dynamicInput = DynamicInput()
                 
-                self.formDataList[index].subCellDataList![subCellIndex].textValue = option.name
+                var item1 = keyValue()
                 
-                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.name
+                item1.title = option.name
+                dynamicInput.id = option.id
+                dynamicInput.isSelected = false
+                dynamicInput.name = option.name
+                dynamicInput.keyValueArray!.append(item1)
+                dynamicInput.keyValueArray!.append(keyValue())
+                dynamicInput.keyValueArray!.append(keyValue())
+                dynamicInput.keyValueArray!.append(keyValue())
                 
-                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
-                
-                self.saveForm()
-                self.tableView.reloadData()
+                optionList.append(dynamicInput)
             }
-            actionSheet.addAction(action)
         }
         
-        let option = UIAlertAction(title: "取消", style: .destructive) { action in
-            
-//            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+        if !optionList.isEmpty {
+            vc?.isFilter = true
+        }
+        
+        vc?.type = "textChoice"
+        vc?.isOffline = true
+        vc?.formNumber = formNumber
+        vc?.cellNumber = cellNumber
+        vc?.subCellNumber = subCellIndex
+        vc?.id = (self.oriFormDataList[formNumber].cells[cellNumber].id)!
+        vc?.oriOptionList = optionList
+        vc?.optionList = optionList
+        vc?.accessToken = accessToken
+        vc?.tokenKey = tokenKey
+        vc?.tokenURL = tokenURL
+        
+        let backItem = UIBarButtonItem()
+        if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+            backItem.tintColor = .white
+        }
+        backItem.title = "Back"
+        self.navigationItem.backBarButtonItem = backItem
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+
+
+//        for option in formDataList[index].subCellDataList![subCellIndex].options! {
+//            let action = UIAlertAction(title: option.name, style: .default) { action in
 //
-//            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//                self.formDataList[index].subCellDataList![subCellIndex].textValue = option.name
 //
-//            self.tableView.reloadData()
-        }
-        actionSheet.addAction(option)
-        
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            let loc = sender.location(in: self.view)
-            actionSheet.modalPresentationStyle = .popover
-            actionSheet.popoverPresentationController?.sourceView = self.view
-            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
-        }
-        
-        self.present(actionSheet, animated: true) {
-            print("option menu presented")
-        }
+//                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.name
+//
+//                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+//
+//                self.saveForm()
+//                self.tableView.reloadData()
+//            }
+//            actionSheet.addAction(action)
+//        }
+//
+//        let option = UIAlertAction(title: "取消", style: .destructive) { action in
+//
+////            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+////
+////            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+////
+////            self.tableView.reloadData()
+//        }
+//        actionSheet.addAction(option)
+//
+//        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+//            let loc = sender.location(in: self.view)
+//            actionSheet.modalPresentationStyle = .popover
+//            actionSheet.popoverPresentationController?.sourceView = self.view
+//            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+//        }
+//
+//        self.present(actionSheet, animated: true) {
+//            print("option menu presented")
+//        }
         
     }
     
@@ -3529,35 +3589,56 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBAction func unwindToFormVC(segue: UIStoryboardSegue) {
         if segue.source is DFSelectionVC {
             if let selectionVC = segue.source as? DFSelectionVC {
-                for formData in formDataList {
-                    if formData.formType == "multipleSelection", formData.formNumber == selectionVC.formNumber, formData.cellNumber == selectionVC.cellNumber, formData.formId == selectionVC.id {
-                        
-                        self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField = []
-                        
-//                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
-                        
-                        formData.dynamicField = []
-                        for option in selectionVC.chosenItemList {
-                            formData.dynamicField?.append(option)
-                            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField?.append(option)
+                
+                if !selectionVC.isOffline {
+                    for formData in formDataList {
+                        if formData.formType == "multipleSelection", formData.formNumber == selectionVC.formNumber, formData.cellNumber == selectionVC.cellNumber, formData.formId == selectionVC.id {
                             
-//                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
-                        }
-                    }else if formData.formType == "singleSelection", formData.formNumber == selectionVC.formNumber, formData.cellNumber == selectionVC.cellNumber, formData.formId == selectionVC.id {
-                        
-                        self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField = []
-                        
-//                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
-                        formData.dynamicField = []
-                        for option in selectionVC.chosenItemList {
-                            formData.dynamicField?.append(option)
-                            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField?.append(option)
+                            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField = []
                             
-//                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
+    //                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
+                            
+                            formData.dynamicField = []
+                            for option in selectionVC.chosenItemList {
+                                formData.dynamicField?.append(option)
+                                self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField?.append(option)
+                                
+    //                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
+                            }
+                        }else if formData.formType == "singleSelection", formData.formNumber == selectionVC.formNumber, formData.cellNumber == selectionVC.cellNumber, formData.formId == selectionVC.id {
+                            
+                            self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField = []
+                            
+    //                        self.oriFormData?.cells[formData.formNumber!].dynamicField = []
+                            formData.dynamicField = []
+                            for option in selectionVC.chosenItemList {
+                                formData.dynamicField?.append(option)
+                                self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].dynamicField?.append(option)
+                                
+    //                            self.oriFormData?.cells[formData.formNumber!].dynamicField?.append(option)
+                            }
                         }
                     }
+                }else {
+                    
+                    if !selectionVC.chosenItemList.isEmpty {
+                        let option = selectionVC.chosenItemList[0]
+//                        self.formDataList[index].subCellDataList![selectionVC.subCellNumber].textValue = option.name
+
+                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = option.name
+                        
+                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = option.id
+                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
+                    }
+                    
+
+                    self.saveForm()
                 }
-                tableView.reloadData()
+                
+                
+                
+                self.tableView.reloadData()
+                
             }
         }else if segue.source is DFElecSignVC {
             if let elecSignVC = segue.source as? DFElecSignVC {

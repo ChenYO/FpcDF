@@ -29,6 +29,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     
     var formNumber = 0
     var cellNumber = 0
+    var subCellNumber = 0
     var id: String?
     var oriOptionList = [DynamicInput]()
     var optionList = [DynamicInput]()
@@ -41,6 +42,8 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     
     var isFilter = false
     var isFirstCheck = true
+    
+    var isOffline = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +66,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         self.navigationItem.rightBarButtonItems = []
         //        self.navigationItem.rightBarButtonItems = [self.confirm!]
         
-        if type == "singleSelection" {
+        if type == "singleSelection" || type == "textChoice" {
             constraint?.constant = 0
             bottomLabel.isHidden = true
             total.isHidden = true
