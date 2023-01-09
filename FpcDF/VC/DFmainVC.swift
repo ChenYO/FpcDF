@@ -3054,7 +3054,21 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = sender.inputNumber
         
         
+        let copyId = self.oriFormDataList[formNumber].cells[cellNumber].copyId
+        
         self.oriFormDataList[formNumber].cells.remove(at: cellNumber)
+        
+        var index = 1
+        
+        for cell in self.oriFormDataList[formNumber].cells {
+            if cell.copyId == copyId {
+                if cell.subCellDataList![0].subType == "label" {
+                    cell.subCellDataList![0].title = "\(index)"
+                    
+                    index += 1
+                }
+            }
+        }
         
         self.setFormData()
         self.tableView.reloadData()
