@@ -2321,9 +2321,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }else if subCell.subType == "deleteButton" {
             key.isEditable = false
             
-            let recognizer = getDeleteButtonGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            if subCell.isFirstCopyCell! {
+                key.text = ""
+            }else {
+                let recognizer = getDeleteButtonGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+                
+                key.addGestureRecognizer(recognizer)
+            }
             
-            key.addGestureRecognizer(recognizer)
             
         }
     }
@@ -2982,7 +2987,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             newSubCell.id = "\(cellIndex)_\(subCellIndex)"
             
-            if subCell.subType == "label", subCell.title == "1" {
+            if subCell.isIncrement! {
                 newSubCell.title = "\(copyIndex)"
             }else {
                 newSubCell.title = subCell.title
@@ -2992,11 +2997,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             newSubCell.titleFont = subCell.titleFont
             
-            if index == copyCell.subCellDataList!.count - 1 {
-                newSubCell.subType = "deleteButton"
-                newSubCell.title = "刪除"
-                newSubCell.titleFont?.color = "#EA0000"
-            }
+//            if index == copyCell.subCellDataList!.count - 1 {
+//                newSubCell.subType = "deleteButton"
+//                newSubCell.title = "刪除"
+//                newSubCell.titleFont?.color = "#EA0000"
+//            }
             
             newSubCell.width = subCell.width
             newSubCell.cellHeight = subCell.cellHeight
@@ -3055,27 +3060,44 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         
+        let confirmSheet = UIAlertController(title: "訊息提示", message: "確定刪除？", preferredStyle: .alert)
         
-        let copyId = self.oriFormDataList[formNumber].cells[cellNumber].copyId
-        
-        self.oriFormDataList[formNumber].cells.remove(at: cellNumber)
-        
-        var index = 1
-        
-        for cell in self.oriFormDataList[formNumber].cells {
-            if cell.copyId == copyId {
-                if cell.subCellDataList![0].subType == "label" {
-                    cell.subCellDataList![0].title = "\(index)"
-                    
+        let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+            action in
+            let copyId = self.oriFormDataList[formNumber].cells[cellNumber].copyId
+            
+            self.oriFormDataList[formNumber].cells.remove(at: cellNumber)
+            
+            var index = 1
+            
+            for cell in self.oriFormDataList[formNumber].cells {
+                if cell.copyId == copyId {
+                    for subCell in cell.subCellDataList! {
+                        if subCell.isIncrement! {
+                            subCell.title = "\(index)"
+                        }
+                    }
                     index += 1
                 }
             }
-        }
+            
+            self.setFormData()
+            
+            self.saveForm()
+            self.tableView.reloadData()
+        })
+    
+        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: {
+            action in
+            
+        })
         
-        self.setFormData()
+        confirmSheet.addAction(confirmAction)
+        confirmSheet.addAction(cancelAction)
         
-        self.saveForm()
-        self.tableView.reloadData()
+        self.present(confirmSheet, animated: true, completion: nil)
+        
+        
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
