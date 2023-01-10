@@ -3034,6 +3034,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             newSubCell.keyBoardType = subCell.keyBoardType
             newSubCell.borderColor = subCell.borderColor
             newSubCell.finishColor = subCell.finishColor
+            newSubCell.isIncrement = subCell.isIncrement
+            newSubCell.isFirstCopyCell = false
             
             newSubCell.fileUrl = ""
             newSubCell.isFinish = false
