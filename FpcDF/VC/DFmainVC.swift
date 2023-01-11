@@ -1693,11 +1693,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.isUserInteractionEnabled = false
                 if let signUrl = self.oriFormDataList[formNumber!].cells[cellNumber].fileUrl {
                     let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
-                    if let imageData = NSData(contentsOf: fileUrl!) {
-                        if let image = UIImage(data: imageData as Data) {
-                            cell.signImageView.image = image
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        if let imageData = NSData(contentsOf: fileUrl!) {
+                            DispatchQueue.main.async {
+                                if let image = UIImage(data: imageData as Data) {
+                                    cell.signImageView.image = image
+                                }
+                            }
                         }
                     }
+                    
+                    
+//                    if let imageData = NSData(contentsOf: fileUrl!) {
+//                        if let image = UIImage(data: imageData as Data) {
+//                            cell.signImageView.image = image
+//                        }
+//                    }
                 }
             }else {
                 cell.isUserInteractionEnabled = true
@@ -2237,13 +2249,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             keyHeight.constant = 40
             
             if isReadOnly {
+                
                 if let signUrl = subCell.fileUrl {
                     let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
-                    if let imageData = NSData(contentsOf: fileUrl!) {
-                        if let image = UIImage(data: imageData as Data) {
-                            imageView.image = image
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        if let imageData = NSData(contentsOf: fileUrl!) {
+                            DispatchQueue.main.async {
+                                if let image = UIImage(data: imageData as Data) {
+                                    imageView.image = image
+                                }
+                            }
                         }
                     }
+                    
+//                    let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
+//                    if let imageData = NSData(contentsOf: fileUrl!) {
+//                        if let image = UIImage(data: imageData as Data) {
+//                            imageView.image = image
+//                        }
+//                    }
                 }
             }else {
                 if let signUrl = subCell.fileUrl {
@@ -2272,11 +2297,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if isReadOnly {
                 if let signUrl = subCell.fileUrl {
                     let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
-                    if let imageData = NSData(contentsOf: fileUrl!) {
-                        if let image = UIImage(data: imageData as Data) {
-                            imageView.image = image
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        if let imageData = NSData(contentsOf: fileUrl!) {
+                            DispatchQueue.main.async {
+                                if let image = UIImage(data: imageData as Data) {
+                                    imageView.image = image
+                                }
+                            }
                         }
                     }
+                    
+//                    let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
+//                    if let imageData = NSData(contentsOf: fileUrl!) {
+//                        if let image = UIImage(data: imageData as Data) {
+//                            imageView.image = image
+//                        }
+//                    }
                 }
             }else {
                 if let signUrl = subCell.fileUrl, signUrl != "" {
