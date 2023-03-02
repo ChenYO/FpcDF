@@ -70,7 +70,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             constraint?.constant = 0
             bottomLabel.isHidden = true
             total.isHidden = true
-        }else if type == "multipleSelection" || type == "textMutilChoice" {
+        }else if type == "multipleSelection" || type == "textMultiChoice" {
             constraint?.constant = 40
             bottomLabel.isHidden = false
             total.isHidden = false
@@ -408,7 +408,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         if type == "singleSelection" || type == "textChoice" || type == "combineOption" {
             cell.imageConstraint?.constant = 0
-        }else if type == "multipleSelection" || type == "textMutilChoice" {
+        }else if type == "multipleSelection" || type == "textMultiChoice" {
             cell.imageConstraint?.constant = 25
         }
         

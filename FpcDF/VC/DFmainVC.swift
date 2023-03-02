@@ -806,7 +806,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMutilChoice" || subCell.subType == "combineOption" {
+                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" {
                             
                             if subCell.textValue == "" {
                                 data.subCellDataList![subIndex].isFinish = false
@@ -1012,7 +1012,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         
                         if subCell.isRequired! && !subCell.isOptional! {
-                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMutilChoice" || subCell.subType == "combineOption" {
+                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" {
                            
                                 if subCell.textValue == "" {
                                     data.subCellDataList![subIndex].isFinish = false
@@ -2341,7 +2341,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let recognizer = getFormGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
-        }else if subCell.subType == "textChoice" || subCell.subType == "textMutilChoice" || subCell.subType == "combineOption" {
+        }else if subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" {
             
             key.isEditable = false
             
