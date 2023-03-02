@@ -806,7 +806,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice"  || subCell.subType == "textChoice"{
+                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMutilChoice" || subCell.subType == "combineOption" {
                             
                             if subCell.textValue == "" {
                                 data.subCellDataList![subIndex].isFinish = false
@@ -1012,7 +1012,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         
                         if subCell.isRequired! && !subCell.isOptional! {
-                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice"{
+                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMutilChoice" || subCell.subType == "combineOption" {
                            
                                 if subCell.textValue == "" {
                                     data.subCellDataList![subIndex].isFinish = false
@@ -1941,7 +1941,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let formNumber = formData.formNumber
         
         if let fontSize = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.size {
-            key.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+            if let isBold = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].isBold, isBold {
+                key.font = UIFont.boldSystemFont(ofSize: CGFloat(fontSize))
+            }else {
+                key.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+            }
         }
         
         if let fontColor = oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].titleFont?.color {
@@ -2337,7 +2341,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let recognizer = getFormGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
-        }else if subCell.subType == "textChoice" {
+        }else if subCell.subType == "textChoice" || subCell.subType == "textMutilChoice" || subCell.subType == "combineOption" {
             
             key.isEditable = false
             
@@ -2528,7 +2532,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.isFilter = true
         }
         
-        vc?.type = "textChoice"
+        vc?.type = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType
         vc?.isOffline = true
         vc?.formNumber = formNumber
         vc?.cellNumber = cellNumber
@@ -3860,18 +3864,67 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 }else {
+                    let subType = self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].subType
                     
                     if !selectionVC.chosenItemList.isEmpty {
-                        let option = selectionVC.chosenItemList[0]
-//                        self.formDataList[index].subCellDataList![selectionVC.subCellNumber].textValue = option.name
 
-                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = option.name
+                        if subType == "textChoice" {
+                            
+                            let option = selectionVC.chosenItemList[0]
+                            
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = option.name
+                            
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = option.id
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
+                            
+                        }else if subType == "textMultiChoice"{
+                            var joinTitle = ""
+                            var joinId = ""
+                            
+                            for (index, chosenItem) in selectionVC.chosenItemList.enumerated() {
+                                joinTitle += chosenItem.name ?? ""
+                                joinId += chosenItem.id ?? ""
+                                
+                                if index != selectionVC.chosenItemList.count - 1 {
+                                    joinTitle += ";"
+                                    joinId += ";"
+                                }
+                            }
+                            
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = joinTitle
+                            
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = joinId
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
+                            
+                        }else if subType == "combineOption" {
+                            let chosenItem = selectionVC.chosenItemList[0]
+                            
+                            var foundIndex = 0
+                            
+                            for (index, option) in self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].options!.enumerated() {
+                                if option.id == chosenItem.id {
+                                    foundIndex = index
+                                    break
+                                }
+                            }
+                            
+                            for subCell in self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList! {
+                                if subCell.subType == "combineOption" {
+                                    
+                                    if foundIndex <= subCell.options!.count - 1 {
+                                        subCell.textValue = subCell.options![foundIndex].name
+                                        subCell.extra1 = subCell.options![foundIndex].id
+                                        subCell.isFinish = true
+                                    }
+                                    
+                                }
+                            }
+                            
+                        }
                         
-                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = option.id
-                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
                     }
                     
-
+                    
                     self.saveForm()
                 }
                 

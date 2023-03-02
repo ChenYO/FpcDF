@@ -66,11 +66,11 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         self.navigationItem.rightBarButtonItems = []
         //        self.navigationItem.rightBarButtonItems = [self.confirm!]
         
-        if type == "singleSelection" || type == "textChoice" {
+        if type == "singleSelection" || type == "textChoice" || type == "combineOption" {
             constraint?.constant = 0
             bottomLabel.isHidden = true
             total.isHidden = true
-        }else if type == "multipleSelection" {
+        }else if type == "multipleSelection" || type == "textMutilChoice" {
             constraint?.constant = 40
             bottomLabel.isHidden = false
             total.isHidden = false
@@ -406,9 +406,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         let checkTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(checkTap))
         
-        if type == "singleSelection" {
+        if type == "singleSelection" || type == "textChoice" || type == "combineOption" {
             cell.imageConstraint?.constant = 0
-        }else if type == "multipleSelection" {
+        }else if type == "multipleSelection" || type == "textMutilChoice" {
             cell.imageConstraint?.constant = 25
         }
         
@@ -456,9 +456,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         if let tokenKey = self.tokenKey, tokenKey == "mobilefpcToken" {
             confirm!.tintColor = .white
         }
-        if self.navigationItem.rightBarButtonItems?.count == 1 {
-            self.navigationItem.rightBarButtonItems?.append(confirm!)
-        }else {
+//        if self.navigationItem.rightBarButtonItems?.count == 1 {
+//            self.navigationItem.rightBarButtonItems?.append(confirm!)
+//        }else {
             confirm?.title = "確認(\(chosenItemList.count))"
             if !isFirstCheck {
                 self.navigationItem.rightBarButtonItems?.popLast()
@@ -466,19 +466,19 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                 isFirstCheck = false
             }
             self.navigationItem.rightBarButtonItems?.append(confirm!)
-        }
+//        }
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        if type == "singleSelection" || type == "textChoice" {
+//        if type == "singleSelection" || type == "textChoice" {
             let choseOption = optionList[indexPath.row]
             chosenItemList = []
             chosenItemList.append(choseOption)
             self.performSegue(withIdentifier: "toFormVC", sender: nil)
-        }
+//        }
     }
     
     @IBAction func unwindToSelectionVC(segue: UIStoryboardSegue) {

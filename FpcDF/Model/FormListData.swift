@@ -150,6 +150,7 @@ class subCellData: Codable {
     var borderColor: String?
     var finishColor: String?
     var isIncrement: Bool?
+    var isBold: Bool?
     var isFirstCopyCell: Bool?
     
     var fileUrl: String?
