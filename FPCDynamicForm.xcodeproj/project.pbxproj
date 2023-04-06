@@ -866,7 +866,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FpcDF/Frameworks",
 				);
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE2 = FpcDF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -892,7 +892,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FpcDF/Frameworks",
 				);
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE2 = FpcDF/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

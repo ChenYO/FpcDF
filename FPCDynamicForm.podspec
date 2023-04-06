@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FPCDynamicForm"
-  spec.version      = "2.7.4"
+  spec.version      = "2.7.5"
   spec.summary      = "A short description of FPCDynamicForm."
 
   # This description is used to generate tags and improve search results.
@@ -99,6 +99,14 @@ Pod::Spec.new do |spec|
   spec.swift_version = "4.2"
   # spec.public_header_files = "Classes/**/*.h"
 
+ 
+  spuc.user_target_xcconfing = {
+   	'GENERATE_INFOPLIST_FILE' => 'YES'
+  }
+
+  spuc.pod_target_xcconfing = {
+   	'GENERATE_INFOPLIST_FILE' => 'YES'
+  }
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
