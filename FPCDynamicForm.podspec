@@ -95,7 +95,7 @@ Pod::Spec.new do |spec|
   spec.exclude_files = "Classes/Exclude"
   spec.resources = "FpcDF/*.xcassets", "FpcDF/**/*.strings", "FpcDF/*.storyboard", "FpcDF/**/*.xib"
 
-  spec.platform     = :ios, "8.0"
+  spec.platform     = :ios, "11.0"
   spec.swift_version = "4.2"
   # spec.public_header_files = "Classes/**/*.h"
 
