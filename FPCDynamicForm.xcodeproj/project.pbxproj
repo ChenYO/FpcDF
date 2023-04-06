@@ -65,6 +65,12 @@
 		760A02C723D1333A00CF2BC9 /* DFMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 760A02C623D1333A00CF2BC9 /* DFMain.storyboard */; };
 		760A02D023D177C200CF2BC9 /* DynamicForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760A02CF23D177C200CF2BC9 /* DynamicForm.swift */; };
 		76275F7223F3D972003F240F /* DFLocalizable.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 765D529E23E3C06200AE354C /* DFLocalizable.swift */; };
+		762C1EDB29DE655B00FDE53C /* DFNibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762C1EDA29DE655B00FDE53C /* DFNibOwnerLoadable.swift */; };
+		762C1EDC29DE655B00FDE53C /* DFNibOwnerLoadable.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 762C1EDA29DE655B00FDE53C /* DFNibOwnerLoadable.swift */; };
+		762C1EE029DE659000FDE53C /* DFInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762C1EDE29DE659000FDE53C /* DFInputView.swift */; };
+		762C1EE129DE659000FDE53C /* DFInputView.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 762C1EDE29DE659000FDE53C /* DFInputView.swift */; };
+		762C1EE229DE659000FDE53C /* DFInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 762C1EDF29DE659000FDE53C /* DFInputView.xib */; };
+		762C1EE329DE659000FDE53C /* DFInputView.xib in Copy Files */ = {isa = PBXBuildFile; fileRef = 762C1EDF29DE659000FDE53C /* DFInputView.xib */; };
 		7648786D23D1A26F001E63CE /* DFSelectionVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BB23D1330D00CF2BC9 /* DFSelectionVC.swift */; };
 		7648786E23D1A272001E63CE /* DFmainVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BA23D1330D00CF2BC9 /* DFmainVC.swift */; };
 		7648786F23D1A274001E63CE /* DFChosenModifyVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BC23D1330D00CF2BC9 /* DFChosenModifyVC.swift */; };
@@ -160,8 +166,10 @@
 				7648787C23D1A299001E63CE /* FormTitleCell.swift in Copy Files */,
 				7648788523D1A2AD001E63CE /* DynamicFieldCell.xib in Copy Files */,
 				7648789123D1A2CA001E63CE /* DFJSONKey.swift in Copy Files */,
+				762C1EE329DE659000FDE53C /* DFInputView.xib in Copy Files */,
 				7648787123D1A27E001E63CE /* DFMain.storyboard in Copy Files */,
 				7648787B23D1A297001E63CE /* FormTitleCell.xib in Copy Files */,
+				762C1EE129DE659000FDE53C /* DFInputView.swift in Copy Files */,
 				7648788723D1A2B2001E63CE /* UIkitExtension.swift in Copy Files */,
 				76D2F0CC28163E760073B20A /* DFTableCell.swift in Copy Files */,
 				7648787923D1A293001E63CE /* KeyValueCell.xib in Copy Files */,
@@ -187,6 +195,7 @@
 				7648787A23D1A295001E63CE /* KeyValueCell.swift in Copy Files */,
 				76A2078927F42AB2003BE45B /* DFSignCell.xib in Copy Files */,
 				7648788123D1A2A4001E63CE /* FormChoiceCell.xib in Copy Files */,
+				762C1EDC29DE655B00FDE53C /* DFNibOwnerLoadable.swift in Copy Files */,
 				76275F7223F3D972003F240F /* DFLocalizable.swift in Copy Files */,
 				7648787F23D1A2A0001E63CE /* FormTextAreaCell.xib in Copy Files */,
 				7648789023D1A2C9001E63CE /* DFUtil.swift in Copy Files */,
@@ -251,6 +260,9 @@
 		760A02C323D1332700CF2BC9 /* UILabelExtensive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtensive.swift; sourceTree = "<group>"; };
 		760A02C623D1333A00CF2BC9 /* DFMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DFMain.storyboard; sourceTree = "<group>"; };
 		760A02CF23D177C200CF2BC9 /* DynamicForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicForm.swift; sourceTree = "<group>"; };
+		762C1EDA29DE655B00FDE53C /* DFNibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFNibOwnerLoadable.swift; sourceTree = "<group>"; };
+		762C1EDE29DE659000FDE53C /* DFInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFInputView.swift; sourceTree = "<group>"; };
+		762C1EDF29DE659000FDE53C /* DFInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DFInputView.xib; sourceTree = "<group>"; };
 		765D529A23E3AFB300AE354C /* DFResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFResult.swift; sourceTree = "<group>"; };
 		765D529E23E3C06200AE354C /* DFLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DFLocalizable.swift; sourceTree = "<group>"; };
 		76A2077A27F42720003BE45B /* UniFPCDynamicForm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UniFPCDynamicForm-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -306,6 +318,8 @@
 		760A023A23D05C5E00CF2BC9 /* FpcDF */ = {
 			isa = PBXGroup;
 			children = (
+				762C1EDD29DE656800FDE53C /* View */,
+				762C1ED929DE651900FDE53C /* Protocol */,
 				760A025423D1320100CF2BC9 /* Framework */,
 				760A025323D131FC00CF2BC9 /* UI */,
 				760A025223D131F700CF2BC9 /* VC */,
@@ -424,6 +438,23 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		762C1ED929DE651900FDE53C /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				762C1EDA29DE655B00FDE53C /* DFNibOwnerLoadable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		762C1EDD29DE656800FDE53C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				762C1EDE29DE659000FDE53C /* DFInputView.swift */,
+				762C1EDF29DE659000FDE53C /* DFInputView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -505,6 +536,7 @@
 				760A027A23D1325300CF2BC9 /* MultiSelectionCell.xib in Resources */,
 				760A027C23D1325300CF2BC9 /* UploadCell.xib in Resources */,
 				760A027223D1325300CF2BC9 /* SingleSelectionCell.xib in Resources */,
+				762C1EE229DE659000FDE53C /* DFInputView.xib in Resources */,
 				760A027323D1325300CF2BC9 /* fileCell.xib in Resources */,
 				760A027E23D1325300CF2BC9 /* DynamicFieldCell.xib in Resources */,
 				760A027023D1325300CF2BC9 /* FormTitleCell.xib in Resources */,
@@ -550,6 +582,7 @@
 				760A027623D1325300CF2BC9 /* FormTextFieldCell.swift in Sources */,
 				760A02BD23D1330D00CF2BC9 /* DFmainVC.swift in Sources */,
 				760A02A823D132BE00CF2BC9 /* DFErrorType.swift in Sources */,
+				762C1EE029DE659000FDE53C /* DFInputView.swift in Sources */,
 				760A02B823D132FC00CF2BC9 /* DFUtil.swift in Sources */,
 				76A2078227F42900003BE45B /* DFUIImageExtensive.swift in Sources */,
 				760A02AC23D132BE00CF2BC9 /* FormByIdData.swift in Sources */,
@@ -567,6 +600,7 @@
 				76A2077F27F427EB003BE45B /* DFElecSignVC.swift in Sources */,
 				760A02B423D132FC00CF2BC9 /* DFAPI.swift in Sources */,
 				76BAD60828227671002D6476 /* DynamicDelegate.swift in Sources */,
+				762C1EDB29DE655B00FDE53C /* DFNibOwnerLoadable.swift in Sources */,
 				760A02A223D132BE00CF2BC9 /* DynamicInput.swift in Sources */,
 				760A026F23D1325300CF2BC9 /* FormTitleCell.swift in Sources */,
 				76B11BFD23EBF95D00F407DE /* DFVersionCode.swift in Sources */,

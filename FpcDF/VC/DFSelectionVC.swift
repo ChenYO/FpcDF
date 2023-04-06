@@ -45,8 +45,16 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     
     var isOffline = false
     
+    var alertBkgView: UIView?
+    var selfInputView: DFInputView!
+    var selfInputText = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        alertBkgView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        selfInputView = DFInputView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width / 1.5, height: 300))
+        
         searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
@@ -63,7 +71,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         bottomView.addGestureRecognizer(bottomViewTapRecognizer)
         
-        self.navigationItem.rightBarButtonItems = []
+        let inputButton = UIBarButtonItem(title: "自行輸入" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(inputByself))
+        
+        self.navigationItem.rightBarButtonItems = [inputButton]
         //        self.navigationItem.rightBarButtonItems = [self.confirm!]
         
         if type == "singleSelection" || type == "textChoice" || type == "combineOption" {
@@ -153,6 +163,33 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             }
             
         }
+    }
+    
+    @objc func inputByself() {
+        self.selfInputView!.center = CGPoint(x: alertBkgView!.frame.size.width / 2, y: alertBkgView!.frame.size.height / 2 )
+        self.alertBkgView!.addSubview(self.selfInputView!)
+        
+        self.view.addSubview(self.alertBkgView!)
+        
+        self.alertBkgView!.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        
+        self.selfInputText = ""
+        
+        self.selfInputView.option.text = ""
+        self.selfInputView.cancelButton.addTarget(self, action: #selector(closeInputView), for: .touchUpInside)
+        self.selfInputView.confirmButton.addTarget(self, action: #selector(confirmInput), for: .touchUpInside)
+    }
+    
+    @objc func closeInputView() {
+        self.selfInputText = ""
+        self.selfInputView.removeFromSuperview()
+        self.alertBkgView?.removeFromSuperview()
+    }
+    
+    @objc func confirmInput() {
+        self.selfInputText = self.selfInputView.option.text
+        
+        self.performSegue(withIdentifier: "toFormVC", sender: nil)
     }
     
     func setButtons() {

@@ -3866,64 +3866,67 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }else {
                     let subType = self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].subType
                     
-                    if !selectionVC.chosenItemList.isEmpty {
+                    if selectionVC.selfInputText != "" {
+                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = selectionVC.selfInputText
 
-                        if subType == "textChoice" {
-                            
-                            let option = selectionVC.chosenItemList[0]
-                            
-                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = option.name
-                            
-                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = option.id
-                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
-                            
-                        }else if subType == "textMultiChoice"{
-                            var joinTitle = ""
-                            var joinId = ""
-                            
-                            for (index, chosenItem) in selectionVC.chosenItemList.enumerated() {
-                                joinTitle += chosenItem.name ?? ""
-                                joinId += chosenItem.id ?? ""
-                                
-                                if index != selectionVC.chosenItemList.count - 1 {
-                                    joinTitle += ";"
-                                    joinId += ";"
-                                }
-                            }
-                            
-                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = joinTitle
-                            
-                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = joinId
-                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
-                            
-                        }else if subType == "combineOption" {
-                            let chosenItem = selectionVC.chosenItemList[0]
-                            
-                            var foundIndex = 0
-                            
-                            for (index, option) in self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].options!.enumerated() {
-                                if option.id == chosenItem.id {
-                                    foundIndex = index
-                                    break
-                                }
-                            }
-                            
-                            for subCell in self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList! {
-                                if subCell.subType == "combineOption" {
-                                    
-                                    if foundIndex <= subCell.options!.count - 1 {
-                                        subCell.textValue = subCell.options![foundIndex].name
-                                        subCell.extra1 = subCell.options![foundIndex].id
-                                        subCell.isFinish = true
-                                    }
-                                    
-                                }
-                            }
-                            
-                        }
+                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
+                    }else {
                         
+                        if !selectionVC.chosenItemList.isEmpty {
+                            
+                            if subType == "textChoice" {
+                                
+                                let option = selectionVC.chosenItemList[0]
+                                
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = option.name
+                                
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = option.id
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
+                                
+                            }else if subType == "textMultiChoice"{
+                                var joinTitle = ""
+                                var joinId = ""
+                                
+                                for (index, chosenItem) in selectionVC.chosenItemList.enumerated() {
+                                    joinTitle += chosenItem.name ?? ""
+                                    joinId += chosenItem.id ?? ""
+                                    
+                                    if index != selectionVC.chosenItemList.count - 1 {
+                                        joinTitle += ";"
+                                        joinId += ";"
+                                    }
+                                }
+                                
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = joinTitle
+                                
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].extra1 = joinId
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
+                                
+                            }else if subType == "combineOption" {
+                                let chosenItem = selectionVC.chosenItemList[0]
+                                
+                                var foundIndex = 0
+                                
+                                for (index, option) in self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].options!.enumerated() {
+                                    if option.id == chosenItem.id {
+                                        foundIndex = index
+                                        break
+                                    }
+                                }
+                                
+                                for subCell in self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList! {
+                                    if subCell.subType == "combineOption" {
+                                        
+                                        if foundIndex <= subCell.options!.count - 1 {
+                                            subCell.textValue = subCell.options![foundIndex].name
+                                            subCell.extra1 = subCell.options![foundIndex].id
+                                            subCell.isFinish = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                    
                     
                     self.saveForm()
                 }
