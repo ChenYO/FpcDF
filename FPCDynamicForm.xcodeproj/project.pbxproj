@@ -71,6 +71,8 @@
 		762C1EE129DE659000FDE53C /* DFInputView.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 762C1EDE29DE659000FDE53C /* DFInputView.swift */; };
 		762C1EE229DE659000FDE53C /* DFInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 762C1EDF29DE659000FDE53C /* DFInputView.xib */; };
 		762C1EE329DE659000FDE53C /* DFInputView.xib in Copy Files */ = {isa = PBXBuildFile; fileRef = 762C1EDF29DE659000FDE53C /* DFInputView.xib */; };
+		762C1EE429DE67A100FDE53C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 760A023C23D05C5E00CF2BC9 /* Info.plist */; };
+		762C1EE529DE67A100FDE53C /* Info.plist in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A023C23D05C5E00CF2BC9 /* Info.plist */; };
 		7648786D23D1A26F001E63CE /* DFSelectionVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BB23D1330D00CF2BC9 /* DFSelectionVC.swift */; };
 		7648786E23D1A272001E63CE /* DFmainVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BA23D1330D00CF2BC9 /* DFmainVC.swift */; };
 		7648786F23D1A274001E63CE /* DFChosenModifyVC.swift in Copy Files */ = {isa = PBXBuildFile; fileRef = 760A02BC23D1330D00CF2BC9 /* DFChosenModifyVC.swift */; };
@@ -201,6 +203,7 @@
 				7648789023D1A2C9001E63CE /* DFUtil.swift in Copy Files */,
 				7648787D23D1A29B001E63CE /* FormTextFieldCell.xib in Copy Files */,
 				76A2078027F427EB003BE45B /* DFElecSignVC.swift in Copy Files */,
+				762C1EE529DE67A100FDE53C /* Info.plist in Copy Files */,
 				7648788623D1A2AF001E63CE /* DynamicFieldCell.swift in Copy Files */,
 				7648788023D1A2A2001E63CE /* FormTextAreaCell.swift in Copy Files */,
 				7648789323D1A2D4001E63CE /* UILabelExtensive.swift in Copy Files */,
@@ -541,6 +544,7 @@
 				760A027E23D1325300CF2BC9 /* DynamicFieldCell.xib in Resources */,
 				760A027023D1325300CF2BC9 /* FormTitleCell.xib in Resources */,
 				76095C9923F693D000C1A73A /* DFLocalizable.strings in Resources */,
+				762C1EE429DE67A100FDE53C /* Info.plist in Resources */,
 				760A025623D1321F00CF2BC9 /* Assets.xcassets in Resources */,
 				760A027823D1325300CF2BC9 /* KeyValueCell.xib in Resources */,
 				760A026C23D1325300CF2BC9 /* FormTextFieldCell.xib in Resources */,
