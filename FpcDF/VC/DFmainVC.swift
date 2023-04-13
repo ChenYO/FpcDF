@@ -2431,6 +2431,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = sender.tag
         let subCellIndex = sender.inputNumber
         
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
         for dateFormatter in formDataList[index].dateFormatterList {
             if dateFormatter.index == subCellIndex {
                 let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
@@ -2467,6 +2477,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
         
         
@@ -2502,6 +2522,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
         
         let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
@@ -2611,6 +2641,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
         let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
         
         
@@ -2678,6 +2718,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
         
         let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
         
@@ -2750,6 +2800,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
         if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
             self.formDataList[index].subCellDataList![subCellIndex].textValue = "Y"
             
@@ -2783,6 +2843,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
     
         let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "DFElecSignVC") as? DFElecSignVC
@@ -2815,9 +2884,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @objc func openCameraOrPhoto(_ sender: UITapGestureRecognizer) {
         
+        let index = sender.index
         let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
         
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -2922,11 +3002,21 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     @objc func getForm(_ sender: UITapGestureRecognizer) {
+        let index = sender.index
         let formNumber = sender.formNumber
         let cellNumber = sender.inputNumber
         let subCellIndex = (sender.view?.tag)!
         
-    
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
         if let subFormId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subFormId {
             
             let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
@@ -3762,11 +3852,49 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.saveForm()
     }
     
+    //檢查是否有必填欄位，且是否已完成
+    func checkConditionIsFinish(index: Int, formNumber: Int, cellIndex: Int, subCellIndex: Int) -> Bool {
+        var isFinish = true
+        
+        let needFinishIdList = self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].needConditionIdList ?? []
+        
+        for needFinishId in needFinishIdList {
+            for form in self.oriFormDataList {
+                for cell in form.cells {
+                    for subCell in cell.subCellDataList! {
+                        if subCell.conditionID == needFinishId {
+                            if !subCell.isFinish! {
+                                isFinish = false
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        return isFinish
+    }
+    
     public func textViewDidBeginEditing(_ textView: UITextView) {
+        let index = textView.index
+        let formNumber = textView.formNumber
+        let cellNumber = textView.inputNumber
+        let subCellIndex = textView.tag
+        
         let txtFieldPosition = textView.convert(textView.bounds.origin, to: tableView)
         let indexPath = tableView.indexPathForRow(at: txtFieldPosition)
         if let ip = indexPath {
             tableView.scrollToRow(at: ip, at: .bottom, animated: true)
+        }
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
         }
     }
     
