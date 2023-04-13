@@ -111,6 +111,27 @@ class DFUtil {
         }
         return nil
     }
+    
+    static func DFTipMessageAndConfirm(_ vc: UIViewController, msg: String, callback: @escaping (_ action: UIAlertAction) -> ()) {
+        let alert = UIAlertController(title: "訊息提示", message: msg, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "確定", style: UIAlertAction.Style.default, handler: callback))
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
+    static func DFTipMessageAndConfirmOrCancel(_ vc: UIViewController, msg: String, confirmLabel: String, callback: @escaping (_ action: UIAlertAction) -> ()) {
+        let alert = UIAlertController(title: "訊息提示", message: msg, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: confirmLabel, style: UIAlertAction.Style.default, handler: callback))
+        alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: nil))
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
+    static func DFTipMessageThreeAction(_ vc: UIViewController, msg: String, action1Label: String, action2Label: String, action3Label: String, action1callback: @escaping (_ action: UIAlertAction) -> (), action2callback: @escaping (_ action: UIAlertAction) -> (), action3callback: @escaping (_ action: UIAlertAction) -> ()) {
+        let alert = UIAlertController(title: "訊息提示", message: msg, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: action1Label, style: UIAlertAction.Style.default, handler: action1callback))
+        alert.addAction(UIAlertAction(title: action2Label, style: UIAlertAction.Style.default, handler: action2callback))
+        alert.addAction(UIAlertAction(title: action3Label, style: UIAlertAction.Style.default, handler: action3callback))
+        vc.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension Bundle {

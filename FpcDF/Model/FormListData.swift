@@ -19,6 +19,7 @@ class FormListData: Codable {
     var thirdOutputUrl: String?
     var buttons: [button]
     var cells: [cell]
+    var tip: String?
 }
 
 struct button: Codable {
@@ -152,6 +153,9 @@ class subCellData: Codable {
     var isIncrement: Bool?
     var isBold: Bool?
     var isFirstCopyCell: Bool?
+    var conditionID: String?
+    var tip: String?
+    var needConditionIdList: [String]?
     
     var fileUrl: String?
     var isFinish: Bool?
