@@ -1758,6 +1758,32 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    @objc func toolBarCancelClick(sender: UIBarButtonItem) {
+        print(sender.tag)
+        let formNumber = sender.tag
+        let cellNumber = sender.inputNumber
+        
+        for dateFormatter in dateFormatterList {
+            if dateFormatter.index == formNumber, dateFormatter.cellIndex == cellNumber {
+                let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
+                print(timeInterval)
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].textValue = ""
+            }
+        }
+        
+        for formData in formDataList {
+            if sender.tag == formData.formNumber, sender.inputNumber == formData.cellNumber {
+                
+                formData.inputValue = self.oriFormDataList[formNumber].cells[cellNumber].textValue
+                
+            }
+        }
+        
+        self.tableView.reloadData()
+        self.view.endEditing(true)
+    }
+    
     @objc func doneButtonTapped(sender: UIBarButtonItem) {
         // 依據元件的 tag 取得 UITextField
         print(sender.tag)
@@ -1850,10 +1876,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         dateFormatterList.append(dateFormatter)
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        toolBar.setItems([doneButton], animated: true)
+        let cancelButton = UIBarButtonItem(title: "Clear", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelClick))
+        toolBar.setItems([doneButton, cancelButton], animated: true)
         
         doneButton.tag = formNumber
         doneButton.inputNumber = cellNumber
+        
+        cancelButton.tag = formNumber
+        cancelButton.inputNumber = cellNumber
         
         cell.inputField.inputView = datePicker
         cell.inputField.inputAccessoryView = toolBar
@@ -2409,19 +2439,48 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         formDataList[index].dateFormatterList.append(dateFormatter)
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(subCellDoneButtonTapped))
-        toolBar.setItems([doneButton], animated: true)
+        let cancelButton = UIBarButtonItem(title: "Clear", style: UIBarButtonItem.Style.plain, target: self, action: #selector(subCellCancelClick))
+        toolBar.setItems([doneButton, cancelButton], animated: true)
         
         doneButton.tag = cellNumber
         doneButton.index = index
         doneButton.formNumber = formNumber
         doneButton.inputNumber = subCellIndex
         
+        cancelButton.tag = cellNumber
+        cancelButton.index = index
+        cancelButton.formNumber = formNumber
+        cancelButton.inputNumber = subCellIndex
         
         key.inputView = datePicker
         key.inputAccessoryView = toolBar
         
     }
     
+    @objc func subCellCancelClick(sender: UIBarButtonItem) {
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.tag
+        let subCellIndex = sender.inputNumber
+        
+        for dateFormatter in formDataList[index].dateFormatterList {
+            print(dateFormatter.index)
+            print(subCellIndex)
+            if dateFormatter.index == subCellIndex {
+                let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
+                print(timeInterval)
+                
+                formDataList[index].subCellDataList![subCellIndex].textValue = ""
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+            }
+        }
+        self.saveForm()
+        self.tableView.reloadData()
+        self.view.endEditing(true)
+    }
     
     @objc func subCellDoneButtonTapped(sender: UIBarButtonItem) {
         // 依據元件的 tag 取得 UITextField
