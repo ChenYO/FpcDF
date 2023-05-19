@@ -2474,7 +2474,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
                 
-                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
+                    
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                }
+                
             }
         }
         self.saveForm()
