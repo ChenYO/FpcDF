@@ -806,7 +806,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" {
+                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "functionDropDown" {
                             
                             if subCell.textValue == "" {
                                 data.subCellDataList![subIndex].isFinish = false
@@ -1012,7 +1012,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         
                         if subCell.isRequired! && !subCell.isOptional! {
-                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" {
+                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "functionDropDown" {
                            
                                 if subCell.textValue == "" {
                                     data.subCellDataList![subIndex].isFinish = false
@@ -2399,8 +2399,25 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 key.addGestureRecognizer(recognizer)
             }
+        }else if subCell.subType == "functionDropDown" {
             
+            key.isEditable = false
             
+            let recognizer = getFunctionDropDownGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            if subCell.textValue != "" {
+                for option in subCell.options! {
+                    if option.id == subCell.textValue {
+                        key.text = option.name
+                        if subCell.isRequired! {
+                            key.textColor = UIColor(hexString: option.color!)
+                            
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -2519,6 +2536,90 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.saveForm()
         self.tableView.reloadData()
         self.view.endEditing(true)
+    }
+    
+    func getFunctionDropDownGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(functionDropDown))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func functionDropDown(_ sender: UITapGestureRecognizer) {
+        
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
+        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+        
+        
+        for option in formDataList[index].subCellDataList![subCellIndex].options! {
+            let action = UIAlertAction(title: option.name, style: .default) { action in
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                
+                if option.functionType == "label" {
+                    self.formDataList[index].subCellDataList![subCellIndex].textValue = option.id
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
+                    
+                    self.saveForm()
+                    self.tableView.reloadData()
+                }else if option.functionType == "form" {
+                    self.formDataList[index].subCellDataList![subCellIndex].textValue = option.id
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
+                    
+                    self.saveForm()
+                    self.tableView.reloadData()
+                    
+                    if let subFormId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subFormId {
+                        self.toNewForm(subFormId: subFormId, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex)
+                        
+                    }
+                }
+            
+                
+            }
+            actionSheet.addAction(action)
+        }
+        
+        let option = UIAlertAction(title: "取消", style: .destructive) { action in
+            
+//            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+//
+//            self.tableView.reloadData()
+        }
+        actionSheet.addAction(option)
+        
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            let loc = sender.location(in: self.view)
+            actionSheet.modalPresentationStyle = .popover
+            actionSheet.popoverPresentationController?.sourceView = self.view
+            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+        }
+        
+        self.present(actionSheet, animated: true) {
+            print("option menu presented")
+        }
+        
     }
     
     func getDropDownGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
@@ -3081,35 +3182,39 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         if let subFormId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subFormId {
+            self.toNewForm(subFormId: subFormId, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex)
             
-            let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
-            let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
-            
-            vc?.isUsingJsonString = true
-            vc?.formId = subFormId
-            vc?.delegate = self.delegate
-            vc?.mainFormDelegate = self
-            vc?.jsonStringList = self.jsonStringList
-            
-            if let searchId =  self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].searchId, searchId != ""  {
-        
-                let searchTitleCellIndex = Int(searchId.split(separator: "_")[0])! - 1
-                let searchTitleSubCellIndex = Int(searchId.split(separator: "_")[1])! - 1
-                
-                vc?.searchTitle = self.oriFormDataList[formNumber].cells[searchTitleCellIndex].subCellDataList![searchTitleSubCellIndex].title ?? ""
-            }
-            
-            
-            let backItem = UIBarButtonItem()
-            backItem.title = "Back"
-            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
-                backItem.tintColor = .white
-            }
-            
-            self.navigationItem.backBarButtonItem = backItem
-            self.navigationController?.pushViewController(vc!, animated: true)
         }
         
+    }
+    
+    func toNewForm(subFormId: String, formNumber: Int, cellNumber: Int, subCellIndex: Int) {
+        let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+        let vc = storyboard.instantiateViewController(withIdentifier: "DFmainVC") as? DFmainVC
+        
+        vc?.isUsingJsonString = true
+        vc?.formId = subFormId
+        vc?.delegate = self.delegate
+        vc?.mainFormDelegate = self
+        vc?.jsonStringList = self.jsonStringList
+        
+        if let searchId =  self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].searchId, searchId != ""  {
+    
+            let searchTitleCellIndex = Int(searchId.split(separator: "_")[0])! - 1
+            let searchTitleSubCellIndex = Int(searchId.split(separator: "_")[1])! - 1
+            
+            vc?.searchTitle = self.oriFormDataList[formNumber].cells[searchTitleCellIndex].subCellDataList![searchTitleSubCellIndex].title ?? ""
+        }
+        
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+            backItem.tintColor = .white
+        }
+        
+        self.navigationItem.backBarButtonItem = backItem
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     func getCopyButtonGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{

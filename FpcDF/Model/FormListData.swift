@@ -85,6 +85,7 @@ struct option: Codable {
     var id: String?
     var name: String?
     var color: String?
+    var functionType: String?
 }
 
 struct inputConfig: Codable {
