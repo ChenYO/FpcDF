@@ -248,10 +248,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             for cell in formDataList {
-                for subCell in cell.subCellDataList! {
-                    if subCell.isDefaultDate! {
-                        subCell.textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
-                        subCell.isDefaultDate = false
+                if let subCellDataList = cell.subCellDataList {
+                    for subCell in subCellDataList {
+                        if subCell.isDefaultDate! {
+                            subCell.textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                            subCell.isDefaultDate = false
+                        }
                     }
                 }
             }
@@ -1046,6 +1048,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 if subCell.textValue == "" {
                                     data.subCellDataList![subIndex].isFinish = false
                                 }
+                                
+                                if subCell.isDefaultDate! {
+                                    if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
+                                        data.subCellDataList![subIndex].textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                                    }
+                                }
+                                
                                 
                             }else if subCell.subType == "checkBox" {
                                 
