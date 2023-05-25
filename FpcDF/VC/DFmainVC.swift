@@ -239,7 +239,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             for form in self.oriFormDataList {
                 for cell in form.cells {
                     for subCell in cell.subCellDataList! {
-                        if subCell.isDefaultDate {
+                        if subCell.isDefaultDate! {
                             subCell.textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
                             subCell.isDefaultDate = false
                         }
@@ -249,7 +249,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             for cell in formDataList {
                 for subCell in cell.subCellDataList! {
-                    if subCell.isDefaultDate {
+                    if subCell.isDefaultDate! {
                         subCell.textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
                         subCell.isDefaultDate = false
                     }
