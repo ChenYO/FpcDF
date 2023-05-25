@@ -46,6 +46,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var width: CGFloat = 0.0
     
     var searchTitle = ""
+    var chooseDateSelf = false
     
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
@@ -233,6 +234,30 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
  
     @objc func saveFormFromButton() {
+        
+        if !chooseDateSelf {
+            for form in self.oriFormDataList {
+                for cell in form.cells {
+                    for subCell in cell.subCellDataList {
+                        if subCell.isDefaultDate {
+                            subCell.textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                            subCell.isDefaultDate = false
+                        }
+                    }
+                }
+            }
+            
+            for cell in formDataList {
+                for subCell in cell.subCellDataList {
+                    if subCell.isDefaultDate {
+                        subCell.textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                        subCell.isDefaultDate = false
+                    }
+                }
+            }
+        }
+        
+        
         self.saveForm()
         
         self.sendForm()
@@ -2505,6 +2530,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     @objc func subCellDoneButtonTapped(sender: UIBarButtonItem) {
         // 依據元件的 tag 取得 UITextField
+        self.chooseDateSelf = true
         
         let index = sender.index
         let formNumber = sender.formNumber
@@ -4163,7 +4189,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     let subType = self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].subType
                     
                     if selectionVC.selfInputText != "" {
-                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = selectionVC.selfInputText
+                        self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = selectionVC.selfInputText.trimmingCharacters(in: .whitespaces)
 
                         self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
                     }else {

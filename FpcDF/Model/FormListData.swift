@@ -157,6 +157,7 @@ class subCellData: Codable {
     var conditionID: String?
     var tip: String?
     var needConditionIdList: [String]?
+    var isDefaultDate: Bool?
     
     var fileUrl: String?
     var isFinish: Bool?

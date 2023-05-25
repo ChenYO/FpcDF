@@ -73,7 +73,9 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         let inputButton = UIBarButtonItem(title: "自行輸入" , style: UIBarButtonItem.Style.plain, target: self, action: #selector(inputByself))
         
-        self.navigationItem.rightBarButtonItems = [inputButton]
+        let clearButton = UIBarButtonItem(title: "清除", style: UIBarButtonItem.Style.plain, target: self, action: #selector(clear))
+        
+        self.navigationItem.rightBarButtonItems = [inputButton, clearButton]
         //        self.navigationItem.rightBarButtonItems = [self.confirm!]
         
         if type == "singleSelection" || type == "textChoice" || type == "combineOption" {
@@ -163,6 +165,12 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             }
             
         }
+    }
+    
+    @objc func clear() {
+        self.selfInputText = " "
+        
+        self.performSegue(withIdentifier: "toFormVC", sender: nil)
     }
     
     @objc func inputByself() {
