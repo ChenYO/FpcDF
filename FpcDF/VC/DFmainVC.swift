@@ -4230,6 +4230,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         joinTitle += ";"
                                         joinId += ";"
                                     }
+                                    
+                                    if !self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isHorizon! {
+                                        joinTitle += "\n"
+                                    }
                                 }
                                 
                                 self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].textValue = joinTitle
