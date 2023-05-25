@@ -261,6 +261,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.saveForm()
         
         self.sendForm()
+        
+        DFUtil.DFTipMessageAndConfirm(self, msg: "儲存完成", callback: {
+            _ in
+        })
     }
     
     func sendForm() {
