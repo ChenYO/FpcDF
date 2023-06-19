@@ -2792,6 +2792,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.isFilter = true
         }
         
+        if let defaultList = formDataList[index].subCellDataList![subCellIndex].choiceValue {
+            vc?.defaultList = defaultList
+        }
+        
         vc?.type = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType
         vc?.isOffline = true
         vc?.formNumber = formNumber
