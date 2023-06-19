@@ -2425,8 +2425,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }else {
                     key.text = subCell.textValue
                 }
-                
+            }else {
+                if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].fixedMessage != "" {
+                    
+                    key.text = "\(oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].fixedMessage ?? "")"
+                }
             }
+            
+            
         }else if subCell.subType == "copyButton" {
             key.isEditable = false
             
