@@ -159,6 +159,9 @@ class subCellData: Codable {
     var needConditionIdList: [String]?
     var isDefaultDate: Bool?
     var fixedMessage: String?
+    var maxValue: Double?
+    var minValue: Double?
+    var overLimitColor: String?
     
     var fileUrl: String?
     var isFinish: Bool?

@@ -35,6 +35,8 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     var optionList = [DynamicInput]()
     var chosenItemList = [DynamicInput]()
     
+    var defaultList:[String] = []
+    
     var type: String?
     var timer: Timer?
     var searchBarTextString = ""
@@ -91,6 +93,14 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
                 total.text = "\(chosenItemList.count)"
             }
         }
+        
+        for option in oriOptionList {
+            if defaultList.contains(option.id!) {
+                option.isSelected = true
+                chosenItemList.append(option)
+            }
+        }
+        
         
         if optionList.count == 0 {
             if let tokenURL = tokenURL, tokenURL != "", let accessToken = accessToken, accessToken != "" {
@@ -168,7 +178,15 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     }
     
     @objc func clear() {
+        
         self.selfInputText = " "
+        
+        for option in oriOptionList {
+            if defaultList.contains(option.id!) {
+                self.selfInputText = option.name ?? " "
+            }
+        }
+        
         
         self.performSegue(withIdentifier: "toFormVC", sender: nil)
     }
@@ -478,6 +496,16 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         let indexPath = IndexPath(row: (sender.view?.tag)!, section: 0)
         let choseOption = optionList[(sender.view?.tag)!]
         let cell: KeyValueCell = tableView.cellForRow(at: indexPath) as! KeyValueCell
+        
+        var isFound = false
+        
+        if defaultList.contains(choseOption.id!) {
+            isFound = true
+        }
+        
+        if isFound {
+            return
+        }
         
         choseOption.isSelected = !choseOption.isSelected!
         

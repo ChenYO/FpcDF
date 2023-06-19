@@ -837,7 +837,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "functionDropDown" {
+                        if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "functionDropDown" || subCell.subType == "limitTextArea"{
                             
                             if subCell.textValue == "" {
                                 data.subCellDataList![subIndex].isFinish = false
@@ -1043,7 +1043,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         
                         if subCell.isRequired! && !subCell.isOptional! {
-                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "functionDropDown" {
+                            if subCell.subType == "dropDown" || subCell.subType == "textArea" || subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "radio" || subCell.subType == "singleChoice" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "functionDropDown" || subCell.subType == "limitTextArea"{
                            
                                 if subCell.textValue == "" {
                                     data.subCellDataList![subIndex].isFinish = false
@@ -2466,6 +2466,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             key.textColor = UIColor(hexString: option.color!)
                             
                         }
+                    }
+                }
+            }
+        }else if subCell.subType == "limitTextArea" {
+            key.isScrollEnabled = true
+            
+            if subCell.textValue != "" {
+                key.text = subCell.textValue
+            }
+            
+            if let isNumber = subCell.textValue?.isDouble, isNumber {
+                if let checkNumber = Double(subCell.textValue!) {
+                    if checkNumber > subCell.maxValue ?? 0.0 || checkNumber < subCell.minValue ?? 0.0 {
+                        key.textColor = UIColor(hexString: subCell.overLimitColor!)
                     }
                 }
             }

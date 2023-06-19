@@ -334,3 +334,9 @@ extension UIImageView {
         }
     }
 }
+
+extension String {
+    var isInteger: Bool { return Int(self) != nil }
+    var isFloat: Bool { return Float(self) != nil }
+    var isDouble: Bool { return Double(self) != nil }
+}
