@@ -2418,7 +2418,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.addGestureRecognizer(recognizer)
             
             if subCell.textValue != "" {
-                key.text = subCell.textValue
+                
+                if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].fixedMessage != "" {
+                    
+                    key.text = "\(oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].fixedMessage ?? "")\n\(subCell.textValue ?? "")"
+                }else {
+                    key.text = subCell.textValue
+                }
+                
             }
         }else if subCell.subType == "copyButton" {
             key.isEditable = false
