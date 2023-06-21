@@ -181,11 +181,11 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         self.selfInputText = " "
         
-        for option in oriOptionList {
-            if defaultList.contains(option.id!) {
-                self.selfInputText = option.name ?? " "
-            }
-        }
+//        for option in oriOptionList {
+//            if defaultList.contains(option.id!) {
+//                self.selfInputText = option.name ?? " "
+//            }
+//        }
         
         
         self.performSegue(withIdentifier: "toFormVC", sender: nil)
