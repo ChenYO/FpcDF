@@ -2459,6 +2459,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.addGestureRecognizer(recognizer)
             
             if subCell.textValue != "" {
+                key.text = subCell.textValue
+                
                 for option in subCell.options! {
                     if option.id == subCell.textValue {
                         key.text = option.name
@@ -2660,8 +2662,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         self.formDataList[index].subCellDataList![subCellIndex].textValue = textField!.text
                         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textField!.text
-                        self.formDataList[index].subCellDataList![subCellIndex].title = textField!.text
-                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].title = textField!.text
                         
                         self.saveForm()
                         self.tableView.reloadData()
