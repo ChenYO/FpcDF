@@ -2647,6 +2647,38 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     self.saveForm()
                     self.tableView.reloadData()
+                }else if option.functionType == "textArea" {
+                    let actionSheet = UIAlertController(title: "訊息提示", message: "請輸入數值", preferredStyle: .alert)
+                    
+                    actionSheet.addTextField { (textField) in
+                        textField.keyboardType = .decimalPad
+                    }
+
+                    // 3. Grab the value from the text field, and print it when the user clicks OK.
+                    actionSheet.addAction(UIAlertAction(title: "確定", style: .default, handler: { [weak actionSheet] (_) in
+                        let textField = actionSheet?.textFields![0] // Force unwrapping because we know it exists.
+                        
+                        self.formDataList[index].subCellDataList![subCellIndex].textValue = textField!.text
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textField!.text
+                        self.formDataList[index].subCellDataList![subCellIndex].title = textField!.text
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].title = textField!.text
+                        
+                        self.saveForm()
+                        self.tableView.reloadData()
+                    }))
+                    
+                    actionSheet.addAction(UIAlertAction(title: "取消", style: .destructive))
+                    
+                    if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+                        let loc = sender.location(in: self.view)
+                        actionSheet.modalPresentationStyle = .popover
+                        actionSheet.popoverPresentationController?.sourceView = self.view
+                        actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+                    }
+                    
+                    self.present(actionSheet, animated: true) {
+                        print("option menu presented")
+                    }
                 }else if option.functionType == "form" {
                     self.formDataList[index].subCellDataList![subCellIndex].textValue = option.id
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
