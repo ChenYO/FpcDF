@@ -120,6 +120,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+        
         tableView.separatorStyle = .none
         self.navigationItem.rightBarButtonItems = []
         
