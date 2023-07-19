@@ -2058,7 +2058,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }else {
             key.backgroundColor = UIColor(hexString: "#D0D0D0")
-            if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption"{
+            if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "dropDown"{
                 key.textColor = UIColor(hexString: "#D0D0D0")
             }
         }
@@ -2135,6 +2135,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }else if subCell.subType == "dropDown" {
             
             key.isEditable = false
+            label.isHidden = false
             
             let recognizer = getDropDownGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
@@ -2145,8 +2146,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if option.id == subCell.textValue {
                         key.text = option.name
                         if subCell.isRequired! {
-                            key.textColor = UIColor(hexString: option.color!)
-                            
+//                            key.textColor = UIColor(hexString: option.color!)
+                            key.textColor = .white
+                            label.textColor = UIColor(hexString: option.color!)
                         }
                     }
                 }
@@ -2441,8 +2443,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.addGestureRecognizer(recognizer)
             
             if subCell.textValue != "" {
+                key.textColor = .white
                 if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].fixedMessage != "" {
-                    key.textColor = .white
                     
                     key.text = "\(oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].fixedMessage ?? "")\n\(subCell.textValue ?? "")"
                     label.text = "\(oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].fixedMessage ?? "")\n\(subCell.textValue ?? "")"
