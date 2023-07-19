@@ -139,6 +139,21 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var ImageGap14: NSLayoutConstraint!
     
 
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label3: UILabel!
+    @IBOutlet weak var label4: UILabel!
+    @IBOutlet weak var label5: UILabel!
+    @IBOutlet weak var label6: UILabel!
+    @IBOutlet weak var label7: UILabel!
+    @IBOutlet weak var label8: UILabel!
+    @IBOutlet weak var label9: UILabel!
+    @IBOutlet weak var label10: UILabel!
+    @IBOutlet weak var label11: UILabel!
+    @IBOutlet weak var label12: UILabel!
+    @IBOutlet weak var label13: UILabel!
+    @IBOutlet weak var label14: UILabel!
+    @IBOutlet weak var label15: UILabel!
     
     
     override func awakeFromNib() {
@@ -370,6 +385,21 @@ class DFTableCell: UITableViewCell {
         ImageGap13.constant = 0
         ImageGap14.constant = 0
         
+        label1.isHidden = true
+        label2.isHidden = true
+        label3.isHidden = true
+        label4.isHidden = true
+        label5.isHidden = true
+        label6.isHidden = true
+        label7.isHidden = true
+        label8.isHidden = true
+        label9.isHidden = true
+        label10.isHidden = true
+        label11.isHidden = true
+        label12.isHidden = true
+        label13.isHidden = true
+        label14.isHidden = true
+        label15.isHidden = true
         
         key1.inputAccessoryView = nil
         key1.inputView = nil
