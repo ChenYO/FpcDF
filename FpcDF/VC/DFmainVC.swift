@@ -2152,6 +2152,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 }
+            }else {
+                if subCell.isOptional! {
+                    key.textColor = .white
+                }
             }
             
             
