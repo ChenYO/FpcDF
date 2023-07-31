@@ -2150,6 +2150,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 for option in subCell.options! {
                     if option.id == subCell.textValue {
                         key.text = option.name
+                        label.text = option.name
                         if subCell.isRequired! {
 //                            key.textColor = UIColor(hexString: option.color!)
                             key.textColor = .white
@@ -2666,11 +2667,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let subCellIndex = (sender.view?.tag)!
         
         for cell in self.oriFormDataList[formNumber].cells {
-            if cell.subCellDataList!.count >= subCellIndex + 1 {
-                if cell.subCellDataList![subCellIndex].subType == "dropDown" {
-                    if cell.subCellDataList![subCellIndex].textValue == "" {
-                        cell.subCellDataList![subCellIndex].textValue = "V"
-                        cell.subCellDataList![subCellIndex].isFinish = true
+            if cell.subCellDataList!.count >= subCellIndex + 3 {
+                if cell.subCellDataList![subCellIndex + 2].subType == "dropDown" {
+                    if cell.subCellDataList![subCellIndex + 2].textValue == "" {
+                        cell.subCellDataList![subCellIndex + 2].textValue = "V"
+                        cell.subCellDataList![subCellIndex + 2].isFinish = true
                     }
                 }
             }
