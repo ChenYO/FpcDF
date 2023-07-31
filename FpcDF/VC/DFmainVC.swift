@@ -2124,6 +2124,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             label.text = subCell.title
             label.isHidden = false
             
+            if let canCheckAll = subCell.canCheckAll, canCheckAll {
+                let recognizer = getCheckAllGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber, checkNumber: subCell.checkNumber ?? 0)
+                    
+                key.addGestureRecognizer(recognizer)
+            }
         }else if subCell.subType == "textArea" {
             
             key.isScrollEnabled = true
@@ -2637,6 +2642,42 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.saveForm()
         self.tableView.reloadData()
         self.view.endEditing(true)
+    }
+    
+    func getCheckAllGesture(index: Int, formNumber: Int, cellNumber: Int, checkNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(checkAll))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        recognizer.checkNumber = checkNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func checkAll(_ sender: UITapGestureRecognizer) {
+        
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let checkNumber = sender.checkNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        for cell in self.oriFormDataList[formNumber].cells {
+            if cell.subCellDataList!.count >= subCellIndex + 1 {
+                if cell.subCellDataList![subCellIndex].subType == "dropDown" {
+                    if cell.subCellDataList![subCellIndex].textValue == "" {
+                        cell.subCellDataList![subCellIndex].textValue = "V"
+                        cell.subCellDataList![subCellIndex].isFinish = true
+                    }
+                }
+            }
+        }
+        
+        self.saveForm()
+        tableView.reloadData()
     }
     
     func getFunctionDropDownGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{

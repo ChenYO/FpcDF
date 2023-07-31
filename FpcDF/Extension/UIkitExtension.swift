@@ -124,6 +124,7 @@ extension UITapGestureRecognizer {
         static var formNumber: Int = 0
         static var cellNumber: Int = 0
         static var inputNumber: Int = 0
+        static var checkNumber: Int = 0
     }
     
     public var index: Int {
@@ -163,6 +164,16 @@ extension UITapGestureRecognizer {
         
         set {
             objc_setAssociatedObject(self, &AssociatedKey.inputNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    public var checkNumber: Int {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKey.checkNumber) as? Int ?? 0
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKey.checkNumber, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
 }

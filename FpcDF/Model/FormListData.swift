@@ -164,6 +164,8 @@ class subCellData: Codable {
     var minValue: Double?
     var overLimitColor: String?
     var needIndex: Bool?
+    var canCheckAll: Bool?
+    var checkNumber: Int?
     
     var fileUrl: String?
     var isFinish: Bool?
