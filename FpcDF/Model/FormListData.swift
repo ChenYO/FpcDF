@@ -20,6 +20,7 @@ class FormListData: Codable {
     var buttons: [button]
     var cells: [cell]
     var tip: String?
+    var checkAllButton: Bool?
 }
 
 struct button: Codable {
@@ -162,6 +163,7 @@ class subCellData: Codable {
     var maxValue: Double?
     var minValue: Double?
     var overLimitColor: String?
+    var needIndex: Bool?
     
     var fileUrl: String?
     var isFinish: Bool?

@@ -4313,8 +4313,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             var joinId = ""
                             
                             for (index, chosenItem) in selectionVC.chosenItemList.enumerated() {
-                                joinTitle += chosenItem.name ?? ""
-                                joinId += chosenItem.id ?? ""
+                                if let needIndex = self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].needIndex, needIndex {
+                                    
+                                    joinTitle += "\(index + 1).\(chosenItem.name ?? "")"
+                                    joinId += chosenItem.id ?? ""
+                                }else {
+                                    joinTitle += chosenItem.name ?? ""
+                                    joinId += chosenItem.id ?? ""
+                                }
                                 
                                 if index != selectionVC.chosenItemList.count - 1 {
                                     joinTitle += ";"
@@ -4322,15 +4328,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 }
                                 
                                 if !self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isHorizon! {
-                                    joinTitle += "\n"
+                                    joinTitle += "\n\n"
                                 }
                             }
                             
                             if selectionVC.selfInputText != "" {
-                                joinTitle += selectionVC.selfInputText
+                                if let needIndex = self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].needIndex, needIndex {
+                                    
+                                    joinTitle += "\(selectionVC.chosenItemList.count + 1).\(selectionVC.selfInputText)"
+                                }else {
+                                    joinTitle += selectionVC.selfInputText
+                                }
 
                                 if !self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isHorizon! {
-                                    joinTitle += "\n"
+                                    joinTitle += "\n\n"
                                 }
                             }
                             
