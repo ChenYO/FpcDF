@@ -48,6 +48,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     var searchTitle = ""
     var chooseDateSelf = false
     
+    var isShowMessage = false
+    var message = ""
+    
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
     public func dynamicSendForm(_ formId: String, _ formStringList: [String]) {
@@ -166,6 +169,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
             }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.isShowMessage {
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.message, callback: {
+                _ in
+                self.isShowMessage = false
+                self.message = ""
+            })
         }
     }
     
@@ -4446,8 +4461,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].fileUrl = elecSignVC.signUrl
                     
-                    self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].isFinish = true
-
+                    if let isSignRemark = self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].isSignRemark, isSignRemark {
+                        
+                        if self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].textValue == "" {
+                            self.isShowMessage = true
+                            self.message = self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].signTip ?? ""
+                        }else {
+                            self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].isFinish = true
+                        }
+                        
+                    }else {
+                        self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].isFinish = true
+                    }
                 }
             }
         }

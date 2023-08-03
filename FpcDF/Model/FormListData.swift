@@ -166,6 +166,8 @@ class subCellData: Codable {
     var needIndex: Bool?
     var canCheckAll: Bool?
     var checkNumber: Int?
+    var isSignRemark: Bool?
+    var signTip: String?
     
     var fileUrl: String?
     var isFinish: Bool?
