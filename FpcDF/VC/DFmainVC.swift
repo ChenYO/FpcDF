@@ -4274,6 +4274,34 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
             }else {
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                
+                var isFalse = false
+                
+                for cell in self.oriFormDataList[formNumber].cells {
+                    for subCell in cell.subCellDataList! {
+                        if subCell.subType == "limitTextArea", subCell.textValue != "" {
+                            if subCell.textValue!.isDouble {
+                                if let checkNumber = Double(subCell.textValue!) {
+                                    if checkNumber > subCell.maxValue ?? 0.0 || checkNumber < subCell.minValue ?? 0.0 {
+                                        isFalse = true
+                                        
+                                        subCell.textValue = ""
+                                        subCell.isFinish = false
+                                    }else {
+                                        subCell.isFinish = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if isFalse {
+                    DFUtil.DFTipMessageAndConfirm(self, msg: "數值超過限制，請修正", callback: {
+                        _ in
+                       
+                    })
+                }
             }
         }
         
