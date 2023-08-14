@@ -2535,7 +2535,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let isNumber = subCell.textValue?.isDouble, isNumber {
                 if let checkNumber = Double(subCell.textValue!) {
                     if checkNumber > subCell.maxValue ?? 0.0 || checkNumber < subCell.minValue ?? 0.0 {
-                        key.textColor = UIColor(hexString: subCell.overLimitColor!)
+                        if let overLimitColor = subCell.overLimitColor {
+                            key.textColor = UIColor(hexString: overLimitColor)
+                        }
+                        
                     }
                 }
             }
