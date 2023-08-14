@@ -4280,15 +4280,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 for cell in self.oriFormDataList[formNumber].cells {
                     for subCell in cell.subCellDataList! {
                         if subCell.subType == "limitTextArea", subCell.textValue != "" {
+                            
+                            subCell.isFinish = true
+                            
                             if subCell.textValue!.isDouble {
                                 if let checkNumber = Double(subCell.textValue!) {
                                     if checkNumber > subCell.maxValue ?? 0.0 || checkNumber < subCell.minValue ?? 0.0 {
                                         isFalse = true
-                                        
-                                        subCell.textValue = ""
-                                        subCell.isFinish = false
-                                    }else {
-                                        subCell.isFinish = true
                                     }
                                 }
                             }
