@@ -4277,22 +4277,22 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 var isFalse = false
                 
-                for cell in self.oriFormDataList[formNumber].cells {
-                    for subCell in cell.subCellDataList! {
-                        if subCell.subType == "limitTextArea", subCell.textValue != "" {
+//                for cell in self.oriFormDataList[formNumber].cells {
+//                    for subCell in cell.subCellDataList! {
+//                        if subCell.subType == "limitTextArea", subCell.textValue != "" {
+//
+//                            subCell.isFinish = true
                             
-                            subCell.isFinish = true
-                            
-                            if subCell.textValue!.isDouble {
-                                if let checkNumber = Double(subCell.textValue!) {
-                                    if checkNumber > subCell.maxValue ?? 0.0 || checkNumber < subCell.minValue ?? 0.0 {
+                            if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!.isDouble {
+                                if let checkNumber = Double(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!) {
+                                    if checkNumber > self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].maxValue ?? 0.0 || checkNumber < self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].minValue ?? 0.0 {
                                         isFalse = true
                                     }
                                 }
                             }
-                        }
-                    }
-                }
+//                        }
+//                    }
+//                }
                 
                 if isFalse {
                     DFUtil.DFTipMessageAndConfirm(self, msg: "數值超過限制，請修正", callback: {
