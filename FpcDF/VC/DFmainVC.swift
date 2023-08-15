@@ -4286,13 +4286,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //
 //                            subCell.isFinish = true
                             
-                            if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!.isDouble {
-                                if let checkNumber = Double(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!) {
-                                    if checkNumber > self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].maxValue ?? 0.0 || checkNumber < self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].minValue ?? 0.0 {
-                                        isFalse = true
-                                    }
-                                }
+                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType == "limitTextArea" {
+                    if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!.isDouble {
+                        if let checkNumber = Double(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!) {
+                            if checkNumber > self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].maxValue ?? 0.0 || checkNumber < self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].minValue ?? 0.0 {
+                                isFalse = true
                             }
+                        }
+                    }
+                }
 //                        }
 //                    }
 //                }
