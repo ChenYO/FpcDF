@@ -123,8 +123,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
-        
         tableView.separatorStyle = .none
         self.navigationItem.rightBarButtonItems = []
         
@@ -4136,6 +4134,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let keyboardHeight: CGFloat = keyboardSize.height
         
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+        
         UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions(rawValue: 7), animations: {
             self.view.frame = CGRect(x: 0, y: (self.view.frame.origin.y), width: self.view.bounds.width, height: self.screenHeight - keyboardHeight)
             
@@ -4150,6 +4150,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //鍵盤消失時 恢復畫面
     @objc func keyboardWillHide(_ notification: Foundation.Notification) {
         keyboardPresented = false
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
         UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions(rawValue: 7), animations: {
             self.view.frame = CGRect(x: 0, y: (self.view.frame.origin.y), width: self.view.bounds.width, height: self.screenHeight)
             
