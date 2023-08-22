@@ -69,9 +69,10 @@ class DFElecSignVC: UIViewController {
             imageView.removeFromSuperview()
         }
         
-        if signUrl != "" {
+        if self.signUrl != "" {
             drawingView.isHidden = false
             signTip.isHidden = true
+            self.signUrl = ""
             if let imageView = signImageView {
                 imageView.removeFromSuperview()
             }
@@ -122,12 +123,22 @@ class DFElecSignVC: UIViewController {
 
                     try image.write(to: fileURL)
                     print("file saved")
+                    
+                    self.performSegue(withIdentifier: "toFormVC", sender: nil)
+                    
                 } catch {
                     print("error saving file:", error)
+                    
+                    let alert = UIAlertController(title: "訊息提示", message: "簽名檔儲存失敗", preferredStyle: .alert)
+                    let confirm = UIAlertAction(title: "確認", style: .default)
+                    
+                    alert.addAction(confirm)
+                    
+                    self.present(alert, animated: true, completion: nil)
                 }
 //            }
             
-            self.performSegue(withIdentifier: "toFormVC", sender: nil)
+            
             
         }else {
             let alert = UIAlertController(title: "訊息提示", message: "請簽名", preferredStyle: .alert)
