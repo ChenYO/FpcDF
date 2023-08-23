@@ -2396,15 +2396,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         let image = UIImage(data: imageData as Data)
                         
                         imageView.image = image
-                    }
-                }else {
-                    let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
-                    
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        if let imageData = NSData(contentsOf: fileUrl!) {
-                            DispatchQueue.main.async {
-                                if let image = UIImage(data: imageData as Data) {
-                                    imageView.image = image
+                    }else {
+                        let fileUrl = URL(string: "https://appcloud.fpcetg.com.tw/eformapi/uploads/\(signUrl)")
+                        
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            if let imageData = NSData(contentsOf: fileUrl!) {
+                                DispatchQueue.main.async {
+                                    if let image = UIImage(data: imageData as Data) {
+                                        imageView.image = image
+                                    }
                                 }
                             }
                         }
