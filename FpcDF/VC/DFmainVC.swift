@@ -2073,7 +2073,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }else {
             key.backgroundColor = UIColor(hexString: "#D0D0D0")
-            if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "dropDown"{
+            if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice" || subCell.subType == "combineOption" || subCell.subType == "dropDown" || subCell.subType == "radio" || subCell.subType == "checkBox"{
                 key.textColor = UIColor(hexString: "#D0D0D0")
             }
         }
