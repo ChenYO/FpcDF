@@ -2208,6 +2208,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             let recognizer = getRadioGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
+//            key.isEditable = false
+            label.isHidden = false
+            
             key.addGestureRecognizer(recognizer)
             
             var optionStr = ""
@@ -2258,23 +2261,28 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                  NSAttributedString.Key.paragraphStyle: style])
             
             if subCell.isRequired! {
-                
+                key.textColor = .white
                 if let realRange = range {
                     attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: selectedColor) , range: realRange)
-                    key.attributedText = attributedString
+//                    key.attributedText = attributedString
+                    label.attributedText = attributedString
                 }else {
                     key.text = optionStr
+                    label.text = optionStr
                 }
                 
             }else {
                 key.text = optionStr
+                label.text = optionStr
             }
             
+
         }else if subCell.subType == "checkBox" {
             
             let recognizer = getCheckBoxGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
+            label.isHidden = false
             
             var optionStr = ""
             var startIndex = 0
@@ -2325,21 +2333,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                  NSAttributedString.Key.paragraphStyle: style])
             
             if subCell.isRequired! {
+                key.textColor = .white
                 
                 if rangeList.isEmpty {
                     key.text = optionStr
+                    label.text = optionStr
                 }else {
                     for (index, range) in rangeList.enumerated() {
                         
                         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: selectedColorList[index]) , range: range)
                     }
-                    key.attributedText = attributedString
+//                    key.attributedText = attributedString
+                    label.attributedText = attributedString
                 }
                 
             }else {
                 key.text = optionStr
+                label.text = optionStr
             }
             
+
 
         }else if subCell.subType == "singleChoice" {
             
