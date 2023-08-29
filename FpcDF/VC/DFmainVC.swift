@@ -2344,14 +2344,17 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }else if subCell.subType == "singleChoice" {
             
             key.isEditable = false
+            label.isHidden = false
             
             let recognizer = getSingleChoiceGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
             
             key.addGestureRecognizer(recognizer)
             
             if subCell.textValue != "" {
+                key.textColor = .yellow
                 key.backgroundColor = .yellow
             }else {
+                key.textColor = .white
                 key.backgroundColor = .white
             }
             
