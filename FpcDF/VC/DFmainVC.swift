@@ -2268,7 +2268,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 if let realRange = range {
                     attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: selectedColor) , range: realRange)
-//                    key.attributedText = attributedString
+                    key.attributedText = attributedString
                     label.attributedText = attributedString
                 }else {
                     key.text = optionStr
@@ -2354,7 +2354,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         
                         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: selectedColorList[index]) , range: range)
                     }
-//                    key.attributedText = attributedString
+                    key.attributedText = attributedString
                     label.attributedText = attributedString
                 }
                 
