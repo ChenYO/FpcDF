@@ -2367,7 +2367,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
 
-            if !subCell.choiceValue?.isEmpty {
+            if !subCell.choiceValue!.isEmpty {
                 key.textColor = .white
             }
 
