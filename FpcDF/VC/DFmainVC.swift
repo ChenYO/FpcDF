@@ -2261,11 +2261,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                  NSAttributedString.Key.paragraphStyle: style])
             
             if subCell.isRequired! {
-                
-                if subCell.isOptional! {
-                    key.textColor = .white
-                }
-                
+            
+
                 if let realRange = range {
                     attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(hexString: selectedColor) , range: realRange)
                     key.attributedText = attributedString
@@ -2273,6 +2270,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }else {
                     key.text = optionStr
                     label.text = optionStr
+                }
+                
+                if subCell.isOptional! {
+                    key.textColor = .white
                 }
                 
             }else {
@@ -2342,10 +2343,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if subCell.isRequired! {
                 
-                if subCell.isOptional! {
-                    key.textColor = .white
-                }
-                
                 if rangeList.isEmpty {
                     key.text = optionStr
                     label.text = optionStr
@@ -2357,6 +2354,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     key.attributedText = attributedString
                     label.attributedText = attributedString
                 }
+                
+                if subCell.isOptional! {
+                    key.textColor = .white
+                }
+                
                 
             }else {
                 key.textColor = .white
