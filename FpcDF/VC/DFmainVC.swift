@@ -2271,6 +2271,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 
             }else {
+                key.textColor = .white
                 key.text = optionStr
                 label.text = optionStr
             }
@@ -2349,6 +2350,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
                 
             }else {
+                key.textColor = .white
                 key.text = optionStr
                 label.text = optionStr
             }
