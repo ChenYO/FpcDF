@@ -4470,7 +4470,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             if selectionVC.selfInputText != "" {
                                 if let needIndex = self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].needIndex, needIndex {
                                     
-                                    joinTitle += "\(selectionVC.chosenItemList.count + 1).\(selectionVC.selfInputText)"
+                                    if selectionVC.selfInputText.prefix(2) == "\(selectionVC.chosenItemList.count + 1)." {
+                                        joinTitle += "\(selectionVC.selfInputText)"
+                                    }else {
+                                        joinTitle += "\(selectionVC.chosenItemList.count + 1).\(selectionVC.selfInputText)"
+                                    }
                                 }else {
                                     joinTitle += selectionVC.selfInputText
                                 }
