@@ -497,15 +497,15 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         let choseOption = optionList[(sender.view?.tag)!]
         let cell: KeyValueCell = tableView.cellForRow(at: indexPath) as! KeyValueCell
         
-        var isFound = false
+//        var isFound = false
         
-        if defaultList.contains(choseOption.id!) {
-            isFound = true
-        }
-        
-        if isFound {
-            return
-        }
+//        if defaultList.contains(choseOption.id!) {
+//            isFound = true
+//        }
+//
+//        if isFound {
+//            return
+//        }
         
         choseOption.isSelected = !choseOption.isSelected!
         

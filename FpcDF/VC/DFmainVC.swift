@@ -1066,12 +1066,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     data.subCellDataList![subIndex].isFinish = false
                                 }
                                 
-                                if let isDefaultDate = subCell.isDefaultDate, isDefaultDate {
-                                    if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
-                                        data.subCellDataList![subIndex].textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                                if !isReadOnly {
+                                    if let isDefaultDate = subCell.isDefaultDate, isDefaultDate {
+                                        if subCell.subType == "date" || subCell.subType == "time" || subCell.subType == "dateTime" {
+                                            data.subCellDataList![subIndex].textValue = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                                        }
                                     }
                                 }
-                                
                                 
                             }else if subCell.subType == "checkBox" {
                                 
