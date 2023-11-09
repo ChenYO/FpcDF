@@ -116,6 +116,10 @@ struct file: Codable {
     var url: String?
 }
 
+struct param: Codable {
+    var key: String?
+    var value: String?
+}
 
 class subCellData: Codable {
     var id: String?
@@ -168,6 +172,8 @@ class subCellData: Codable {
     var checkNumber: Int?
     var isSignRemark: Bool?
     var signTip: String?
+    var fontLimit: Int?
+    var forceAnswerList: [param]?
     
     var fileUrl: String?
     var isFinish: Bool?

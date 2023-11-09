@@ -2211,9 +2211,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
 //            key.isEditable = false
             label.isHidden = false
+            label.textColor = .black
             
             key.addGestureRecognizer(recognizer)
             
+        
             var optionStr = ""
             var startIndex = 0
             var range: NSRange?
@@ -2293,6 +2295,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.addGestureRecognizer(recognizer)
             label.isHidden = false
+            label.textColor = .black
             
             var optionStr = ""
             var startIndex = 0
@@ -4253,9 +4256,19 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }else if formData.formType == "tableKey" {
                 if formData.cellNumber == cellNumber, formData.formNumber == formNumber {
-                    formData.subCellDataList![subCellIndex].textValue = textView.text!
                     
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textView.text!
+                    if let fontLimit = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fontLimit, fontLimit != 0, textView.text!.count >= fontLimit {
+                        DFUtil.DFTipMessageAndConfirm(self, msg: "超過字數限制，請修正", callback: {
+                            _ in
+                           
+                        })
+                    }else {
+                        formData.subCellDataList![subCellIndex].textValue = textView.text!
+                        
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textView.text!
+                    }
+                    
+                    
                 }
             }
         }
@@ -4356,6 +4369,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
+        
+        // 檢查是否有填寫後，須改變其他欄位的值
+        if let forceAnswerList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].forceAnswerList {
+            
+            for forceAnswer in forceAnswerList {
+                for cell in self.oriFormDataList[formNumber].cells {
+                    if cell.id == forceAnswer.key {
+                        cell.textValue = forceAnswer.value
+                    }
+                }
+            }
+        }
         
         self.tableView.reloadData()
     }
