@@ -174,6 +174,8 @@ class subCellData: Codable {
     var signTip: String?
     var fontLimit: Int?
     var forceAnswerList: [param]?
+    var emptyForceAnswerList: [param]?
+    var hasForceAnswer: Bool?
     
     var fileUrl: String?
     var isFinish: Bool?

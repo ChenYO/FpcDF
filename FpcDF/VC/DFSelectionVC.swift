@@ -199,6 +199,8 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         self.alertBkgView!.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         
+        self.alertBkgView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(endEdit)))
+        
         self.selfInputText = ""
         
         self.selfInputView.option.text = ""
@@ -210,6 +212,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         self.selfInputText = ""
         self.selfInputView.removeFromSuperview()
         self.alertBkgView?.removeFromSuperview()
+    }
+    
+    @objc func endEdit() {
+        self.view.endEditing(true)
     }
     
     @objc func confirmInput() {
@@ -552,6 +558,10 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             chosenItemList.append(choseOption)
             self.performSegue(withIdentifier: "toFormVC", sender: nil)
 //        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     @IBAction func unwindToSelectionVC(segue: UIStoryboardSegue) {

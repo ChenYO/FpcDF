@@ -4297,6 +4297,35 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
+        //檢查此欄位是否有連動欄位
+        if let hasForceAnswer = self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].hasForceAnswer, hasForceAnswer {
+            
+            for subCell in self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList! {
+                if let forceAnswerList = subCell.forceAnswerList, !forceAnswerList.isEmpty {
+                    
+                    if subCell.textValue != "" {
+                        for forceAnswer in forceAnswerList {
+                            if forceAnswer.key == self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].id {
+                                self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = forceAnswer.value
+                            }
+                        }
+                    }
+                    
+                }
+                
+                if let emptyForceAnswerList = subCell.emptyForceAnswerList, !emptyForceAnswerList.isEmpty {
+                    
+                    if subCell.textValue == "" {
+                        for emptyForceAnswer in emptyForceAnswerList {
+                            if emptyForceAnswer.key == self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].id {
+                                self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = emptyForceAnswer.value
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         
         return isFinish
     }
@@ -4371,16 +4400,30 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         // 檢查是否有填寫後，須改變其他欄位的值
-        if let forceAnswerList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].forceAnswerList {
-            
-            for forceAnswer in forceAnswerList {
-                for cell in self.oriFormDataList[formNumber].cells {
-                    if cell.id == forceAnswer.key {
-                        cell.textValue = forceAnswer.value
+        if textView.text! != "" {
+            if let forceAnswerList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].forceAnswerList {
+                
+                for forceAnswer in forceAnswerList {
+                    for cell in self.oriFormDataList[formNumber].cells {
+                        if cell.id == forceAnswer.key {
+                            cell.textValue = forceAnswer.value
+                        }
+                    }
+                }
+            }
+        }else {
+            if let emptyForceAnswerList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].emptyForceAnswerList {
+                
+                for forceAnswer in emptyForceAnswerList {
+                    for cell in self.oriFormDataList[formNumber].cells {
+                        if cell.id == forceAnswer.key {
+                            cell.textValue = forceAnswer.value
+                        }
                     }
                 }
             }
         }
+        
         
         self.tableView.reloadData()
     }
