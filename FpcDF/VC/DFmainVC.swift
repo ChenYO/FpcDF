@@ -3080,6 +3080,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }
                 }
                 
+                self.checkIfForceAnswer(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex)
+                
                 self.saveForm()
                 self.tableView.reloadData()
             }
@@ -4297,6 +4299,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
+    
+        return isFinish
+    }
+    
+    func checkIfForceAnswer(index: Int, formNumber: Int, cellIndex: Int, subCellIndex: Int) {
         //檢查此欄位是否有連動欄位
         if let hasForceAnswer = self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].hasForceAnswer, hasForceAnswer {
             
@@ -4307,6 +4314,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         for forceAnswer in forceAnswerList {
                             if forceAnswer.key == self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].id {
                                 self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = forceAnswer.value
+                                self.formDataList[index].subCellDataList![subCellIndex].textValue = forceAnswer.value
                             }
                         }
                     }
@@ -4319,15 +4327,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         for emptyForceAnswer in emptyForceAnswerList {
                             if emptyForceAnswer.key == self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].id {
                                 self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = emptyForceAnswer.value
+                                self.formDataList[index].subCellDataList![subCellIndex].textValue = emptyForceAnswer.value
                             }
                         }
                     }
                 }
             }
         }
-        
-        
-        return isFinish
     }
     
     public func textViewDidBeginEditing(_ textView: UITextView) {
@@ -4404,9 +4410,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let forceAnswerList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].forceAnswerList {
                 
                 for forceAnswer in forceAnswerList {
-                    for cell in self.oriFormDataList[formNumber].cells {
-                        if cell.id == forceAnswer.key {
-                            cell.textValue = forceAnswer.value
+                    for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+                        if subCell.id == forceAnswer.key {
+                            subCell.textValue = forceAnswer.value
                         }
                     }
                 }
@@ -4415,9 +4421,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             if let emptyForceAnswerList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].emptyForceAnswerList {
                 
                 for forceAnswer in emptyForceAnswerList {
-                    for cell in self.oriFormDataList[formNumber].cells {
-                        if cell.id == forceAnswer.key {
-                            cell.textValue = forceAnswer.value
+                    for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+                        if subCell.id == forceAnswer.key {
+                            subCell.textValue = forceAnswer.value
                         }
                     }
                 }
