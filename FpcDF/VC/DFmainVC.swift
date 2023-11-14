@@ -4413,6 +4413,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
                         if subCell.id == forceAnswer.key {
                             subCell.textValue = forceAnswer.value
+                            subCell.isFinish = true
                         }
                     }
                 }
@@ -4424,6 +4425,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
                         if subCell.id == forceAnswer.key {
                             subCell.textValue = forceAnswer.value
+                            subCell.isFinish = true
                         }
                     }
                 }
