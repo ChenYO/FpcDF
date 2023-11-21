@@ -4527,20 +4527,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 subCell.isOptional = true
                             }
                             
-                            if subCell.subType == "checkBox" {
-                                if subCell.choiceValue!.isEmpty {
-                                    subCell.isFinish = false
-                                }else {
-                                    subCell.isFinish = true
-                                }
+                            if subCell.isOptional! {
+                                subCell.isFinish = true
                             }else {
-                                if subCell.textValue != "" {
-                                    subCell.isFinish = true
+                                if subCell.subType == "checkBox" {
+                                    if subCell.choiceValue!.isEmpty {
+                                        subCell.isFinish = false
+                                    }else {
+                                        subCell.isFinish = true
+                                    }
                                 }else {
-                                    subCell.isFinish = false
+                                    if subCell.textValue != "" {
+                                        subCell.isFinish = true
+                                    }else {
+                                        subCell.isFinish = false
+                                    }
                                 }
                             }
-                            
                         }
                     }
                 }
