@@ -4517,8 +4517,30 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 for cell in self.oriFormDataList[formNumber].cells {
                     for subCell in cell.subCellDataList! {
                         if subCell.id == otherRequiredID {
-                            subCell.isRequired = true
-                            subCell.isOptional = false
+                            
+                            if textView.text! != "" {
+                                subCell.isRequired = true
+                                subCell.isOptional = false
+                                
+                            }else {
+                                subCell.isRequired = true
+                                subCell.isOptional = true
+                            }
+                            
+                            if subCell.subType == "checkBox" {
+                                if subCell.choiceValue!.isEmpty {
+                                    subCell.isFinish = false
+                                }else {
+                                    subCell.isFinish = true
+                                }
+                            }else {
+                                if subCell.textValue != "" {
+                                    subCell.isFinish = true
+                                }else {
+                                    subCell.isFinish = false
+                                }
+                            }
+                            
                         }
                     }
                 }
