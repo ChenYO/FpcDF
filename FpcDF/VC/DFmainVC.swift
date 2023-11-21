@@ -2803,6 +2803,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         for cell in self.oriFormDataList[formNumber].cells {
             if cell.subCellDataList!.count >= subCellIndex + 3 {
                 if cell.subCellDataList![subCellIndex + 2].subType == "dropDown" {
+                    
+                    if let relateFormId = cell.subCellDataList![subCellIndex + 2].relatedFormID, relateFormId != "" {
+                        continue
+                    }
+                    
                     if cell.subCellDataList![subCellIndex + 2].textValue == "" {
                         cell.subCellDataList![subCellIndex + 2].textValue = "V"
                         cell.subCellDataList![subCellIndex + 2].isFinish = true
@@ -2958,7 +2963,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             return
         }
         
-        if let relateFormID = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relatedFormID, let relateItem = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateItem, let relateAnswer = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateAnswer {
+        if let relateFormID = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relatedFormID, let relateItem = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateItem, let relateAnswer = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateAnswer, relateFormID != "" {
             
             self.checkIsRelateForm(subCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "")
         }else {
@@ -4520,6 +4525,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
+        self.saveForm()
         self.tableView.reloadData()
     }
     
