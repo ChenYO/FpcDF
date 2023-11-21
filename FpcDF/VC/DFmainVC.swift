@@ -229,6 +229,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if !self.jsonStringList.isEmpty {
             
+            self.dfShowActivityIndicator()
+            self.tableView.isUserInteractionEnabled = false
+            
             for jsonString in self.jsonStringList {
                 do {
                     let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
@@ -236,6 +239,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if obj.formID == self.formId {
                         self.title = obj.formTitle
                         self.oriFormDataList.append(obj)
+                        
+                        for cell in obj.cells {
+                            for subCell in cell.subCellDataList! {
+                                
+                                if let relateFormID = subCell.relatedFormID, let relateAnswer = subCell.relateAnswer, let relateItem = subCell.relateItem, relateFormID != "" {
+                                    
+                                    self.checkIsRelateForm(subCell: subCell, relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: "", isLoad: true)
+                                }
+                            }
+                        }
                     }
                     
                 } catch {
@@ -244,11 +257,65 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             self.setFormData()
             
+            self.dfStopActivityIndicator()
+            self.tableView.isUserInteractionEnabled = true
+            
             self.tableView.reloadData()
             
             self.scrollToSearchId()
         }
     }
+    
+    func checkIsRelateForm(subCell: subCellData, relateFormID: String, relateItem: String, relateAnswer: String, tip: String, isLoad: Bool = false) {
+        
+        do{
+            for jsonString in self.jsonStringList {
+                
+                let relateForm = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                
+                if relateForm.formID == relateFormID {
+                    
+                    var isPair = true
+                    var isEmpty = true
+                    
+                    for relateCell in relateForm.cells {
+                        for relateSubCell in relateCell.subCellDataList! {
+                            if relateSubCell.hasRelateItem == relateItem {
+                                if relateSubCell.textValue != "" {
+                                    isEmpty = false
+                                    
+                                    if relateSubCell.textValue != relateAnswer {
+                                        isPair = false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if !isEmpty {
+                        if isPair {
+                            subCell.textValue = "V"
+                            subCell.isFinish = true
+                        }else {
+                            subCell.textValue = "X"
+                            subCell.isFinish = true
+                        }
+                    }else {
+                        if !isLoad {
+                            DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
+                                _ in
+                                
+                            })
+                        }
+                    }
+                }
+            }
+        } catch {
+            
+        }
+       
+    }
+    
  
     @objc func saveFormFromButton() {
         
@@ -2891,19 +2958,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             return
         }
         
-        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
-        
-        
-        if (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!) >= (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
-            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
+        if let relateFormID = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relatedFormID, let relateItem = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateItem, let relateAnswer = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateAnswer {
+            
+            self.checkIsRelateForm(subCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "")
+        }else {
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
+            
+            
+            if (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!) >= (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
+            }
+            
+            formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
+            
+            
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
+            
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
         }
-        
-        formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
-        
-        
-        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
-        
-        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
         
         self.saveForm()
         tableView.reloadData()
@@ -4432,6 +4504,21 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
+        //填寫後，其他欄位需改為必填
+        if let otherRequirdList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].otherRequireList, !otherRequirdList.isEmpty {
+            
+            for otherRequiredID in otherRequirdList {
+                
+                for cell in self.oriFormDataList[formNumber].cells {
+                    for subCell in cell.subCellDataList! {
+                        if subCell.id == otherRequiredID {
+                            subCell.isRequired = true
+                            subCell.isOptional = false
+                        }
+                    }
+                }
+            }
+        }
         
         self.tableView.reloadData()
     }

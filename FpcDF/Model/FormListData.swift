@@ -176,6 +176,11 @@ class subCellData: Codable {
     var forceAnswerList: [param]?
     var emptyForceAnswerList: [param]?
     var hasForceAnswer: Bool?
+    var relatedFormID: String?
+    var hasRelateItem: String?
+    var relateItem: String?
+    var relateAnswer: String?
+    var otherRequireList: [String]?
     
     var fileUrl: String?
     var isFinish: Bool?
