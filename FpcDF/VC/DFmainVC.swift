@@ -3349,6 +3349,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         vc!.subCellIndex = subCellIndex
         vc!.isFromSubCell = true
         vc!.signUrl = formDataList[index].subCellDataList![subCellIndex].fileUrl ?? ""
+        vc!.delegate = self
         
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
@@ -3996,6 +3997,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             vc?.formNumber = formData.formNumber!
             vc?.cellIndex = formData.cellNumber!
+            vc?.delegate = self
             vc?.signUrl = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].fileUrl ?? ""
             
             let backItem = UIBarButtonItem()
