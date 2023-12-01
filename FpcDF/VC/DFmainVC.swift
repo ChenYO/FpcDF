@@ -13,7 +13,7 @@ import MobileCoreServices
 private let bundle = Bundle(for: DynamicForm.self)
 
 public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate, DynamicDelegate {
-
+ 
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -82,6 +82,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         print("save main form")
     }
     
+    public func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+        
+    }
     
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
