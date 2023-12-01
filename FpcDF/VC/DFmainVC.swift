@@ -83,7 +83,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     public func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
-        
+        if let delegate = self.delegate {
+            delegate.lockOrientation(orientation)
+        }
     }
     
     override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
