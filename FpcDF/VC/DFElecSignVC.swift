@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class DFElecSignVC: UIViewController {
     
     @IBOutlet weak var drawingView: DFDrawingView!
@@ -99,9 +100,16 @@ class DFElecSignVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        UIDevice.current.setValue(UIInterfaceOrientationMask.landscapeRight.rawValue, forKey: "orientation")
+        UINavigationController.attemptRotationToDeviceOrientation()
 //        clearImage()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        UIDevice.current.setValue(UIInterfaceOrientationMask.all.rawValue, forKey: "orientation")
+        UINavigationController.attemptRotationToDeviceOrientation()
+    }
     
     @objc func send(sender: AnyObject) {
         if let imageView = imageView {
