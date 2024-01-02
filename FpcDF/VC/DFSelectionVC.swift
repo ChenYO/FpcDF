@@ -10,7 +10,7 @@ import UIKit
 
 private let bundle = Bundle(for: DynamicForm.self)
 
-class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -50,6 +50,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     var alertBkgView: UIView?
     var selfInputView: DFInputView!
     var selfInputText = ""
+    var fontLimit = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,6 +205,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         self.selfInputText = ""
         
         self.selfInputView.option.text = ""
+        self.selfInputView.option.delegate = self
         self.selfInputView.cancelButton.addTarget(self, action: #selector(closeInputView), for: .touchUpInside)
         self.selfInputView.confirmButton.addTarget(self, action: #selector(confirmInput), for: .touchUpInside)
     }
@@ -222,6 +224,16 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         self.selfInputText = self.selfInputView.option.text
         
         self.performSegue(withIdentifier: "toFormVC", sender: nil)
+    }
+    
+    public func textViewDidChange(_ textView: UITextView) {
+        
+        if self.fontLimit != 0, textView.text!.count >= fontLimit {
+            DFUtil.DFTipMessageAndConfirm(self, msg: "超過\(self.fontLimit)字數限制，請修正", callback: {
+                _ in
+               
+            })
+        }
     }
     
     func setButtons() {

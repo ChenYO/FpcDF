@@ -3052,6 +3052,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             vc?.defaultList = defaultList
         }
         
+        if let fontLimit = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fontLimit, fontLimit != 0 {
+            vc?.fontLimit = fontLimit
+        }
+        
         vc?.type = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType
         vc?.isOffline = true
         vc?.formNumber = formNumber
@@ -4344,7 +4348,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 if formData.cellNumber == cellNumber, formData.formNumber == formNumber {
                     
                     if let fontLimit = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fontLimit, fontLimit != 0, textView.text!.count >= fontLimit {
-                        DFUtil.DFTipMessageAndConfirm(self, msg: "超過字數限制，請修正", callback: {
+                        DFUtil.DFTipMessageAndConfirm(self, msg: "超過\(fontLimit)字數限制，請修正", callback: {
                             _ in
                            
                         })
