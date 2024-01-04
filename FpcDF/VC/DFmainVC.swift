@@ -2970,25 +2970,62 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if let relateFormID = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relatedFormID, let relateItem = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateItem, let relateAnswer = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].relateAnswer, relateFormID != "" {
             
-            self.checkIsRelateForm(subCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "")
-        }else {
-            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
-            
-            
-            if (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!) >= (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
-                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
+            var isFormExist = false
+            do{
+                for jsonString in self.jsonStringList {
+                    
+                    let relateForm = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                    
+                    if relateForm.formID == relateFormID {
+                        isFormExist = true
+                        break
+                    }
+                }
+            } catch {
+                
             }
             
-            formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
+            if isFormExist {
+                self.checkIsRelateForm(subCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "")
+            }else {
+                self.loopDropOption(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex)
+            }
             
-            
-            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
-            
-            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+        }else {
+            self.loopDropOption(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex)
+//            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
+//
+//
+//            if (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!) >= (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
+//                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
+//            }
+//
+//            formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
+//
+//
+//            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
+//
+//            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
         }
         
         self.saveForm()
         tableView.reloadData()
+    }
+    
+    func loopDropOption(index: Int, formNumber: Int, cellNumber: Int, subCellIndex: Int) {
+        
+        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
+
+        if (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!) >= (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
+        }
+        
+        formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
+        
+        
+        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
+        
+        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
     }
     
     func getTextChoiceGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
