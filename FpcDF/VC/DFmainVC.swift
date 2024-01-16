@@ -301,9 +301,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if isPair {
                             subCell.textValue = "V"
                             subCell.isFinish = true
+                            subCell.loopIndex = 0
                         }else {
                             subCell.textValue = "X"
                             subCell.isFinish = true
+                            subCell.loopIndex = 1
                         }
                         
                         self.checkDropDwonOptionHasRequireID(optionCell: subCell, formNumber: formNumber)
