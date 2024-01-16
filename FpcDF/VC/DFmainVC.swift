@@ -237,7 +237,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.dfShowActivityIndicator()
             self.tableView.isUserInteractionEnabled = false
             
-            for jsonString in self.jsonStringList {
+            for (index, jsonString) in self.jsonStringList.enumerated() {
                 do {
                     let obj = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
                     
@@ -250,7 +250,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 
                                 if let relateFormID = subCell.relatedFormID, let relateAnswer = subCell.relateAnswer, let relateItem = subCell.relateItem, relateFormID != "" {
                                     
-                                    self.checkIsRelateForm(subCell: subCell, relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: "", isLoad: true)
+                                    self.checkIsRelateForm(subCell: subCell, relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: "", isLoad: true, formNumber: index)
                                 }
                             }
                         }
@@ -271,7 +271,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func checkIsRelateForm(subCell: subCellData, relateFormID: String, relateItem: String, relateAnswer: String, tip: String, isLoad: Bool = false) {
+    func checkIsRelateForm(subCell: subCellData, relateFormID: String, relateItem: String, relateAnswer: String, tip: String, isLoad: Bool = false, formNumber: Int) {
         
         do{
             for jsonString in self.jsonStringList {
@@ -305,6 +305,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             subCell.textValue = "X"
                             subCell.isFinish = true
                         }
+                        
+                        self.checkDropDwonOptionHasRequireID(cell: subCell, formNumber: formNumber)
                     }else {
                         if !isLoad {
                             DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
@@ -2986,7 +2988,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
             if isFormExist {
-                self.checkIsRelateForm(subCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "")
+                self.checkIsRelateForm(subCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", formNumber: formNumber)
             }else {
                 self.loopDropOption(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex)
             }
@@ -3026,6 +3028,148 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
         
         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+        
+        self.checkDropDwonOptionHasRequireID(cell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], formNumber: formNumber)
+    }
+    
+    func checkDropDwonOptionHasRequireID(cell: subCellData, formNumber: Int) {
+        
+
+        if let checkAll = cell.options![cell.loopIndex!].checkAll, checkAll {
+            
+            let options = cell.options!
+            
+            var otherRequireList:[String] = []
+            
+            for option in options {
+                if !option.otherRequireList!.isEmpty {
+                    otherRequireList = option.otherRequireList!
+                }
+            }
+            
+            var isFound = false
+            
+            for cell in self.oriFormDataList[formNumber].cells {
+                for subCell in cell.subCellDataList! {
+                    if let subType = subCell.subType, subType == "dropDown" {
+                        let id = subCell.textValue
+                        
+                        for option in options {
+                            if option.id == id, !option.otherRequireList!.isEmpty {
+                                isFound = true
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            for otherRequiredID in otherRequireList {
+                
+                for cell in self.oriFormDataList[formNumber].cells {
+                    for subCell in cell.subCellDataList! {
+                        if subCell.id == otherRequiredID {
+                            
+                            if isFound {
+                                if let isForceRequire = subCell.options![subCell.loopIndex!].isForceRequire, isForceRequire {
+                                    
+                                    if let tip = subCell.options![subCell.loopIndex!].tip, tip != "" {
+                                        DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
+                                            _ in
+                                            self.view.endEditing(true)
+                                        })
+                                    }
+                                    
+                                    subCell.isRequired = true
+                                    subCell.isOptional = false
+                                    
+                                }else {
+                                    subCell.isRequired = true
+                                    subCell.isOptional = true
+                                }
+                                
+                                if subCell.isOptional! {
+                                    subCell.isFinish = true
+                                }else {
+                                    if subCell.subType == "checkBox" {
+                                        if subCell.choiceValue!.isEmpty {
+                                            subCell.isFinish = false
+                                        }else {
+                                            subCell.isFinish = true
+                                        }
+                                    }else {
+                                        if subCell.textValue != "" {
+                                            subCell.isFinish = true
+                                        }else {
+                                            subCell.isFinish = false
+                                        }
+                                    }
+                                }
+                            }else {
+                                subCell.isRequired = false
+                                subCell.isOptional = false
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            
+        }else {
+            
+            
+            
+            if let otherRequirdList = cell.options![cell.loopIndex!].otherRequireList, !otherRequirdList.isEmpty {
+                
+                for otherRequiredID in otherRequirdList {
+                    
+                    for cell in self.oriFormDataList[formNumber].cells {
+                        for subCell in cell.subCellDataList! {
+                            if subCell.id == otherRequiredID {
+                                
+                                if let isForceRequire = subCell.options![subCell.loopIndex!].isForceRequire, isForceRequire {
+                                    
+                                    if let tip = subCell.options![subCell.loopIndex!].tip, tip != "" {
+                                        DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
+                                            _ in
+                                            self.view.endEditing(true)
+                                        })
+                                    }
+                                    subCell.isRequired = true
+                                    subCell.isOptional = false
+                                    
+                                }else {
+                                    subCell.isRequired = true
+                                    subCell.isOptional = true
+                                }
+                                
+                                
+                                if subCell.isOptional! {
+                                    subCell.isFinish = true
+                                }else {
+                                    if subCell.subType == "checkBox" {
+                                        if subCell.choiceValue!.isEmpty {
+                                            subCell.isFinish = false
+                                        }else {
+                                            subCell.isFinish = true
+                                        }
+                                    }else {
+                                        if subCell.textValue != "" {
+                                            subCell.isFinish = true
+                                        }else {
+                                            subCell.isFinish = false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+       
     }
     
     func getTextChoiceGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
@@ -4090,6 +4234,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl = imageName
                 
+                //20240115新增功能：選擇圖片後，設定其他欄位為必填
+                self.setOtherRequire(formNumber: picker.formNumber, cellNumber: picker.cellNumber, subCellIndex: picker.subCellNumber, answer: self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl ?? "")
                 
                 self.saveForm()
                 if let imageData = image.rotateImageByOrientation().jpegData(compressionQuality: 0.9) {
@@ -4558,6 +4704,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         //填寫後，其他欄位需改為必填
+        setOtherRequire(formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex, answer: textView.text ?? "")
+        
+        self.saveForm()
+        self.tableView.reloadData()
+    }
+    
+    func setOtherRequire(formNumber: Int, cellNumber: Int, subCellIndex: Int, answer: String) {
+    
         if let otherRequirdList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].otherRequireList, !otherRequirdList.isEmpty {
             
             for otherRequiredID in otherRequirdList {
@@ -4566,7 +4720,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     for subCell in cell.subCellDataList! {
                         if subCell.id == otherRequiredID {
                             
-                            if textView.text! != "" {
+                            if answer != "" {
+                                
+                                if let tip = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip, tip != "" {
+                                    DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
+                                        _ in
+                                        self.view.endEditing(true)
+                                    })
+                                }
+                                
                                 subCell.isRequired = true
                                 subCell.isOptional = false
                                 
@@ -4597,9 +4759,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
         }
-        
-        self.saveForm()
-        self.tableView.reloadData()
     }
     
     func adjustTextView(_ textView: UITextView, layout: Bool, width: CGFloat, cellNumber: Int, index: Int) {

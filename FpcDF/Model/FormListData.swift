@@ -87,6 +87,10 @@ struct option: Codable {
     var name: String?
     var color: String?
     var functionType: String?
+    var tip: String?
+    var otherRequireList: [String]?
+    var checkAll: Bool?
+    var isForceRequire: Bool?
 }
 
 struct inputConfig: Codable {
