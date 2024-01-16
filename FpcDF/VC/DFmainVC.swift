@@ -3107,8 +3107,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     }
                                 }
                             }else {
-                                subCell.isRequired = false
-                                subCell.isOptional = false
+                                subCell.isRequired = true
+                                subCell.isOptional = true
+                                subCell.isFinish = true
                             }
                             
                         }
