@@ -306,7 +306,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             subCell.isFinish = true
                         }
                         
-                        self.checkDropDwonOptionHasRequireID(cell: subCell, formNumber: formNumber)
+                        self.checkDropDwonOptionHasRequireID(optionCell: subCell, formNumber: formNumber)
                     }else {
                         if !isLoad {
                             DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
@@ -3029,15 +3029,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
         
-        self.checkDropDwonOptionHasRequireID(cell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], formNumber: formNumber)
+        self.checkDropDwonOptionHasRequireID(optionCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], formNumber: formNumber)
     }
     
-    func checkDropDwonOptionHasRequireID(cell: subCellData, formNumber: Int) {
+    func checkDropDwonOptionHasRequireID(optionCell: subCellData, formNumber: Int) {
         
 
-        if let checkAll = cell.options![cell.loopIndex!].checkAll, checkAll {
+        if let checkAll = optionCell.options![optionCell.loopIndex!].checkAll, checkAll {
             
-            let options = cell.options!
+            let options = optionCell.options!
             
             var otherRequireList:[String] = []
             
@@ -3072,9 +3072,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if subCell.id == otherRequiredID {
                             
                             if isFound {
-                                if let isForceRequire = subCell.options![subCell.loopIndex!].isForceRequire, isForceRequire {
+                                if let isForceRequire = optionCell.options![optionCell.loopIndex!].isForceRequire, isForceRequire {
                                     
-                                    if let tip = subCell.options![subCell.loopIndex!].tip, tip != "" {
+                                    if let tip = optionCell.options![optionCell.loopIndex!].tip, tip != "" {
                                         DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
                                             _ in
                                             self.view.endEditing(true)
@@ -3120,7 +3120,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             
             
-            if let otherRequirdList = cell.options![cell.loopIndex!].otherRequireList, !otherRequirdList.isEmpty {
+            if let otherRequirdList = optionCell.options![optionCell.loopIndex!].otherRequireList, !otherRequirdList.isEmpty {
                 
                 for otherRequiredID in otherRequirdList {
                     
@@ -3128,9 +3128,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         for subCell in cell.subCellDataList! {
                             if subCell.id == otherRequiredID {
                                 
-                                if let isForceRequire = subCell.options![subCell.loopIndex!].isForceRequire, isForceRequire {
+                                if let isForceRequire = optionCell.options![optionCell.loopIndex!].isForceRequire, isForceRequire {
                                     
-                                    if let tip = subCell.options![subCell.loopIndex!].tip, tip != "" {
+                                    if let tip = optionCell.options![optionCell.loopIndex!].tip, tip != "" {
                                         DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
                                             _ in
                                             self.view.endEditing(true)
