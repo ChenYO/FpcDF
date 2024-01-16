@@ -4212,6 +4212,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let image = (info[UIImagePickerController.InfoKey.editedImage] ?? info[UIImagePickerController.InfoKey.originalImage]) as? UIImage {
             let imageName = UUID().uuidString + ".jpg"
             
+            picker.presentingViewController?.dismiss(animated: true)
+            
             if isUsingJsonString {
                 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                 
@@ -4238,6 +4240,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl = imageName
                 
                 //20240115新增功能：選擇圖片後，設定其他欄位為必填
+                
                 self.setOtherRequire(formNumber: picker.formNumber, cellNumber: picker.cellNumber, subCellIndex: picker.subCellNumber, answer: self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl ?? "")
                 
                 self.saveForm()
@@ -4260,7 +4263,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
             
         }
-        picker.presentingViewController?.dismiss(animated: true)
+        
     }
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
