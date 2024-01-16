@@ -3646,6 +3646,23 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl = ""
                     
+                    if let otherRequirdList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].otherRequireList, !otherRequirdList.isEmpty {
+                        
+                        for otherRequiredID in otherRequirdList {
+                            
+                            for cell in self.oriFormDataList[formNumber].cells {
+                                for subCell in cell.subCellDataList! {
+                                    if subCell.id == otherRequiredID {
+                                        
+                                        subCell.isRequired = false
+                                        subCell.isOptional = true
+                                        subCell.isFinish = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                     self.saveForm()
                     self.tableView.reloadData()
                 } catch {
