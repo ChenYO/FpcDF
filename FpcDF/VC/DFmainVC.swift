@@ -3181,6 +3181,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         if subCell.id == otherRequiredID {
                                             subCell.isRequired = false
                                             subCell.isOptional = true
+                                            subCell.isFinish = true
                                         }
                                     }
                                 }
