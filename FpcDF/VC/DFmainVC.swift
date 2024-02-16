@@ -3169,6 +3169,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                 }
+            }else {
+                if optionCell.subType == "radio" {
+                    
+                    for (index, option) in optionCell.options!.enumerated() {
+                        if let otherRequirdList = option.otherRequireList, !otherRequirdList.isEmpty {
+                            
+                            for otherRequiredID in otherRequirdList {
+                                for cell in self.oriFormDataList[formNumber].cells {
+                                    for subCell in cell.subCellDataList! {
+                                        if subCell.id == otherRequiredID {
+                                            subCell.isRequired = false
+                                            subCell.isOptional = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
             }
         }
         
@@ -3540,7 +3560,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if let signAllId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].signAllId, signAllId != "" {
             
-            self.toSignAll(sender)
+//            self.toSignAll(sender)
+            self.toSignVC(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex, signAllId: signAllId)
         }else {
             self.toSignVC(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex, signAllId: "")
         }
@@ -4735,6 +4756,22 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if let checkNumber = Double(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!) {
                             if checkNumber > self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].maxValue ?? 0.0 || checkNumber < self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].minValue ?? 0.0 {
                                 isFalse = true
+                            }
+                        }
+                    }
+                }else if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType == "sign" {
+                    
+                    if let signAllId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].signAllId, signAllId != "" {
+                        
+                        for form in self.oriFormDataList {
+                            
+                            for cell in form.cells {
+                                
+                                for subCell in cell.subCellDataList! {
+                                    if subCell.signAllId == signAllId {
+                                        subCell.textValue = textView.text!
+                                    }
+                                }
                             }
                         }
                     }
