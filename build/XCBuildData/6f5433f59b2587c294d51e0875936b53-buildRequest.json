@@ -1,0 +1,45 @@
+{
+  "_buildCommand2" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "577fae2cdedb5e2b5b278a558b7deda3e00dc438fb4414f88bed0eee75194bf8"
+    }
+  ],
+  "containerPath" : "/Users/chenyao/Desktop/Framework/FpcDF/FPCDynamicForm.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+          "BUILD_DIR" : "/Users/chenyao/Library/Developer/Xcode/DerivedData/FPCDynamicForm-cudtxmdklbxxyifnhnfqeadnfmwc/Build/Intermediates.noindex/IBDesignables/Products",
+          "BUILD_ROOT" : "/Users/chenyao/Library/Developer/Xcode/DerivedData/FPCDynamicForm-cudtxmdklbxxyifnhnfqeadnfmwc/Build/Intermediates.noindex/IBDesignables/Products",
+          "ONLY_ACTIVE_ARCH" : "NO",
+          "SDKROOT" : "iphonesimulator16.1",
+          "TOOLCHAINS" : "com.apple.dt.toolchain.XcodeDefault"
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "build",
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      },
+      "toolchainOverride" : "com.apple.dt.toolchain.XcodeDefault"
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : false,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : false
+}

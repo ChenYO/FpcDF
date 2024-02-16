@@ -26,6 +26,7 @@ class DFElecSignVC: UIViewController {
     var signImage: Data?
     var isFromSubCell = false
     var signUrl = ""
+    var signAllId = ""
     
     var delegate: DynamicDelegate?
     

@@ -185,6 +185,7 @@ class subCellData: Codable {
     var relateItem: String?
     var relateAnswer: String?
     var otherRequireList: [String]?
+    var signAllId: String?
     
     var fileUrl: String?
     var isFinish: Bool?

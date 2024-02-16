@@ -308,7 +308,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             subCell.loopIndex = 1
                         }
                         
-                        self.checkDropDwonOptionHasRequireID(optionCell: subCell, formNumber: formNumber)
+                        self.checkOptionHasRequireID(optionCell: subCell, formNumber: formNumber)
                     }else {
                         if !isLoad {
                             DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
@@ -2997,19 +2997,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }else {
             self.loopDropOption(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex)
-//            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! += 1
-//
-//
-//            if (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!) >= (self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options?.count)! {
-//                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex! = 0
-//            }
-//
-//            formDataList[index].subCellDataList![subCellIndex].title = formDataList[index].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].name
-//
-//
-//            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = formDataList[cellNumber].subCellDataList![subCellIndex].options! [(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].loopIndex!)].id
-//
-//            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
         }
         
         self.saveForm()
@@ -3031,13 +3018,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
         
-        self.checkDropDwonOptionHasRequireID(optionCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], formNumber: formNumber)
+        self.checkOptionHasRequireID(optionCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], formNumber: formNumber)
     }
     
-    func checkDropDwonOptionHasRequireID(optionCell: subCellData, formNumber: Int) {
+    func checkOptionHasRequireID(optionCell: subCellData, formNumber: Int) {
         
+        var optionIndex = 0
+        
+        if optionCell.subType == "dropDown" {
+            optionIndex = optionCell.loopIndex!
+        }else if optionCell.subType == "radio" {
+            
+            for (index, option) in optionCell.options!.enumerated() {
+                if option.id == optionCell.textValue {
+                    optionIndex = index
+                }
+            }
+            
+        }
 
-        if let checkAll = optionCell.options![optionCell.loopIndex!].checkAll, checkAll {
+        if let checkAll = optionCell.options![optionIndex].checkAll, checkAll {
             
             let options = optionCell.options!
             
@@ -3074,9 +3074,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         if subCell.id == otherRequiredID {
                             
                             if isFound {
-                                if let isForceRequire = optionCell.options![optionCell.loopIndex!].isForceRequire, isForceRequire {
+                                if let isForceRequire = optionCell.options![optionIndex].isForceRequire, isForceRequire {
                                     
-                                    if let tip = optionCell.options![optionCell.loopIndex!].tip, tip != "" {
+                                    if let tip = optionCell.options![optionIndex].tip, tip != "" {
                                         DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
                                             _ in
                                             self.view.endEditing(true)
@@ -3123,7 +3123,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             
             
-            if let otherRequirdList = optionCell.options![optionCell.loopIndex!].otherRequireList, !otherRequirdList.isEmpty {
+            if let otherRequirdList = optionCell.options![optionIndex].otherRequireList, !otherRequirdList.isEmpty {
                 
                 for otherRequiredID in otherRequirdList {
                     
@@ -3131,9 +3131,9 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         for subCell in cell.subCellDataList! {
                             if subCell.id == otherRequiredID {
                                 
-                                if let isForceRequire = optionCell.options![optionCell.loopIndex!].isForceRequire, isForceRequire {
+                                if let isForceRequire = optionCell.options![optionIndex].isForceRequire, isForceRequire {
                                     
-                                    if let tip = optionCell.options![optionCell.loopIndex!].tip, tip != "" {
+                                    if let tip = optionCell.options![optionIndex].tip, tip != "" {
                                         DFUtil.DFTipMessageAndConfirm(self, msg: tip, callback: {
                                             _ in
                                             self.view.endEditing(true)
@@ -3352,6 +3352,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 self.checkIfForceAnswer(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex)
                 
+                self.checkOptionHasRequireID(optionCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], formNumber: formNumber)
+                
                 self.saveForm()
                 self.tableView.reloadData()
             }
@@ -3532,10 +3534,61 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             return
         }
+        
+        
+        
+        
+        if let signAllId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].signAllId, signAllId != "" {
+            
+            self.toSignAll(sender)
+        }else {
+            self.toSignVC(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex, signAllId: "")
+        }
+        
+    }
     
+    func toSignAll(_ sender: UITapGestureRecognizer) {
+        
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
+        
+        
+        let signAllAction = UIAlertAction(title: "合併簽名", style: .default) { action in
+            self.toSignVC(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex, signAllId: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].signAllId ?? "")
+        }
+        actionSheet.addAction(signAllAction)
+        
+        
+        let signAction = UIAlertAction(title: "單獨簽名", style: .default) { action in
+            self.toSignVC(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex, signAllId: "")
+           
+        }
+        actionSheet.addAction(signAction)
+        
+        let option = UIAlertAction(title: "取消", style: .destructive) { action in
+            
+        }
+        actionSheet.addAction(option)
+        
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            let loc = sender.location(in: self.view)
+            actionSheet.modalPresentationStyle = .popover
+            actionSheet.popoverPresentationController?.sourceView = self.view
+            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+        }
+        
+        self.present(actionSheet, animated: true) {
+            print("option menu presented")
+        }
+    }
+    
+    func toSignVC(index: Int, formNumber: Int, cellNumber: Int, subCellIndex: Int, signAllId: String) {
         let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
         let vc = storyboard.instantiateViewController(withIdentifier: "DFElecSignVC") as? DFElecSignVC
-        
         vc!.index = index
         vc!.formNumber = formNumber
         vc!.cellIndex = cellNumber
@@ -3544,11 +3597,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         vc!.signUrl = formDataList[index].subCellDataList![subCellIndex].fileUrl ?? ""
         vc!.delegate = self
         
+        vc?.signAllId = signAllId
+        
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(vc!, animated: true)
-        
     }
     
     func getPictureGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
@@ -4980,6 +5034,24 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     }else {
                         self.oriFormDataList[elecSignVC.formNumber].cells[elecSignVC.cellIndex].subCellDataList![elecSignVC.subCellIndex].isFinish = true
                     }
+                    
+                    
+                    if elecSignVC.signAllId != "" {
+                        
+                        for form in self.oriFormDataList {
+                            
+                            for cell in form.cells {
+                                
+                                for subCell in cell.subCellDataList! {
+                                    if subCell.signAllId == elecSignVC.signAllId {
+                                        subCell.fileUrl = elecSignVC.signUrl
+                                        subCell.isFinish = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                 }
             }
         }
