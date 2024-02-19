@@ -2776,11 +2776,32 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
                 print(timeInterval)
                 
-                formDataList[index].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                var error = ""
                 
-                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                if let canInputFutureDate = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].canInputFutureDate, !canInputFutureDate {
+                    
+                    let currentTimestamp = Date().timeIntervalSince1970
+                    
+                    if dateFormatter.datePicker!.date.timeIntervalSince1970 > currentTimestamp {
+                        error += "不可填今日以後的日期。"
+                    }
+                    
+                }
                 
-                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                if error != "" {
+                    DFUtil.DFTipMessageAndConfirm(self, msg: error, callback: {
+                        _ in
+                        
+                    })
+                }else {
+                    formDataList[index].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                    
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+                    
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                }
+                
+                
             }
         }
         self.saveForm()
