@@ -2804,11 +2804,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             if error != "" {
                 
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                
                 DFUtil.DFTipMessageAndConfirm(self, msg: error, callback: {
                     _ in
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
-                    
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                   
                 })
             }
             
