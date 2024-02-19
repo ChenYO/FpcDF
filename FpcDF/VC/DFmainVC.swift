@@ -2776,34 +2776,44 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
                 print(timeInterval)
                 
-                var error = ""
                 
-                if let canInputFutureDate = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].canInputFutureDate, !canInputFutureDate {
-                    
-                    let currentTimestamp = Date().timeIntervalSince1970
-                    
-                    if dateFormatter.datePicker!.date.timeIntervalSince1970 > currentTimestamp {
-                        error += "不可填今日以後的日期。"
-                    }
-                    
-                }
+                formDataList[index].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
                 
-                if error != "" {
-                    DFUtil.DFTipMessageAndConfirm(self, msg: error, callback: {
-                        _ in
-                        
-                    })
-                }else {
-                    formDataList[index].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
-                    
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
-                    
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
-                }
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = String(dateFormatter.datePicker!.date.timeIntervalSince1970 * 1000).components(separatedBy: ".").first
                 
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
                 
             }
         }
+        
+        if let canInputFutureDate = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].canInputFutureDate, !canInputFutureDate {
+            
+            let currentTimestamp = String(Date().timeIntervalSince1970 * 1000).components(separatedBy: ".").first
+            
+            let selectedTimestamp = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!
+            
+            let currentDate =  setTimestampToDate(timestampString: currentTimestamp!, format: "yyyyMMdd")
+            let selectedDate =  setTimestampToDate(timestampString: selectedTimestamp, format: "yyyyMMdd")
+            
+            var error = ""
+            
+            if selectedDate > currentDate {
+                error += "不可填今日以後的日期。"
+            }
+            
+            if error != "" {
+                
+                DFUtil.DFTipMessageAndConfirm(self, msg: error, callback: {
+                    _ in
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+                    
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                })
+            }
+            
+            
+        }
+        
         self.saveForm()
         self.tableView.reloadData()
         self.view.endEditing(true)
