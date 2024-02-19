@@ -2808,6 +2808,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
                 
+                
                 DFUtil.DFTipMessageAndConfirm(self, msg: error, callback: {
                     _ in
                    
