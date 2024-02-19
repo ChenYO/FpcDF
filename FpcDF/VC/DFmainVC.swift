@@ -2797,6 +2797,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             var error = ""
             
+            
             if selectedDate > currentDate {
                 error += "不可填今日以後的日期。"
             }
