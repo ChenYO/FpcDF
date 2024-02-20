@@ -3499,11 +3499,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let option = UIAlertAction(title: "取消", style: .destructive) { action in
             
-//            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
-//
-//            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
-//
-//            self.tableView.reloadData()
         }
         actionSheet.addAction(option)
         
@@ -3556,6 +3551,26 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.formDataList[index].subCellDataList![subCellIndex].textValue = ""
             
             self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+        }
+        
+        var isInput = false
+        
+        for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+            if subCell.subType == "singleChoice" {
+                if subCell.textValue != "" {
+                    isInput = true
+                }
+            }
+        }
+        
+        for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+            if subCell.subType == "singleChoice" {
+                if isInput {
+                    subCell.isFinish = true
+                }else {
+                    subCell.isFinish = false
+                }
+            }
         }
         
         self.saveForm()
