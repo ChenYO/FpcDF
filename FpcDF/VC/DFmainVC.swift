@@ -2460,13 +2460,41 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             key.addGestureRecognizer(recognizer)
             
-            if subCell.textValue != "" {
-                key.textColor = .yellow
-                key.backgroundColor = .yellow
-            }else {
-                key.textColor = .white
-                key.backgroundColor = .white
+            var isInput = false
+            
+            for subCell in self.oriFormDataList[formNumber!].cells[cellNumber].subCellDataList! {
+                if subCell.subType == "singleChoice" {
+                    if subCell.textValue != "" {
+                        isInput = true
+                    }
+                }
             }
+            
+            if subCell.isRequired! {
+                if isInput {
+                    if subCell.textValue != "" {
+                        key.textColor = .yellow
+                        key.backgroundColor = .yellow
+                    }else {
+                        key.textColor = .white
+                        key.backgroundColor = .white
+                    }
+                }else {
+                    key.textColor = UIColor(hexString: "#D0D0D0")
+                    key.backgroundColor = UIColor(hexString: "#D0D0D0")
+                }
+            }else {
+                if subCell.textValue != "" {
+                    key.textColor = .yellow
+                    key.backgroundColor = .yellow
+                }else {
+                    key.textColor = .white
+                    key.backgroundColor = .white
+                }
+            }
+            
+            
+           
             
         }else if subCell.subType == "sign" {
             
