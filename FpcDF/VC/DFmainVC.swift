@@ -2885,12 +2885,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         for i in 1...checkNumber {
             
-            if self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].subType == "radio" {
+            let subCellCount = self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList!.count - 1
+            
+            if self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellCount].subType == "radio" {
                 if self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].textValue == "" {
                     
-                    self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].textValue = defaultAnswer
+                    self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellCount].textValue = defaultAnswer
                     
-                    self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].isFinish = true
+                    self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellCount].isFinish = true
                 }
             }
         }
@@ -5157,6 +5159,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 if let id = chosenItem.id, id != "" {
                                     self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].choiceValue?.append(id)
                                 }
+                            }
+                            
+                            if self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].choiceValue!.isEmpty {
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = false
+                            }else {
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
                             }
                         }
                     }else if selectionVC.selfInputText != "" {

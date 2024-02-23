@@ -494,7 +494,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
         
         if type == "singleSelection" || type == "textChoice" || type == "combineOption" {
             cell.imageConstraint?.constant = 0
-        }else if type == "multipleSelection" || type == "textMultiChoice" {
+        }else if type == "multipleSelection" || type == "textMultiChoice" || type == "checkBox" {
             cell.imageConstraint?.constant = 25
         }
         
