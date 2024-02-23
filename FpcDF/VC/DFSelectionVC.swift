@@ -51,6 +51,7 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     var selfInputView: DFInputView!
     var selfInputText = ""
     var fontLimit = 0
+    var isMultiple = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,10 +86,14 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             constraint?.constant = 0
             bottomLabel.isHidden = true
             total.isHidden = true
-        }else if type == "multipleSelection" || type == "textMultiChoice" {
+            
+            isMultiple = false
+        }else if type == "multipleSelection" || type == "textMultiChoice" || type == "checkBox" {
             constraint?.constant = 40
             bottomLabel.isHidden = false
             total.isHidden = false
+            
+            isMultiple = true
             
             if !chosenItemList.isEmpty {
                 total.text = "\(chosenItemList.count)"
@@ -513,18 +518,17 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
     @objc func checkTap(sender:UITapGestureRecognizer) {
         let indexPath = IndexPath(row: (sender.view?.tag)!, section: 0)
         let choseOption = optionList[(sender.view?.tag)!]
+        
+        self.setChosenCell(indexPath: indexPath, choseOption: choseOption)
+        
+       
+        
+    }
+    
+    func setChosenCell(indexPath: IndexPath, choseOption: DynamicInput) {
         let cell: KeyValueCell = tableView.cellForRow(at: indexPath) as! KeyValueCell
         
-//        var isFound = false
-        
-//        if defaultList.contains(choseOption.id!) {
-//            isFound = true
-//        }
-//
-//        if isFound {
-//            return
-//        }
-        
+
         choseOption.isSelected = !choseOption.isSelected!
         
         if choseOption.isSelected! {
@@ -558,17 +562,24 @@ class DFSelectionVC: UIViewController, UISearchBarDelegate, UITableViewDataSourc
             }
             self.navigationItem.rightBarButtonItems?.append(confirm!)
 //        }
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         
 //        if type == "singleSelection" || type == "textChoice" {
+        
+        if isMultiple {
+            let choseOption = optionList[indexPath.row]
+            
+            self.setChosenCell(indexPath: indexPath, choseOption: choseOption)
+        }else {
             let choseOption = optionList[indexPath.row]
             chosenItemList = []
             chosenItemList.append(choseOption)
             self.performSegue(withIdentifier: "toFormVC", sender: nil)
+        }
+            
 //        }
     }
     

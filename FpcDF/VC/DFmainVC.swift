@@ -2378,6 +2378,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             var rangeList: [NSRange] = []
             var selectedColorList: [String] = []
             
+            let optionAlignNumber = subCell.optionAlignNumber ?? 0
+            
             for (index, option) in subCell.options!.enumerated() {
                 
                 var optionNameString = ""
@@ -2400,6 +2402,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if index != subCell.options!.count - 1 {
                         optionStr += "\n"
                         startIndex += 1
+                    }
+                }else {
+                    if optionAlignNumber != 0 {
+                        if index % optionAlignNumber == 0 {
+                            optionStr += "\n"
+                            startIndex += 1
+                        }
                     }
                 }
             }
@@ -2872,6 +2881,20 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let checkNumber = sender.checkNumber
         let subCellIndex = (sender.view?.tag)!
         
+        let defaultAnswer = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].defaultAnswer ?? ""
+        
+        for i in 1...checkNumber {
+            
+            if self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].subType == "radio" {
+                if self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].textValue == "" {
+                    
+                    self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].textValue = defaultAnswer
+                    
+                    self.oriFormDataList[formNumber].cells[i + cellNumber].subCellDataList![subCellIndex].isFinish = true
+                }
+            }
+        }
+        
         for cell in self.oriFormDataList[formNumber].cells {
             if cell.subCellDataList!.count >= subCellIndex + 3 {
                 if cell.subCellDataList![subCellIndex + 2].subType == "dropDown" {
@@ -3343,46 +3366,6 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         backItem.title = "Back"
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(vc!, animated: true)
-        
-//        let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
-
-
-//        for option in formDataList[index].subCellDataList![subCellIndex].options! {
-//            let action = UIAlertAction(title: option.name, style: .default) { action in
-//
-//                self.formDataList[index].subCellDataList![subCellIndex].textValue = option.name
-//
-//                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.name
-//
-//                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
-//
-//                self.saveForm()
-//                self.tableView.reloadData()
-//            }
-//            actionSheet.addAction(action)
-//        }
-//
-//        let option = UIAlertAction(title: "取消", style: .destructive) { action in
-//
-////            self.formDataList[cellNumber].subCellDataList![subCellIndex].textValue = ""
-////
-////            self.oriFormData?.cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
-////
-////            self.tableView.reloadData()
-//        }
-//        actionSheet.addAction(option)
-//
-//        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-//            let loc = sender.location(in: self.view)
-//            actionSheet.modalPresentationStyle = .popover
-//            actionSheet.popoverPresentationController?.sourceView = self.view
-//            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
-//        }
-//
-//        self.present(actionSheet, animated: true) {
-//            print("option menu presented")
-//        }
-        
     }
     
     func getRadioGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
@@ -3498,49 +3481,108 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let actionSheet = UIAlertController(title: "選項", message: nil, preferredStyle: .actionSheet)
         
         
-        for option in formDataList[index].subCellDataList![subCellIndex].options! {
-            let action = UIAlertAction(title: option.name, style: .default) { action in
-                
-                if let optionIndex = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
-                    return option.id == id
-                }) {
-                    self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
-                } else {
-                    self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
-                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
-                }
-                
-                if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
-                    
-                    if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
-                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
-                    }else {
-                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
-                    }
-                }
-                self.saveForm()
-                self.tableView.reloadData()
-            }
-            actionSheet.addAction(action)
-        }
-        
-        let option = UIAlertAction(title: "取消", style: .destructive) { action in
+        if let isMultipleChoice = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isMultipleChoice, isMultipleChoice {
             
+            let storyboard = UIStoryboard.init(name: "DFMain", bundle: bundle)
+            let vc = storyboard.instantiateViewController(withIdentifier: "DFSelectionVC") as? DFSelectionVC
+            
+            var optionList = [DynamicInput]()
+            
+            
+            if let oriOptionList = formDataList[index].subCellDataList![subCellIndex].options, oriOptionList.count > 0 {
+                for option in oriOptionList {
+                    let dynamicInput = DynamicInput()
+                    
+                    var item1 = keyValue()
+                    
+                    item1.title = option.name
+                    dynamicInput.id = option.id
+                    dynamicInput.isSelected = false
+                    dynamicInput.name = option.name
+                    dynamicInput.keyValueArray!.append(item1)
+                    dynamicInput.keyValueArray!.append(keyValue())
+                    dynamicInput.keyValueArray!.append(keyValue())
+                    dynamicInput.keyValueArray!.append(keyValue())
+                    
+                    optionList.append(dynamicInput)
+                }
+            }
+            
+            if !optionList.isEmpty {
+                vc?.isFilter = true
+            }
+            
+            if let defaultList = formDataList[index].subCellDataList![subCellIndex].choiceValue {
+                vc?.defaultList = defaultList
+            }
+            
+            if let fontLimit = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fontLimit, fontLimit != 0 {
+                vc?.fontLimit = fontLimit
+            }
+            
+            vc?.type = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType
+            vc?.isOffline = true
+            vc?.formNumber = formNumber
+            vc?.cellNumber = cellNumber
+            vc?.subCellNumber = subCellIndex
+            vc?.id = (self.oriFormDataList[formNumber].cells[cellNumber].id)!
+            vc?.oriOptionList = optionList
+            vc?.optionList = optionList
+            vc?.accessToken = accessToken
+            vc?.tokenKey = tokenKey
+            vc?.tokenURL = tokenURL
+            
+            let backItem = UIBarButtonItem()
+            if let tokenKey = tokenKey, tokenKey == "mobilefpcToken" {
+                backItem.tintColor = .white
+            }
+            backItem.title = "Back"
+            self.navigationItem.backBarButtonItem = backItem
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }else {
+            for option in formDataList[index].subCellDataList![subCellIndex].options! {
+                let action = UIAlertAction(title: option.name, style: .default) { action in
+                    
+                    if let optionIndex = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
+                        return option.id == id
+                    }) {
+                        self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
+                    } else {
+                        self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                    }
+                    
+                    if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
+                        
+                        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
+                            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                        }else {
+                            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                        }
+                    }
+                    self.saveForm()
+                    self.tableView.reloadData()
+                }
+                actionSheet.addAction(action)
+            }
+            
+            let option = UIAlertAction(title: "取消", style: .destructive) { action in
+                
+            }
+            actionSheet.addAction(option)
+            
+            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+                let loc = sender.location(in: self.view)
+                actionSheet.modalPresentationStyle = .popover
+                actionSheet.popoverPresentationController?.sourceView = self.view
+                actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+            }
+            
+            self.present(actionSheet, animated: true) {
+                print("option menu presented")
+            }
         }
-        actionSheet.addAction(option)
-        
-        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            let loc = sender.location(in: self.view)
-            actionSheet.modalPresentationStyle = .popover
-            actionSheet.popoverPresentationController?.sourceView = self.view
-            actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
-        }
-        
-        self.present(actionSheet, animated: true) {
-            print("option menu presented")
-        }
-        
     }
     
     func getSingleChoiceGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
@@ -5104,6 +5146,16 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         subCell.extra1 = subCell.options![foundIndex].id
                                         subCell.isFinish = true
                                     }
+                                }
+                            }
+                        }else if subType == "checkBox" {
+                            
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].choiceValue = []
+                            
+                            for (index, chosenItem) in selectionVC.chosenItemList.enumerated() {
+                                
+                                if let id = chosenItem.id, id != "" {
+                                    self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].choiceValue?.append(id)
                                 }
                             }
                         }
