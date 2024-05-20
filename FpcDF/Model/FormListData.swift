@@ -191,6 +191,11 @@ class subCellData: Codable {
     var isMultipleChoice: Bool?
     var optionAlignNumber: Int?
     
+    var limitTextNeedTip: Bool?
+    var limitTextCheckList: [String]?
+    var limitTextPassList: [param]?
+    var limitTextUnPassList: [param]?
+    
     var fileUrl: String?
     var isFinish: Bool?
 }

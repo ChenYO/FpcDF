@@ -2204,6 +2204,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if subCell.keyBoardType == "number" {
             key.keyboardType = UIKeyboardType.decimalPad
+            key.addNumericAccessory(addPlusMinus: true)
         }else {
             key.keyboardType = .default
         }
@@ -2767,8 +2768,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let subCellIndex = sender.inputNumber
         
         for dateFormatter in formDataList[index].dateFormatterList {
-            print(dateFormatter.index)
-            print(subCellIndex)
+          
             if dateFormatter.index == subCellIndex {
                 let timeInterval:TimeInterval = (dateFormatter.datePicker?.date.timeIntervalSince1970)!
                 print(timeInterval)
@@ -4882,6 +4882,54 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                     }
+                    
+                    if let limitTextCheckList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].limitTextCheckList, !limitTextCheckList.isEmpty {
+                        
+                        var isPass = true
+                        var isAllFinish = true
+                        
+                        for limitTextCheckId in limitTextCheckList {
+                            let cellIndex = Int(limitTextCheckId.split(separator: "_")[0])! - 1
+                            let subCellIndex = Int(limitTextCheckId.split(separator: "_")[1])! - 1
+                            
+                            if self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue!.isDouble {
+                                if let checkNumber = Double(self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue!) {
+                                    if checkNumber > self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].maxValue ?? 0.0 || checkNumber < self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].minValue ?? 0.0 {
+                                        isPass = false
+                                    }
+                                }
+                            }else {
+                                isAllFinish = false
+                            }
+                        }
+                        
+                        if isAllFinish {
+                            if isPass {
+                                if let limitTextPassList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].limitTextPassList {
+                                    
+                                    for passData in limitTextPassList {
+                                        let cellIndex = Int(passData.key!.split(separator: "_")[0])! - 1
+                                        let subCellIndex = Int(passData.key!.split(separator: "_")[1])! - 1
+                                        
+                                        self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = passData.value
+                                        self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].isFinish = true
+                                    }
+                                }
+                            }else {
+                                if let limitTextUnPassList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].limitTextUnPassList {
+                                    
+                                    for unPassData in limitTextUnPassList {
+                                        let cellIndex = Int(unPassData.key!.split(separator: "_")[0])! - 1
+                                        let subCellIndex = Int(unPassData.key!.split(separator: "_")[1])! - 1
+                                        
+                                        self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = unPassData.value
+                                        self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].isFinish = true
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
                 }else if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType == "sign" {
                     
                     if let signAllId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].signAllId, signAllId != "" {
@@ -4903,12 +4951,15 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //                    }
 //                }
                 
-                if isFalse {
-                    DFUtil.DFTipMessageAndConfirm(self, msg: "數值超過限制，請修正", callback: {
-                        _ in
-                       
-                    })
+                if let limitTextNeedTip = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].limitTextNeedTip, limitTextNeedTip {
+                    if isFalse {
+                        DFUtil.DFTipMessageAndConfirm(self, msg: "數值超過限制，請修正", callback: {
+                            _ in
+                           
+                        })
+                    }
                 }
+                
             }
         }
         
