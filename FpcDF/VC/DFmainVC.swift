@@ -4681,7 +4681,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions(rawValue: 7), animations: {
-            self.view.frame = CGRect(x: 0, y: (self.view.frame.origin.y), width: self.view.bounds.width, height: self.screenHeight - keyboardHeight)
+            self.view.frame = CGRect(x: 0, y: (self.view.frame.origin.y), width: self.view.bounds.width, height: self.screenHeight - keyboardHeight - 50)
             
             self.view.layoutIfNeeded() // Key point!
             
