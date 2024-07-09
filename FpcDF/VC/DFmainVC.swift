@@ -128,7 +128,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 350, right: 0)
         
         tableView.separatorStyle = .none
         self.navigationItem.rightBarButtonItems = []
@@ -2502,9 +2502,125 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     key.backgroundColor = .white
                 }
             }
+        }else if subCell.subType == "singleChoiceRadio" {
+            
+            key.isEditable = false
+            label.isHidden = false
+            label.textColor = .black
+            
+            let recognizer = getSingleChoiceGestureRadio(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            var isInput = false
+            
+            for subCell in self.oriFormDataList[formNumber!].cells[cellNumber].subCellDataList! {
+                if subCell.subType == "singleChoiceRadio" {
+                    if subCell.textValue != "" {
+                        isInput = true
+                    }
+                }
+            }
+            
+            if subCell.isRequired! {
+                if isInput {
+                   
+                    if subCell.isFinish! {
+                        
+                        if subCell.textValue != "" {
+                            label.text = "◉ \(subCell.title ?? "")"
+                            label.textColor = UIColor(hexString: subCell.finishColor!)
+                        }else {
+                            label.text = "○ \(subCell.title ?? "")"
+                            label.textColor = .black
+                        }
+                        
+                        key.textColor = .white
+                        key.backgroundColor = .white
+                    }else {
+                        label.text = "○ \(subCell.title ?? "")"
+                        label.textColor = .black
+                        key.textColor = UIColor(hexString: "#D0D0D0")
+                        key.backgroundColor = UIColor(hexString: "#D0D0D0")
+                    }
+                }else {
+                    label.text = "○ \(subCell.title ?? "")"
+                    key.textColor = UIColor(hexString: "#D0D0D0")
+                    key.backgroundColor = UIColor(hexString: "#D0D0D0")
+                }
+            }else {
+                if subCell.textValue != "" {
+                    label.text = "◉ \(subCell.title ?? "")"
+                    label.textColor = UIColor(hexString: subCell.finishColor!)
+                }else {
+                    label.text = "○ \(subCell.title ?? "")"
+                    label.textColor = .black
+                }
+                key.textColor = .white
+                key.backgroundColor = .white
+            }
+        }else if subCell.subType == "singleChoiceCheckBox" {
+            
+            key.isEditable = false
+            label.isHidden = false
+            label.textColor = .black
+            
+            let recognizer = getSingleChoiceGestureCheckBox(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            var isInput = false
+            
+            if let otherRequireList = subCell.otherRequireList {
+                
+                for checkId in otherRequireList {
+                    let cellIndex = Int(checkId.split(separator: "_")[0])! - 1
+                    let subCellIndex = Int(checkId.split(separator: "_")[1])! - 1
+                    
+                    if self.oriFormDataList[formNumber!].cells[cellIndex].subCellDataList![subCellIndex].textValue != "" {
+                        isInput = true
+                    }
+                }
+            }
             
             
-           
+            if subCell.isRequired! {
+                if isInput {
+                   
+                    if subCell.isFinish! {
+                        
+                        if subCell.textValue != "" {
+                            label.text = "▣ \(subCell.title ?? "")"
+                            label.textColor = UIColor(hexString: subCell.finishColor!)
+                        }else {
+                            label.text = "□ \(subCell.title ?? "")"
+                            label.textColor = .black
+                        }
+                        
+                        key.textColor = .white
+                        key.backgroundColor = .white
+                    }else {
+                        label.text = "□ \(subCell.title ?? "")"
+                        label.textColor = .black
+                        key.textColor = UIColor(hexString: "#D0D0D0")
+                        key.backgroundColor = UIColor(hexString: "#D0D0D0")
+                    }
+                }else {
+                    label.text = "□ \(subCell.title ?? "")"
+                    key.textColor = UIColor(hexString: "#D0D0D0")
+                    key.backgroundColor = UIColor(hexString: "#D0D0D0")
+                }
+            }else {
+                if subCell.textValue != "" {
+                    label.text = "▣ \(subCell.title ?? "")"
+                    label.textColor = UIColor(hexString: subCell.finishColor!)
+                }else {
+                    label.text = "□ \(subCell.title ?? "")"
+                    label.textColor = .black
+                }
+                key.textColor = .white
+                key.backgroundColor = .white
+            }
             
         }else if subCell.subType == "sign" {
             
@@ -2703,6 +2819,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                         
                     }
+                }
+            }else {
+                if let overLimitColor = subCell.overLimitColor {
+                    key.textColor = UIColor(hexString: overLimitColor)
                 }
             }
         }
@@ -3642,6 +3762,149 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }else {
                     subCell.isFinish = false
                 }
+            }
+        }
+        
+        self.saveForm()
+        self.tableView.reloadData()
+        
+    }
+    
+    func getSingleChoiceGestureRadio(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(singleChoiceRadio))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func singleChoiceRadio(_ sender: UITapGestureRecognizer) {
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
+        for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+            if subCell.subType == "singleChoiceRadio" {
+                subCell.textValue = ""
+            }
+        }
+        
+        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
+            self.formDataList[index].subCellDataList![subCellIndex].textValue = "Y"
+            
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = "Y"
+        }else {
+            self.formDataList[index].subCellDataList![subCellIndex].textValue = ""
+            
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+        }
+        
+        var isInput = false
+        
+        for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+            if subCell.subType == "singleChoiceRadio" {
+                if subCell.textValue != "" {
+                    isInput = true
+                }
+            }
+        }
+        
+        for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+            if subCell.subType == "singleChoiceRadio" {
+                if isInput {
+                    subCell.isFinish = true
+                }else {
+                    subCell.isFinish = false
+                }
+            }
+        }
+        
+        self.saveForm()
+        self.tableView.reloadData()
+        
+    }
+    
+    func getSingleChoiceGestureCheckBox(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(singleChoiceCheckBox))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func singleChoiceCheckBox(_ sender: UITapGestureRecognizer) {
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
+        
+        
+        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue == "" {
+            self.formDataList[index].subCellDataList![subCellIndex].textValue = "Y"
+            
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = "Y"
+        }else {
+            self.formDataList[index].subCellDataList![subCellIndex].textValue = ""
+            
+            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = ""
+        }
+        
+        var isInput = false
+        
+        if let otherRequireList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].otherRequireList {
+            
+            for checkId in otherRequireList {
+                let checkCellIndex = Int(checkId.split(separator: "_")[0])! - 1
+                let checkSubCellIndex = Int(checkId.split(separator: "_")[1])! - 1
+                
+                if self.oriFormDataList[formNumber].cells[checkCellIndex].subCellDataList![checkSubCellIndex].textValue != "" {
+                    isInput = true
+                }
+            }
+        }
+        
+        if let otherRequireList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].otherRequireList {
+            
+            for checkId in otherRequireList {
+                let checkCellIndex = Int(checkId.split(separator: "_")[0])! - 1
+                let checkSubCellIndex = Int(checkId.split(separator: "_")[1])! - 1
+                
+                if isInput {
+                    self.oriFormDataList[formNumber].cells[checkCellIndex].subCellDataList![checkSubCellIndex].isFinish = true
+                }else {
+                    self.oriFormDataList[formNumber].cells[checkCellIndex].subCellDataList![checkSubCellIndex].isFinish = false
+                }
+                
             }
         }
         
@@ -4681,7 +4944,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         
         UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions(rawValue: 7), animations: {
-            self.view.frame = CGRect(x: 0, y: (self.view.frame.origin.y), width: self.view.bounds.width, height: self.screenHeight - keyboardHeight - 50)
+            self.view.frame = CGRect(x: 0, y: (self.view.frame.origin.y), width: self.view.bounds.width, height: self.screenHeight - keyboardHeight)
             
             self.view.layoutIfNeeded() // Key point!
             
@@ -4836,7 +5099,13 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         let txtFieldPosition = textView.convert(textView.bounds.origin, to: tableView)
         let indexPath = tableView.indexPathForRow(at: txtFieldPosition)
-        if let ip = indexPath {
+        if var ip = indexPath {
+            ip.row += 2
+            
+            if ip.row >= self.formDataList.count {
+                ip.row = self.formDataList.count - 1
+            }
+            
             tableView.scrollToRow(at: ip, at: .bottom, animated: true)
         }
         
@@ -4876,6 +5145,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             
                 if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subType == "limitTextArea" {
                     if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!.isDouble {
+                        
+                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = "\(round(Double(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!)! * 100) / 100)"
                         if let checkNumber = Double(self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue!) {
                             if checkNumber > self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].maxValue ?? 0.0 || checkNumber < self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].minValue ?? 0.0 {
                                 isFalse = true
