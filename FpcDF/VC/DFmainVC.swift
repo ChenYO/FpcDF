@@ -248,9 +248,18 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         for cell in obj.cells {
                             for subCell in cell.subCellDataList! {
                                 
-                                if let relateFormID = subCell.relatedFormID, let relateAnswer = subCell.relateAnswer, let relateItem = subCell.relateItem, relateFormID != "" {
+//                                if let relateFormID = subCell.relatedFormID, let relateAnswer = subCell.relateAnswer, let relateItem = subCell.relateItem, relateFormID != "" {
+//                                    
+//                                    self.checkIsRelateForm(subCell: subCell, relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: "", isLoad: true, formNumber: index)
+//                                }
+                                if let relateFormID = subCell.relatedFormID, relateFormID != "" {
                                     
-                                    self.checkIsRelateForm(subCell: subCell, relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: "", isLoad: true, formNumber: index)
+                                    if let relateAnswer = subCell.relateAnswer, let relateItem = subCell.relateItem, relateAnswer != "", relateItem != "" {
+                                    
+                                        self.checkIsRelateForm(subCell: subCell, relateFormID: relateFormID, relateItem: relateItem, relateAnswer: relateAnswer, tip: "", isLoad: true, formNumber: index)
+                                    }else {
+                                        self.checkIsRelateFormForRadio(relateFormID: relateFormID, formNumber: index)
+                                    }
                                 }
                             }
                         }
@@ -325,6 +334,72 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
        
     }
     
+    //工事組客製功能
+    func checkIsRelateFormForRadio(relateFormID: String, formNumber: Int) {
+        
+        do{
+            for jsonString in self.jsonStringList {
+                
+                let relateForm = try DFUtil.decodeJsonStringAndReturnObject(string: jsonString, type: FormListData.self)
+                
+                if relateForm.formID == relateFormID {
+                    
+                    for relateCell in relateForm.cells {
+                        for relateSubCell in relateCell.subCellDataList! {
+                            if let forceAnswerList = relateSubCell.forceAnswerList, !forceAnswerList.isEmpty && relateSubCell.subType == "radio" {
+                                
+                                if relateSubCell.textValue == "D" {
+                                    for forceAnswer in forceAnswerList {
+                                        let cellIndex = Int(forceAnswer.key!.split(separator: "_")[0])! - 1
+                                        let subCellIndex = Int(forceAnswer.key!.split(separator: "_")[1])! - 1
+                                        
+                                        if self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].subType == "textMultiChoice" {
+                                            
+                                            var oldAnswer = self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue ?? ""
+                                            
+                                            let options = self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].options ?? []
+                                            
+                            
+                                            
+                                            for option in options {
+                                                if forceAnswer.value! == option.id {
+                                                    
+                                                    if !oldAnswer.contains(option.name ?? "") {
+                                                        if !self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].choiceValue!.contains(forceAnswer.value!) {
+                                                            self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].choiceValue?.append(forceAnswer.value!)
+                                                        }
+                                                        
+                                                        for i in stride(from: options.count, to: 0, by: -1) {
+                                                            print(i)
+                                                            oldAnswer = oldAnswer.replacingOccurrences(of: "\(i).", with: "\(i+1).")
+                                                        }
+                                                        
+                                                        oldAnswer = "1.\(option.name ?? ""); \n\n \(oldAnswer)"
+                                                    }
+                                                }
+                                            }
+                                            
+                                            
+                                            self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = oldAnswer
+                                            
+                                            self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].isFinish = true
+                                        }else {
+                                            self.oriFormDataList[formNumber].cells[cellIndex].subCellDataList![subCellIndex].textValue = forceAnswer.value ?? ""
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        } catch {
+            
+        }
+       
+    }
  
     @objc func saveFormFromButton() {
         
@@ -5408,6 +5483,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             var joinTitle = ""
                             var joinId = ""
                             
+                            self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].choiceValue = []
+                            
                             for (index, chosenItem) in selectionVC.chosenItemList.enumerated() {
                                 if let needIndex = self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].needIndex, needIndex {
                                     
@@ -5417,6 +5494,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     joinTitle += chosenItem.name ?? ""
                                     joinId += chosenItem.id ?? ""
                                 }
+                                
+                                self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].choiceValue?.append(chosenItem.id!)
                                 
                                 if index != selectionVC.chosenItemList.count - 1 {
                                     joinTitle += ";"
