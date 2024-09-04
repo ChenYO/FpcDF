@@ -1509,6 +1509,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 cell.requireLabel.isHidden = !required
             }
             
+            if let backgroundColor = self.oriFormDataList[formNumber!].cells[cellNumber].backgroundColor {
+                cell.backgroundColor = UIColor(hexString: backgroundColor)
+            }
+            
             cell.title.text = formData.title
             return cell
         case "textField":

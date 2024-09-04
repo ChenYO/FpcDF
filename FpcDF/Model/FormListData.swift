@@ -61,6 +61,7 @@ class cell: Codable {
     var paramType: String?
     var copyCellId: String?
     var copyId: String?
+    var backgroundColor: String?
     
     var fileUrl: String?
 }
