@@ -3744,26 +3744,99 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             for option in formDataList[index].subCellDataList![subCellIndex].options! {
                 let action = UIAlertAction(title: option.name, style: .default) { action in
                     
-                    if let optionIndex = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
-                        return option.id == id
-                    }) {
-                        self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
-                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
-                    } else {
-                        self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
-                        self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                    if let isOtherOption = option.isOtherOption, isOtherOption {
+                        
+                        if let optionIndex = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
+                            return option.id == id
+                        }) {
+                            self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
+                            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
+                            
+                            
+                            for item in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options! {
+                                if item.id == option.id {
+                                    item.name = "其他"
+                                }
+                            }
+                        } else {
+                           
+                            
+                            let alertController = UIAlertController(title: "提示", message: "請輸入內容", preferredStyle: .alert)
+                            
+                            // 添加文字輸入框
+                            alertController.addTextField { textField in
+                                textField.placeholder = "其他"
+                            }
+                            
+                            // 添加“確定”按鈕
+                            let confirmAction = UIAlertAction(title: "確認", style: .default) { _ in
+                                if let textField = alertController.textFields?.first, let inputText = textField.text {
+                                    // 在這裡處理輸入的文字
+                                    print("User input: \(inputText)")
+                                    self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                                    
+                                   
+                                    for item in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].options! {
+                                        if item.id == option.id {
+                                            item.name = "其他:\(inputText)"
+                                        }
+                                    }
+                                    
+                                    self.saveForm()
+                                    self.tableView.reloadData()
+                                }
+                            }
+                            
+                            // 添加“取消”按鈕
+                            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                            
+                            // 添加動作到警告控制器
+                            alertController.addAction(confirmAction)
+                            alertController.addAction(cancelAction)
+                            
+                            // 顯示對話框
+                            self.present(alertController, animated: true, completion: nil)
+                          
+                        }
+                        
+                        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
+                            
+                            if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
+                                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                            }else {
+                                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                            }
+                        }
+                       
+                        self.saveForm()
+                        self.tableView.reloadData()
+                        
+                    }else {
+                        if let optionIndex = self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.firstIndex(where: { (id) -> Bool in
+                            return option.id == id
+                        }) {
+                            self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
+                            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.remove(at: optionIndex)
+                        } else {
+                            self.formDataList[index].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.append(option.id!)
+                        }
+                        
+                        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
+                            
+                            if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
+                                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                            }else {
+                                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
+                            }
+                        }
+                        
+                        self.saveForm()
+                        self.tableView.reloadData()
                     }
                     
-                    if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isRequired! && !self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isOptional! {
-                        
-                        if self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].choiceValue!.isEmpty {
-                            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
-                        }else {
-                            self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = true
-                        }
-                    }
-                    self.saveForm()
-                    self.tableView.reloadData()
+                    
                 }
                 actionSheet.addAction(action)
             }

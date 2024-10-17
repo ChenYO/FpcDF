@@ -83,7 +83,7 @@ struct font: Codable {
     var alignment: String?
 }
 
-struct option: Codable {
+class option: Codable {
     var id: String?
     var name: String?
     var color: String?
@@ -92,6 +92,7 @@ struct option: Codable {
     var otherRequireList: [String]?
     var checkAll: Bool?
     var isForceRequire: Bool?
+    var isOtherOption: Bool?
 }
 
 struct inputConfig: Codable {
