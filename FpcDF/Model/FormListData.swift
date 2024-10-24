@@ -187,6 +187,7 @@ class subCellData: Codable {
     var relateItem: String?
     var relateAnswer: String?
     var otherRequireList: [String]?
+    var otherNotRequireList: [String]?
     var signAllId: String?
     var canInputFutureDate: Bool?
     var defaultAnswer: String?

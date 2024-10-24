@@ -3986,6 +3986,48 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
+        if let requireList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].otherRequireList, !requireList.isEmpty {
+            
+            for checkId in requireList {
+                let checkCellIndex = Int(checkId.split(separator: "_")[0])! - 1
+                let checkSubCellIndex = Int(checkId.split(separator: "_")[1])! - 1
+                
+                self.oriFormDataList[formNumber].cells[checkCellIndex].subCellDataList![checkSubCellIndex].isRequired = true
+            }
+            
+            var isInput = false
+            
+            for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+                if subCell.subType == "singleChoice" {
+                    if subCell.textValue != "" {
+                        isInput = true
+                    }
+                }
+            }
+            
+            for subCell in self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList! {
+                if subCell.subType == "singleChoice" {
+                    if isInput {
+                        subCell.isFinish = true
+                    }else {
+                        subCell.isFinish = false
+                    }
+                }
+            }
+        }
+        
+        if let notRequireList = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].otherNotRequireList, !notRequireList.isEmpty {
+            
+            for checkId in notRequireList {
+                let checkCellIndex = Int(checkId.split(separator: "_")[0])! - 1
+                let checkSubCellIndex = Int(checkId.split(separator: "_")[1])! - 1
+                
+                self.oriFormDataList[formNumber].cells[checkCellIndex].subCellDataList![checkSubCellIndex].isRequired = false
+                
+                self.oriFormDataList[formNumber].cells[checkCellIndex].subCellDataList![checkSubCellIndex].isFinish = true
+            }
+        }
+        
         self.saveForm()
         self.tableView.reloadData()
         
