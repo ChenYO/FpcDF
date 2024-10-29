@@ -4002,6 +4002,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if subCell.textValue != "" {
                         isInput = true
                     }
+                }else if subCell.subType == "date" || subCell.subType == "textArea" || subCell.subType == "radio" || subCell.subType == "checkBox" || subCell.subType == "dateTime" || subCell.subType == "time" || subCell.subType == "dropDown" || subCell.subType == "textChoice" || subCell.subType == "textMultiChoice"{
+                    if subCell.textValue != "" {
+                        subCell.isFinish = true
+                    }else {
+                        subCell.isFinish = false
+                    }
                 }
             }
             
