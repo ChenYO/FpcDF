@@ -199,6 +199,8 @@ class subCellData: Codable {
     var limitTextPassList: [param]?
     var limitTextUnPassList: [param]?
     
+    var backgroundColor: String?
+    
     var fileUrl: String?
     var isFinish: Bool?
 }

@@ -2275,6 +2275,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             key.layer.borderColor = UIColor(hexString: borderColor).cgColor
         }
         
+        
         key.text = subCell.title
         label.text = subCell.title
         
@@ -2293,6 +2294,12 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 //            key.backgroundColor = UIColor(hexString: "#F0F0F0")
             key.isEditable = false
             key.textColor = .white
+            
+            if let backgroundColor = subCell.backgroundColor {
+                key.textColor = UIColor(hexString: backgroundColor)
+                key.backgroundColor = UIColor(hexString: backgroundColor)
+            }
+            
             label.text = subCell.title
             label.isHidden = false
             
@@ -2304,9 +2311,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }else if subCell.subType == "textArea" {
             
             key.isScrollEnabled = true
+            key.textColor = .black
             
             if subCell.textValue != "" {
                 key.text = subCell.textValue
+            }
+            
+            if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].extra1!.contains("answer") {
+                key.backgroundColor = UIColor(hexString: "#F0F0F0")
             }
             
         }else if subCell.subType == "dropDown" {
@@ -2359,6 +2371,11 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 label.text = setTimestampToDate(timestampString: formData.subCellDataList![subCellIndex].textValue!, format: format)
 
+            }
+            
+            if oriFormDataList[formNumber!].cells[cellNumber].subCellDataList![subCellIndex].extra1!.contains("answer") {
+                key.textColor = UIColor(hexString: "#F0F0F0")
+                key.backgroundColor = UIColor(hexString: "#F0F0F0")
             }
             
         }else if subCell.subType == "radio" {
