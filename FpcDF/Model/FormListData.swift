@@ -17,6 +17,7 @@ class FormListData: Codable {
     var dataSourceUrl: String?
     var thirdInputUrl: String?
     var thirdOutputUrl: String?
+    var thirdApproveUrl: String?
     var buttons: [button]
     var cells: [cell]
     var tip: String?
@@ -200,6 +201,7 @@ class subCellData: Codable {
     var limitTextUnPassList: [param]?
     
     var backgroundColor: String?
+    var isReadOnly: Bool?
     
     var fileUrl: String?
     var isFinish: Bool?

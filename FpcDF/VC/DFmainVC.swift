@@ -2667,7 +2667,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             var isInput = false
             
-            if let otherRequireList = subCell.otherRequireList {
+            if let otherRequireList = subCell.otherRequireList, !otherRequireList.isEmpty {
                 
                 for checkId in otherRequireList {
                     let cellIndex = Int(checkId.split(separator: "_")[0])! - 1
@@ -2676,6 +2676,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     if self.oriFormDataList[formNumber!].cells[cellIndex].subCellDataList![subCellIndex].textValue != "" {
                         isInput = true
                     }
+                }
+            }else {
+                if subCell.textValue != "" {
+                    isInput = true
                 }
             }
             
