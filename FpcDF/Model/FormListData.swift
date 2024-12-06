@@ -132,7 +132,7 @@ class subCellData: Codable {
     var id: String?
     var title: String?
     var subType: String?
-    var width: Int?
+    var width: Double?
     var cellHeight: Double?
     var cellGap: Double?
     var loopIndex: Int?
