@@ -5322,7 +5322,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
     }
     
     //檢查是否有必填欄位，且是否已完成
