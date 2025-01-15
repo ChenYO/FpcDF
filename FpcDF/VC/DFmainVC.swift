@@ -196,6 +196,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //依照是否有導覽列決定返回的動作
     @objc func back() {
         
+//        self.saveForm()
         self.sendForm()
         
         if isModal() {
@@ -2016,7 +2017,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
         
         self.tableView.reloadData()
         self.view.endEditing(true)
@@ -3005,7 +3006,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
             }
         }
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
         self.view.endEditing(true)
     }
@@ -3076,7 +3077,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
         }
         
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
         self.view.endEditing(true)
     }
@@ -3134,7 +3135,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
         tableView.reloadData()
     }
     
@@ -3179,7 +3180,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.formDataList[index].subCellDataList![subCellIndex].textValue = option.id
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
                     
-                    self.saveForm()
+//                    self.saveForm()
                     self.tableView.reloadData()
                 }else if option.functionType == "textArea" {
                     let actionSheet = UIAlertController(title: "訊息提示", message: "請輸入數值", preferredStyle: .alert)
@@ -3195,7 +3196,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.formDataList[index].subCellDataList![subCellIndex].textValue = textField!.text
                         self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = textField!.text
                         
-                        self.saveForm()
+//                        self.saveForm()
                         self.tableView.reloadData()
                     }))
                     
@@ -3215,7 +3216,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     self.formDataList[index].subCellDataList![subCellIndex].textValue = option.id
                     self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].textValue = option.id
                     
-                    self.saveForm()
+//                    self.saveForm()
                     self.tableView.reloadData()
                     
                     if let subFormId = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].subFormId {
@@ -3308,7 +3309,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.loopDropOption(index: index, formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex)
         }
         
-        self.saveForm()
+//        self.saveForm()
         tableView.reloadData()
     }
     
@@ -3663,7 +3664,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                     }
                                 }
                                 
-                                self.saveForm()
+//                                self.saveForm()
                                 self.tableView.reloadData()
                             }
                         }
@@ -3689,7 +3690,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                    
-                    self.saveForm()
+//                    self.saveForm()
                     self.tableView.reloadData()
                     
                 }else {
@@ -3712,7 +3713,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     
                     self.checkOptionHasRequireID(optionCell: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex], formNumber: formNumber)
                     
-                    self.saveForm()
+//                    self.saveForm()
                     self.tableView.reloadData()
                 }
                 
@@ -3875,7 +3876,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                         }
                                     }
                                     
-                                    self.saveForm()
+//                                    self.saveForm()
                                     self.tableView.reloadData()
                                 }
                             }
@@ -3901,7 +3902,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                        
-                        self.saveForm()
+//                        self.saveForm()
                         self.tableView.reloadData()
                         
                     }else {
@@ -3924,7 +3925,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             }
                         }
                         
-                        self.saveForm()
+//                        self.saveForm()
                         self.tableView.reloadData()
                     }
                     
@@ -4009,7 +4010,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
         
     }
@@ -4126,7 +4127,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
         
     }
@@ -4200,7 +4201,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
         
     }
@@ -4416,7 +4417,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         }
                     }
                     
-                    self.saveForm()
+//                    self.saveForm()
                     self.tableView.reloadData()
                 } catch {
                 }
@@ -4542,7 +4543,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         self.setFormData()
         
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
     }
     
@@ -4671,7 +4672,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             self.setFormData()
             
-            self.saveForm()
+//            self.saveForm()
             self.tableView.reloadData()
         })
     
@@ -4716,7 +4717,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.removeAll()
             self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.append(formData.optionNumber!)
             
-            self.saveForm()
+//            self.saveForm()
             
             formData.isCheck = true
             
@@ -4733,7 +4734,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue = self.oriFormDataList[formData.formNumber!].cells[formData.cellNumber!].choiceValue?.sorted(by: {$0 < $1})
             
-            self.saveForm()
+//            self.saveForm()
             
             tableView.reloadData()
         case "picture":
@@ -5013,7 +5014,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 
                 self.setOtherRequire(formNumber: picker.formNumber, cellNumber: picker.cellNumber, subCellIndex: picker.subCellNumber, answer: self.oriFormDataList[picker.formNumber].cells[picker.cellNumber].subCellDataList![picker.subCellNumber].fileUrl ?? "")
                 
-                self.saveForm()
+//                self.saveForm()
                 if let imageData = image.rotateImageByOrientation().jpegData(compressionQuality: 0.9) {
                     do {
 
@@ -5280,7 +5281,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
     }
     
     public func textViewDidChange(_ textView: UITextView) {
@@ -5557,7 +5558,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         //填寫後，其他欄位需改為必填
         setOtherRequire(formNumber: formNumber, cellNumber: cellNumber, subCellIndex: subCellIndex, answer: textView.text ?? "")
         
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
     }
     
@@ -5791,7 +5792,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                         self.oriFormDataList[selectionVC.formNumber].cells[selectionVC.cellNumber].subCellDataList![selectionVC.subCellNumber].isFinish = true
                     }
                     
-                    self.saveForm()
+//                    self.saveForm()
                 }
                 
                 
@@ -5850,7 +5851,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         
-        self.saveForm()
+//        self.saveForm()
         self.tableView.reloadData()
     }
     
