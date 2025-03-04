@@ -196,7 +196,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //依照是否有導覽列決定返回的動作
     @objc func back() {
         
-//        self.saveForm()
+        self.saveForm()
         self.sendForm()
         
         if isModal() {
