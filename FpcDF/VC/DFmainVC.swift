@@ -270,6 +270,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
+            self.setButtons()
             self.setFormData()
             
             self.dfStopActivityIndicator()
@@ -762,7 +763,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     //執行送出
-    func sendAPI(address: String, parameters: [String: Any]) {
+    func sendAPI(address: String, parameters: [String: Any], isPop: Bool, type: String) {
         DFAPI.customPost(address: address, parameters: parameters) { json in
             print(json)
             DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
@@ -783,10 +784,29 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             
                             let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
                                 action in
-                                if self.isModal() {
-                                    self.dismiss(animated: true, completion: nil)
-                                }else {
-                                    self.navigationController?.popViewController(animated: true)
+                                if isPop {
+                                    if self.isModal() {
+                                        self.dismiss(animated: true, completion: nil)
+                                    }else {
+                                        self.navigationController?.popViewController(animated: true)
+                                    }
+                                }
+                                
+                                if type == "Replace" {
+                                    let formList: [String] = [json["formString"] as! String]
+                                    
+                                    
+                                    self.oriFormDataList = []
+                                    self.jsonStringList = formList
+                                    self.loadFromJsonString()
+                                    
+                                    if let callback = self.delegate {
+                                        callback.dynamicSaveForm(self.formId, formList)
+                                    }
+                                    
+                                    if let callback = self.mainFormDelegate {
+                                        callback.dynamicSaveForm(self.formId, formList)
+                                    }
                                 }
                             })
                             confirmSheet.addAction(confirmAction)
@@ -887,7 +907,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 self.tokenKey!: obj.accessTokenSHA256
                             ]
                             
-                            self.sendAPI(address: urlString, parameters: parameters)
+                            self.sendAPI(address: urlString, parameters: parameters, isPop: true, type: "send")
                             
                         } catch {
                             
@@ -933,7 +953,41 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                     UIApplication.shared.openURL(url)
                 }
             }
+        case "Replace":
+            let confirmSheet = UIAlertController(title: "Tips", message: title, preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: "確定", style: .default, handler: {
+                action in
+                
+                do {
+                    
+                    let jsonEncoder = JSONEncoder()
+                    let oriJsonData = try jsonEncoder.encode(self.oriFormDataList[0])
+//                            let oriJsonData = try jsonEncoder.encode(self.oriFormData)
+                    let json = String(data: oriJsonData, encoding: String.Encoding.utf8)
+                    
+                    let parameters = [
+                        "formString": json ?? "",
+                        "accessToken": self.accessToken ?? ""
+                    ] as [String : Any]
+                    
+                    self.sendAPI(address: urlString, parameters: parameters, isPop: false, type: "Replace")
+                    
+                } catch {
+                    
+                }
+            })
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: {
+            action in
+                self.dfStopActivityIndicator()
+            })
+            confirmSheet.addAction(confirmAction)
+            confirmSheet.addAction(cancelAction)
+            
+            self.present(confirmSheet, animated: true, completion: nil)
         default:
+            self.dfStopActivityIndicator()
             break
         }
     }
