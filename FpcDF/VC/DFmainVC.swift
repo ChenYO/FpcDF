@@ -723,6 +723,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    
     //顯示更新畫面
     func showUpdate(json: [String: Any]){
         
