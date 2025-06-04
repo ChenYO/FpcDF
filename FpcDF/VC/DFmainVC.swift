@@ -270,7 +270,10 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                 }
             }
             
-            self.setButtons()
+            if !self.isReadOnly {
+                self.setButtons()
+            }
+            
             self.setFormData()
             
             self.dfStopActivityIndicator()
@@ -764,11 +767,21 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     //執行送出
     func sendAPI(address: String, parameters: [String: Any], isPop: Bool, type: String) {
+        
+        for button in self.navigationItem.rightBarButtonItems! {
+            button.isEnabled = false
+        }
+        
         DFAPI.customPost(address: address, parameters: parameters) { json in
             print(json)
             DispatchQueue.global(qos: DispatchQoS.background.qosClass).async {
                 DispatchQueue.main.async {
                     self.dfStopActivityIndicator()
+                    
+                    for button in self.navigationItem.rightBarButtonItems! {
+                        button.isEnabled = true
+                    }
+                    
                     if let result = json["result"] as? String {
                         if result == "FAIL" {
                             let confirmSheet = UIAlertController(title: "Tips", message: json["msg"] as? String, preferredStyle: .alert)
