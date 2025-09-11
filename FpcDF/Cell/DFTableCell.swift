@@ -25,6 +25,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var key13: UITextView!
     @IBOutlet weak var key14: UITextView!
     @IBOutlet weak var key15: UITextView!
+    @IBOutlet weak var key16: UITextView!
+    @IBOutlet weak var key17: UITextView!
+    @IBOutlet weak var key18: UITextView!
+    @IBOutlet weak var key19: UITextView!
+    @IBOutlet weak var key20: UITextView!
+    @IBOutlet weak var key21: UITextView!
+    @IBOutlet weak var key22: UITextView!
+    @IBOutlet weak var key23: UITextView!
+    @IBOutlet weak var key24: UITextView!
+    @IBOutlet weak var key25: UITextView!
     
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
@@ -41,6 +51,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var imageView13: UIImageView!
     @IBOutlet weak var imageView14: UIImageView!
     @IBOutlet weak var imageView15: UIImageView!
+    @IBOutlet weak var imageView16: UIImageView!
+    @IBOutlet weak var imageView17: UIImageView!
+    @IBOutlet weak var imageView18: UIImageView!
+    @IBOutlet weak var imageView19: UIImageView!
+    @IBOutlet weak var imageView20: UIImageView!
+    @IBOutlet weak var imageView21: UIImageView!
+    @IBOutlet weak var imageView22: UIImageView!
+    @IBOutlet weak var imageView23: UIImageView!
+    @IBOutlet weak var imageView24: UIImageView!
+    @IBOutlet weak var imageView25: UIImageView!
     
     
     @IBOutlet weak var keyWidth1: NSLayoutConstraint!
@@ -58,6 +78,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyWidth13: NSLayoutConstraint!
     @IBOutlet weak var keyWidth14: NSLayoutConstraint!
     @IBOutlet weak var keyWidth15: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth16: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth17: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth18: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth19: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth20: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth21: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth22: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth23: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth24: NSLayoutConstraint!
+    @IBOutlet weak var keyWidth25: NSLayoutConstraint!
     
     @IBOutlet weak var keyHeight1: NSLayoutConstraint!
     @IBOutlet weak var keyHeight2: NSLayoutConstraint!
@@ -74,6 +104,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyHeight13: NSLayoutConstraint!
     @IBOutlet weak var keyHeight14: NSLayoutConstraint!
     @IBOutlet weak var keyHeight15: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight16: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight17: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight18: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight19: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight20: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight21: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight22: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight23: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight24: NSLayoutConstraint!
+    @IBOutlet weak var keyHeight25: NSLayoutConstraint!
     
     
     @IBOutlet weak var imageHeight1: NSLayoutConstraint!
@@ -91,6 +131,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var imageHeight13: NSLayoutConstraint!
     @IBOutlet weak var imageHeight14: NSLayoutConstraint!
     @IBOutlet weak var imageHeight15: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight16: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight17: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight18: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight19: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight20: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight21: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight22: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight23: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight24: NSLayoutConstraint!
+    @IBOutlet weak var imageHeight25: NSLayoutConstraint!
     
     @IBOutlet weak var keyGap1: NSLayoutConstraint!
     @IBOutlet weak var keyGap2: NSLayoutConstraint!
@@ -106,6 +156,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyGap12: NSLayoutConstraint!
     @IBOutlet weak var keyGap13: NSLayoutConstraint!
     @IBOutlet weak var keyGap14: NSLayoutConstraint!
+    @IBOutlet weak var keyGap15: NSLayoutConstraint!
+    @IBOutlet weak var keyGap16: NSLayoutConstraint!
+    @IBOutlet weak var keyGap17: NSLayoutConstraint!
+    @IBOutlet weak var keyGap18: NSLayoutConstraint!
+    @IBOutlet weak var keyGap19: NSLayoutConstraint!
+    @IBOutlet weak var keyGap20: NSLayoutConstraint!
+    @IBOutlet weak var keyGap21: NSLayoutConstraint!
+    @IBOutlet weak var keyGap22: NSLayoutConstraint!
+    @IBOutlet weak var keyGap23: NSLayoutConstraint!
+    @IBOutlet weak var keyGap24: NSLayoutConstraint!
     
     @IBOutlet weak var keyTop1: NSLayoutConstraint!
     @IBOutlet weak var keyTop2: NSLayoutConstraint!
@@ -122,6 +182,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var keyTop13: NSLayoutConstraint!
     @IBOutlet weak var keyTop14: NSLayoutConstraint!
     @IBOutlet weak var keyTop15: NSLayoutConstraint!
+    @IBOutlet weak var keyTop16: NSLayoutConstraint!
+    @IBOutlet weak var keyTop17: NSLayoutConstraint!
+    @IBOutlet weak var keyTop18: NSLayoutConstraint!
+    @IBOutlet weak var keyTop19: NSLayoutConstraint!
+    @IBOutlet weak var keyTop20: NSLayoutConstraint!
+    @IBOutlet weak var keyTop21: NSLayoutConstraint!
+    @IBOutlet weak var keyTop22: NSLayoutConstraint!
+    @IBOutlet weak var keyTop23: NSLayoutConstraint!
+    @IBOutlet weak var keyTop24: NSLayoutConstraint!
+    @IBOutlet weak var keyTop25: NSLayoutConstraint!
     
     @IBOutlet weak var ImageGap1: NSLayoutConstraint!
     @IBOutlet weak var ImageGap2: NSLayoutConstraint!
@@ -137,6 +207,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var ImageGap12: NSLayoutConstraint!
     @IBOutlet weak var ImageGap13: NSLayoutConstraint!
     @IBOutlet weak var ImageGap14: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap15: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap16: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap17: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap18: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap19: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap20: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap21: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap22: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap23: NSLayoutConstraint!
+    @IBOutlet weak var ImageGap24: NSLayoutConstraint!
     
 
     @IBOutlet weak var label1: UILabel!
@@ -154,6 +234,16 @@ class DFTableCell: UITableViewCell {
     @IBOutlet weak var label13: UILabel!
     @IBOutlet weak var label14: UILabel!
     @IBOutlet weak var label15: UILabel!
+    @IBOutlet weak var label16: UILabel!
+    @IBOutlet weak var label17: UILabel!
+    @IBOutlet weak var label18: UILabel!
+    @IBOutlet weak var label19: UILabel!
+    @IBOutlet weak var label20: UILabel!
+    @IBOutlet weak var label21: UILabel!
+    @IBOutlet weak var label22: UILabel!
+    @IBOutlet weak var label23: UILabel!
+    @IBOutlet weak var label24: UILabel!
+    @IBOutlet weak var label25: UILabel!
     
     
     override func awakeFromNib() {
@@ -185,6 +275,16 @@ class DFTableCell: UITableViewCell {
         keyWidth13.constant = 0
         keyWidth14.constant = 0
         keyWidth15.constant = 0
+        keyWidth16.constant = 0
+        keyWidth17.constant = 0
+        keyWidth18.constant = 0
+        keyWidth19.constant = 0
+        keyWidth20.constant = 0
+        keyWidth21.constant = 0
+        keyWidth22.constant = 0
+        keyWidth23.constant = 0
+        keyWidth24.constant = 0
+        keyWidth25.constant = 0
         
         keyGap1.constant = 0
         keyGap2.constant = 0
@@ -200,6 +300,16 @@ class DFTableCell: UITableViewCell {
         keyGap12.constant = 0
         keyGap13.constant = 0
         keyGap14.constant = 0
+        keyGap15.constant = 0
+        keyGap16.constant = 0
+        keyGap17.constant = 0
+        keyGap18.constant = 0
+        keyGap19.constant = 0
+        keyGap20.constant = 0
+        keyGap21.constant = 0
+        keyGap22.constant = 0
+        keyGap23.constant = 0
+        keyGap24.constant = 0
         
         keyTop1.constant = 0
         keyTop2.constant = 0
@@ -216,6 +326,16 @@ class DFTableCell: UITableViewCell {
         keyTop13.constant = 0
         keyTop14.constant = 0
         keyTop15.constant = 0
+        keyTop16.constant = 0
+        keyTop17.constant = 0
+        keyTop18.constant = 0
+        keyTop19.constant = 0
+        keyTop20.constant = 0
+        keyTop21.constant = 0
+        keyTop22.constant = 0
+        keyTop23.constant = 0
+        keyTop24.constant = 0
+        keyTop25.constant = 0
         
         ImageGap1.constant = 0
         ImageGap2.constant = 0
@@ -231,6 +351,16 @@ class DFTableCell: UITableViewCell {
         ImageGap12.constant = 0
         ImageGap13.constant = 0
         ImageGap14.constant = 0
+        ImageGap15.constant = 0
+        ImageGap16.constant = 0
+        ImageGap17.constant = 0
+        ImageGap18.constant = 0
+        ImageGap19.constant = 0
+        ImageGap20.constant = 0
+        ImageGap21.constant = 0
+        ImageGap22.constant = 0
+        ImageGap23.constant = 0
+        ImageGap24.constant = 0
         
         imageHeight1.constant = 40
         imageHeight2.constant = 40
@@ -247,6 +377,16 @@ class DFTableCell: UITableViewCell {
         imageHeight13.constant = 40
         imageHeight14.constant = 40
         imageHeight15.constant = 40
+        imageHeight16.constant = 40
+        imageHeight17.constant = 40
+        imageHeight18.constant = 40
+        imageHeight19.constant = 40
+        imageHeight20.constant = 40
+        imageHeight21.constant = 40
+        imageHeight22.constant = 40
+        imageHeight23.constant = 40
+        imageHeight24.constant = 40
+        imageHeight25.constant = 40
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -273,6 +413,16 @@ class DFTableCell: UITableViewCell {
         key13.text = ""
         key14.text = ""
         key15.text = ""
+        key16.text = ""
+        key17.text = ""
+        key18.text = ""
+        key19.text = ""
+        key20.text = ""
+        key21.text = ""
+        key22.text = ""
+        key23.text = ""
+        key24.text = ""
+        key25.text = ""
         
         imageView1.image = nil
         imageView2.image = nil
@@ -289,6 +439,16 @@ class DFTableCell: UITableViewCell {
         imageView13.image = nil
         imageView14.image = nil
         imageView15.image = nil
+        imageView16.image = nil
+        imageView17.image = nil
+        imageView18.image = nil
+        imageView19.image = nil
+        imageView20.image = nil
+        imageView21.image = nil
+        imageView22.image = nil
+        imageView23.image = nil
+        imageView24.image = nil
+        imageView25.image = nil
         
         keyWidth1.constant = 0
         keyWidth2.constant = 0
@@ -305,6 +465,16 @@ class DFTableCell: UITableViewCell {
         keyWidth13.constant = 0
         keyWidth14.constant = 0
         keyWidth15.constant = 0
+        keyWidth16.constant = 0
+        keyWidth17.constant = 0
+        keyWidth18.constant = 0
+        keyWidth19.constant = 0
+        keyWidth20.constant = 0
+        keyWidth21.constant = 0
+        keyWidth22.constant = 0
+        keyWidth23.constant = 0
+        keyWidth24.constant = 0
+        keyWidth25.constant = 0
         
         keyHeight1.constant = 40
         keyHeight2.constant = 40
@@ -321,6 +491,16 @@ class DFTableCell: UITableViewCell {
         keyHeight13.constant = 40
         keyHeight14.constant = 40
         keyHeight15.constant = 40
+        keyHeight16.constant = 40
+        keyHeight17.constant = 40
+        keyHeight18.constant = 40
+        keyHeight19.constant = 40
+        keyHeight20.constant = 40
+        keyHeight21.constant = 40
+        keyHeight22.constant = 40
+        keyHeight23.constant = 40
+        keyHeight24.constant = 40
+        keyHeight25.constant = 40
         
         imageHeight1.constant = 40
         imageHeight2.constant = 40
@@ -337,6 +517,16 @@ class DFTableCell: UITableViewCell {
         imageHeight13.constant = 40
         imageHeight14.constant = 40
         imageHeight15.constant = 40
+        imageHeight16.constant = 40
+        imageHeight17.constant = 40
+        imageHeight18.constant = 40
+        imageHeight19.constant = 40
+        imageHeight20.constant = 40
+        imageHeight21.constant = 40
+        imageHeight22.constant = 40
+        imageHeight23.constant = 40
+        imageHeight24.constant = 40
+        imageHeight25.constant = 40
         
         
         keyGap1.constant = 0
@@ -353,6 +543,16 @@ class DFTableCell: UITableViewCell {
         keyGap12.constant = 0
         keyGap13.constant = 0
         keyGap14.constant = 0
+        keyGap15.constant = 0
+        keyGap16.constant = 0
+        keyGap17.constant = 0
+        keyGap18.constant = 0
+        keyGap19.constant = 0
+        keyGap20.constant = 0
+        keyGap21.constant = 0
+        keyGap22.constant = 0
+        keyGap23.constant = 0
+        keyGap24.constant = 0
         
         keyTop1.constant = 0
         keyTop2.constant = 0
@@ -369,6 +569,16 @@ class DFTableCell: UITableViewCell {
         keyTop13.constant = 0
         keyTop14.constant = 0
         keyTop15.constant = 0
+        keyTop16.constant = 0
+        keyTop17.constant = 0
+        keyTop18.constant = 0
+        keyTop19.constant = 0
+        keyTop20.constant = 0
+        keyTop21.constant = 0
+        keyTop22.constant = 0
+        keyTop23.constant = 0
+        keyTop24.constant = 0
+        keyTop25.constant = 0
         
         ImageGap1.constant = 0
         ImageGap2.constant = 0
@@ -384,6 +594,16 @@ class DFTableCell: UITableViewCell {
         ImageGap12.constant = 0
         ImageGap13.constant = 0
         ImageGap14.constant = 0
+        ImageGap15.constant = 0
+        ImageGap16.constant = 0
+        ImageGap17.constant = 0
+        ImageGap18.constant = 0
+        ImageGap19.constant = 0
+        ImageGap20.constant = 0
+        ImageGap21.constant = 0
+        ImageGap22.constant = 0
+        ImageGap23.constant = 0
+        ImageGap24.constant = 0
         
         label1.isHidden = true
         label2.isHidden = true
@@ -400,6 +620,16 @@ class DFTableCell: UITableViewCell {
         label13.isHidden = true
         label14.isHidden = true
         label15.isHidden = true
+        label16.isHidden = true
+        label17.isHidden = true
+        label18.isHidden = true
+        label19.isHidden = true
+        label20.isHidden = true
+        label21.isHidden = true
+        label22.isHidden = true
+        label23.isHidden = true
+        label24.isHidden = true
+        label25.isHidden = true
         
         key1.inputAccessoryView = nil
         key1.inputView = nil
@@ -446,6 +676,35 @@ class DFTableCell: UITableViewCell {
         key15.inputAccessoryView = nil
         key15.inputView = nil
         
+        key16.inputAccessoryView = nil
+        key16.inputView = nil
+        
+        key17.inputAccessoryView = nil
+        key17.inputView = nil
+        
+        key18.inputAccessoryView = nil
+        key18.inputView = nil
+        
+        key19.inputAccessoryView = nil
+        key19.inputView = nil
+        
+        key20.inputAccessoryView = nil
+        key20.inputView = nil
+        
+        key21.inputAccessoryView = nil
+        key21.inputView = nil
+        
+        key22.inputAccessoryView = nil
+        key22.inputView = nil
+        
+        key23.inputAccessoryView = nil
+        key23.inputView = nil
+        
+        key24.inputAccessoryView = nil
+        key24.inputView = nil
+        
+        key25.inputAccessoryView = nil
+        key25.inputView = nil
         
         for gesture in key1.gestureRecognizers ?? [] {
             if let g = gesture as? UITapGestureRecognizer {
@@ -537,6 +796,66 @@ class DFTableCell: UITableViewCell {
             }
         }
         
+        for gesture in key16.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key16.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key17.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key17.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key18.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key18.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key19.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key19.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key20.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key20.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key21.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key21.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key22.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key22.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key23.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key23.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key24.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key24.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in key25.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                key25.removeGestureRecognizer(g)
+            }
+        }
+        
         for gesture in imageView1.gestureRecognizers ?? [] {
             if let g = gesture as? UITapGestureRecognizer {
                 imageView1.removeGestureRecognizer(g)
@@ -624,6 +943,66 @@ class DFTableCell: UITableViewCell {
         for gesture in imageView15.gestureRecognizers ?? [] {
             if let g = gesture as? UITapGestureRecognizer {
                 imageView15.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView16.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView16.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView17.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView17.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView18.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView18.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView19.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView19.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView20.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView20.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView21.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView21.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView22.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView22.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView23.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView23.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView24.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView24.removeGestureRecognizer(g)
+            }
+        }
+        
+        for gesture in imageView25.gestureRecognizers ?? [] {
+            if let g = gesture as? UITapGestureRecognizer {
+                imageView25.removeGestureRecognizer(g)
             }
         }
         
