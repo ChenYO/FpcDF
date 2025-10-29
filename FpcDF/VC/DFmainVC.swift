@@ -2421,7 +2421,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }else if subCell.subType == "textArea" {
             
             key.isScrollEnabled = true
-            key.textColor = .black
+//            key.textColor = .black
             
             if subCell.textValue != "" {
                 key.text = subCell.textValue
