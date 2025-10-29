@@ -101,9 +101,11 @@ Pod::Spec.new do |spec|
 
  
   spec.user_target_xcconfig = { "GENERATE_INFOPLIST_FILE" => "YES" }
-  #spec.pod_target_xcconfig = { "GENERATE_INFOPLIST_FILE" => "YES" }
-	spec.pod_target_xcconfig = {
-	  'INFOPLIST_FILE' => '$(PODS_TARGET_SRCROOT)/FpcDF/Info.plist'
+  spec.pod_target_xcconfig = { "GENERATE_INFOPLIST_FILE" => "YES" }
+
+  spec.info_plist = {
+	  'CFBundleShortVersionString' => '3.7.9',
+	  'CFBundleVersion' => '1'
 	}
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
