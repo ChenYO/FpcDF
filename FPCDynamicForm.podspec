@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FPCDynamicForm"
-  spec.version      = "3.7.8"
+  spec.version      = "3.7.9"
   spec.summary      = "A shdort description of FPCDynamicForm."
 
   # This description is used to generate tags and improve search results.
@@ -101,8 +101,10 @@ Pod::Spec.new do |spec|
 
  
   spec.user_target_xcconfig = { "GENERATE_INFOPLIST_FILE" => "YES" }
-  spec.pod_target_xcconfig = { "GENERATE_INFOPLIST_FILE" => "YES" }
-
+  #spec.pod_target_xcconfig = { "GENERATE_INFOPLIST_FILE" => "YES" }
+	spec.pod_target_xcconfig = {
+	  'INFOPLIST_FILE' => '$(PODS_TARGET_SRCROOT)/FpcDF/Info.plist'
+	}
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  A list of resources included with the Pod. These are copied into the
