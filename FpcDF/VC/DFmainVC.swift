@@ -9,10 +9,11 @@
 import UIKit
 import SafariServices
 import MobileCoreServices
+import QuickLook
 
 private let bundle = Bundle(for: DynamicForm.self)
 
-public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate, DynamicDelegate {
+public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate, QLPreviewControllerDataSource, DynamicDelegate {
  
     
     @IBOutlet weak var tableView: UITableView!
@@ -50,6 +51,8 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     var isShowMessage = false
     var message = ""
+    
+    var previewItem: URL?
     
     fileprivate var heightDictionary: [Int : CGFloat] = [:]
     
@@ -1085,7 +1088,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                             if subCell.choiceValue!.isEmpty {
                                 data.subCellDataList![subIndex].isFinish = false
                             }
-                        }else if subCell.subType == "sign" {
+                        }else if subCell.subType == "sign" || subCell.subType == "attachment" {
                             
 //                            if subCell.textValue == "" {
 //                                data.subCellDataList![subIndex].isFinish = false
@@ -1299,7 +1302,7 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
                                 if subCell.choiceValue!.isEmpty {
                                     data.subCellDataList![subIndex].isFinish = false
                                 }
-                            }else if subCell.subType == "sign" {
+                            }else if subCell.subType == "sign" || subCell.subType == "attachment" {
                                 
 //                                if subCell.textValue == "" {
 //                                    data.subCellDataList![subIndex].isFinish = false
@@ -2941,6 +2944,50 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             
             
             
+        }else if subCell.subType == "attachment" {
+            key.isEditable = false
+            label.isHidden = false
+            
+            let recognizer = getAttachmentGesture(index: formData.index!, formNumber: formNumber!, cellNumber: cellNumber)
+            
+            key.addGestureRecognizer(recognizer)
+            
+            if let fileName = subCell.fileUrl {
+                
+                
+                let parts = fileName.split(separator: "_")
+
+                if parts.count > 1 {
+                    label.text = String(parts[1])
+                } else {
+                    label.text = fileName   // 沒有 "_" 就顯示整個檔名
+                }
+                
+                if subCell.isRequired! {
+                    if subCell.isFinish! {
+                        
+                        if fileName != "" {
+                            label.textColor = UIColor(hexString: subCell.finishColor!)
+                        }else {
+                            label.textColor = .black
+                        }
+                        
+                        key.textColor = .white
+                        key.backgroundColor = .white
+                    }else {
+                        label.textColor = .black
+                        key.textColor = UIColor(hexString: "#D0D0D0")
+                        key.backgroundColor = UIColor(hexString: "#D0D0D0")
+                    }
+                }else {
+                    
+                    key.textColor = .white
+                    key.backgroundColor = .white
+                }
+            }
+            
+
+            
         }else if subCell.subType == "form" {
             
             key.isEditable = false
@@ -4550,6 +4597,136 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    func getAttachmentGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(openAttachment))
+        
+        recognizer.index = index
+        recognizer.formNumber = formNumber
+        recognizer.inputNumber = cellNumber
+        
+        
+        return recognizer
+    }
+    
+    @objc func openAttachment(_ sender: UITapGestureRecognizer) {
+        
+        let index = sender.index
+        let formNumber = sender.formNumber
+        let cellNumber = sender.inputNumber
+        let subCellIndex = (sender.view?.tag)!
+        
+        if !checkConditionIsFinish(index: index, formNumber: formNumber, cellIndex: cellNumber, subCellIndex: subCellIndex) {
+            
+            DFUtil.DFTipMessageAndConfirm(self, msg: self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].tip ?? "", callback: {
+                _ in
+                self.view.endEditing(true)
+            })
+            
+            return
+        }
+        
+        if let fileName = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl, fileName != "" {
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let reviewAction = UIAlertAction(title: "預覽檔案", style: .default) { action in
+                
+                let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileURL = documentsDir.appendingPathComponent(fileName)
+                
+                self.previewItem = fileURL
+
+                let previewController = QLPreviewController()
+                previewController.dataSource = self
+                previewController.modalPresentationStyle = .fullScreen
+                
+                self.present(previewController, animated: true, completion: nil)
+            }
+            actionSheet.addAction(reviewAction)
+            
+            let deleteAction = UIAlertAction(title: "刪除檔案", style: .default) { action in
+                do {
+                    let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    
+                    // create the destination file url to save your image
+                    let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                    
+                    let fileManager = FileManager.default
+                    try fileManager.removeItem(at: fileURL)
+        
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].fileUrl = ""
+                    self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellIndex].isFinish = false
+                    print("已刪除舊檔")
+                    
+                    self.tableView.reloadData()
+                } catch {
+                }
+            }
+            actionSheet.addAction(deleteAction)
+            
+            let selectAction = UIAlertAction(title: "重新選擇", style: .default) { action in
+                
+                let types: [String] = [kUTTypeItem as String]
+                
+                let picker = UIDocumentPickerViewController(documentTypes: types, in: .import)
+                picker.delegate = self
+                picker.modalPresentationStyle = .formSheet
+                
+                picker.formNumber = formNumber
+                picker.cellNumber = cellNumber
+                picker.subCellNumber = subCellIndex
+                
+                // iPad 需要使用 popoverPresentationController
+                if let popover = picker.popoverPresentationController, let source = sender.view {
+                    
+                    popover.sourceView = source
+                    popover.sourceRect = source.bounds
+                }
+                
+                self.present(picker, animated: true, completion: nil)
+            }
+            actionSheet.addAction(selectAction)
+           
+            
+            let cancelAction = UIAlertAction(title: "取消", style: .destructive)
+            
+            actionSheet.addAction(cancelAction)
+            
+            
+            if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+                let loc = sender.location(in: self.view)
+                actionSheet.modalPresentationStyle = .popover
+                actionSheet.popoverPresentationController?.sourceView = self.view
+                actionSheet.popoverPresentationController?.sourceRect = CGRect(x: loc.x, y: loc.y, width: 1.0, height: 1.0)
+            }
+            self.present(actionSheet, animated: true) {
+                print("option menu presented")
+            }
+        }else {
+            let types: [String] = [kUTTypeItem as String]
+            
+            let picker = UIDocumentPickerViewController(documentTypes: types, in: .import)
+            picker.delegate = self
+            picker.modalPresentationStyle = .formSheet
+            
+            picker.formNumber = formNumber
+            picker.cellNumber = cellNumber
+            picker.subCellNumber = subCellIndex
+            
+            // iPad 需要使用 popoverPresentationController
+            if let popover = picker.popoverPresentationController, let source = sender.view {
+                
+                popover.sourceView = source
+                popover.sourceRect = source.bounds
+            }
+            
+            self.present(picker, animated: true, completion: nil)
+        }
+        
+        
+        
+    }
+    
     func getFormGesture(index: Int, formNumber: Int, cellNumber: Int) -> UITapGestureRecognizer{
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(getForm))
@@ -5160,8 +5337,74 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     //選擇檔案後上傳
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         
-        dfShowActivityIndicator()
-        customUpload(oriImage: nil, fileUrl: url, fileName: url.lastPathComponent, formNumber: controller.formNumber, cellNumber: controller.cellNumber, type: "attachment")
+        if isUsingJsonString {
+            
+            let formNumber = controller.formNumber
+            let cellNumber = controller.cellNumber
+            let subCellNumber = controller.subCellNumber
+            
+            print("選到的檔案：\(url.path)")
+            
+            // 取得原始檔名
+            let originalName = url.lastPathComponent
+            
+            // 產生 UUID
+            let uuid = UUID().uuidString
+            
+            // 新檔名：UUID_原檔名
+            let newFileName = "\(uuid)_\(originalName)"
+            
+            // 若你想把檔案複製到 App 的 Documents
+            
+            // App 的 Documents 資料夾位置
+            let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            
+            // 目標位置
+            let destURL = documentsDir.appendingPathComponent(newFileName)
+            
+            do {
+                // 先確認是否有權限，必要時使用 startAccessing
+                let _ = url.startAccessingSecurityScopedResource()
+                
+                if let fileName = self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellNumber].fileUrl, fileName != "" {
+                    do {
+                        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                        
+                        // create the destination file url to save your image
+                        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                        
+                        let fileManager = FileManager.default
+                        try fileManager.removeItem(at: fileURL)
+            
+                        print("已刪除舊檔")
+                    } catch {
+                    }
+                }
+                
+                
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellNumber].fileUrl = newFileName
+                self.oriFormDataList[formNumber].cells[cellNumber].subCellDataList![subCellNumber].isFinish = true
+                
+                // 複製到本機
+                try FileManager.default.copyItem(at: url, to: destURL)
+                
+                url.stopAccessingSecurityScopedResource()
+                
+                print("✔️ 儲存成功：\(destURL.path)")
+                
+                // <<你可在這裡更新你的模型，例如 subCellDataList>>
+                // self.oriFormDataList[formNumber].cells[cellNumber].xxx = destURL.path
+                
+                self.tableView.reloadData()
+                
+            } catch {
+                print("❌ 複製失敗：\(error)")
+            }
+           
+        }else {
+            dfShowActivityIndicator()
+            customUpload(oriImage: nil, fileUrl: url, fileName: url.lastPathComponent, formNumber: controller.formNumber, cellNumber: controller.cellNumber, type: "attachment")
+        }
     }
     
     func customUpload(oriImage: UIImage?, fileUrl: URL?, fileName: String, formNumber: Int, cellNumber: Int, type: String) {
@@ -5992,6 +6235,14 @@ public class DFmainVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         if let indicator = activityIndicator {
             indicator.stopAnimating()
         }
+    }
+    
+    public func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return previewItem == nil ? 0 : 1
+    }
+    
+    public func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return previewItem! as QLPreviewItem
     }
     
 }
